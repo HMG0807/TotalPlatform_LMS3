@@ -1,0 +1,65 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">
+	<link rel="stylesheet" th:href="@{/admin/adminUserListPageStyle.css}">
+	<h1>회원 관리</h1>
+	<div id="searchBox">
+		<!-- 검색창 -->
+		<select name="kw" id="">
+			<option>전체</option>
+			<option value="">ID</option>
+			<option value="">이름</option>
+		</select>
+		<input type="text" id="search_kw" placeholder="ID명 또는 이름을 입력해주세요.">
+		<button id="searchBtn">검색</button>
+	</div>
+	
+	<!-- 검색창 필터-->
+	<!--<div id="filterBox">
+		<input type="checkbox" id="searchFilter01" name="searchFilter">
+		<label for="searchFilter01">수강생</label>
+		<input type="checkbox" id="searchFilter02" name="searchFilter">
+		<label for="searchFilter02">강사</label>
+	</div>-->
+
+	<!-- 유저 조회 테이블 -->
+	<div id="columnBox">
+		<span>번호</span>
+		<span>ID</span>
+		<span>이름</span>
+		<span>등록날짜</span>
+		<span>밴 여부</span>
+		<span>탈퇴 여부</span>
+		<span>강사 등록</span>
+		<span>회원 정지</span>
+		<span>회원 삭제</span>
+		<span>신고 내역</span>
+	</div>
+	<div th:each="user, loop : ${userList}" class="contentRows">
+		<span th:text="${loop.count}"></span>
+		<span th:text="${user.id}"></span>
+		<span th:text="${user.name}"></span>
+		<span th:text="${#temporals.format(user.createDate, 'yyyy-MM-dd')}"></span>
+		<span th:text="${user.bannedYn} == n ? 'N' : 'Y'"></span>
+		<span th:text="${user.signoutYn} == n ? 'N' : 'Y'"></span>
+		<button th:onclick="viewInstModal([[${user}]])">강사 등록</button>
+		<button>정지</button>
+		<button>삭제</button>
+		<button>신고 내역</button>
+	</div>
+	
+	<!-- 강사 등록 모달 -->
+	<div id="instructorModal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>강사 등록</h2>
+			<p><strong>ID:</strong> <span id="modalUserId"></span></p>
+			<p><strong>이름:</strong> <span id="modalUserName"></span></p>
+			<p><strong>이미지 등록:</strong> <input type="file" name="instImg"></p>
+			<p class="modal-content-bottom-p"><a href="">강사 등록</a></p>
+		</div>
+	</div>
+	
+	<!-- JS 파일 불러오기 -->
+	<script th:src="@{/admin/adminUserListPageModul.js}"></script>
+</main>
+</html>
