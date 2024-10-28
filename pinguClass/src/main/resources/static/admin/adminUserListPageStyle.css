@@ -1,0 +1,187 @@
+/* nav 구역 */
+nav > div:nth-child(1){
+    border-right: 7px solid rgb(56, 56, 56);
+}
+
+/* main 구역 */
+main {
+    display: inline-block;
+    width: 1100px;
+    padding: 20px 0px 0px 50px;
+}
+
+main>h1 {
+    font-size: 30px;
+}
+
+/* 검색 창 구역 */
+main>#searchBox {
+    margin-top: 20px;
+    background-color: rgb(237, 242, 245);
+    padding: 25px 30px;
+}
+
+main>#searchBox>select {
+    width: 100px;
+    height: 25px;
+}
+
+main>#searchBox>input[type=text] {
+    width: 400px;
+    height: 25px;
+    position: relative;
+    padding-left: 5px;
+}
+
+main>#searchBox>button {
+    width: 70px;
+    height: 25px;
+    color: white;
+    background-color: rgb(140, 163, 177);
+    border: 0px;
+    position: absolute;
+}
+main #searchBtn:hover {
+	cursor: pointer;
+}
+
+/* 검색창 필터 구역 */
+#filterBox {
+    outline: 1px solid red;
+}
+
+/* 유저 조회 테이블 > Column 구역 */
+#columnBox {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ccc;
+    font-weight: bold;
+    display: flex; /* 브라우저 줄일때 두줄생겨서 추가 */
+}
+
+#columnBox>span {
+    display: inline-block;
+    text-align: center;
+    /*outline: 1px solid red;*/
+}
+
+#columnBox>span:nth-child(1) { width: 50px; }
+#columnBox>span:nth-child(2) { width: 160px; }
+#columnBox>span:nth-child(3) { width: 120px; }
+#columnBox>span:nth-child(4) { width: 110px; }
+#columnBox>span:nth-child(5) { width: 80px; }
+#columnBox>span:nth-child(6) { width: 80px; }
+#columnBox>span:nth-child(7) { width: 85px; }
+#columnBox>span:nth-child(8) { width: 85px; }
+#columnBox>span:nth-child(9) { width: 85px; }
+#columnBox>span:nth-child(10) { width: 85px; }
+
+
+/* 유저 조회 테이블 > Content 구역 */
+.contentRows {
+    padding: 10px;
+    height: 55px;
+    display: flex; /* 브라우저 줄일때 두줄생겨서 추가 */
+}
+
+.contentRows:hover {
+	background-color: var(--subColor);
+}
+
+.contentRows>span {
+    display: inline-block;
+    text-align: center;
+    line-height: 35px;
+}
+
+.contentRows>span:nth-child(1) { width: 50px; }
+.contentRows>span:nth-child(2) { width: 160px; }
+.contentRows>span:nth-child(3) { width: 120px; }
+.contentRows>span:nth-child(4) { width: 110px; }
+.contentRows>span:nth-child(5) { width: 80px; }
+.contentRows>span:nth-child(6) { width: 80px; }
+
+.contentRows>button {
+	width: 70px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 15px;
+	color: white;
+	border-radius: 5px;
+	padding-left: 2px;
+	margin-left: 13px;
+	background-color: var(--mainColor);
+    cursor: pointer;
+    border-width: 0px;
+}
+
+
+/* 모달 스타일 */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-top: 60px;
+}
+
+/* 모달 스타일 > 닫기 버튼 */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* 모달 스타일 > 내용 */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 350px;
+}
+
+.modal-content > h2 {
+	border-bottom: 3px solid rgb(80, 80, 80);
+	width: 280px;
+}
+
+.modal-content > p {
+	margin-top: 15px;
+}
+
+.modal-content > .modal-content-bottom-p {
+	margin-top: 25px;
+	text-align: center;
+}
+
+.modal-content a {
+	border: 1px solid rgb(80, 80, 80);
+	border-radius: 2px;
+	padding: 2px 10px;
+}
+
+.modal-content a:hover {
+	border-width: 0px;
+	background-color: var(--mainColor);
+	color: white;
+}
+
+
+
+
+

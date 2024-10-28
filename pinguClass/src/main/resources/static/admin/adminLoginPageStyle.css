@@ -1,0 +1,54 @@
+main{
+    padding-left: var(--layoutpadding);
+    padding-right: var(--layoutpadding);
+    padding-top: 10rem ;
+    padding-bottom: 10rem ;
+}
+
+main>.loginContainer{
+    width: 100%;
+    min-width:  var(--pageMinWidth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginContainer>p{
+    padding: 1rem 0 1rem 0 ;
+    font-size: var(--titleFont);
+    font-weight: 500;
+}
+
+.loginContainer>form>input{
+    display: block;
+    border: 1px solid var(--subFontColor);
+    width: 22rem;
+    height: 3.5rem;
+    padding-left:1rem ;
+    margin: 1rem 0 1rem 0;
+    border-radius: 0.3rem;
+}
+
+
+
+.loginContainer>form>.login{
+    height: 3.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 1rem 0;
+    border-radius: 0.3rem;
+}
+.loginContainer>form>.login>button{
+    background-color: var(--mainColor);
+    border-width: 0px;
+    color: white;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+

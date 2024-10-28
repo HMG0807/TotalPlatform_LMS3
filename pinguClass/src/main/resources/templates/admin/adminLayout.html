@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자페이지</title>
+    <!-- CSS File Link -->
+    <link rel="stylesheet" th:href="@{/admin/adminLayoutPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/admin/navbarPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/admin/reset.css}">
+</head>
+<body>
+    <header>
+        <a th:href="@{/admin}">PinguClass</a>
+    </header>
+    <div id="mainContainer">
+	    <nav th:replace="~{admin/navbar :: navbarFragment}"></nav>
+	    <th:block layout:fragment="mainFragment"></th:block>
+    </div>
+</body>
+</html>
