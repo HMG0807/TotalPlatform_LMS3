@@ -28,5 +28,6 @@ public class Subscribe {
 	private Integer price;
 	
 	@OneToMany(mappedBy = "subscribe")
-    private List<SubPayment> subPayments;
+  private List<SubPayment> subPayments;
 }
+

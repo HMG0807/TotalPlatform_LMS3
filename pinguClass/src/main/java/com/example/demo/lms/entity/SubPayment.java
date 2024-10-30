@@ -36,3 +36,4 @@ public class SubPayment {
 	@JoinColumn(name = "subsc_id")
 	private Subscribe subscribe;
 }
+
