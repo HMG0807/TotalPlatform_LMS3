@@ -23,6 +23,8 @@ public class File {
 	
 	@Column(name = "file_name")
 	private String fileName; //파일명
+	@Column(name = "original_file_name")
+	private String originalFileName; //원본 파일명
 	@Column(name = "file_url")
 	private String fileUrl; //파일경로
 	@Column(name = "file_type")
