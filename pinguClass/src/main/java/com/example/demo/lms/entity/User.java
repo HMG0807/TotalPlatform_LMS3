@@ -2,6 +2,8 @@ package com.example.demo.lms.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,18 +45,22 @@ public class User {
 	@OneToMany(mappedBy = "user")
     private List<CsQuestion> questions; //1:1문의글 리스트
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
     private List<Community> communitys; //커뮤니티 작성글 리스트
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "reporter")
     private List<Report> reporters; //신고한 리스트
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "reportee")
     private List<Report> reportees; //신고 당한 리스트
 	
 	@OneToMany(mappedBy = "user")
     private List<CommunityLike> communityLikes; //커뮤니티 좋아요 리스트
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
     private List<CommunityComment> communityComments; //커뮤니티 댓글 리스트
 	
@@ -64,6 +70,7 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private Subscription subscription; //현재 구독 상태
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
 	private List<Coupon> coupons; //쿠폰 코드 리스트
 	

@@ -45,10 +45,6 @@ main #searchBtn:hover {
 	cursor: pointer;
 }
 
-/* 검색창 필터 구역 */
-#filterBox {
-    outline: 1px solid red;
-}
 
 /* 유저 조회 테이블 > Column 구역 */
 #columnBox {
@@ -70,11 +66,11 @@ main #searchBtn:hover {
 #columnBox>span:nth-child(3) { width: 120px; }
 #columnBox>span:nth-child(4) { width: 110px; }
 #columnBox>span:nth-child(5) { width: 80px; }
-#columnBox>span:nth-child(6) { width: 80px; }
-#columnBox>span:nth-child(7) { width: 85px; }
-#columnBox>span:nth-child(8) { width: 85px; }
-#columnBox>span:nth-child(9) { width: 85px; }
-#columnBox>span:nth-child(10) { width: 85px; }
+#columnBox>span:nth-child(6) { width: 110px; }
+#columnBox>span:nth-child(7) { width: 95px; }
+#columnBox>span:nth-child(8) { width: 95px; }
+#columnBox>span:nth-child(9) { width: 95px; }
+#columnBox>span:nth-child(10) { width: 110px; }
 
 
 /* 유저 조회 테이블 > Content 구역 */
@@ -99,10 +95,10 @@ main #searchBtn:hover {
 .contentRows>span:nth-child(3) { width: 120px; }
 .contentRows>span:nth-child(4) { width: 110px; }
 .contentRows>span:nth-child(5) { width: 80px; }
-.contentRows>span:nth-child(6) { width: 80px; }
+.contentRows>span:nth-child(6) { width: 110px; }
 
 .contentRows>button {
-	width: 70px;
+	width: 80px;
 	height: 35px;
 	line-height: 35px;
 	font-size: 15px;
@@ -113,6 +109,14 @@ main #searchBtn:hover {
 	background-color: var(--mainColor);
     cursor: pointer;
     border-width: 0px;
+}
+
+.contentRows>button:nth-child(10) {
+	width: 110px;
+}
+.contentRows>.blueText{
+	color: blue;
+	/*font-weight: bold;*/
 }
 
 
@@ -182,6 +186,52 @@ main #searchBtn:hover {
 }
 
 
-
+/* 페이징 버튼 */
+#pageBtn > ul {
+	display: flex;
+	list-style-type: none;
+	margin-top: 30px;
+	justify-content: center;
+}
+#pageBtn li:not(.active):not(.disabled):hover {
+	background-color: #eee;
+}
+#pageBtn li:not(.active):not(.disabled):hover > a {
+	color: rgb(40, 40, 255);
+}
+#pageBtn li {
+	display: inline-block;
+	background-color: white;
+	border: 1px solid #ddd;
+	margin-left: -1px;
+}
+#pageBtn li:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#pageBtn li:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#pageBtn a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 6px 12px;
+	/*color: rgb(206, 154, 0);*/
+}
+#pageBtn .active {
+	background-color: #0D6EFD;
+}
+#pageBtn .active > a {
+	color: white;
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+}
+#pageBtn .disabled {
+	background-color: #ddd;
+}
+#pageBtn .disabled > a {
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+	color: rgb(68, 68, 68);
+}
 
 

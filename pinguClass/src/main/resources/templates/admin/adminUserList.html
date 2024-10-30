@@ -4,22 +4,14 @@
 	<h1>회원 관리</h1>
 	<div id="searchBox">
 		<!-- 검색창 -->
-		<select name="kw" id="">
-			<option>전체</option>
-			<option value="">ID</option>
-			<option value="">이름</option>
+		<select name="searchSelect" id="searchSelect">
+			<option value="total" th:selected="${kwType} == total">전체</option>
+			<option value="id" th:selected="${kwType} == id">ID</option>
+			<option value="name" th:selected="${kwType} == name">이름</option>
 		</select>
-		<input type="text" id="search_kw" placeholder="ID명 또는 이름을 입력해주세요.">
+		<input type="text" id="search_kw" placeholder="ID명 또는 이름을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
 		<button id="searchBtn">검색</button>
 	</div>
-	
-	<!-- 검색창 필터-->
-	<!--<div id="filterBox">
-		<input type="checkbox" id="searchFilter01" name="searchFilter">
-		<label for="searchFilter01">수강생</label>
-		<input type="checkbox" id="searchFilter02" name="searchFilter">
-		<label for="searchFilter02">강사</label>
-	</div>-->
 
 	<!-- 유저 조회 테이블 -->
 	<div id="columnBox">
@@ -28,25 +20,53 @@
 		<span>이름</span>
 		<span>등록날짜</span>
 		<span>밴 여부</span>
-		<span>탈퇴 여부</span>
+		<span>탈퇴/삭제 여부</span>
 		<span>강사 등록</span>
 		<span>회원 정지</span>
 		<span>회원 삭제</span>
 		<span>신고 내역</span>
 	</div>
 	<div th:each="user, loop : ${userList}" class="contentRows">
-		<span th:text="${loop.count}"></span>
+		<span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
 		<span th:text="${user.id}"></span>
 		<span th:text="${user.name}"></span>
 		<span th:text="${#temporals.format(user.createDate, 'yyyy-MM-dd')}"></span>
-		<span th:text="${user.bannedYn} == n ? 'N' : 'Y'"></span>
-		<span th:text="${user.signoutYn} == n ? 'N' : 'Y'"></span>
+		<span th:text="${user.bannedYn} == n ? 'N' : 'Y'" th:classappend="${user.bannedYn} == y ? 'blueText'"></span>
+		<span th:text="${user.signoutYn} == n ? 'N' : 'Y'" th:classappend="${user.signoutYn} == y ? 'blueText'"></span>
 		<button th:onclick="viewInstModal([[${user}]])">강사 등록</button>
-		<button>정지</button>
-		<button>삭제</button>
-		<button>신고 내역</button>
+		<button th:onclick="bannedUser([[${user}]])" th:text="${user.bannedYn} == n ? '정지' : '정지 해제'" th:classappend="${user.bannedYn} == y ? 'blueText'"></button>
+		<button th:onclick="signoutUser([[${user}]])" th:text="${user.signoutYn} == n ? '삭제' : '삭제 해제'" th:classappend="${user.signoutYn} == y ? 'blueText'"></button>
+		<button th:onclick="reportDetails([[${user.userId}]], [[${#lists.size(user.reportees)}]])" th:text="${#lists.size(user.reportees) == 0 ? '신고 내역' : '신고 내역(' + #lists.size(user.reportees) + ')'}"></button>
+	</div>
+
+	<!-- 페이징 버튼 -->
+	<div id="pageBtn" th:if="${page.totalPage} > 1">
+		<ul>
+			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			</li>
+			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			</li>
+			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			</li>
+		</ul>
 	</div>
 	
+	<!-- kw, page 데이터 넘기기 -->
+    <form th:action="@{/admin/userList}" method="get" id="searchForm">
+		<input type="hidden" id="kw" name="kw" th:value="${kw}">
+		<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+        <input type="hidden" id="page" name="page">
+    </form>
+
 	<!-- 강사 등록 모달 -->
 	<div id="instructorModal" class="modal">
 		<div class="modal-content">
@@ -58,8 +78,9 @@
 			<p class="modal-content-bottom-p"><a href="">강사 등록</a></p>
 		</div>
 	</div>
-	
+
 	<!-- JS 파일 불러오기 -->
 	<script th:src="@{/admin/adminUserListPageModul.js}"></script>
 </main>
+
 </html>

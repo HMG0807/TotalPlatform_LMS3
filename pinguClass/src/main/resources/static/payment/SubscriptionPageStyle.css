@@ -1,0 +1,79 @@
+
+/* 컨텐츠 영역 넓이 지정 */
+.main{
+    border: 1px solid red;
+    min-width: 1024px;
+}
+
+/* 프리미엄 구독, 설명문구, 혜택 css */
+.premeumText{
+    border: 1px solid red;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* 구독권 진열란 레이아웃 */
+.premeumProductContainer {
+    border: 1px solid rgb(0, 0, 14);
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+
+/* 구독권 별 div 위치 조정*/
+.premeumProductContainer > div {
+    border: 1px solid gray;
+    border-radius: 10px;; 
+    width: 300px;
+    height: 300px;
+    padding: 1rem;
+    margin: auto;
+}
+
+/* 가격 위치 조정 및 폰트 스타일 */
+.ProductPrice {
+    margin-top: 100px;
+    font-size: var(--contentFont);
+    font-weight: bolder;
+
+}
+
+.subscriptionPeriod{
+    font-size: var(--subtitleFont);
+}
+
+.regularPrice{
+    text-decoration: line-through;
+      
+}
+
+.discountPercent > p{
+    color: red;
+}
+
+.discount{
+    color: red;
+
+}
+
+/* 구매 버튼 정렬 */
+.paymentBnt{
+    margin: 20px auto 0px auto;
+    display: flex;
+    justify-content: center; 
+    border-radius: 10px;
+    width: 250px;
+    background-color: var(--mainColor);
+    
+}
+
+/* 구매 버튼 내 문자 폰트 조절 */
+.paymentBnt > p {
+    font-size: x-large;
+    color: white;
+    
+}
+
+

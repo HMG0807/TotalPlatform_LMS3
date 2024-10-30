@@ -4,12 +4,12 @@
 	<h1>강좌 관리</h1>
 	<div id="searchBox">
 		<!-- 검색창 -->
-		<select name="kw" id="">
-			<option>전체</option>
-			<option value="">강좌명</option>
-			<option value="">강의명</option>
+		<select name="searchSelect" id="searchSelect">
+			<option value="total" th:selected="${kwType} == total">전체</option>
+			<option value="course" th:selected="${kwType} == course">강좌명</option>
+			<option value="lecture" th:selected="${kwType} == lecture">강의명</option>
 		</select>
-		<input type="text" id="search_kw" placeholder="강좌명 또는 강의명을 입력해주세요.">
+		<input type="text" id="search_kw" placeholder="강좌명 또는 강의명을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
 		<button id="searchBtn">검색</button>
 	</div>
 	
@@ -21,6 +21,7 @@
 		<span>카테고리</span>
 		<span>가격</span>
 		<span>수정 날짜</span>
+		<span>삭제 여부</span>
 		<span>강의 조회</span>
 		<span>강좌 삭제</span>
 	</div>
@@ -32,9 +33,38 @@
 		<span th:text="${course.category.category}"></span>
 		<span th:text="${#numbers.formatInteger(course.price,3,'COMMA') + '원'}"></span>
 		<span th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></span>
-		<button th:text="${'강의 조회(' + #lists.size(course.lectures) + ')'}"></button>
-		<button>삭제</button>
+		<span  th:text="${course.deleteYn} == n ? 'N' : 'Y'" th:classappend="${course.deleteYn} == y ? 'blueText'"></span>
+		<button th:onclick="lectureSelect([[${course.courseId}]], [[${#lists.size(course.lectures)}]])" th:text="${'강의 조회(' + #lists.size(course.lectures) + ')'}"></button>
+		<button th:onclick="deleteCourse([[${course}]])" th:text="${course.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${course.deleteYn} == y ? 'blueText'"></button>
 	</div>
+	
+	<!-- 페이징 버튼 -->
+	<div id="pageBtn" th:if="${page.totalPage} > 1">
+		<ul>
+			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			</li>
+			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			</li>
+			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- kw, page 데이터 넘기기 -->
+    <form th:action="@{/admin/courseList}" method="get" id="searchForm">
+		<input type="hidden" id="kw" name="kw" th:value="${kw}">
+		<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+        <input type="hidden" id="page" name="page">
+    </form>
 	
 	<!-- JS 파일 불러오기 -->
 	<script th:src="@{/admin/adminCourseListPageModul.js}"></script>

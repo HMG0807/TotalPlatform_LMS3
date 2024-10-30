@@ -23,8 +23,6 @@ public class SubPayment {
 	@Column(name = "sub_pay_id")
 	private Integer subPayId;
 	
-	private Integer price; //구독 가격
-	private String type; //구독 종류 (1개월 / 3개월 / 6개월 / 12개월)
 	@Column(name = "payment_type")
 	private String paymentType; //결제 방식
 	@Column(name = "create_date")
@@ -33,4 +31,9 @@ public class SubPayment {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "subsc_id")
+	private Subscribe subscribe;
 }
+

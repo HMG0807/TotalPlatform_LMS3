@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/payment/subPaymentOrder.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div class="contentWrap"> <!--contentWrap 시작 -->
+            <div class="content">
+
+                <div class="paymentWrap">
+<!-- 상품 정보란 시작 -->
+                    <form class="productForm" action="">
+                        <h1 th:text="${Subscribe.type}">
+                           
+                        </h1>
+
+                        <div>
+                            <span>
+                                상품가격                    
+                            </span>
+                            <span class="productInfo"  th:text="${Subscribe.price}">
+                            </span>
+                        </div>
+                        
+                        <div>
+                            <span>
+                                할인가
+                            </span>
+                            <span th:if="${Subscribe.type == '1개월 구독'}" class="productInfo">0원</span>
+                            <span th:if="${Subscribe.type == '3개월 구독'}" class="productInfo">3,000원</span>
+                            <span th:if="${Subscribe.type == '6개월 구독'}" class="productInfo">12,000원</span>
+                            <span th:if="${Subscribe.type == '12개월 구독'}" class="productInfo">36,000원</span>
+                        </div>
+
+                        <div  class="totalPaymentAmount">
+                            <span>
+                                총 결제금액
+                            </span>
+                            <span  th:if="${Subscribe.type == '1개월 구독'}" class="productInfo">10,000원</span>
+                            <span  th:if="${Subscribe.type == '3개월 구독'}" class="productInfo">27,000원</span>
+                            <span  th:if="${Subscribe.type == '6개월 구독'}" class="productInfo">48,000원</span>
+                            <span  th:if="${Subscribe.type == '12개월 구독'}" class="productInfo">84,000원</span>
+                        </div>
+                    </form>
+ <!-- 상품 정로란 종료  -->
+                </div>
+<!-- 결제수단 시작 -->
+                <div class="paymentMethod">
+                    <h3>
+                        결제수단
+                    </h3>
+
+                    <div>
+                        <ul>
+                            <li>
+                                <input class="kakaopay" type="radio" name="method">
+                                <span>카카오페이</span>
+                            </li>
+                            <li>
+                                <input type="radio" name="method">
+                                <span>토스</span>
+                            </li>
+                        </ul>
+                    </div>
+<!-- 결제수단 종료 -->   
+<!-- 구매자 정보 시작  -->
+                <div class="buyerInfo">
+                    <h3>
+                        구매자 정보
+                    </h3>
+
+                    <div>
+                        <h5>
+                            결제자 이름
+                        </h5>          
+                        <input type="text" name="name" id="" value="">              
+                    </div>
+
+                    <div>
+                        <h5>
+                            연락처
+                        </h5>
+                        <input type="text" name="contact" value="">       
+                    </div>
+
+                </div>
+<!-- 구매자 정보 종료  -->
+ <!-- 이용약관 시작 -->
+                <div class="agree">
+                    <div>
+                        <input class="agreeCheckbox" type="checkbox" name="agree">
+                        이용약관에 동의합니다.
+                    </div>
+
+                    <div class="agreeLayout">
+                        <div class="agreeText">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit similique incidunt est labore repudiandae sed dolorem officiis corporis corrupti facere, debitis tempore ipsam, excepturi odio quaerat totam quod beatae consequuntur? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit similique incidunt est labore repudiandae sed dolorem officiis corporis corrupti facere, debitis tempore ipsam, excepturi odio quaerat totam quod beatae consequuntur?
+                        </div>
+                    </div>
+                </div>
+<!-- 이용약관 종료 -->
+<!-- 취소 및 결제 버튼 시작 -->
+                <div class="buttonLayout">
+                    <button type="button" value="결제가 취소되었습니다." onclick="alert('취소되었습니다.'); history.back();" id=cancel>취소</button>
+                    <button id="paymentBtn">결제</button>
+                </div>
+
+
+                </div>
+            </div>
+        </div>
+<!--contentWrap 종료 -->
+    </main>   
+<button>d</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="/payment/subPaymentOrder.js"></script>    
+</body>
+</html>
