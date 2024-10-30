@@ -3,6 +3,9 @@ package com.example.demo.lms.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,15 +38,20 @@ public class Course {
 	private Integer fileId; //메인 배너 이미지
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate; //수정날짜
+	@Column(name = "delete_yn")
+	private String deleteYn; //삭제여부
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "inst_id")
 	private Instructor instructor;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="category_id")
 	private Category category;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "course")
     private List<Lecture> lectures; //강의 리스트
 	

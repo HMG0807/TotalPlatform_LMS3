@@ -30,6 +30,8 @@ public class Review {
 	private Integer rating; //별점
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate; //최근업데이트 날짜
+	@Column(name = "delete_yn")
+	private String deleteYn; //삭제여부
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")

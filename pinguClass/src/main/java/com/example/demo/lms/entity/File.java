@@ -29,4 +29,6 @@ public class File {
 	private String fileType; //확장자
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate; //최근업데이트 날짜
+	@Column(name = "delete_yn")
+	private String deleteYn; //삭제여부
 }
