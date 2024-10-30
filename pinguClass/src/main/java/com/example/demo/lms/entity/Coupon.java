@@ -1,6 +1,8 @@
 package com.example.demo.lms.entity;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +32,7 @@ public class Coupon {
 	@Column(name = "create_date")
 	private LocalDateTime createDate; //쿠폰코드 발급 날짜
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

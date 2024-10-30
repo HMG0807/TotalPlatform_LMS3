@@ -3,6 +3,8 @@ package com.example.demo.lms.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +32,10 @@ public class Community {
 	private String content;
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate; //최근업데이트 날짜
+	@Column(name = "delete_yn")
+	private String deleteYn; //삭제여부
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

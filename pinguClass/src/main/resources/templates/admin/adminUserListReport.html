@@ -1,0 +1,59 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">
+	<link rel="stylesheet" th:href="@{/admin/adminUserListReportPageStyle.css}">
+	<h1>회원 관리 > 신고 내역</h1>
+	
+	<div id="backBtnBox">
+		<button onclick="location.href='/admin/userList'">뒤로 가기</button>
+	</div>
+	
+	<div id="reportCountBox">
+		<!-- 신고 받은 건수 -->
+		<h2 th:text="${reportList[0].reportee.id} + '님의 총 신고 받은 건수 : ' + ${#lists.size(reportList)+page.totalPage-1}"></h2>
+	</div>
+
+	<!-- 신고 조회 테이블 -->
+	<div id="columnBox">
+		<span>번호</span>
+		<span>신고자 ID</span>
+		<span>신고 내용</span>
+		<span>등록날짜</span>
+	</div>
+	<div th:each="report, loop : ${reportList}" class="contentRows">
+		<span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
+		<span th:text="${report.reporter.id}"></span>
+		<span th:text="${report.content}"></span>
+		<span th:text="${#temporals.format(report.createDate, 'yyyy-MM-dd')}"></span>
+	</div>
+	
+	<!-- 회원ID, page 데이터 넘기기 -->
+    <form th:action="@{|/admin/reportList/${reportList[0].reportee.userId}|}" method="get" id="searchForm">
+        <input type="hidden" id="page" name="page">
+    </form>
+
+	<!-- 페이징 버튼 -->
+	<div id="pageBtn" th:if="${page.totalPage} > 1">
+		<ul>
+			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			</li>
+			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			</li>
+			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- JS 파일 불러오기 -->
+	<script th:src="@{/admin/adminUserListReportPageModul.js}"></script>
+</main>
+
+</html>

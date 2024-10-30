@@ -1,6 +1,8 @@
 package com.example.demo.lms.entity;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Instructor {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "instructor")
 	private List<Course> courses; //등록한 강좌 리스트
 }
