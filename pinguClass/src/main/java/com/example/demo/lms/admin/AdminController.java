@@ -1,23 +1,26 @@
 package com.example.demo.lms.admin;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.ecommerce.Entity.Product;
+
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.entity.Notice;
 import com.example.demo.lms.entity.Report;
 import com.example.demo.lms.entity.User;
+import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adService;
+	private final FileService fileService;
 
 	@GetMapping("/admin")
 	public String adminLogin() {
@@ -52,12 +56,15 @@ public class AdminController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	@GetMapping("/admin/setInst/{id}")
-	public String createInstructor(@PathVariable("id") Integer userId) {
+	@PostMapping("/admin/setInst")
+	public String createInstructor(@RequestParam(value="userId") Integer userId, HttpServletRequest request,
+								@RequestParam(value = "instImg") MultipartFile instImgFile) throws Exception {
 		
-		this.adService.createInstructor(userId);
+		Integer fileId = this.fileService.save(request, instImgFile); //파일 복사 + file 테이블 insert, file_id 반환
 		
-		return "admin/adminUserList";
+		this.adService.createInstructor(userId, fileId);
+		
+		return "redirect:/admin/userList";
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 회원 정지 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -97,9 +104,9 @@ public class AdminController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 회원 신고 내역 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	@GetMapping("/admin/reportList/{id}")
+	@GetMapping("/admin/reportList/{id}/{page}")
 	public String reportUserList(@PathVariable("id") Integer userId, Model model,
-								 @RequestParam(value="page", defaultValue="0") int page) {
+								@PathVariable("page") int page) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
 		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getUserCountByReportId(userId), 5);
@@ -192,7 +199,10 @@ public class AdminController {
 								@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.get
+                                           
+                                           
+                                           CountByKeyword(kwType, kw), 5);
 		List<Community> communityList = this.adService.getCommunityByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("communityList", communityList);
