@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.repository.ProductRepository;
+import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Instructor;
 import com.example.demo.lms.entity.Lecture;
+import com.example.demo.lms.entity.Notice;
 import com.example.demo.lms.entity.Report;
 import com.example.demo.lms.entity.User;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice.This;
 
 @RequiredArgsConstructor
 @Service
@@ -24,7 +27,8 @@ public class AdminService {
 	private final AdminReportRepository adminReportRepository; //Report(신고) Repository
 	private final AdminCourseRepository adminCourseRepository; //Course(강좌) Repository
 	private final AdminLectureRepository adminLectureRepository; //Lecture(강의) Repository
-
+	private final AdminCommunityRepository adminCommunityRepository; // Community(커뮤니티) Repository
+	private final AdminNoticeRepository adminNoticeRepository; // Notice(공지사항) Repository
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 조회 > 페이징 처리 및 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public List<User> getUserByKeyword(String kwType, String kw, int startNo, int pageSize){
 		
@@ -162,9 +166,102 @@ public class AdminService {
 		this.adminLectureRepository.save(lecture);
 	}
 
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 글 조회 > 검색어의 총 갯수 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public int getCommunityCountByKeyword(String kwType, String kw) {
+		/*
+		switch(kwType) {
+			case "total": return this.adminCommunuityRepository.countUserByKeyword(kw);
+			case "title": return this.adminCommunuityRepository.countUserById(kw);
+			case "name": return this.adminCommunuityRepository.countUserByName(kw);
+		}
+		*/
+		
+		return this.adminCommunityRepository.countCommunityByKeyword(kw);
+	}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 전체글 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	public List<Community> getCommunityByKeyword(String kw, int startNo, int pageSize) {
+		return this.adminCommunityRepository.findCommunityLimitStartIdx(kw, startNo, pageSize);
+	}
 	
 	
-}
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 작성글 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
+
+	public Community getCommunity(Integer cmId) {
+		
+		Optional<Community> community = this.adminCommunityRepository.findById(cmId);
+		
+		return community.get();
+	}	
+	
+
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
+
+	public List<Community> getCommunityContentByKeyword(String kwType, String kw, int startNo, int pageSize){
+	
+	switch(kwType) {
+	case "total": return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
+	case "title": return this.adminCommunityRepository.findAllByCommunityTitle(kw, startNo, pageSize);
+	case "name": return this.adminCommunityRepository.findAllByUserName(kw, startNo, pageSize);}
+
+return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
+
+	}
+	
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 작성글 삭제+삭제 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void signoutContent(Integer cmId, String singnoutVal) {
+		Community community = getCommunity(cmId);
+		community.setDeleteYn(singnoutVal);
+		
+		this.adminCommunityRepository.save(community);
+	}
+
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Notice> getNoticeByKeyword(String kw, int startNo, int pageSize) {
+		return this.adminNoticeRepository.findNoticeLimitStartIdx(kw, startNo, pageSize);}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 작성글 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
+
+	public Notice getNotice(Integer noticeId) {
+			
+		Optional<Notice> notice = this.adminNoticeRepository.findById(noticeId);
+			
+		return notice.get();
+		}	
+				
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 작성글 삭제+삭제 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void signoutDetail(Integer noticeId, String singnoutVal) {
+		Notice notice = getNotice(noticeId);
+		notice.setDeleteYn(singnoutVal);
+		
+		this.adminNoticeRepository.save(notice);
+	}	
+	
+		
+	}	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 
 

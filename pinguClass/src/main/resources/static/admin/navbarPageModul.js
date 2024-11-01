@@ -7,3 +7,14 @@ navBtns[0].addEventListener('click', function() {
 navBtns[1].addEventListener('click', function() {
 	location.href = "/admin/courseList";
 });
+navBtns[2].addEventListener('click', function() {
+	location.href = "/admin/communityList";
+});
+
+navBtns[3].addEventListener('click', function() {
+	location.href = "/admin/adminNoticeList";
+});
+
+navBtns[4].addEventListener('click', function() {
+	location.href = "/admin/communityList";
+});
