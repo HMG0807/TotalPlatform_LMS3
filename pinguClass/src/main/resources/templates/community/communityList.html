@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--커뮤니티 목록-->
+    <link rel="stylesheet" th:href="@{/community/communityListStyle.css}">
+    <!--헤더 풋터-->
+    <link rel="stylesheet" th:href="@{/community/fragment.css}">
+</head>
+<body>
+    <!--네비바 html 시작-->
+    <nav th:fragment="navbarFragment">
+        <div class="header ">
+            <!--*-*-*-*-*-*-*-*-* headerUp_Contents *-*-*-*-*-*-*-*-*-->
+            <div class="headerUp">
+                <div class="headerLogo">
+                    <a th:href="@{|/main|}">
+                        <i class="fa-brands fa-blogger-b"></i>
+                    </a>
+                </div>
+                <form th:action="@{/searchcourse}" method="get" class="headerSearchBar">
+                    <input name="keyword" type="text" class="search" placeholder="찾는 강의를 검색하세요">
+                    <div class="searchBtn">
+                        <button type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="headerRightCon">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/cart}" class="cart"><!--로그인 안했을때만 보여줌-->
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+    
+                    <a sec:authorize="isAnonymous()" class="logincheck"><!--로그인 안했을때만 보여줌-->
+                        <p class="loginBtn">LogIn</p>
+                    </a>
+    
+                    <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="logincheck"><!--로그인했을때만 보여줌-->
+                        LogOut
+                    </a>
+                    
+                    <a sec:authorize="isAuthenticated()" th:href="@{|/user/mypage|}"> <!--로그인했을때만 보여줌-->
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                </div>
+            </div>
+            <!--*-*-*-*-*-*-*-*-* headerDown_Contents *-*-*-*-*-*-*-*-*-->
+            <div class="headerDown">
+                <ul>
+                    <li class="categoryBtn">
+                        <a href="#">
+                            <i class="fa-solid fa-bars"></i> 카테고리
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">할인특가</a>
+                    </li>
+                    <li>
+                        <a href="#">이벤트</a>
+                    </li>
+                    <li>
+                        <a href="#">고객센터</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/boardQuestion/list}">FAQ/문의</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/quiz}">문제풀기</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/community/list}">커뮤니티</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="categoryContainer">
+            <ul class="category">
+                <li>
+                    <p>Java</p>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                </li>
+                <li>
+                    <p>Javascript</p>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                </li>
+                <li>
+                    <p>Python</p>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                </li>
+                <li>
+                    <p>C</p>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                    <a href="#">content</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--네비바 html 끝-->
+
+    <!--커뮤니티 목록 html 시작-->
+    <div layout:fragment="content" class="container my-3">
+        <div class="row my-3">
+            <div class="col-6">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/community/create}" class="btn btn-primary"><!--로그인했을때만 보여줌-->
+                        작성하기
+                    </a>
+            </div>
+            <div class="col-6">
+                <div class="input-group">
+                    <input type="text" id="search_kw" class="form-control">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                    <!-- 검색 원래 코드
+                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                    -->
+                </div>
+            </div>
+        </div>
+    
+    
+    
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>글쓴이</th>
+                    <th>작성일자</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="community, loop : ${community}">
+                <!--
+                    <td th:text="${community.getTotalElements - (community.number * community.size) - loop.index}"></td>
+                    -->
+                    <td>
+                        <a th:href="@{|/community/detail/${community.cmId}|}" th:text="${community.title}"></a>
+                    </td>
+                    <td><span th:if="${community.author != null}" th:text="${community.author.Name}"></span></td>
+                    <td th:text="${#temporals.format(community.createDate,'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    
+    
+    
+        <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}" class="pagingNav">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}" th:if="${page >= paging.number-5 and page <= paging.number+5}" th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
+        <!-- 검색창 폼 / 검색은 API 활용
+        <form th:action="@{/boardQuestion/list}" method="get" id="searchForm">
+            <input type="hidden" id="kw" name="kw" th:value="${kw}">
+            <input type="hidden" id="page" name="page" th:value="${paging.number}">
+        </form>
+        -->
+    </div>
+    <!--커뮤니티 목록 html 끝-->
+<footer th:fragment ="footerFragment">
+	<div class="footer">
+        <div class="footerTop">
+            <div class="footerLogo">
+                <a href="#">
+                    <i class="fa-brands fa-blogger-b"></i>
+                    <!-- BROWNIE -->
+                </a>
+            </div>
+            <ul class="footerNav">
+                <li>
+                    <a href="#">ABOUT</a>
+                </li>
+                <li>
+                    <a href="#">BLOG</a>
+                </li>
+                <li>
+                    <a href="#">SERVICE</a>
+                </li>
+                <li>
+                    <a href="#">CONTACTS</a>
+                </li>
+            </ul>
+            <ul class="footerSns">
+                <li>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="footerbottom">
+            <div class="textBox">
+                <p>주식회사 BROWNIE</p>
+                <p>대표 : Julian</p>
+                <p>사업자 등록번호 : 000-00-00000</p>
+                <p>대표전화 : 1234-1234</p>
+                <p>통신판매업신고 : 2024-경기안산-00000</p>
+                <p>Email : abc01@naver.com</p>
+                <p>주소 : 경기 안산시 단원구 145 3층</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/user/fragment.js}"></script>
+
+</body>
+</html>
