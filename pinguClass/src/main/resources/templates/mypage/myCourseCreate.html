@@ -1,0 +1,103 @@
+<main>
+	
+    <div class="main">
+        <div class="sectionBody">
+        	
+        </div>
+    </div>
+    
+    <link rel="stylesheet" th:href="@{/mypage/myCourseCreatePageStyle.css}">
+    
+    <div class="mpContainer">
+		<div class="mpSideNav">
+			<div class="mpSideNavTitle">
+				<p>마이페이지</p>
+			</div>
+			<ul>
+				<li class="on">
+					<a href="#">
+						<p>공지사항</p>
+						<i class="fa-solid fa-angle-right"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<ul>
+			<li class="courseMngContent">
+				<div class="courseMngTitle">
+					내 강좌 관리 > 강좌 등록
+				</div>
+				<!-- 내용 부문 -->
+				<div class="signContainer">
+		            <form name="join_form" action="post">
+		                <!-- 개인정보 입력 -->
+		                <div class="userId formText">
+		                    <label for="user-id">아이디 <span class="identify">*</span></label>
+		                    <input type="text" class="formStyle" id="user-id" placeholder="아이디를 입력해주세요">
+		                </div>
+		                <div class="userPassword formText">
+		                    <label for="user-password">비밀번호 <span class="identify">*</span></label>
+		                    <input type="password" class="formStyle" id="user-password" placeholder="비밀번호를 입력해주세요">
+		                </div>
+		                <div class="userpasswordCheck formText">
+		                    <label for="user-passwordCheck">비밀번호 확인 <span class="identify">*</span></label>
+		                    <input type="password" class="formStyle" id="user-passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요">
+		                </div>
+		                <div class="userName formText">
+		                    <label for="user-name">이름 <span class="identify">*</span></label>
+		                    <input type="text" class="formStyle" id="user-name" placeholder="이름을 입력해주세요">
+		                </div>
+		                <div class="userEmail formText">
+		                    <label for="user-email">Email <span class="identify">*</span></label>
+		                    <input type="email" class="formStyle" id="user-email" placeholder="예 : Bteammai">&emsp;@&emsp;
+		                    <select class="formStyle">
+		                        <option>선택하기</option>
+		                        <option>naver.com</option>
+		                        <option>gmail.com</option>
+		                        <option>daum.net</option>
+		                        <option>nate.com</option>
+		                        <option>직접입력하기</option>
+		                    </select>
+		                    <input type="email" style="display: none;">
+		                </div>
+		                <div class="userPhone formText">
+		                    <label for="user-phone">휴대폰 <span class="identify">*</span></label>
+		                    <input type="text" class="formStyle" id="user-phone" placeholder="숫자만 입력해주세요">
+		                </div>
+		                <div class="userAddress formText">
+		                    <label for="user-adress">주소 <span class="identify">*</span></label>
+		                    <button type="button" class="formStyle"><i class="fa-solid fa-magnifying-glass"></i>주소 검색</button>
+		                </div>
+		                <div class="userGender formText">
+		                    <label for="user-gender">성별 <span class="identify">*</span></label>
+		                    <div class="radioBox formStyle">
+		                        <input type="radio" id="gender01" name="gender" />
+		                        <label for="gender01">
+		                            <div class="CheckB"></div>남자
+		                        </label>
+		                        <input type="radio" id="gender02" name="gender" />
+		                        <label for="gender02">
+		                            <div class="CheckB"></div>여자
+		                        </label>
+		                        <input type="radio" id="gender03" name="gender" />
+		                        <label for="gender03">
+		                            <div class="CheckB"></div>선택안함
+		                        </label>
+		                    </div>
+		                </div>
+		
+		                <!-- button -->
+		                <div class="submitButton">
+		                    <input type="submit" value="가입하기">
+		                </div>
+		
+		            </form>
+	        	</div>
+			</li>
+		</ul>
+
+	</div>
+    
+	<script th:src="@{/mypage/myCourseMngPageModul.js}"></script>
+</main>

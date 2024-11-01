@@ -1,6 +1,7 @@
 package com.example.demo.lms.entity;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -29,6 +30,7 @@ public class Instructor {
 	@Column(name = "file_id")
 	private Integer fileId; //프로필 이미지
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;

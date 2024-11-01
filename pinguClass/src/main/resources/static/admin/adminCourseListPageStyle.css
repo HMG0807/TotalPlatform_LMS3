@@ -115,7 +115,10 @@ main #searchBtn:hover {
 }
 .contentRows>.blueText{
 	color: blue;
-	/*font-weight: bold;*/
+	font-weight: bold;
+}
+.contentRows>.switchBtn{
+	background-color: #0D6EFD;
 }
 
 

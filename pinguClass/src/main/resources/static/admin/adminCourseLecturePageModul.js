@@ -1,4 +1,9 @@
 
+//페이징 버튼 클릭시
+function paseBtnClick(courseId, pageNum){
+	location.replace(`/admin/lectureList/${courseId}/${pageNum}`);
+}
+
 // 삭제 or 삭제해제 버튼 클릭시
 function deleteLecture(lecture, courseId, page) {
 	

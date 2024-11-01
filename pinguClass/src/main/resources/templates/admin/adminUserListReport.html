@@ -4,7 +4,7 @@
 	<h1>회원 관리 > 신고 내역</h1>
 	
 	<div id="backBtnBox">
-		<button onclick="location.href='/admin/userList'">뒤로 가기</button>
+		<button onclick="history.back();">뒤로 가기</button>
 	</div>
 	
 	<div id="reportCountBox">
@@ -25,29 +25,24 @@
 		<span th:text="${report.content}"></span>
 		<span th:text="${#temporals.format(report.createDate, 'yyyy-MM-dd')}"></span>
 	</div>
-	
-	<!-- 회원ID, page 데이터 넘기기 -->
-    <form th:action="@{|/admin/reportList/${reportList[0].reportee.userId}|}" method="get" id="searchForm">
-        <input type="hidden" id="page" name="page">
-    </form>
 
 	<!-- 페이징 버튼 -->
 	<div id="pageBtn" th:if="${page.totalPage} > 1">
 		<ul>
 			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
-				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${reportList[0].reportee.userId}]], 1)">처음으로</a>
 			</li>
 			<li>
-				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${reportList[0].reportee.userId}]], [[${page.pageNo-1}]])" th:if="${page.pageNo>1}">이전</a>
 			</li>
 			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
-				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+				<a href="javascript:void(0)" } th:onclick="paseBtnClick([[${reportList[0].reportee.userId}]], [[${num}]])" th:text="${num}"></a>
 			</li>
 			<li>
-				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${reportList[0].reportee.userId}]], [[${page.pageNo+1}]])" th:if="${page.pageNo < page.totalPage}">다음</a>
 			</li>
 			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
-				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${reportList[0].reportee.userId}]], [[${page.totalPage}]])">마지막으로</a>
 			</li>
 		</ul>
 	</div>

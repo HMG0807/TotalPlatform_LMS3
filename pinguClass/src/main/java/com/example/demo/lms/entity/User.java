@@ -88,6 +88,10 @@ public class User {
 	
 	@OneToMany(mappedBy = "user")
     private List<CoursePayment> coursePayments; //강좌 결제 리스트
+	
+	@JsonManagedReference
+	@OneToOne(mappedBy = "user")
+	private Instructor instructor; //강사
 }
 
 

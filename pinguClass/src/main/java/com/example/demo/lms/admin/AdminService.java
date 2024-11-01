@@ -62,9 +62,11 @@ public class AdminService {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	public void createInstructor(Integer userId) {
+	public void createInstructor(Integer userId, Integer fileId) {
 		
 		Instructor inst = new Instructor();
+		inst.setUser(getUser(userId));
+		inst.setFileId(fileId);
 		
 		this.adminInstructorRepository.save(inst);
 	}
