@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <!--레이아웃 적용 에러로 html, css 일단 짱박음-->
+    <link rel="stylesheet" th:href="@{/user/reset.css}">
+    <link rel="stylesheet" th:href="@{/user/header.css}">
+    <link rel="stylesheet" th:href="@{/user/signPage.css}">
+    <link rel="stylesheet" th:href="@{/user/footer.css}">
+    <script th:src="@{https://kit.fontawesome.com/86c06c2025.js}" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+
+        <div class="headerBanner">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sunt libero odit pariatur tempore
+                facilis magni quia veritatis</p>
+            <div class="closeBtn"><i class="fa-solid fa-x"></i></div>
+        </div>
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <p><span>B</span>-Team</p>
+                <div class="language">
+                    <p>KR</p>
+                    <p>EN</p>
+                </div>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="SEARCH">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <ul class="contentNav">
+                <li class="wishList">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-heart"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="cart">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="login">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="customerService">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-headset"></i>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="headerDown_Container">
+            <div class="categoryContainer">
+                <p><span><i class="fa-solid fa-bars"></i></span>Category</p>
+                <ul class="category">
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                </ul>
+            </div>
+            <ul class="event">
+                <li><a href="#">BEST</a></li>
+                <li><a href="#">NEW</a></li>
+                <li><a href="#">Seler</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="signContainer">
+            <p>회원가입</p>
+            <div class="noti">
+                <span class="identify">*</span> 필수입력사항입니다.
+            </div>
+            <form name="signform" method="post" th:action="@{/user/sign}">
+                <!-- 개인정보 입력 -->
+                <div class="userId formText">
+                    <label for="user-id">아이디 <span class="identify">*</span></label>
+                    <input type="text" name="id" class="formStyle" id="user-id" placeholder="아이디를 입력해주세요">
+                </div>
+                <div class="userPassword formText">
+                    <label for="user-password">비밀번호 <span class="identify">*</span></label>
+                    <input type="password" name="pw1" class="formStyle" id="user-password" placeholder="비밀번호를 입력해주세요">
+                </div>
+                <div class="userpasswordCheck formText">
+                    <label for="user-passwordCheck">비밀번호 확인 <span class="identify">*</span></label>
+                    <input type="password" name="pw2" class="formStyle" id="user-passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요">
+                </div>
+                <div class="userName formText">
+                    <label for="user-name">이름 <span class="identify">*</span></label>
+                    <input type="text" name="name" class="formStyle" id="user-name" placeholder="이름을 입력해주세요">
+                </div>
+                <div class="userEmail formText">
+                    <label for="user-email">Email <span class="identify">*</span></label>
+                    <input type="text" name="email1"class="formStyle" id="user-email" placeholder="예 : Bteammai">
+                    <select name="email2">
+                        <option>선택하기</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="">직접입력하기</option>
+                    </select>
+                    <!--<input type="text">-->
+                </div>
+                <div class="userPhone formText">
+                    <label for="user-phone">휴대폰 <span class="identify">*</span></label>
+                    <input type="text" name="tel" class="formStyle" id="user-phone" placeholder="숫자만 입력해주세요">
+                </div>
+                <div class="userAddress formText">
+                    <label for="user-adress">주소 <span class="identify">*</span></label>
+                    <button type="button" class="formStyle"><i class="fa-solid fa-magnifying-glass"></i>주소 검색</button>
+                </div>
+                <div class="userGender formText">
+                    <label for="user-gender">성별 <span class="identify">*</span></label>
+                    <div class="radioBox formStyle">
+                        <input type="radio" id="gender01" name="gender" value="남" />
+                        <label for="gender01">
+                            <div class="CheckB"></div>남자
+                        </label>
+                        <input type="radio" id="gender02" name="gender" value="여" />
+                        <label for="gender02">
+                            <div class="CheckB"></div>여자
+                        </label>
+                        <input type="radio" id="gender03" name="gender" value="미선택" />
+                        <label for="gender03">
+                            <div class="CheckB"></div>선택안함
+                        </label>
+                    </div>
+                </div>
+
+
+
+
+                <div class="userBirth formText">
+                    <label for="user-birth">생년월일 <span class="identify">*</span></label>
+                    <input type="date" name="birth" class="formStyle" placeholder="yyyy/mm/dd">
+                </div>
+
+                <!-- 약관동의 입력 -->
+
+                <div class="agreeContainer">
+                    <p>
+                        이용약관동의<span class="identify">*</span>
+                    </p>
+                    <div class="agreeContent">
+                        <div class="agreeCon">
+                            <input type="checkbox" id="agree01" name="agree" class="agreeBox">
+                            <label for="agree01">
+                                <div class="inputCircle"></div>전체 동의합니다.
+                            </label>
+                        </div>
+                        <div class="agreeCon">
+                            <input type="checkbox" id="agree02" name="agree" class="agreeBox">
+                            <label for="agree02">
+                                <div class="inputCircle"></div>이용약관 동의 &ensp;<span>( 필수 )</span>
+                            </label>
+                            <div class="viewMore">약관보기+</div>
+                        </div>
+                        <div class="agreeCon">
+                            <input type="checkbox" id="agree03" name="agree" class="agreeBox">
+                            <label for="agree03">
+                                <div class="inputCircle"></div>개인정보 수집 및 이용 동의 &ensp;<span>( 필수 )</span>
+                            </label>
+                            <div class="viewMore">약관보기+</div>
+                        </div>
+                        <div class="agreeCon">
+                            <input type="checkbox" id="agree04" name="agree" class="agreeBox">
+                            <label for="agree04">
+                                <div class="inputCircle"></div>개인정보 수집 및 이용 동의 &ensp;<span>( 선택 )</span>
+                            </label>
+                            <div class="viewMore">약관보기+</div>
+                        </div>
+                        <div class="agreeCon">
+                            <input type="checkbox" id="agree05" name="agree" class="agreeBox">
+                            <label for="agree05">
+                                <div class="inputCircle"></div>본인은 14세 이상입니다. &ensp;<span>( 필수 )</span>
+                            </label>
+                            <div class="viewMore">약관보기+</div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- button -->
+
+                <div class="submitButton">
+                    <input type="submit" value="가입하기" class="next-btn">
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+
+
+    <script th:src="@{/user/headerModul.js}"></script>
+    <script th:src="@{/user/signModul.js}"></script>
+</body>
+
+</html>
