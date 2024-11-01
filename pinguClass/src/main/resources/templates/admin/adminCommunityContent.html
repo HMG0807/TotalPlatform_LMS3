@@ -1,0 +1,27 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">  
+    <link rel="stylesheet" th:href="@{/admin/adminCommunityContentStyle.css}">
+    
+    <h1>커뮤니티 관리 > 작성글 조회</h1>
+    
+    <div id="backBtnBox">
+		<button onclick="history.back();">뒤로 가기</button>
+	</div>
+
+    <div class="mainWrap">
+
+        <div class="titleLayout">
+            <h3 class="title">제목</h3>
+            <div class="titleContent" th:text="${community.title}"></div> 
+        </div>
+        <div>
+            <div class="contentWrap">
+                <div class="content" th:text="${community.content}"></div>
+            </div>   
+        </div>
+    
+    </div>
+  
+   
+</main>
+</html>    
