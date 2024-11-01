@@ -1,0 +1,67 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">
+	<link rel="stylesheet" th:href="@{/admin/adminCommunityPageStyle.css}">
+    <h1>커뮤니티 관리</h1>
+
+    <div id="searchBox">
+        <!-- 검색창 -->
+         <select name="searchSelect" id="searchSelect">
+            <option value="total" th:selected="${kwType} == total">전체</option>
+            <option value="title" th:selected="${kwType} == title">글제목</option>
+            <option value="name" th:selected="${kwType} == name">작성자명</option>
+         </select>
+         <input type="text" id="search_kw" placeholder="글제목 또는 유저명을 입력해주세요.">
+		 <button id="searchBtn">검색</button>
+    </div>
+
+    <!-- 커뮤니티 글 조회 테이블  -->
+    <div id="columnBox">
+        <span>번호</span>
+        <span>글제목</span>
+        <span>작성자명</span>
+        <span>최근 수정일</span>
+        <span>삭제여부</span>
+        <span>작성글 조회</span>
+        <span>작성글 삭제</span>
+    </div>
+    <div th:each="community, loop : ${communityList}" class="contentRows">
+        <span th:text="${loop.count}"></span>
+        <span th:if="${#strings.length(community.title) > 27}" th:text="${#strings.substring(community.title, 0, 27) + '...'}"></span>
+		<span th:if="${#strings.length(community.title) <= 27}" th:text="${community.title}"></span>
+        <span th:text="${community.user.name}"></span>
+        <span th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd')}"></span>
+        <span  th:text="${community.deleteYn} == n ? 'N' : 'Y'" th:classappend="${community.deleteYn} == y ? 'blueText'"></span>
+        <button th:onclick="communitySelect([[${community.cmId}]], [[${#lists.size(community.content)}]])">작성글 조회</button>
+		<button th:onclick="deleteCommunity([[${community}]])" th:text="${community.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${community.deleteYn} == y ? 'blueText'"></button>
+    </div>
+    <!-- 페이징 버튼  -->
+    <div id="pageBtn" th:if="${page.totalPage} > 1">
+		<ul>
+			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			</li>
+			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			</li>
+			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			</li>
+		</ul>
+	</div>
+
+    <!-- kw, page 데이터 넘기기 -->
+    <form th:action="@{/admin/communityList}" method="get" id="searchForm">
+		<input type="hidden" id="kw" name="kw" th:value="${kw}">
+		<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+        <input type="hidden" id="page" name="page">
+    </form>
+
+    <script th:src="@{/admin/adminCommunityPageModul.js}"></script>     
+</main>
+</html>

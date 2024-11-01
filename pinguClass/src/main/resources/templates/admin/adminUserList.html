@@ -33,9 +33,10 @@
 		<span th:text="${#temporals.format(user.createDate, 'yyyy-MM-dd')}"></span>
 		<span th:text="${user.bannedYn} == n ? 'N' : 'Y'" th:classappend="${user.bannedYn} == y ? 'blueText'"></span>
 		<span th:text="${user.signoutYn} == n ? 'N' : 'Y'" th:classappend="${user.signoutYn} == y ? 'blueText'"></span>
-		<button th:onclick="viewInstModal([[${user}]])">강사 등록</button>
-		<button th:onclick="bannedUser([[${user}]])" th:text="${user.bannedYn} == n ? '정지' : '정지 해제'" th:classappend="${user.bannedYn} == y ? 'blueText'"></button>
-		<button th:onclick="signoutUser([[${user}]])" th:text="${user.signoutYn} == n ? '삭제' : '삭제 해제'" th:classappend="${user.signoutYn} == y ? 'blueText'"></button>
+		<button th:onclick="viewInstModal([[${user}]])" th:if="${user.instructor == null}">강사 등록</button>
+		<button th:if="${user.instructor != null}" class="instSwitchBtn">등록 완료</button>
+		<button th:onclick="bannedUser([[${user}]])" th:text="${user.bannedYn} == n ? '정지' : '정지 해제'" th:classappend="${user.bannedYn} == y ? 'switchBtn'"></button>
+		<button th:onclick="signoutUser([[${user}]])" th:text="${user.signoutYn} == n ? '삭제' : '삭제 해제'" th:classappend="${user.signoutYn} == y ? 'switchBtn'"></button>
 		<button th:onclick="reportDetails([[${user.userId}]], [[${#lists.size(user.reportees)}]])" th:text="${#lists.size(user.reportees) == 0 ? '신고 내역' : '신고 내역(' + #lists.size(user.reportees) + ')'}"></button>
 	</div>
 
@@ -74,8 +75,14 @@
 			<h2>강사 등록</h2>
 			<p><strong>ID:</strong> <span id="modalUserId"></span></p>
 			<p><strong>이름:</strong> <span id="modalUserName"></span></p>
-			<p><strong>이미지 등록:</strong> <input type="file" name="instImg"></p>
-			<p class="modal-content-bottom-p"><a href="">강사 등록</a></p>
+			<p>
+				<strong>이미지 등록:</strong>
+				<form th:action="@{/admin/setInst}" method="post" id="searchForm2" enctype="multipart/form-data">
+					<input type="hidden" name="userId" id="userId">
+					<input type="file" name="instImg" id="instImg">
+				</form>
+			</p>
+			<p class="modal-content-bottom-p"><a href="javascript:void(0)" th:onclick="instSubmit()">강사 등록</a></p>
 		</div>
 	</div>
 

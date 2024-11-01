@@ -26,31 +26,26 @@
 		<span th:if="${#strings.length(lecture.title) <= 27}" th:text="${lecture.title}"></span>
 		<span th:text="${#temporals.format(lecture.lastUpdate, 'yyyy-MM-dd')}"></span>
 		<span  th:text="${lecture.deleteYn} == n ? 'N' : 'Y'" th:classappend="${lecture.deleteYn} == y ? 'blueText'"></span>
-		<button th:onclick="deleteLecture([[${lecture}]], [[${lectureList[0].course.courseId}]], [[${page.pageNo}]])" th:text="${lecture.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${lecture.deleteYn} == y ? 'blueText'"></button>
+		<button th:onclick="deleteLecture([[${lecture}]], [[${lectureList[0].course.courseId}]], [[${page.pageNo}]])" th:text="${lecture.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${lecture.deleteYn} == y ? 'switchBtn'"></button>
 	</div>
-	
-	<!-- 강좌ID, page 데이터 넘기기 -->
-    <form th:action="@{|/admin/lectureList/${lectureList[0].course.courseId}|}" method="get" id="searchForm">
-        <input type="hidden" id="page" name="page">
-    </form>
 
 	<!-- 페이징 버튼 -->
 	<div id="pageBtn" th:if="${page.totalPage} > 1">
 		<ul>
 			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
-				<a class="page-link" th:href="@{|/admin/lectureList/${lectureList[0].course.courseId}/1|}">처음으로</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${lectureList[0].course.courseId}]], 1)">처음으로</a>
 			</li>
 			<li>
-				<a class="page-link" th:href="@{|/admin/lectureList/${lectureList[0].course.courseId}/${page.pageNo-1}|}" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${lectureList[0].course.courseId}]], [[${page.pageNo-1}]])" th:if="${page.pageNo>1}">이전</a>
 			</li>
 			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
-				<a class="page-link" th:href="@{|/admin/lectureList/${lectureList[0].course.courseId}/${num}|}" th:text="${num}" th:data-page="${num}"></a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${lectureList[0].course.courseId}]], [[${num}]])" th:text="${num}"></a>
 			</li>
 			<li>
-				<a class="page-link" th:href="@{|/admin/lectureList/${lectureList[0].course.courseId}/${page.pageNo+1}|}" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${lectureList[0].course.courseId}]], [[${page.pageNo+1}]])" th:if="${page.pageNo < page.totalPage}">다음</a>
 			</li>
 			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
-				<a class="page-link" th:href="@{|/admin/lectureList/${lectureList[0].course.courseId}/${page.totalPage}|}" th:data-page="${page.totalPage}">마지막으로</a>
+				<a href="javascript:void(0)" th:onclick="paseBtnClick([[${lectureList[0].course.courseId}]], [[${page.totalPage}]])">마지막으로</a>
 			</li>
 		</ul>
 	</div>
