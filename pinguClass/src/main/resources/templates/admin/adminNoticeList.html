@@ -1,8 +1,12 @@
 <html layout:decorate="~{admin/adminLayout}">
 <main layout:fragment="mainFragment">
     <link rel="stylesheet" th:href="@{/admin/adminNoticeListPageStyle.css}">
-	<h1>공지사항 관리</h1>
-
+	<div>
+        <h1>공지사항 관리</h1>
+        <button class="announcementBtn">
+            공지사항 등록
+        </button>
+    </div>
 <!-- 강좌 조회 테이블 -->
 <div id="columnBox">
     <span>번호</span>
@@ -23,9 +27,9 @@
     <span  th:text="${notice.deleteYn} == n ? 'N' : 'Y'" th:classappend="${notice.deleteYn} == y ? 'blueText'"></span>
     <button th:onclick="noticeSelect([[${notice.noticeId}]], [[${#lists.size(notice.content)}]])">조회</button>
     <button th:onclick="deleteNotice([[${notice.title}]], [[${notice.noticeId}]], [[${notice.deleteYn}]])" th:text="${notice.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${notice.deleteYn} == y ? 'blueText'"></button>
-    <button>수정</button>
+    <button th:onclick="noticeModify([[${notice.noticeId}]], [[${#lists.size(notice.content)}]])">수정</button>
 </div>
-
+<!-- th:href="@{|/admin/adminNoticeList/${notice.noticeId}|}" -->
 <!-- 페이징 버튼 -->
 <div id="pageBtn" th:if="${page.totalPage} > 1">
     <ul>
