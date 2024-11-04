@@ -17,7 +17,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	public User getUser(Integer id) throws Exception {
+	public User getUser(String id) throws Exception {
 		Optional<User> user = this.userRepository.findById(id);
 		if(user.isPresent()) {
 			return user.get();

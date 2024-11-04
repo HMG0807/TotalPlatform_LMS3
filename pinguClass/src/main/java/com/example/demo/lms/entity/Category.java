@@ -29,8 +29,8 @@ public class Category {
 	private String category; //카테고리
 	
 	@JsonManagedReference
-	@OneToOne(mappedBy = "category")
-	private Course course;
+	@OneToMany(mappedBy = "category")
+	private List<Course> courses;
 	
 	@OneToMany(mappedBy = "category")
     private List<UserCategory> userCategorys;

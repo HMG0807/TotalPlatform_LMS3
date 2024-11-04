@@ -1,6 +1,6 @@
 
 <main>
-	<link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+	<link rel="stylesheet" href="../../static/mypage/myCourseQnaListPageStyle.css">
 	
 	<div class="mpContainer">
 		<div class="mpSideNav">
@@ -20,15 +20,14 @@
 		<ul>
 			<li class="courseMngContent">
 				<div class="courseMngTitle">
-					내 강좌 관리
-					<button class="courseCreateBtn" onclick="location.href='/mypage/instructor/courseCreate'">강좌 등록</button>
+					내 강좌 관리 > QnA 내역
 				</div>
 				<table class="courseMngInfo">
 					<tr>
 						<th>번호</th>
-						<th>강좌명</th>
-						<th>개설일</th>
-						<th>기타</th>
+						<th>제목</th>
+						<th>작성일</th>
+						<th>답글 여부</th>
 					</tr>
 					<tr th:each="course, loop : ${courseList}">
 						<td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">1</td>
@@ -36,11 +35,17 @@
 						<td th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></td>
 						<td>
 							<div class="btnsDiv">
-								<button>강좌 수정</button>
-								<button>강좌 삭제</button>
-								<button>QnA 내역</button>
-								<button>리뷰 보기</button>
-								<button>강의 추가/관리</button>
+								<button>답글 등록</button>
+							</div>
+						</td>
+					</tr>
+					<tr th:each="course, loop : ${courseList}">
+						<td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">2</td>
+						<td th:text="${course.title}"></td>
+						<td th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></td>
+						<td>
+							<div class="btnsDiv">
+								<button>답글 보기</button>
 							</div>
 						</td>
 					</tr>
@@ -75,7 +80,7 @@
 		</ul>
 
 	</div>
-	<script th:src="@{/mypage/myCourseMngPageModul.js}"></script>
+	<script th:src="@{/mypage/myCourseQnaListPageModul.js}"></script>
 
 </main>
 

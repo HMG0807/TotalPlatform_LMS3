@@ -21,6 +21,7 @@ import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -41,7 +42,8 @@ public class AdminController {
 	@GetMapping("/admin/userList")
 	public String userList(Model model, @RequestParam(value="page", defaultValue="0") int page, 
 							@RequestParam(value = "kw", defaultValue = "") String kw,
-							@RequestParam(value = "kwType", defaultValue = "") String kwType) {
+							@RequestParam(value = "kwType", defaultValue = "") String kwType,
+							HttpSession session) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
 		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getUserCountByKeyword(kwType, kw), 5);
@@ -199,10 +201,7 @@ public class AdminController {
 								@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.get
-                                           
-                                           
-                                           CountByKeyword(kwType, kw), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
 		List<Community> communityList = this.adService.getCommunityByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("communityList", communityList);

@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.lms.entity.Course;
+import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MyCourseMngController {
 	
 	private final MyCourseMngService mcmService;
+	private final FileService fileService;
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 등록한 강좌 리스트 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/mypage/instructor/myCourseList")
@@ -33,13 +38,31 @@ public class MyCourseMngController {
 		return "mypage/myCourseMng";
 	}
 	
-	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/mypage/instructor/courseCreate")
-	public String myCourseList(CourseForm courseForm) {
+	public String myCourseCreateGet(CourseForm courseForm) {
+		
+		return "mypage/myCourseForm";
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@PostMapping("/mypage/instructor/courseCreate")
+	public String myCourseCreatePost(CourseForm courseForm, HttpServletRequest request, @RequestParam(value = "bannerImg") MultipartFile bannerImg) throws Exception {
 		
 		String userId = "user3"; //principal.getName() 대체
 		
-		return "mypage/myCourseCreate";
+		//파일 복사 + file 테이블 insert, file_id 반환
+		Integer fileId = this.fileService.save(request, bannerImg);
+		
+		System.out.println(fileId);
+		System.out.println(fileId);
+		System.out.println(fileId);
+		System.out.println(fileId);
+		System.out.println(fileId);
+		
+		this.mcmService.CourseCreate(userId, courseForm, fileId);
+		
+		return "redirect:/mypage/instructor/myCourseList";
 	}
 }
 

@@ -1,5 +1,8 @@
 package com.example.demo.lms.entity;
+
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,15 +17,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "qna")
+@Table(name = "qna_answer")
 @Getter
 @Setter
-public class Qna {
+public class QnaAnswer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "qna_id")
-	private Integer qnaId;
+	@Column(name = "answer_id")
+	private Integer answerId;
 	
 	private String title;
 	private String content;
@@ -31,14 +34,12 @@ public class Qna {
 	@Column(name = "delete_yn")
 	private String deleteYn; //삭제여부
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@OneToOne
+	@JoinColumn(name="qna_id")
+	private Qna qna;
 	
+	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "course_id")
-	private Course course;
-	
-	@OneToOne(mappedBy = "qna")
-	private QnaAnswer qnaAnswer;
+	@JoinColumn(name = "inst_id")
+	private Instructor instructor;
 }
