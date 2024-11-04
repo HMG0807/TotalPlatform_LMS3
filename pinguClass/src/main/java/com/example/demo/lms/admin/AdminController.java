@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
