@@ -1,0 +1,70 @@
+<main>
+    
+    <link rel="stylesheet" th:href="@{/mypage/myCourseFormPageStyle.css}">
+    
+    <div class="mpContainer">
+		<div class="mpSideNav">
+			<div class="mpSideNavTitle">
+				<p>마이페이지</p>
+			</div>
+			<ul>
+				<li class="on">
+					<a href="#">
+						<p>공지사항</p>
+						<i class="fa-solid fa-angle-right"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<ul>
+			<li class="courseMngContent">
+				<div class="courseMngTitle">
+					내 강좌 관리 > 강좌 등록
+				</div>
+				<!-- 내용 부문 -->
+				<div class="courseContainer">
+		            <form name="courseform" th:action="@{/mypage/instructor/courseCreate}" th:object="${courseForm}" enctype="multipart/form-data" method="post">
+		                <!-- 과정 입력 -->
+		                <div class="courseImg formText">
+		                    <label for="bannerImg">배너 이미지</label>
+		                    <input type="file" name="bannerImg">
+		                </div>
+		                <div class="courseCategory formText">
+		                    <label for="category">카테고리</label>
+		                    <select class="formStyle" th:field="*{category}">
+		                        <option value="">선택하기</option>
+		                        <option value="한식">한식</option>
+		                        <option value="양식">양식</option>
+		                    </select>
+		                </div>
+		                <div class="courseTitle formText">
+		                    <label for="title">제목</label>
+		                    <input type="text" class="formStyle" th:field="*{title}" placeholder="과정 제목을 입력해주세요.">
+		                </div>
+		                <div class="courseContent formText">
+		                    <label for="conetent">내용</label>
+		                    <textarea type="text" class="formStyle" name="content" id="content" th:text="${courseForm.content}" placeholder="과정 내용을 입력해주세요."></textarea>
+		                </div>
+		                <div class="courseObjective formText">
+		                    <label for="objective">목표</label>
+		                    <textarea type="text" class="formStyle" name="objective" id="objective" th:text="${courseForm.objective}" placeholder="과정 목표를 입력해주세요."></textarea>
+		                </div>
+		                <div class="coursePrice formText">
+		                    <label for="price">가격</label>
+		                    <input type="text" class="formStyle" th:field="*{price}" placeholder="가격을 입력해주세요.">
+		                </div>
+		
+		                <!-- button -->
+		                <div class="submitButton">
+		                    <input type="submit" value="등록하기">
+		                </div>
+		            </form>
+	        	</div>
+			</li>
+		</ul>
+
+	</div>
+    
+	<script th:src="@{/mypage/myCourseFormPageModul.js}"></script>
+</main>

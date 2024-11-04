@@ -8,10 +8,27 @@ main {
     display: inline-block;
     width: 1150px;
     padding: 20px 0px 0px 50px;
+	
 }
 
-main>h1 {
+div>h1 {
     font-size: 30px;
+}
+
+.announcementBtn{
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 15px;
+	color: white;
+	border-radius: 5px;
+	padding-left: 2px;
+	margin-left: 25px;
+	background-color: var(--mainColor);
+    cursor: pointer;
+    border-width: 0px;
+	margin-left: 980px;
+
 }
 
 /* 공지사항 조회 테이블 > Column 구역 */
@@ -31,11 +48,12 @@ main>h1 {
 
 #columnBox>span:nth-child(1) { width: 50px;}
 #columnBox>span:nth-child(2) { width: 250px;}
-#columnBox>span:nth-child(3) { width: 120px;}
-#columnBox>span:nth-child(4) { width: 150px;}
-#columnBox>span:nth-child(5) { width: 150px;}
+#columnBox>span:nth-child(3) { width: 250px;}
+#columnBox>span:nth-child(4) { width: 200px;}
+#columnBox>span:nth-child(5) { width: 100px;}
 #columnBox>span:nth-child(6) { width: 150px;}
 #columnBox>span:nth-child(7) { width: 150px;}
+#columnBox>span:nth-child(8) { width: 150px;}
 
 
 
@@ -57,11 +75,12 @@ main>h1 {
     line-height: 35px;
 }
 
-.contentRows>span:nth-child(1) { width: 50px;}
-.contentRows>span:nth-child(2) { width: 250px;}
-.contentRows>span:nth-child(3) { width: 120px;}
-.contentRows>span:nth-child(4) { width: 150px;}
-.contentRows>span:nth-child(5) { width: 150px;}
+.contentRows>span:nth-child(1) { width: 40px;}
+.contentRows>span:nth-child(2) { width: 215px;}
+.contentRows>span:nth-child(3) { width: 210px;}
+.contentRows>span:nth-child(4) { width: 160px;}
+.contentRows>span:nth-child(5) { width: 80px;}
+
 
 
 .contentRows>button {

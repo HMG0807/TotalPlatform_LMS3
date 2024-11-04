@@ -42,6 +42,11 @@ public class User {
 	@Column(name = "signout_yn")
 	private String signoutYn; //회원탈퇴여부
 	
+	@Column(name = "refresh_token")
+	private String refreshToken; //로그인 토큰
+	
+	private String role; //로그인 권한
+	
 	@OneToMany(mappedBy = "user")
     private List<CsQuestion> questions; //1:1문의글 리스트
 	

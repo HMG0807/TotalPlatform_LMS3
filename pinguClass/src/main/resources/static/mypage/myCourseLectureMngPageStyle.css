@@ -1,0 +1,190 @@
+/* reset.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Nunito Sans", sans-serif;
+    color: rgb(80, 80, 80);
+}
+
+main>.mpContainer {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    min-width: 1024px;
+    display: flex;
+    gap: 2rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+
+main>.mpContainer>.mpSideNav {
+    width: 20%;
+}
+
+.mpSideNav>.mpSideNavTitle {
+    font-size: 30px;
+    font-weight: 500;
+    padding-bottom: 2rem;
+}
+
+.mpSideNav>ul {
+    border: 1px solid rgb(209, 209, 209);
+    box-shadow: 0px 2px 2px rgb(223, 223, 223);
+}
+
+.mpSideNav>ul>li>a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    border-bottom: 1px solid rgb(209, 209, 209);
+    color: rgb(136, 136, 136);
+    font-weight: 600;
+}
+.mpSideNav>ul>li>a:last-child{
+    border-bottom: none;
+}
+.mpSideNav>ul>li>a>p,
+.mpSideNav>ul>li>a>i {
+    color: rgb(209, 209, 209);
+    font-weight: 600;
+}
+
+.mpSideNav>ul>li.on {
+    background-color: rgb(240, 240, 240);
+}
+
+.mpSideNav>ul>li.on>a>p,
+.mpSideNav>ul>li.on>a>i {
+    color: var(--mainColor);
+}
+
+
+main>.mpContainer{
+    width: 80%;
+}
+
+main>.mpContainer>ul {
+    width: 100%;
+    position: relative;
+}
+main>.mpContainer>ul>.courseMngContent{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 컨텐츠 영역 > 제목 */
+.courseMngContent>.courseMngTitle {
+    font-size: 24px;
+    font-weight: 500;
+    padding-bottom: 2rem;
+    padding-top: 0.6rem;
+    position: relative;
+}
+
+.courseMngContent>.courseMngTitle>button { /* 강의 순서 변경, 강의 추가 버튼 */
+    border: 0px;
+    background-color: #0D6EFD;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
+.courseMngContent>.courseMngTitle>.orderByChangeBtn{ /* 강의 순서 변경 버튼 */
+    right: 120px;
+}
+
+/* 컨텐츠 영역 > 내용 */
+.courseMngContent>.courseMngInfo{
+    border-collapse: collapse;
+    font-weight:lighter;
+    width: 100%;
+}
+.courseMngContent tr{
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+.courseMngContent tr:first-child{
+    border-top: 2px solid rgb(49, 49, 49);
+    border-bottom: 1px solid rgb(49, 49, 49);
+}
+
+th , td{ 
+    padding: 1.5rem 0 1.5rem 0;
+    text-align: center;
+    color: rgb(68, 68, 68);
+}
+td{
+    font-weight: 400;
+}
+th , td{
+    width: 10%;
+}
+
+th:nth-child(2){
+    width: 55%;
+    text-align: center;
+}
+td:nth-child(2){
+    text-align: left;
+}
+th:nth-child(3){
+    width: 15%;
+}
+
+
+/* 페이징 버튼 */
+#pageBtn > ul {
+	display: flex;
+	list-style-type: none;
+	margin-top: 30px;
+	justify-content: center;
+}
+#pageBtn li:not(.active):not(.disabled):hover {
+	background-color: #eee;
+}
+#pageBtn li:not(.active):not(.disabled):hover > a {
+	color: rgb(40, 40, 255);
+}
+#pageBtn li {
+	display: inline-block;
+	background-color: white;
+	border: 1px solid #ddd;
+	margin-left: -1px;
+}
+#pageBtn li:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#pageBtn li:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#pageBtn a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 6px 12px;
+	/*color: rgb(206, 154, 0);*/
+}
+#pageBtn .active {
+	background-color: #0D6EFD;
+}
+#pageBtn .active > a {
+	color: white;
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+}
+#pageBtn .disabled {
+	background-color: #ddd;
+}
+#pageBtn .disabled > a {
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+	color: rgb(68, 68, 68);
+}

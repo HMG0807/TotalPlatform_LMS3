@@ -1,9 +1,11 @@
 package com.example.demo.lms.admin;
 
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
@@ -21,6 +24,8 @@ import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -41,7 +46,8 @@ public class AdminController {
 	@GetMapping("/admin/userList")
 	public String userList(Model model, @RequestParam(value="page", defaultValue="0") int page, 
 							@RequestParam(value = "kw", defaultValue = "") String kw,
-							@RequestParam(value = "kwType", defaultValue = "") String kwType) {
+							@RequestParam(value = "kwType", defaultValue = "") String kwType,
+							HttpSession session) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
 		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getUserCountByKeyword(kwType, kw), 5);
@@ -199,10 +205,7 @@ public class AdminController {
 								@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.get
-                                           
-                                           
-                                           CountByKeyword(kwType, kw), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
 		List<Community> communityList = this.adService.getCommunityByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("communityList", communityList);
@@ -279,7 +282,7 @@ public class AdminController {
 		return "redirect:/admin/adminNoticeList";
 	}
 	
-	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 글 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항글 글 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/admin/cancelNotice/{id}")
 	public String signoutNoticeDetailCancel(@PathVariable("id") Integer noticeId) {
 		
@@ -287,6 +290,61 @@ public class AdminController {
 		
 		return "redirect:/admin/adminNoticeList";
 	}
+	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 작성 페이지 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@GetMapping("/admin/adminNoticeList/registerPage")
+	public String moveAnnouncementRegistration(NoticeForm noticeForm) {
+		
+		return "/admin/adminRegistNotice";
+	}	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@PostMapping("/admin/adminNoticeList/registerPage")
+	public String resistAnnouncement(@Valid NoticeForm noticeForm,
+			BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "/admin/adminRegistNotice";
+		}
+		
+		String adminCode = "qwer1234"; //principal.getName()
+		
+		
+		this.adService.register(noticeForm.getTitle(), noticeForm.getContents(), adminCode);
+		
+		return "/admin/adminNoticeList";
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 수정 페이지 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+//	@GetMapping("/admin/adminNoticeList/{id}")
+//	public String questionModify(@PathVariable("id") Integer noticeId, Model model){
+//		
+//		Notice n = this.adService.getNotice(noticeId);
+//		
+//		model.addAttribute(null, n)
+//		
+//		return "/admin/adminRegistNotice";
+//	}
+//	
+//	@PostMapping("/admin/adminNoticeList/{id}")
+//	public String questionModify(@Valid NoticeForm noticeForm, 
+//			@PathVariable("id") Integer noticeId, BindingResult bindingResult){
+//		
+//		if(bindingResult.hasErrors()) {
+//			return "/admin/adminRegistNotice";
+//		}
+//		
+//		Notice n = this.adService.getNotice(noticeId);
+//		this.adService.modify(n, noticeForm.getTitle(), noticeForm.getContents());
+//		
+//		return "/admin/adminNoticeList";
+//	}	
+	
+
+	
 	
 	
 } //class END

@@ -1,0 +1,36 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">  
+    <link rel="stylesheet" th:href="@{/admin/adminRegisterNoticeStyle.css}">
+    
+    <h1>공지사항 관리 > 공지사항 등록 및 수정 </h1>
+    
+    <div id="backBtnBox">
+		<button onclick="history.back();">뒤로 가기</button>
+	</div>
+
+    <div class="mainWrap">
+
+        <form class="Question" method="post" th:object="${noticeForm}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <!-- subject -->
+            <div class="qs-info-subject">
+                <h3>제목</h1>
+                <input type="text" th:field="*{title}" >
+            </div>
+            <!-- subject end -->
+
+            <!-- content-->
+            <div class="qs-info-content">
+                <h4>내용</h4>
+                <textarea th:field="*{contents}"></textarea>
+            </div>
+            <!-- content end -->
+
+            <button type="submit">저장하기</button>
+        </form>
+    
+    </div> 
+    <!-- <script th:src="@{/admin/adminRegistNotice.js}"></script> -->
+</body>
+</html>

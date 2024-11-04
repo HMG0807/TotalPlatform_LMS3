@@ -1,7 +1,5 @@
 package com.example.demo.lms.mypage;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +12,4 @@ public class CourseForm {
 	private String content;
 	private String objective;
 	private Integer price;
-	private MultipartFile bannerImg;
 }
