@@ -1,0 +1,76 @@
+
+.subjectdiv>label {
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: rgb(90, 90, 90);
+    font-weight: 900;
+}
+
+.subjectdiv>input {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 0.5rem;
+    font-size:1.2rem;
+    text-indent: 3rem;
+}
+
+.contentdiv>label{
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: rgb(90, 90, 90);
+    font-weight: 900;
+}
+.contentdiv>textarea {
+    text-indent: 3rem;
+    font-size:1.2rem;
+}
+
+.filediv>label {
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: rgb(90, 90, 90);
+    font-weight: 900;
+}
+
+.filediv>input {
+    width: 15%;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 0.5rem;
+    text-indent: 2rem;
+}
+
+.passworddiv>label {
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: rgb(90, 90, 90);
+    font-weight: 900;
+}
+
+.passworddiv>input {
+    width: 15%;
+    padding-bottom: 0.5rem;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 0.5rem;
+    font-size:1.2rem;
+    text-indent: 3rem;
+}
+
+.formcontainer>h5{
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    color: rgb(90, 90, 90);
+}
+.formcontainer{
+	border:none;
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}

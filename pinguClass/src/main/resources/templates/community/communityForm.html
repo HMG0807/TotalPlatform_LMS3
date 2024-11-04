@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!--커뮤니티 목록-->
-    <link rel="stylesheet" th:href="@{/community/communityListStyle.css}">
+    <!--커뮤니티 글 작성-->
+    <link rel="stylesheet" th:href="@{/community/communityForm.css}">
     <!--헤더 풋터-->
     <link rel="stylesheet" th:href="@{/community/fragment.css}">
 </head>
@@ -115,79 +115,31 @@
         </div>
     </nav>
     <!--네비바 html 끝-->
-
-    <!--커뮤니티 목록 html 시작-->
-    <div layout:fragment="content" class="container my-3">
-        <div class="row my-3">
-            <div class="col-6">
-                    <a sec:authorize="isAuthenticated()" th:href="@{/community/create}" class="btn btn-primary"><!--로그인했을때만 보여줌-->
-                        작성하기
-                    </a>
+    <div layout:fragment="content" class="container formcontainer">
+        <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+        <form th:action="@{/community/create}" id="communityForm" method="post">
+           <!--<div th:replace="~{communityForm_errors :: formErrorsFragment}"></div>-->
+            <div class="mb-3 subjectdiv">
+                <label for="subject" class="form-label">제목</label>
+                <input type="text" name="title" class="form-control">
             </div>
-            <div class="col-6">
-                <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                    <!-- 검색 원래 코드
-                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                    -->
-                </div>
+            <div class="mb-3 contentdiv">
+                <label for="content" class="form-label">내용</label>
+                <textarea name="content" class="form-control" rows="10"></textarea>
             </div>
-        </div>
-    
-    
-    
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>글쓴이</th>
-                    <th>작성일자</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="paging, loop : ${community}">
-                    <td th:text="${community.getTotalElements - (community.number * community.size) - loop.index}"></td>
-                    <td>
-                        <a th:href="@{|/community/detail/${community.cmId}|}" th:text="${community.title}"></a>
-                    </td>
-                    <td><span th:if="${community.author != null}" th:text="${community.author.Name}"></span></td>
-                    <td th:text="${#temporals.format(community.lastUpdate,'yyyy-MM-dd HH:mm')}"></td>
-                </tr>
-            </tbody>
-        </table>
-    
-    
-    
-        <!-- 페이징처리 시작 -->
-        <div th:if="${!paging.isEmpty()}" class="pagingNav">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
-                        <span>이전</span>
-                    </a>
-                </li>
-                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}" th:if="${page >= paging.number-5 and page <= paging.number+5}" th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
-                </li>
-                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
-                        <span>다음</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- 페이징처리 끝 -->
-        <!-- 검색창 폼 / 검색은 API 활용
-        <form th:action="@{/boardQuestion/list}" method="get" id="searchForm">
-            <input type="hidden" id="kw" name="kw" th:value="${kw}">
-            <input type="hidden" id="page" name="page" th:value="${paging.number}">
+            <div class="mb-3 filediv">
+                <label for="file" class="form-label">첨부파일</label>
+                <input type="file" class="form-control">
+            </div>
+            <!-- 1102 이순 : community 컬럼에 암호 컬럼x
+            <div class="mb-3 passworddiv">
+                <label for="password" class="form-label">암호</label>
+               <input type="password" class="form-control">
+            </div>
+            -->
+            <input type="submit" value="저장하기" class="btn btn-primary my-2">
         </form>
-        -->
     </div>
-    <!--커뮤니티 목록 html 끝-->
 <footer th:fragment ="footerFragment">
 	<div class="footer">
         <div class="footerTop">
@@ -241,3 +193,22 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

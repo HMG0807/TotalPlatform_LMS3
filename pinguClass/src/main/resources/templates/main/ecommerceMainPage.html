@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{|/layout/reset.css|}">
+    <link rel="stylesheet" th:href="@{|/layout/header.css|}">
+    <link rel="stylesheet" th:href="@{|/layout/footer.css|}">
+    <link rel="stylesheet" th:href="@{|/main/ecommerceMainPageStyle.css|}">
+    <script src="https://kit.fontawesome.com/86c06c2025.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* HEADER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <header>
+        <div class="headerBanner">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sunt libero odit pariatur tempore
+                facilis magni quia veritatis</p>
+            <div class="closeBtn"><i class="fa-solid fa-x"></i></div>
+        </div>
+
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <p><span>B</span>-Team</p>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="SEARCH">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <ul class="contentNav">
+                <li class="wishList">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-heart"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="cart">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="login">
+                    <a th:href="@{|/user/login|}">
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="customerService">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-headset"></i>
+                        </p>
+                    </a>
+                    <ul>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">자주하는 질문</a></li>
+                        <li><a href="#">1:1 문의</a></li>
+                        <li><a href="#">대량주문 문의</a></li>
+                    </ul>   
+                </li>
+            </ul>
+        </div>
+        <div class="headerDown_Container">
+            <div class="categoryContainer">
+                <p><span><i class="fa-solid fa-bars"></i></span>Category</p>
+                <ul class="category">
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                </ul>
+            </div>
+            <ul class="event">
+                <li><a href="#">BEST</a></li>
+                <li><a href="#">NEW</a></li>
+                <li><a href="#">Seler</a></li>
+            </ul>
+            <div class="languageContainer">
+                <div class="language">
+                    <p>KR</p>
+                    <p>EN</p>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <main>
+        <div class="mainSlideContainer">
+            <div class="slides">
+                <div class="slide">
+                    <img src="/static/img/Banner01.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/static/img/banner02.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/static/img/banner03.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/static/img/banner03.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/static/img/banner03.png" alt="">
+                </div>
+            </div>
+            <div class="slideBtn nextBtn">
+                <p><i class="fa-solid fa-chevron-right"></i></p>
+            </div>
+            <div class="slideBtn preBtn">
+                <p><i class="fa-solid fa-chevron-left"></i></p>
+            </div>
+        </div>
+        <section>
+            <div class="sectionTitle">
+                <p>
+                    &#128640; 지금 가장 많이 담는 특가&ensp; <i class="fa-solid fa-chevron-right"></i>
+                </p>
+                <p class="sectionSubtitle">추천 특가템 최대40%</p>
+            </div>
+            <div class="productContainer">
+                <div class="slides">
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">11
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">22
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">33
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">44
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="productBtn nextBtn">
+                    <p><i class="fa-solid fa-chevron-right"></i></p>
+                </div>
+                <div class="productBtn preBtn btnOff">
+                    <p><i class="fa-solid fa-chevron-left"></i></p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="sectionTitle">
+                <p>
+                    &#128640; 지금 가장 많이 담는 특가&ensp; <i class="fa-solid fa-chevron-right"></i>
+                </p>
+                <p class="sectionSubtitle">추천 특가템 최대40%</p>
+            </div>
+            <div class="productContainer">
+                <div class="slides">
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">11
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">22
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">33
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="slide">
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">44
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999++</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="#">
+                                <div class="productImg">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="putBtn">
+                                    <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                                </div>
+                                <div class="productText">
+                                    <div class="productName">
+                                        <p>[Company]ProductName</p>
+                                    </div>
+                                    <div class="productPrice">
+                                        <p class="originalPrice">10,000원</p>
+                                        <p><span>20% </span>8,330원</p>
+                                    </div>
+                                    <div class="productReview">
+                                        <p>9,999+</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="productBtn nextBtn">
+                    <p><i class="fa-solid fa-chevron-right"></i></p>
+                </div>
+                <div class="productBtn preBtn btnOff">
+                    <p><i class="fa-solid fa-chevron-left"></i></p>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="sectionBanner">
+                <a href="#">
+                    <img src="/static/img/sectionBanner.png" alt="">
+                </a>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="timeSale">
+                <div class="timeSaleTitle">
+                    <p class="title">&#127801;&ensp;일일특가</p>
+                    <p class="subTitle">단 24시간 한정특가</p>
+                    <div class="timeTimer">
+                        11:11:15
+                    </div>
+                    <p class="noti">망설이면 늦어요!</p>
+                </div>
+                <div class="timeSaleProduct">
+                    <div class="product">
+                        <a href="#">
+                            <div class="productImg">
+                                <img src="" alt="">
+                            </div>
+                            <div class="putBtn">
+                                <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                            </div>
+                            <div class="productText">
+                                <div class="productName">
+                                    <p>[Company]ProductName</p>
+                                </div>
+                                <div class="productPrice">
+                                    <p class="originalPrice">10,000원</p>
+                                    <p><span>20% </span>8,330원</p>
+                                </div>
+                                <div class="productReview">
+                                    <p>9,999+</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product">
+                        <a href="#">
+                            <div class="productImg">
+                                <img src="" alt="">
+                            </div>
+                            <div class="putBtn">
+                                <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                            </div>
+                            <div class="productText">
+                                <div class="productName">
+                                    <p>[Company]ProductName</p>
+                                </div>
+                                <div class="productPrice">
+                                    <p class="originalPrice">10,000원</p>
+                                    <p><span>20% </span>8,330원</p>
+                                </div>
+                                <div class="productReview">
+                                    <p>9,999+</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="timeSale">
+                <div class="timeSaleTitle">
+                    <p class="title">&#127801;&ensp;일일특가</p>
+                    <p class="subTitle">단 24시간 한정특가</p>
+                    <div class="timeTimer">
+                        11:11:15
+                    </div>
+                    <p class="noti">망설이면 늦어요!</p>
+                </div>
+                <div class="timeSaleProduct">
+                    <div class="product">
+                        <a href="#">
+                            <div class="productImg">
+                                <img src="" alt="">
+                            </div>
+                            <div class="putBtn">
+                                <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                            </div>
+                            <div class="productText">
+                                <div class="productName">
+                                    <p>[Company]ProductName</p>
+                                </div>
+                                <div class="productPrice">
+                                    <p class="originalPrice">10,000원</p>
+                                    <p><span>20% </span>8,330원</p>
+                                </div>
+                                <div class="productReview">
+                                    <p>9,999+</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product">
+                        <a href="#">
+                            <div class="productImg">
+                                <img src="" alt="">
+                            </div>
+                            <div class="putBtn">
+                                <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                            </div>
+                            <div class="productText">
+                                <div class="productName">
+                                    <p>[Company]ProductName</p>
+                                </div>
+                                <div class="productPrice">
+                                    <p class="originalPrice">10,000원</p>
+                                    <p><span>20% </span>8,330원</p>
+                                </div>
+                                <div class="productReview">
+                                    <p>9,999+</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="sectionBanner">
+                <a href="#">
+                    <img src="/static/img/sectionBanner.png" alt="">
+                </a>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="timeSale">
+                <div class="timeSaleTitle">
+                    <p class="title">추천특가</p>
+                    <p class="noti">망설이면 늦어요!</p>
+                </div>
+                <div class="timeSaleProduct">
+                    <div class="product">
+                        <a href="#">
+                            <div class="productImg">
+                                <img src="" alt="">
+                            </div>
+                            <div class="putBtn">
+                                <p><i class="fa-solid fa-cart-shopping"></i>담기</p>
+                            </div>
+                            <div class="productText">
+                                <div class="productName">
+                                    <p>[Company]ProductName</p>
+                                </div>
+                                <div class="productPrice">
+                                    <p class="originalPrice">10,000원</p>
+                                    <p><span>20% </span>8,330원</p>
+                                </div>
+                                <div class="productReview">
+                                    <p>9,999+</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <footer>
+        <div class="footerCon footerCon01">
+
+
+            <div class="csContainer">
+                <div class="csText">
+                    <p>고객행복센터</p>
+
+                    <div class="companyNum">
+                        <p>1644-1107</p>
+                        <p><span>월~토요일 오전 7시 - 오후6시</span></p>
+                    </div>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <p>비회원문의 : help@naver.com</p>
+            </div>
+
+            <div class="introduceContainer">
+                <ul class="companyNav">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">회사소개영상</a></li>
+                    <li><a href="#">투자정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+                <div class="introduceText">
+                    <p>법인명 : lorem | 사업자등록번호 : 000-00-00000 &emsp;<a href="#">사업자정보 확인</a></p>
+                    <p>통신판매업 : 제 2024-경기안산-1515호</p>
+                    <p>주소 : 경기도 안산시 상록구 이동 000호 5층 | 대표이사 : 백경빈</p>
+                    <p>채용문의 : <a href="#">abcd@naver.com</a></p>
+                    <p>팩스 : 000 - 0000 - 0000</p>
+                </div>
+                <ul class="snsContainer">
+                    <!-- <a target="_blank" href="https://icons8.com/icon/ww630cOi80NH/target-logo">표적</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a> -->
+                    <li><a href="#"><img src="/static/img/facebook.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/youtube.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/instagrem.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/target.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/blog.png" alt=""></a></li>
+                </ul> 
+            </div>
+        </div>
+
+        <div class="footerCon footerNotice">
+            <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
+        </div>
+    </footer>
+
+
+    <script th:src="@{|/layout/headerModul.js|}"></script>
+    <script th:src="@{|/layout/ATeamModul.js|}"></script>
+    <script th:src="@{|/main/ecommerceMainPageModul.js|}"></script>
+</body>
+
+</html>

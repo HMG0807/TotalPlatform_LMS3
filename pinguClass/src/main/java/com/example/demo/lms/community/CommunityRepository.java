@@ -12,7 +12,7 @@ import com.example.demo.lms.entity.User;
 
 public interface CommunityRepository extends JpaRepository<Community, Integer> {
 
-	List<Community> findAll();
+	//List<Community> findAll();
 	Page<Community> findByUser(User user, Pageable pageable);
 
 

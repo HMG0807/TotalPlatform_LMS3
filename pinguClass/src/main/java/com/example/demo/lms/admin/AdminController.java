@@ -199,10 +199,7 @@ public class AdminController {
 								@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.get
-                                           
-                                           
-                                           CountByKeyword(kwType, kw), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
 		List<Community> communityList = this.adService.getCommunityByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("communityList", communityList);

@@ -11,7 +11,7 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String mainpage() {
-		return "main/main";
+		return "main/ecommerceMainPage";
 		
 	}
 	
