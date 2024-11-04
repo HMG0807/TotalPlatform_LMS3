@@ -38,4 +38,8 @@ public class Instructor {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "instructor")
 	private List<Course> courses; //등록한 강좌 리스트
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "instructor")
+	private List<QnaAnswer> qnaAnswers; //등록한 답변 리스트
 }

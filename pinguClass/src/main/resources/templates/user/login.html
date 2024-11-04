@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>loginPage</title>
     <!--레이아웃 적용 에러로 html, css 일단 짱박음-->
-    <link rel="stylesheet" th:href="@{/user/reset.css}">
-    <link rel="stylesheet" th:href="@{/user/header.css}">
+    <link rel="stylesheet" th:href="@{/layout/reset.css}">
+    <link rel="stylesheet" th:href="@{/layout/header.css}">
     <link rel="stylesheet" th:href="@{/user/loginPage.css}">
-    <link rel="stylesheet" th:href="@{/user/footer.css}">
+    <link rel="stylesheet" th:href="@{/layout/footer.css}">
     <script th:src="@{https://kit.fontawesome.com/86c06c2025.js}" crossorigin="anonymous"></script>
 </head>
 
@@ -130,11 +130,16 @@
 
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main>
+    <div th:if="${param.error}">
+            	<div>
+                사용자ID 또는 비밀번호를 확인해 주세요.
+            	</div>
+            </div>
         <div class="loginContainer">
             <p>로그인</p>
-            <form id="login" method="post" th:action="@{/user/login}">
-                <input type="text" name="id" placeholder="아이디를 입력해주세요">
-                <input type="password" name="pw" placeholder="비밀번호를 입력해주세요">
+            <form id="LoginForm" method="post">
+                <input id="loginId" type="text" name="username" placeholder="아이디를 입력해주세요">
+                <input id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요">
                 <div class="findContainer">
                     <div class="findBtn idFind">
                         <a href="#">아이디 찾기</a>
@@ -210,7 +215,7 @@
                     <li><a href="#"><img src="../static/img/youtube.png" alt=""></a></li>
                     <li><a href="#"><img src="../static/img/instagrem.png" alt=""></a></li>
                     <li><a href="#"><img src="../static/img/target.png" alt=""></a></li>
-                    <li><a href="#"><img src="../static/img/blog.png" alt=""></a></li>
+                    <li><a href="#"><img src="../static/img/blog.png" alt=""></a></li> 
                 </ul>
             </div>
         </div>
@@ -222,8 +227,8 @@
 
 
 
-
-
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script th:src="@{/user/login.js}"></script>
    <script th:src="@{/user/headerModul.js}"></script>
 </body>
 

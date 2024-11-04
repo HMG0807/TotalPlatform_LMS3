@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
@@ -23,6 +25,7 @@ import com.example.demo.lms.paging.EzenPaging;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -43,7 +46,8 @@ public class AdminController {
 	@GetMapping("/admin/userList")
 	public String userList(Model model, @RequestParam(value="page", defaultValue="0") int page, 
 							@RequestParam(value = "kw", defaultValue = "") String kw,
-							@RequestParam(value = "kwType", defaultValue = "") String kwType) {
+							@RequestParam(value = "kwType", defaultValue = "") String kwType,
+							HttpSession session) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
 		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getUserCountByKeyword(kwType, kw), 5);

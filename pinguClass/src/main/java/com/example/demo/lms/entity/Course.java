@@ -47,7 +47,7 @@ public class Course {
 	private Instructor instructor;
 	
 	@JsonBackReference
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
 	
