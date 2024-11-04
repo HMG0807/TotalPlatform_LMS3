@@ -1,12 +1,13 @@
 package com.example.demo.lms.admin;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.ecommerce.Entity.Product;
-import com.example.demo.ecommerce.repository.ProductRepository;
+
+import com.example.demo.lms.entity.Admin;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Instructor;
@@ -16,7 +17,7 @@ import com.example.demo.lms.entity.Report;
 import com.example.demo.lms.entity.User;
 
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.asm.Advice.This;
+
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +30,7 @@ public class AdminService {
 	private final AdminLectureRepository adminLectureRepository; //Lecture(강의) Repository
 	private final AdminCommunityRepository adminCommunityRepository; // Community(커뮤니티) Repository
 	private final AdminNoticeRepository adminNoticeRepository; // Notice(공지사항) Repository
+	private final AdminRepository adminRepository;
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 조회 > 페이징 처리 및 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public List<User> getUserByKeyword(String kwType, String kw, int startNo, int pageSize){
 		
@@ -243,10 +245,29 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 		this.adminNoticeRepository.save(notice);
 	}	
 	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void register(String title, String content, String adminCode){
 		
+		Admin admin = this.adminRepository.findByAdminCode(adminCode);
+		
+		Notice n = new Notice();
+		n.setTitle(title);
+		n.setContent(content);
+		n.setLastUpdate(LocalDateTime.now());
+		n.setAdmin(admin);
+		n.setDeleteYn("n");
+		
+		this.adminNoticeRepository.save(n);
+	}
+
+	public void modify(Notice n, String title, String content) {
+		n.setTitle(title);
+		n.setContent(content);
+		this.adminNoticeRepository.save(n);
 	}	
 	
-
+}
 	
 	
 	
