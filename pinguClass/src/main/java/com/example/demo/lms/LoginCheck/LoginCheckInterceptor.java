@@ -3,6 +3,7 @@ package com.example.demo.lms.LoginCheck;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
+
 public class LoginCheckInterceptor implements HandlerInterceptor {
 	
 	private final LoginCheckService loginCheckService;
@@ -26,19 +28,46 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         Object handler)
         throws Exception {
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        LoginCheck loginCheck = handlerMethod.getMethodAnnotation(LoginCheck.class);	
-        
-        
-        
-        if (loginCheck == null) {
+    	if (handler instanceof ResourceHttpRequestHandler) {
             return true;
         }
+
+    	boolean hasAnnotation = checkAnnotation(handler, LoginCheck.class);
+  
         
-        if (loginCheckService.checkToken(request) == null) {
-            throw new undefinedUserException("로그인 후 다시 이용해 주세요");
+        if (hasAnnotation) {
+            
+            if (loginCheckService.checkToken(request) != null){
+            	return true;
+            }
+            
+            if (loginCheckService.checkToken(request) == null) {
+            	throw new undefinedUserException("로그인 후 다시 이용해 주세요");
+                
+            }
+        }
+        
+        if(!hasAnnotation) {
+        	 return true;
         }
         return true;
+        
 
     }
+    
+    
+    private boolean checkAnnotation(Object handler, Class<LoginCheck> loginCheck) {
+
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+
+
+        if (null != handlerMethod.getMethodAnnotation(loginCheck) || null != handlerMethod.getBeanType().getAnnotation(loginCheck)) {
+            return true;
+        }
+
+        //annotation이 없는 경우
+        return false;
+    }
+
 }
+    

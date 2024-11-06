@@ -12,6 +12,7 @@ let ApiUrl = "http://192.168.17.254:8080/login"
       axios({
       url: ApiUrl,
       method: "post",
+      withCredentials: true,
       headers : {		  
 	      "Content-Type": "application/json"
 	   },
@@ -26,7 +27,7 @@ let ApiUrl = "http://192.168.17.254:8080/login"
        //성공시 구현 될 코드
        alert("로그인에 성공하였습니다.")
        let jwtToken = response.headers.get("Authorization"); 
-	   document.cookie = `jwtToken=${jwtToken};path=/`
+	   document.cookie = `jwtToken=${jwtToken};path=/;`
        location.href="/main";
   
        console.log(response.data);
@@ -36,13 +37,8 @@ let ApiUrl = "http://192.168.17.254:8080/login"
        console.error(error);
       });
 
+})
 
-
-
-
-
-
-		})
 
 
 
