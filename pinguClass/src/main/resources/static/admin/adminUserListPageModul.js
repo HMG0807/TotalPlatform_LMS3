@@ -31,11 +31,11 @@ Array.from(page_elements).forEach(function(element) {
 
 
 // 모달(상세)창 열기 > 강사 등록 버튼 클릭시
-function viewInstModal(user) {
-	document.getElementById('modalUserId').innerText = user.id;
-	document.getElementById('modalUserName').innerText = user.name;
-	document.getElementById('userId').value = user.userId;
-	userName = user.name;
+function viewInstModal(id, name, userId) {
+	document.getElementById('modalUserId').innerText = id;
+	document.getElementById('modalUserName').innerText = name;
+	document.getElementById('userId').value = userId;
+	userName = name;
 
 	// 모달 표시
 	document.getElementById('instructorModal').style.display = "block";
@@ -76,28 +76,28 @@ function instSubmit(){
 
 
 // 정지 or 정지해제 버튼 클릭시
-function bannedUser(user) {
-	if(user.bannedYn == "n"){
-		if(confirm(`정말로 \"${user.id}\" 회원을 정지하시겠습니까?`)){
-			location.href = "/admin/banned/" + user.userId;
+function bannedUser(bannedYn, id, userId) {
+	if(bannedYn == "n"){
+		if(confirm(`정말로 \"${id}\" 회원을 정지하시겠습니까?`)){
+			location.href = "/admin/banned/" + userId;
 		}
 	} else {
-		if(confirm(`정말로 \"${user.id}\" 회원을 정지해제 하시겠습니까?`)){
-			location.href = "/admin/banncancel/" + user.userId;
+		if(confirm(`정말로 \"${id}\" 회원을 정지해제 하시겠습니까?`)){
+			location.href = "/admin/banncancel/" + userId;
 		}
 	}
 }
 
 // 삭제 or 삭제해제 버튼 클릭시
-function signoutUser(user) {
+function signoutUser(signoutYn, id, userId) {
 	
-	if(user.signoutYn == "n"){
-		if(confirm(`정말로 \"${user.id}\" 회원을 삭제하시겠습니까?`)){
-			location.href = "/admin/signout/" + user.userId;
+	if(signoutYn == "n"){
+		if(confirm(`정말로 \"${id}\" 회원을 삭제하시겠습니까?`)){
+			location.href = "/admin/signout/" + userId;
 		}
 	} else {
-		if(confirm(`정말로 \"${user.id}\" 회원을 삭제해제 하시겠습니까?`)){
-			location.href = "/admin/signoutcancel/" + user.userId;
+		if(confirm(`정말로 \"${id}\" 회원을 삭제해제 하시겠습니까?`)){
+			location.href = "/admin/signoutcancel/" + userId;
 		}
 	}
 }
