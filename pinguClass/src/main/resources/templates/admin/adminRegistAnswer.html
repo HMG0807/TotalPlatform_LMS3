@@ -1,0 +1,37 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">  
+    <link rel="stylesheet" th:href="@{/admin/adminRegisterNoticeStyle.css}">
+    
+    <h1>1대1문의 관리 > 문의 답변 및 수정 </h1>
+    
+    <div id="backBtnBox">
+		<button onclick="history.back();">뒤로 가기</button>
+	</div>
+
+    <div class="mainWrap">
+
+        <form class="Question" method="post" th:object="${answerForm}">
+
+            <input type="hidden" name="questionId" th:value="${questionId}">
+            
+            <!-- subject -->
+            <div class="qs-info-subject">
+                <h3>제목</h1>
+                <input type="text" th:field="*{title}" >
+            </div>
+            <!-- subject end -->
+
+            <!-- content-->
+            <div class="qs-info-content">
+                <h4>내용</h4>
+                <textarea th:field="*{contents}"></textarea>
+            </div>
+            <!-- content end -->
+
+            <button type="submit">저장하기</button>
+        </form>
+    
+    </div> 
+
+</body>
+</html>

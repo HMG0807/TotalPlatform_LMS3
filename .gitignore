@@ -71,4 +71,6 @@ local.properties
 
 # log ignore
 *.gz
-*.log 
+*.log
+
+

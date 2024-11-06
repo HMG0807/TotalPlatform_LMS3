@@ -3,6 +3,8 @@ package com.example.demo.lms.main;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.demo.lms.LoginCheck.LoginCheck;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -14,7 +16,6 @@ public class MainController {
 		return "main/main";
 		
 	}
-	
 	
 
 }

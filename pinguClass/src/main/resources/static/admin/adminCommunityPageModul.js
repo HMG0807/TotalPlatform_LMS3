@@ -34,14 +34,14 @@ function communitySelect(cmId, communityCount){
 }
 
 //삭제 버튼 클릭시
-function deleteCommunity(community){
-	if(community.deleteYn == "n"){
-		if(confirm(`정말로 \"${community.title}\" 작성글을 삭제하시겠습니까?`)){
-			location.href = "/admin/deleteCommunity/" + community.cmId;
+function deleteCommunity(cmId,deleteYn,title){
+	if(deleteYn == "n"){
+		if(confirm(`정말로 \"${title}\" 작성글을 삭제하시겠습니까?`)){
+			location.href = "/admin/deleteCommunity/" + cmId;
 		}
 	} else {
-		if(confirm(`정말로 \"${community.title}\" 작성글을 삭제해제 하시겠습니까?`)){
-			location.href = "/admin/cancelcommunity/"+ community.cmId;
+		if(confirm(`정말로 \"${title}\" 작성글을 삭제해제 하시겠습니까?`)){
+			location.href = "/admin/cancelcommunity/"+ cmId;
 		}
 	}
 }

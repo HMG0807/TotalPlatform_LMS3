@@ -1,0 +1,224 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.myCard{
+    width: var(--pageMinWidth);
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+    cursor: pointer;
+}
+.profileImg{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    background-color: rgb(211, 211, 211);
+}
+
+.profileName>p{
+    font-weight: 900;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profileName>p>i{
+    display: block;
+    padding: 1rem;
+}
+
+.cashContainer{
+    display: flex;
+    align-items: center;
+}
+
+.cashContainer>.content{
+    margin-left: 3rem;
+}
+.cashContainer>.content>a>p{
+    padding-bottom: 0.5rem;
+    font-size: 14px;
+}
+.cashContainer>.content>a>p>i{
+    padding-right: 1rem ;
+}
+.cashContainer>.content>a>.money{
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.content>.btn{
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--spanColor);
+    color: white;
+    font-weight: 900;
+}
+
+
+
+
+/* mypage mainContent ------------------------------------------------*/
+.myPageContainer{
+    width: var(--pageMinWidth);
+    display: flex;
+    margin-bottom: 5rem ;
+}
+
+/* Side Nav */
+.myPageSideNav{
+    width: 30%;
+}
+.myPageContentContainer{
+    width: 70%;
+}
+
+
+.myPageSideNav>ul{
+    padding-bottom: 2rem;
+    margin:  1rem 0;
+    padding-right: 4rem;
+}
+.myPageSideNav>ul:first-child{
+    margin-top: 0;
+}
+
+.myPageSideNav>ul>li>a{
+    display: flex;
+    padding: 1rem;
+    font-weight: 900;
+}
+.myPageSideNav>ul>li>a>i{
+    display: block;
+    width: 30px;
+    font-size: 20px;
+}
+
+
+
+
+/* mypageContent */
+
+.myPageContentContainer>ul{
+    position:relative;
+}
+.myPageContentContainer>ul>li{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+}
+
+.myPageContentContainer>ul>li.on{
+    display: block;
+}
+
+.myInfo>.myInfoTitle{
+    padding: 2rem 0;
+    font-size: 20px;
+    font-weight: 900;
+}
+.myInfo>.profileImg{
+    margin-bottom: 2rem;
+}
+
+.myInfo>form{
+    display: flex;
+    flex-direction: column;
+}
+
+.myInfo>form>input{
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.myInfo>form>.saveBtn{
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--spanColor);
+    border-radius: 0.3rem;
+    color: white;
+    font-weight: 900;
+}
+
+.myInfo>form>.removeIdBtn{
+    padding: 1rem 0;
+    border: none;
+    background-color: var(--background);
+    cursor: pointer;
+}
+
+
+
+/* subscription */
+
+.subscriptionTitle{
+    margin-bottom: 1rem;
+}
+.subscriptionTitle>p{
+    font-size: 20px ;
+    font-weight: 900;
+    padding-bottom: 1rem;
+}
+.subscriptionTitle>p.subTitle{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.subscription>button{
+    border: none;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 0.5rem ;
+    background-color: var(--spanColor);
+    color: white;
+    font-weight: 900;
+}
+.subscription>ul{
+    margin-top: 5rem ;
+    border-top: 1px solid var(--boxShadow);
+    padding: 1rem 0;
+}
+.subscription>ul>li>a{
+    display: flex;
+    padding: 1rem 0;
+    justify-content: space-between;
+    font-weight: 900;
+}
+.subscription>ul>li>a>i{
+    padding: 0 1em;
+}
+
+
+
+/* delivery */
+
+.deliveryTitle{
+    padding: 2rem 0;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.delivery>input[type="date"]{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    border-radius: 0.5rem;
+    background-color: var(--boxShadow);
+    border: none;
+    outline: none;
+}

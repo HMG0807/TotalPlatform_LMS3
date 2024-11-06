@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.lms.admin.AdminUserRepository;
+import com.example.demo.lms.entity.Category;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Instructor;
 import com.example.demo.lms.entity.User;
@@ -63,4 +64,18 @@ public class MyCourseMngService {
 		this.instUseCourseRepository.save(course);
 	}
 
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 모든 카테고리 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Category> getCategoryList() {
+		
+		return this.instUseCategoryRepository.findAll();
+	}
+
 }
+
+
+
+
+
+
+
+

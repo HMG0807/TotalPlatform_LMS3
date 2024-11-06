@@ -42,11 +42,12 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             }
             
             if (loginCheckService.checkToken(request) == null) {
-            	throw new undefinedUserException("로그인 후 다시 이용해 주세요");
-                
+            	//throw new undefinedUserException("로그인 후 다시 이용해 주세요");
+              response.sendRedirect("/user/login");
             }
         }
         
+
         if(!hasAnnotation) {
         	 return true;
         }

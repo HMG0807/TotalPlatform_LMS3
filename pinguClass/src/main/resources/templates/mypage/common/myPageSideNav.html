@@ -1,0 +1,25 @@
+<th:block th:fragment="mySideNavFragment">
+	<link rel="stylesheet" th:href="@{/mypage/common/myPageSideNavStyle.css}">
+	
+	<div class="myPageSideNav">
+        <ul>
+            <li><a href="#"><i class="fa-solid fa-crown"></i>회원정보 수정</a></li>
+            <li><a href="#"><i class="fa-solid fa-receipt"></i>쿠폰 코드내역</a></li>
+            <li id="subscription"><a href="#"><i class="fa-solid fa-calendar-days"></i>구독관리</a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><i class="fa-solid fa-calendar-days"></i>강좌 QnA 관리</a></li>
+            <li><a href="#"><i class="fa-solid fa-calendar-days"></i>강좌 리뷰 관리</a></li>
+            <li><a href="#"><i class="fa-solid fa-calendar-check"></i>수강 강좌 내역</a></li>
+            <li><a href="#"><i class="fa-solid fa-calendar-check"></i>구매 강좌 내역</a></li>
+            <li><a href="#"><i class="fa-solid fa-calendar-days"></i>내 강좌 관리</a></li>
+        </ul>
+        <ul>
+        	<li><a href="#"><i class="fa-regular fa-comment-dots"></i>커뮤니티 관리</a></li>
+            <li id="csCenter"><a href="csPage.html"><i class="fa-regular fa-comment"></i>고객센터</a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>로그아웃</a></li>
+        </ul>
+    </div>
+</th:block>

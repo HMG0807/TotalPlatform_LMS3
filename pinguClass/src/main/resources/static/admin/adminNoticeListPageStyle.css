@@ -1,5 +1,5 @@
 /* nav 구역 */
-nav > div:nth-child(3){
+nav > div:nth-child(4){
     border-right: 7px solid rgb(56, 56, 56);
 }
 
