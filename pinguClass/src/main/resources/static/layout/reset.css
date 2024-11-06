@@ -1,40 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-
+/* 통합 리셋 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: "Nunito Sans", sans-serif;
-    color: rgb(80, 80, 80);
-
+    color: var(--color);
 }
 
+body.scrollOff{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body{
+    background-color: var(--background);
+}
 
 :root {
-    /* color */
-    --mainColor: #f7418f;
-    --subColor: #fc8192;
-    --subColor02: #fec7b4;
-    --subColor03: #fff3c7;
+    --pageMinWidth : 1200px;
+    --spanColor : rgb(255, 123, 0);
+}
 
-    /* font size */
-    --titleFont: 24px;
-    --subtitleFont: 20px;
-    --contentFont: 16px;
-
-    /* layout  */
-    --pageMinWidth : 1024px;
-    --layoutpadding : 10vw;
-
-    /* FontColor */
-    --subFontColor : rgb(150, 150, 150);
-
-
-
+/* 라이트 모드일떄 리셋 설정 */
+:root[color-theme='light'] {
+    --background: #fff;
+    --color: #393939;
+    --boxShadow:rgb(211, 211, 211);
 }
 
 
+/* 다크 모드일떄 리셋 설정 */
+:root[color-theme='dark'] {
+    --background: #101010;
+    --color: #f7f7f7;
+    --boxShadow:rgb(80, 80, 80);
+}
 
+html{
+    background-color: var(--background);
+    color: var(--mainColor);
+}
 
+.btn{
+    cursor: pointer;
+}

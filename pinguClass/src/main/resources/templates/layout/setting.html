@@ -1,0 +1,26 @@
+<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+<th:block th:fragment="settingFragment">
+	<div class="setting">
+        <div class="settingBtn">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <!-- 다크모드 토글 버튼 -->
+        <div class="settingContainer">
+
+            <div class="settingCon">
+                <p>language Seletor</p>
+                <select name="language" id="languageSelect" class="setting_Con" disabled>
+                    <option value="language">한국어</option>
+                    <option value="language">English</option>
+                </select>
+            </div>
+            <div class="settingCon darkModeContainer">
+                <p>Dark Mode</p>
+                <input type="checkbox" id="darkMode" class="check setting_Con" disabled>
+                <label for="darkMode">
+                    <div class="darkModeBtn"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+</th:block>

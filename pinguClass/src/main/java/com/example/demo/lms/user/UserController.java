@@ -1,17 +1,13 @@
-package com.example.demo.totalPlatform;
+package com.example.demo.lms.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.lms.LoginCheck.LoginCheck;
-import com.example.demo.lms.user.UserService;
-
 
 @Controller
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
+
 	
 	
 	@GetMapping("/")
@@ -24,12 +20,14 @@ public class UserController {
     public String login() {
         return "user/login";
     } 
-		
+	
 	@LoginCheck
 	@GetMapping("/test")
 	public String test() {
-		return "gdgdgd";
+		
+		return "";
 	}
+	
 	
 	// 회원가입창
 	@GetMapping("user/sign")

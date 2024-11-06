@@ -32,7 +32,7 @@
         <span th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd')}"></span>
         <span  th:text="${community.deleteYn} == n ? 'N' : 'Y'" th:classappend="${community.deleteYn} == y ? 'blueText'"></span>
         <button th:onclick="communitySelect([[${community.cmId}]], [[${#lists.size(community.content)}]])">작성글 조회</button>
-		<button th:onclick="deleteCommunity([[${community}]])" th:text="${community.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${community.deleteYn} == y ? 'blueText'"></button>
+		<button th:onclick="deleteCommunity([[${community.cmId}]],[[${community.deleteYn}]],[[${community.title}]])" th:text="${community.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${community.deleteYn} == y ? 'blueText'"></button>
     </div>
     <!-- 페이징 버튼  -->
     <div id="pageBtn" th:if="${page.totalPage} > 1">
