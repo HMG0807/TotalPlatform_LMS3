@@ -1,21 +1,42 @@
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 footer {
-    padding-left: var(--layoutpadding);
-    padding-right: var(--layoutpadding);
-    min-width: var(--pageMinWidth);
-    border-top: 1px solid rgb(222, 222, 222);
-    background-color: rgb(250, 250, 250);
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--boxShadow);
+    background-color: var(--background);
 }
+
+
+
+
+
 
 
 .footerCon01 {
     display: flex;
     padding: 2rem 0 2rem;
-    min-width: var(--pageMinWidth);
-    gap: 10vw;
+    width: var(--pageMinWidth);
+    justify-content: space-between;
 }
+
+.csContainer{
+    width: 45%;
+}
+
+
+.introduceContainer{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+
 
 .csText>p {
     padding-bottom: 2rem;
@@ -58,12 +79,12 @@ footer {
 .askCon>.askBtn {
     border: 1px solid var(--subFontColor);
     font-size: 14px;
-
     display: flex;
     align-items: center;
     margin-right: 1rem;
     border-radius: 0.2rem;
-    background-color: white;
+    background-color: var(--color);
+
 }
 
 .askCon>.askBtn>a {
@@ -72,6 +93,7 @@ footer {
     height: 100%;
     align-items: center;
     padding: 0 2rem 0 2rem;
+    color: var(--background);
 }
 
 .csContainer>p {
@@ -129,7 +151,8 @@ footer {
     justify-content: center;
     padding: 1rem 0 1rem 0;
     position: relative;
-    z-index: 20;
+    z-index: 1;
+    width: 100%;
 }
 .footerNotice>p{
     color: var(--subFontColor);

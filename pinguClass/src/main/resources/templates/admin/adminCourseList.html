@@ -26,7 +26,7 @@
 		<span>강좌 삭제</span>
 	</div>
 	<div th:each="course, loop : ${courseList}" class="contentRows">
-		<span th:text="${loop.count}"></span>
+		<span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
 		<span th:text="${course.instructor.user.name}"></span>
 		<span th:if="${#strings.length(course.title) > 27}" th:text="${#strings.substring(course.title, 0, 27) + '...'}"></span>
 		<span th:if="${#strings.length(course.title) <= 27}" th:text="${course.title}"></span>

@@ -33,10 +33,10 @@
 		<span th:text="${#temporals.format(user.createDate, 'yyyy-MM-dd')}"></span>
 		<span th:text="${user.bannedYn} == n ? 'N' : 'Y'" th:classappend="${user.bannedYn} == y ? 'blueText'"></span>
 		<span th:text="${user.signoutYn} == n ? 'N' : 'Y'" th:classappend="${user.signoutYn} == y ? 'blueText'"></span>
-		<button th:onclick="viewInstModal([[${user}]])" th:if="${user.instructor == null}">강사 등록</button>
+		<button th:onclick="viewInstModal([[${user.id}]], [[${user.name}]], [[${user.userId}]])" th:if="${user.instructor == null}">강사 등록</button>
 		<button th:if="${user.instructor != null}" class="instSwitchBtn">등록 완료</button>
-		<button th:onclick="bannedUser([[${user}]])" th:text="${user.bannedYn} == n ? '정지' : '정지 해제'" th:classappend="${user.bannedYn} == y ? 'switchBtn'"></button>
-		<button th:onclick="signoutUser([[${user}]])" th:text="${user.signoutYn} == n ? '삭제' : '삭제 해제'" th:classappend="${user.signoutYn} == y ? 'switchBtn'"></button>
+		<button th:onclick="bannedUser([[${user.bannedYn}]], [[${user.id}]], [[${user.userId}]])" th:text="${user.bannedYn} == n ? '정지' : '정지 해제'" th:classappend="${user.bannedYn} == y ? 'switchBtn'"></button>
+		<button th:onclick="signoutUser([[${user.signoutYn}]], [[${user.id}]], [[${user.userId}]])" th:text="${user.signoutYn} == n ? '삭제' : '삭제 해제'" th:classappend="${user.signoutYn} == y ? 'switchBtn'"></button>
 		<button th:onclick="reportDetails([[${user.userId}]], [[${#lists.size(user.reportees)}]])" th:text="${#lists.size(user.reportees) == 0 ? '신고 내역' : '신고 내역(' + #lists.size(user.reportees) + ')'}"></button>
 	</div>
 
