@@ -133,7 +133,7 @@ public class AdminController {
 							@RequestParam(value = "kw", defaultValue = "") String kw,
 							@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 		
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCourseCountByKeyword(kwType, kw), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 3, adService.getCourseCountByKeyword(kwType, kw), 5);
 		List<Course> courseList = this.adService.getCourseByKeyword(kwType, kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("courseList", courseList);

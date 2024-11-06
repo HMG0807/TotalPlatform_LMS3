@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.lms.LoginCheck.LoginCheck;
+import com.example.demo.lms.entity.Category;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
@@ -30,7 +31,7 @@ public class MyCourseMngController {
 		
 		String userId = "user3"; //principal.getName() 대체
 		
-		EzenPaging ezenPaging = new EzenPaging(page, 10, this.mcmService.getCourseCountById(userId), 5);
+		EzenPaging ezenPaging = new EzenPaging(page, 2, this.mcmService.getCourseCountById(userId), 5);
 		List<Course> courseList = this.mcmService.getCourseList(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("courseList", courseList);
@@ -41,10 +42,18 @@ public class MyCourseMngController {
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/mypage/instructor/courseCreate")
-	public String myCourseCreateGet(CourseForm courseForm) {
+	public String myCourseCreateGet(CourseForm courseForm, Model model) {
+		
+		List<Category> categoryList = this.mcmService.getCategoryList();
+		
+		model.addAttribute("categoryList", categoryList);
 		
 		return "mypage/myCourseForm";
 	}
+	
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	// 마이페이지 서브메뉴바 프래그먼트로 빼기
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@PostMapping("/mypage/instructor/courseCreate")
@@ -55,16 +64,17 @@ public class MyCourseMngController {
 		//파일 복사 + file 테이블 insert, file_id 반환
 		Integer fileId = this.fileService.save(request, bannerImg);
 		
-		System.out.println(fileId);
-		System.out.println(fileId);
-		System.out.println(fileId);
-		System.out.println(fileId);
-		System.out.println(fileId);
-		
 		this.mcmService.CourseCreate(userId, courseForm, fileId);
 		
 		return "redirect:/mypage/instructor/myCourseList";
 	}
+	
+	@GetMapping("/mypage")
+	public String mypageTest() {
+		
+		return "mypage/myPage";
+	}
+	
 }
 
 

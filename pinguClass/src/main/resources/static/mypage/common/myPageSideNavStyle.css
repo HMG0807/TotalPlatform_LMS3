@@ -1,0 +1,24 @@
+/* Side Nav */
+.myPageSideNav{
+    width: 20%;
+}
+
+.myPageSideNav>ul{
+    padding-bottom: 2rem;
+    margin:  1rem 0;
+    padding-right: 4rem;
+}
+.myPageSideNav>ul:first-child{
+    margin-top: 0;
+}
+
+.myPageSideNav>ul>li>a{
+    display: flex;
+    padding: 1rem;
+    font-weight: 900;
+}
+.myPageSideNav>ul>li>a>i{
+    display: block;
+    width: 30px;
+    font-size: 20px;
+}

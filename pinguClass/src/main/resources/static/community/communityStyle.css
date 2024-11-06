@@ -1,0 +1,168 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0;
+}
+
+.csContentContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+}
+
+.csSideNav {
+    width: 20%;
+}
+.csSideNav>p{
+    padding-bottom: 2rem ;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+
+.csSideNav>ul {
+    padding-right: 3rem;
+}
+
+.csSideNav>ul>li>a {
+    display: block;
+    width: 100%;
+    padding: 1rem 1rem;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.csCon {
+    width: 80%;
+}
+.csCon>ul {
+    position: relative;
+    height: 150vh;
+}
+
+.csCon>ul>li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+}
+
+.csCon>ul>li.on{
+    display: block;
+}
+
+.csConTitle {
+    padding-bottom: 1rem;
+    font-size: 24px;
+    font-weight: 900;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cummunitysearchContainer{
+    width: 40%;
+    display: flex;
+}
+
+
+.cummunitysearchContainer>input{
+    width: 90%;
+    padding-left: 1rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--color);
+}
+.cummunitysearchContainer>button{
+    width: 10%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--color);
+}
+
+.cummunitysearchContainer{
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: var(--boxShadow);
+    
+}
+
+
+
+
+.selectOption{
+    display: flex;
+    justify-content: end;
+}
+.selectOption>p{
+    padding-bottom: 1rem ;
+    padding-left: 1rem;
+    font-size: 14px;
+}
+
+
+
+
+
+.faqNav {
+    display: flex;
+    padding: 3rem 0;
+    gap: 2rem;
+}
+
+.faqNav>li {
+    flex: 1;
+}
+
+.faqNav>li>a {
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+
+
+.csCon>ul>li>.faqCon {
+    position: relative;
+}
+
+.faqCon>li {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.faqCon>li.on{
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+table tr {
+    border-top: 1px solid var(--boxShadow);
+}
+
+table tr:last-child {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+table tr td {
+    padding: 1rem 0;
+}
+
+table tr td:first-child {
+    width: 5%;
+}
+table tr td:nth-child(2) {
+    width: 80%;
+}
+table tr td:nth-child(3) {
+    width: 20%;
+}
