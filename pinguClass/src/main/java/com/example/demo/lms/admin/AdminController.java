@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
+import com.example.demo.lms.entity.CsAnswer;
+import com.example.demo.lms.entity.CsQuestion;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.entity.Notice;
 import com.example.demo.lms.entity.Report;
@@ -247,18 +248,15 @@ public class AdminController {
 	/*************************************** 공지사항 관리 ***************************************/
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 전체 공지사항 글 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/admin/adminNoticeList")
-	public String adminAnnounceList(Model model, @RequestParam(value="page", defaultValue="0") int page, 
-								@RequestParam(value = "kw", defaultValue = "") String kw,
-								@RequestParam(value = "kwType", defaultValue = "") String kwType) {
+	public String adminAnnounceList(Model model, @RequestParam(value="page", defaultValue="0") int page) {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
-		List<Notice> noticeList = this.adService.getNoticeByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getNoticeCountByKeyword(), 5);
+		List<Notice> noticeList = this.adService.getNoticeByKeyword(ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("page", ezenPaging);
-		model.addAttribute("kw", kw);
-		model.addAttribute("kwType", kwType);
+
 		
 		return "/admin/adminNoticeList";
 	}
@@ -303,7 +301,7 @@ public class AdminController {
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
 	@PostMapping("/admin/adminNoticeList/registerPage")
-	public String resistAnnouncement(@Valid NoticeForm noticeForm,
+	public String registAnnouncement(@Valid NoticeForm noticeForm,
 			BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
@@ -315,37 +313,150 @@ public class AdminController {
 		
 		this.adService.register(noticeForm.getTitle(), noticeForm.getContents(), adminCode);
 		
-		return "/admin/adminNoticeList";
+		return "redirect:/admin/adminNoticeList";
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 수정 페이지 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-//	@GetMapping("/admin/adminNoticeList/{id}")
-//	public String questionModify(@PathVariable("id") Integer noticeId, Model model){
-//		
-//		Notice n = this.adService.getNotice(noticeId);
-//		
-//		model.addAttribute(null, n)
-//		
-//		return "/admin/adminRegistNotice";
-//	}
-//	
-//	@PostMapping("/admin/adminNoticeList/{id}")
-//	public String questionModify(@Valid NoticeForm noticeForm, 
-//			@PathVariable("id") Integer noticeId, BindingResult bindingResult){
-//		
-//		if(bindingResult.hasErrors()) {
-//			return "/admin/adminRegistNotice";
-//		}
-//		
-//		Notice n = this.adService.getNotice(noticeId);
-//		this.adService.modify(n, noticeForm.getTitle(), noticeForm.getContents());
-//		
-//		return "/admin/adminNoticeList";
-//	}	
+	@GetMapping("/admin/adminNoticeList/{id}")
+	public String questionModify(NoticeForm noticeForm,@PathVariable("id") Integer noticeId, Model model){
+		
+		Notice n = this.adService.getNotice(noticeId);
+		
+//		model.addAttribute(null, n);
+		noticeForm.setTitle(n.getTitle());
+		noticeForm.setContents(n.getContent());
+		
+		return "/admin/adminRegistNotice";
+	}
+	
+	@PostMapping("/admin/adminNoticeList/{id}")
+	public String questionModify(@Valid NoticeForm noticeForm, 
+			@PathVariable("id") Integer noticeId, BindingResult bindingResult){
+		
+		if(bindingResult.hasErrors()) {
+			return "/admin/adminRegistNotice";
+		}
+		
+		Notice n = this.adService.getNotice(noticeId);
+		this.adService.modify(n, noticeForm.getTitle(), noticeForm.getContents());
+		
+		return "redirect:/admin/adminNoticeList";
+	}	
 	
 
+	/*************************************** 1대1 문의 관리 ***************************************/
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 전체  문의글 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@GetMapping("/admin/adminOneToOneList")
+	public String adminOneToOneList(Model model, @RequestParam(value="page", defaultValue="0") int page,
+			@RequestParam(value = "kw", defaultValue = "") String kw,
+			@RequestParam(value = "kwType", defaultValue = "") String kwType) {
+									
+		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCsQuestionCountByKeyword(), 5);
+		List<CsQuestion> questionList = this.adService.getCsQuetionByKeyword(ezenPaging.getStartNo(), ezenPaging.getPageSize());
+		
+		model.addAttribute("questionList", questionList);
+		model.addAttribute("page", ezenPaging);
+		model.addAttribute("kw", kw);
+		model.addAttribute("kwType", kwType);
+		
+		return "/admin/adminOneToOne";
+	}	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 / 답변 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@GetMapping("/admin/adminOneToOneListDetail/{id}")
+	public String adiminOneToOneDetail(@PathVariable("id") Integer questionId,Model model){ 
+		
+		CsQuestion question = this.adService.getQuestion(questionId);
+		
+		model.addAttribute("question",question);
+		return "/admin/adminOneToOneAnswerDetail";	
+	}
 	
 	
+	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 수정 페이지 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@GetMapping("/admin/adminOneToOneList/modifyPage/{id}")
+	public String moveAnswerModify(AnswerForm answerForm, @PathVariable("id") Integer answerId) {
+		
+		CsAnswer a = this.adService.getAnswer(answerId);
+		answerForm.setTitle(a.getTitle());
+		answerForm.setContents(a.getContent());
+		
+		return "/admin/adminRegistAnswer";
+	}	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 답변 수정  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@PostMapping("/admin/adminOneToOneList/modifyPage/{id}")
+	public String ModifyAnswer(@PathVariable("id") Integer id,@Valid AnswerForm answerForm,
+			BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "/admin/adminRegistAnswer";
+		}
+		
+		String adminCode = "qwer1234"; //principal.getName()
+		
+		this.adService.modifyAnswer(id, answerForm.getTitle(), answerForm.getContents(), adminCode);
+		
+		return "redirect:/admin/adminOneToOneList";
+	}	
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 등록 페이지 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@GetMapping("/admin/adminOneToOneList/registerPage/{id}")
+	public String moveAnswerRegistration(AnswerForm answerForm, @PathVariable("id") Integer questionId, Model model) {
+		
+		model.addAttribute("questionId", questionId);
+		return "/admin/adminRegistAnswer";
+	}	
+
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 답변 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	@PostMapping("/admin/adminOneToOneList/registerPage/{id}")
+	public String registAnswer(@PathVariable("id") Integer id,@Valid AnswerForm answerForm,
+			BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "/admin/adminRegistAnswer";
+		}
+		
+		String adminCode = "qwer1234"; //principal.getName()
+		
+		
+		this.adService.registAnswer(answerForm.getQuestionId(), answerForm.getTitle(), answerForm.getContents(), adminCode);
+		
+		return "redirect:/admin/adminOneToOneList";
+	}	
+	
+	
+	
+	
+	
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 답변 삭제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@GetMapping("/admin/deleteAnswer/{id}")
+	public String signoutAnswer(@PathVariable("id") Integer answerId) {
+		
+		this.adService.signoutAnswer(answerId, "y");
+		
+		return "redirect:/admin/adminOneToOneList";
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 답변 삭제 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@GetMapping("/admin/seleteAnswerCancel/{id}")
+	public String signoutAnswerCancel(@PathVariable("id") Integer answerId) {
+		
+		this.adService.signoutAnswer(answerId, "n");
+	
+		return "redirect:/admin/adminOneToOneList";
+	}	
+	
+
 	
 } //class END
 

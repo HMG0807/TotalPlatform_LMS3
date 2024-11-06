@@ -1,9 +1,4 @@
-/* nav 구역 */
-nav > div:nth-child(4){
-    border-right: 7px solid rgb(56, 56, 56);
-}
-
-/* main 구역 */
+    /* main 구역 */
 main {
     display: inline-block;
     width: 1150px;
@@ -15,23 +10,38 @@ div>h1 {
     font-size: 30px;
 }
 
-.announcementBtn{
-	width: 100px;
-	height: 35px;
-	line-height: 35px;
-	font-size: 15px;
-	color: white;
-	border-radius: 5px;
-	padding-left: 2px;
-	margin-left: 25px;
-	background-color: var(--mainColor);
-    cursor: pointer;
-    border-width: 0px;
-	margin-left: 980px;
-
+/* 검색 창 구역 */
+main>#searchBox {
+    margin-top: 20px;
+    background-color: rgb(237, 242, 245);
+    padding: 25px 30px;
 }
 
-/* 공지사항 조회 테이블 > Column 구역 */
+main>#searchBox>select {
+    width: 100px;
+    height: 25px;
+}
+
+main>#searchBox>input[type=text] {
+    width: 400px;
+    height: 25px;
+    position: relative;
+    padding-left: 5px;
+}
+
+main>#searchBox>button {
+    width: 70px;
+    height: 25px;
+    color: white;
+    background-color: rgb(140, 163, 177);
+    border: 0px;
+    position: absolute;
+}
+main #searchBtn:hover {
+	cursor: pointer;
+}
+
+/* 강좌 조회 테이블 > Column 구역 */
 #columnBox {
     margin-top: 20px;
     padding: 10px;
@@ -46,19 +56,16 @@ div>h1 {
     /*outline: 1px solid red;*/
 }
 
-#columnBox>span:nth-child(1) { width: 50px;}
-#columnBox>span:nth-child(2) { width: 250px;}
-#columnBox>span:nth-child(3) { width: 250px;}
+#columnBox>span:nth-child(1) { width: 80px;}
+#columnBox>span:nth-child(2) { width: 200px;}
+#columnBox>span:nth-child(3) { width: 120px;}
 #columnBox>span:nth-child(4) { width: 200px;}
-#columnBox>span:nth-child(5) { width: 100px;}
-#columnBox>span:nth-child(6) { width: 150px;}
-#columnBox>span:nth-child(7) { width: 150px;}
-#columnBox>span:nth-child(8) { width: 150px;}
+#columnBox>span:nth-child(5) { width: 120px;}
+#columnBox>span:nth-child(6) { width: 115px;}
+#columnBox>span:nth-child(7) { width: 120px;}
 
 
-
-
-/* 공지사항 조회 테이블 > Content 구역 */
+/* 강좌 조회 테이블 > Content 구역 */
 .contentRows {
     padding: 10px;
     height: 55px;
@@ -75,12 +82,11 @@ div>h1 {
     line-height: 35px;
 }
 
-.contentRows>span:nth-child(1) { width: 40px;}
-.contentRows>span:nth-child(2) { width: 215px;}
-.contentRows>span:nth-child(3) { width: 210px;}
-.contentRows>span:nth-child(4) { width: 160px;}
-.contentRows>span:nth-child(5) { width: 80px;}
-
+.contentRows>span:nth-child(1) { width: 75px;}
+.contentRows>span:nth-child(2) { width: 200px;}
+.contentRows>span:nth-child(3) { width: 125px;}
+.contentRows>span:nth-child(4) { width: 200px;}
+.contentRows>span:nth-child(5) { width: 150px;}
 
 
 .contentRows>button {
@@ -91,16 +97,28 @@ div>h1 {
 	color: white;
 	border-radius: 5px;
 	padding-left: 2px;
-	margin-left: 25px;
+	margin-left: 13px;
 	background-color: var(--mainColor);
     cursor: pointer;
     border-width: 0px;
+
 }
+
+/* 삭제 버튼 색 없애는 처리 */
+.contentRows>.nonBnt{
+	background-color: white;
+}
+
 
 .contentRows>button:nth-child(8) {
 	width: 90px;
 }
 .contentRows>.blueText{
+	color: blue;
+	font-weight: bold;
+}
+.contentRows>.switchBtn{
+	background-color: #0D6EFD;
 }
 
 
@@ -151,3 +169,4 @@ div>h1 {
 	pointer-events: none; /* 포인터 이벤트 동작 X */
 	color: rgb(68, 68, 68);
 }
+

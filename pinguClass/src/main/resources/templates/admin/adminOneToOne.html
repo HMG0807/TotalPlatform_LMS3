@@ -1,0 +1,79 @@
+<html layout:decorate="~{admin/adminLayout}">
+<main layout:fragment="mainFragment">
+    <link rel="stylesheet" th:href="@{/admin/adminOneToOnePageStyle.css}">
+
+    <h1>1대1문의 관리</h1>
+    <div id="searchBox">
+		<!-- 검색창 -->
+		<select name="searchSelect" id="searchSelect">
+			<option value="total" th:selected="${kwType} == total">전체</option>
+			<option value="name" th:selected="${kwType} == title">제목</option>
+			<option value="lecture" th:selected="${kwType} == name">작성자명</option>
+		</select>
+		<input type="text" id="search_kw" placeholder="제목 또는 작성자명을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
+		<button id="searchBtn">검색</button>
+	</div>
+    
+    <div id="columnBox">
+        <span>번호</span>
+        <span>제목</span>
+        <span>질문자</span>
+        <span>질문 업데이트 일자</span>
+
+        <span>문의 조회</span>
+        <span>답변 삭제</span>
+        <span>답변 및 수정</span>
+    </div>
+
+    <div th:each="CsQuestion, loop : ${questionList}" class="contentRows">
+        <span th:text="${loop.count}"></span>
+        <span th:if="${#strings.length(CsQuestion.title) > 27}" th:text="${#strings.substring(CsQuestion.title, 0, 27) ++ '...'}"></span>
+        <span th:if="${#strings.length(CsQuestion.title) <= 27}" th:text="${CsQuestion.title}"></span>
+        <span th:text="${CsQuestion.user.id}"></span>
+        <span th:text="${#temporals.format(CsQuestion.lastUpdate, 'yyyy-MM-dd')}"></span>
+
+
+        <button th:if="${CsQuestion.csAnswer!=null}" th:onclick="answerSelect([[${CsQuestion.csAnswer.answerId}]], [[${#lists.size(CsQuestion.content)}]])">조회</button>
+        <button th:if="${CsQuestion.csAnswer==null}" disabled>조회</button>
+
+        <button th:if="${CsQuestion.csAnswer!=null}" th:onclick="deleteAnswer([[${CsQuestion.csAnswer.title}]], [[${CsQuestion.csAnswer.answerId}]], [[${CsQuestion.csAnswer.deleteYn}]])" th:text="${CsQuestion.csAnswer.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${CsQuestion.csAnswer.deleteYn} == y ? 'blueText'">삭제</button>
+        <button th:if="${CsQuestion.csAnswer==null}" disabled class="nonBnt"></button>
+
+
+        <button th:if="${CsQuestion.csAnswer!=null}" th:onclick="modifyAnswer([[${CsQuestion.csAnswer.answerId}]], [[${#lists.size(CsQuestion.csAnswer.content)}]])">수정</button>
+        <button th:if="${CsQuestion.csAnswer==null}" th:onclick="answerQuestion([[${CsQuestion.questionId}]])">답변</button>
+
+    </div>
+
+    <!-- 페이징 버튼  -->
+    <div id="pageBtn" th:if="${page.totalPage} > 1">
+		<ul>
+			<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			</li>
+			<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			</li>
+			<li>
+				<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			</li>
+			<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			</li>
+		</ul>
+	</div>
+
+    <!-- kw, page 데이터 넘기기 -->
+<form th:action="@{/admin/adminOneToOneList}" method="get" id="searchForm">
+    <input type="hidden" id="kw" name="kw" th:value="${kw}">
+    <input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+    <input type="hidden" id="page" name="page">
+</form>
+
+
+    <script th:src="@{/admin/adminOneToOnePageModul.js}"></script>
+</main>
+</html>

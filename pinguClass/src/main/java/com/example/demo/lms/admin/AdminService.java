@@ -6,10 +6,11 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-
 import com.example.demo.lms.entity.Admin;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
+import com.example.demo.lms.entity.CsAnswer;
+import com.example.demo.lms.entity.CsQuestion;
 import com.example.demo.lms.entity.Instructor;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.entity.Notice;
@@ -30,7 +31,9 @@ public class AdminService {
 	private final AdminLectureRepository adminLectureRepository; //Lecture(강의) Repository
 	private final AdminCommunityRepository adminCommunityRepository; // Community(커뮤니티) Repository
 	private final AdminNoticeRepository adminNoticeRepository; // Notice(공지사항) Repository
-	private final AdminRepository adminRepository;
+	private final AdminRepository adminRepository; //Admin(관리자) Repository
+	private final AdminCsQuestionRepository adminCsQuestionRepository;
+	private final AdminCsAnswerRepository adminCsAnswerRepository;
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 조회 > 페이징 처리 및 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public List<User> getUserByKeyword(String kwType, String kw, int startNo, int pageSize){
 		
@@ -225,8 +228,16 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	public List<Notice> getNoticeByKeyword(String kw, int startNo, int pageSize) {
-		return this.adminNoticeRepository.findNoticeLimitStartIdx(kw, startNo, pageSize);}
+	public List<Notice> getNoticeByKeyword(int startNo, int pageSize) {
+		return this.adminNoticeRepository.findNoticeLimitStartIdx(startNo, pageSize);}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 페이징 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	
+	public int getNoticeCountByKeyword() {
+
+		return this.adminNoticeRepository.countNoticeByKeyword();
+	}	
+	
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 작성글 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
 
@@ -261,37 +272,93 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 		this.adminNoticeRepository.save(n);
 	}
 
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 수정 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public void modify(Notice n, String title, String content) {
 		n.setTitle(title);
 		n.setContent(content);
 		this.adminNoticeRepository.save(n);
+	}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<CsQuestion> getCsQuetionByKeyword(int startNo, int pageSize) {
+
+		return this.adminCsQuestionRepository.findCsQuestionLimitStartIdx(startNo, pageSize);}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 페이징  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public int getCsQuestionCountByKeyword() {
+		
+		return this.adminCsQuestionRepository.countCsQuestionByKeyword();
+	}
+
+	
+	public CsQuestion getQuestion(Integer questionId) {
+
+		Optional<CsQuestion> question = this.adminCsQuestionRepository.findById(questionId);
+		
+		return question.get();				
+
+    }
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 답변 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void registAnswer(Integer questionId, String title, String content, String adminCode){
+		
+		Admin admin = this.adminRepository.findByAdminCode(adminCode);
+		CsQuestion question = this.adminCsQuestionRepository.findById(questionId).get();
+		
+		CsAnswer c = new CsAnswer();
+		c.setCsQuestion(question);
+		c.setAdmin(admin);
+		c.setTitle(title);
+		c.setContent(content);
+		c.setLastUpdate(LocalDateTime.now());
+		c.setDeleteYn("n");
+		
+		this.adminCsAnswerRepository.save(c);
+	}
+
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 답변 수정 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void modifyAnswer(Integer answerId, String title, String content, String adminCode) {
+		
+		//수정할 답변 id로 답변 객체 조회
+		CsAnswer c = this.adminCsAnswerRepository.findById(answerId).get();
+		
+		Admin admin = this.adminRepository.findByAdminCode(adminCode);
+		
+		//답변 글 수정
+		c.setTitle(title);
+		c.setContent(content);
+		c.setAdmin(admin);
+		c.setLastUpdate(LocalDateTime.now());
+		
+		//답변 글 db 적용
+		this.adminCsAnswerRepository.save(c);
+	}
+
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 답변 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+	public CsAnswer getAnswer(Integer answerId){
+		Optional<CsAnswer> a = this.adminCsAnswerRepository.findById(answerId);
+
+			return a.get();
+	}
+
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 답변 삭제+삭제 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void signoutAnswer(Integer answerId, String singnoutVal) {
+		CsAnswer answer = getAnswer(answerId);
+		answer.setDeleteYn(singnoutVal);
+		
+		this.adminCsAnswerRepository.save(answer);
 	}	
 	
+
+
+	
+
 }
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
 
 
 
