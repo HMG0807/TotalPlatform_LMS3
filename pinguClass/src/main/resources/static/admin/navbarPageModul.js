@@ -16,5 +16,5 @@ navBtns[3].addEventListener('click', function() {
 });
 
 navBtns[4].addEventListener('click', function() {
-	location.href = "/admin/communityList";
+	location.href = "/admin/adminOneToOneList";
 });
