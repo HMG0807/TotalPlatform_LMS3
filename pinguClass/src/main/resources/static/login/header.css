@@ -1,0 +1,236 @@
+/* ***************************************************** Header_Style 
+***************************************************** */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    position: sticky;
+    width: 100vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    background-color: #e9e1da;
+    top: 0;
+    left: 0;
+    transition: .3s;
+    z-index: 10;
+    border-bottom: 2px solid white;
+}
+
+.header.color {
+    background-color: #d9bbb8;
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* HeaderUp Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.headerUp {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+/*-*-* header Logo *-*-*/
+
+.headerLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerLogo>a {
+    display: block;
+    color: rgb(63, 63, 63);
+    font-size: 2rem;
+}
+
+.header.color>.headerUp>.headerLogo>a {
+    color: white;
+}
+
+
+/*-*-* header Search *-*-*/
+
+.headerSearchBar {
+    display: flex;
+    align-items: center;
+}
+
+.search {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    border-radius: 0.5rem;
+    /* border: 1px solid gray; */
+    border: none;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+    height: 65%;
+}
+
+.searchBtn>button {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    color: rgb(73, 73, 73);
+    border: none;
+    box-shadow: 1px 1px 3px gray;
+    border-radius: 0.3rem;
+    background-color: white;
+}
+
+.header.color>.headerUp>.headerSearchBar>.searchBtn>a {
+    color: white;
+}
+
+
+/*-*-* header Right *-*-*/
+
+.headerRightCon {
+    display: flex;
+    align-items: center;
+}
+
+.headerRightCon>a {
+    display: block;
+    font-size: 1.2rem;
+    color: rgb(73, 73, 73);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    cursor: pointer;
+}
+
+.header.color>.headerUp>.headerRightCon>a {
+    color: white;
+}
+
+.headerRightCon>a:last-child {
+    padding-right: 0;
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* HeaderDown Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.headerDown {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transition: .3s;
+}
+
+.header.color>.headerDown {
+    overflow: hidden;
+}
+
+.headerDown>ul {
+    display: flex;
+}
+
+.headerDown>ul>li:first-child {
+    padding-left: 0;
+}
+
+.headerDown>ul>li>a {
+    color: rgb(100, 100, 100);
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: block;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.headerDown>ul>li>a:first-child {
+    padding-left: 0;
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Header Category Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.categoryContainer {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.776);
+    z-index: -10;
+    height: 0;
+    opacity: 0;
+    transition: .5s;
+}
+
+.categoryContainer.on {
+    z-index: 50;
+    opacity: 1;
+}
+
+.categoryContainer>.category {
+    display: flex;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    background-color: #d9bbb8f2;
+}
+
+.category>li {
+    height: 90%;
+    padding-right: 2rem;
+    list-style-type: square;
+    color: rgb(89, 89, 89);
+    font-weight: 900;
+}
+
+.category>li>a {
+    display: block;
+    padding-right: 4rem;
+    padding-left: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    color: white;
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Header Hover Event *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.searchBtn>a:hover {
+    transition: .2s;
+    color: #608fb7;
+    text-shadow: 2px 2px 2px white;
+}
+
+.header.color>.headerUp>.headerSearchBar>.searchBtn>a:hover {
+    transition: .2s;
+    color: #608fb7;
+    text-shadow: 2px 2px 2px white;
+}
+
+.headerRightCon>a:hover {
+    transition: .2s;
+    color: #608fb7;
+    text-shadow: 2px 2px 2px white;
+}
+
+.header.color>.headerUp>.headerRightCon>a:hover {
+    transition: .2s;
+    color: #608fb7;
+    text-shadow: 2px 2px 2px white;
+}
+
+.headerDown>ul>li>a:hover {
+    transition: .2s;
+    color: #608fb7;
+    text-shadow: 2px 2px 2px white;
+}

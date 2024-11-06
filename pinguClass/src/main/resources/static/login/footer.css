@@ -1,0 +1,94 @@
+/* ***************************************************** Footer_Style 
+***************************************************** */
+
+.footer {
+    width: 100vw;
+    background-color: #e9e1da;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+
+/* footertop  */
+
+.footerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.footerLogo>a {
+    color: rgb(80, 80, 80);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 900;
+}
+
+.footerNav {
+    display: flex;
+}
+
+.footerNav>li>a {
+    display: block;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: rgb(80, 80, 80);
+}
+
+.footerSns {
+    display: flex;
+}
+
+.footerSns>li>a {
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: rgb(80, 80, 80);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.footerSns>li:last-child>a {
+    padding-right: 0;
+}
+
+.footerNav>li>a:hover {
+    transition: 0.3s;
+    color: white;
+    text-shadow: 1px 1px 2px gray;
+}
+
+.footerSns>li>a:hover {
+    transition: 0.3s;
+    color: white;
+    text-shadow: 1px 1px 2px gray;
+}
+
+
+/* footerBottom  */
+
+.footerbottom {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.footerbottom>.textBox {
+    width: 35%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.textBox>p {
+    width: 50%;
+    color: rgb(77, 77, 77);
+    font-size: 0.8rem;
+    font-weight: 900;
+}

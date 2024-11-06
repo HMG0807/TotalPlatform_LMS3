@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/layout/reset.css}">
+    <link rel="stylesheet" th:href="@{/layout/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/layout/footerStyle.css}">
+    <link rel="stylesheet" th:href="@{/csc/csPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/layout/settingStyle.css}">
+    <script th:src="@{https://kit.fontawesome.com/86c06c2025.js}" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* HEADER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <header>
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <a href="mainPage.html">
+                    <p><span>B</span>-Team</p>
+                </a>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="검색어를 입력해주세요">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <div class="headerContent">
+                <ul>
+                    <li class="headerContentBtn bellBtn">
+                        <a href="#">
+                            <i class="fa-regular fa-bell"></i>
+                        </a>
+                    </li>
+                    <li class="headerContentBtn loginBtn">
+                        <a href="#">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <ul class="loginNav">
+                            <li><a href="#">로그인</a></li>
+                            <li><a href="#">회원가입</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="headerDownContainer">
+            <div class="categoryBtn">
+                <a><i class="fa-solid fa-bars"></i><span>Category</span></a>
+            </div>
+            <ul class="headerNav">
+                <li><a href="#">클래스</a></li>
+                <li><a href="#">클럽</a></li>
+                <li><a href="#">커뮤니티</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="backgroundShadow"></div>
+    <div class="categoryContainer">
+        <div class="category">
+            <ul>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">lorem</a></li>
+                <li><a href="#">lorem</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main>
+        <div class="csContentContainer">
+            <div class="csSideNav">
+                <ul>
+                    <li><a th:href="@{/notice}">공지사항</a></li>
+                    <li><a th:href="@{/csc}">1:1문의</a></li>
+                </ul>
+            </div>
+            <div class="csCon">
+                <ul>
+                	<li class="maintap mention on">
+                        <div class="csConTitle">
+                            <p>공지사항</p>
+                        </div>
+                        <table>
+                        	<tr>
+                            	<th>번호</th>
+                            	<th>제목</th>
+                            	<th>작성자</th>
+                            	<th>작성일</th>
+                        	</tr>
+                            <tr th:each="notice : ${notice}">
+                            <!--
+                                <td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
+                                -->
+                                <td>N</td>
+                                <td><a th:href="@{|/notice/detail/${notice.noticeId}|}" th:text="${notice.content}"></a></td>
+                                <td>관리자</td>
+                                <td th:text="${#temporals.format(notice.lastUpdate, 'yyyy-MM-dd')}"></td>
+                            </tr>
+                        </table>
+                    </li>
+                    
+                    <li class="maintap faq">
+                        <div class="csConTitle">
+                            <p>FAQ</p>
+                        </div>
+                        <ul class="faqNav">
+                            <li><a href="#">이용안내</a></li>
+                            <li><a href="#">결제</a></li>
+                            <li><a href="#">회원정보</a></li><!--마이페이지에서 가능?-->
+                        </ul>
+                        
+                        <ul class="faqCon">
+                            <li class="on">
+                                <table>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>이용안내를 알고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>이용안내를 알고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>이용안내를 알고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>이용안내를 알고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    
+
+                                </table>
+                            </li>
+                            <li>
+                                <table>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>환불하고싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                <table>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Q</td>
+                                        <td>회원정보를 변경하고 싶어요</td>
+                                        <td>2024.10.01</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <footer>
+        <div class="footerCon footerCon01">
+
+
+            <div class="csContainer">
+                <div class="csText">
+                    <p>고객행복센터</p>
+
+                    <div class="companyNum">
+                        <p>0000-1107</p>
+                        <p><span>월~토요일 오전 7시 - 오후6시</span></p>
+                    </div>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <p>비회원문의 : help@naver.com</p>
+            </div>
+
+            <div class="introduceContainer">
+                <ul class="companyNav">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">회사소개영상</a></li>
+                    <li><a href="#">투자정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+                <div class="introduceText">
+                    <p>법인명 : lorem | 사업자등록번호 : 000-00-00000 &emsp;<a href="#">사업자정보 확인</a></p>
+                    <p>통신판매업 : 제 2024-경기안산-1515호</p>
+                    <p>주소 : 경기도 안산시 상록구 이동 000호 5층 | 대표이사 : 백경빈</p>
+                    <p>채용문의 : <a href="#">abcd@naver.com</a></p>
+                    <p>팩스 : 000 - 0000 - 0000</p>
+                </div>
+                <ul class="snsContainer">
+                    <!-- <a target="_blank" href="https://icons8.com/icon/ww630cOi80NH/target-logo">표적</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a> -->
+                    <li><a href="#"><img src="/static/img/facebook.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/youtube.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/instagrem.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/target.png" alt=""></a></li>
+                    <li><a href="#"><img src="/static/img/blog.png" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footerCon footerNotice">
+            <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
+        </div>
+    </footer>
+    <div class="setting">
+        <div class="settingBtn">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <!-- 다크모드 토글 버튼 -->
+        <div class="settingContainer">
+
+            <div class="settingCon">
+                <p>language Seletor</p>
+                <select name="language" id="languageSelect" class="setting_Con" disabled>
+                    <option value="language">한국어</option>
+                    <option value="language">English</option>
+                </select>
+            </div>
+            <div class="settingCon darkModeContainer">
+                <p>Dark Mode</p>
+                <input type="checkbox" id="darkMode" class="check setting_Con" disabled>
+                <label for="darkMode">
+                    <div class="darkModeBtn"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/layout/headerModul.js}"></script>
+    <script th:src="@{/layout/BTeamModul.js}"></script>
+    <script th:src="@{/csc/csPageModul.js}"></script>
+</body>
+
+</html>

@@ -66,15 +66,15 @@ public class UserService {
 	}
 	
 //  ID값으로 해당되는 유저를 찾는 메서드
-//	public User getUserId(String id) throws UserException {
-//		Optional<User> userId = this.userRepository.findById(id);
-//		if(userId.isPresent()) {
-//			return userId.get();
-//		}
-//		else {
-//			throw new UserException("해당 유저가 존재하지 않습니다");
-//		}
-//	}
+	public User getUserId(String id) throws UserException {
+		Optional<User> userId = this.userRepository.findById(id);
+		if(userId.isPresent()) {
+			return userId.get();
+		}
+		else {
+			throw new UserException("해당 유저가 존재하지 않습니다");
+		}
+	}
 	
 
 	

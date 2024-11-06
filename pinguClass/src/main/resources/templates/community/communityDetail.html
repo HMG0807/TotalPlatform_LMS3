@@ -7,8 +7,7 @@
     <!--헤더 풋터-->
     <link rel="stylesheet" th:href="@{/layout/fragment.css}">
     <!--커뮤니티 목록-->
-    <link rel="stylesheet" th:href="@{/community/communityListStyle.css}">
-    
+    <link rel="stylesheet" th:href="@{/community/communityDetailStyle.css}">
 </head>
 <body>
     <!--네비바 html 시작-->
@@ -116,81 +115,132 @@
         </div>
     </nav>
     <!--네비바 html 끝-->
-
-    <!--커뮤니티 목록 html 시작-->
-    <div layout:fragment="content" class="container my-3">
-        <div class="row my-3">
-            <div class="col-6">
-                    <a sec:authorize="isAuthenticated()" th:href="@{/community/create}" class="btn btn-primary"><!--로그인했을때만 보여줌-->
-                        작성하기
-                    </a>
-            </div>
-            <div class="col-6">
-                <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                    <!-- 검색 원래 코드
-                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                    -->
+<div layout:fragment="content" class="container my-3">
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2" th:text="${community.title}"></h2>
+    <div class="card my-3">
+        <div class="card-body">
+        	<div class="option">. . .
+        		<!--더보기 드롭다운-->
+    			<div class="optionDropdown">
+        			<!--자기글만 수정 가능하도록 처리  추가-->
+					<a class="modify" th:href="@{|/community/modify/${id}|}" sec:authorize="isAuthenticated()">수정</a>
+					<br>
+        			<a class="delete" th:data-uri="@{|/community/delete/${id}|}" th:href="@{|/community/delete/${id}|}" sec:authorize="isAuthenticated()">삭제</a>
+    			</div>
+        	</div>
+        	<div class="card-content " style="white-space: pre-line;">
+        		<div th:text="${community.content}"></div>
+        	</div>
+            <div class="d-flex justify-content-end">
+            	<div class="d-flex"> <!--추천/신고 일단 img 짱박음-->
+            		<div class="recommend">
+            			<img id= "Qrecommend" class="material-symbols-outlined " th:src="@{/files/recommend_off.png}" >
+            		</div>
+            		<div class="recommend">
+            			<img  id="Qcomplaint" class="material-symbols-outlined" th:src="@{/files/complaint_no.png}">
+            		</div>
+            	</div>
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">
+                    	<span th:if="${community.user != null}" th:text="${community.user.name}"></span>
+                	</div>
+                    <div th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
         </div>
-    
-    
-    
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>글쓴이</th>
-                    <th>작성일자</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="community : ${communityList}">
-                    <td></td>
-                    <td>
-                        <a th:href="@{|/community/detail/${community.cmId}|}" th:text="${community.title}"></a>
-                    </td>
-                    <td><span th:if="${community.user != null}" th:text="${community.user.name}"></span></td>
-                    <td th:text="${#temporals.format(community.lastUpdate,'yyyy-MM-dd HH:mm')}"></td>
-                </tr>
-            </tbody>
-        </table>
-    
-    
-    
-        <!-- 페이징처리 시작 -->
-        <!-- 
-        <div th:if="${!paging.isEmpty()}" class="pagingNav">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
-                        <span>이전</span>
-                    </a>
-                </li>
-                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}" th:if="${page >= paging.number-5 and page <= paging.number+5}" th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
-                </li>
-                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
-                        <span>다음</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        -->
-        <!-- 페이징처리 끝 -->
-        <!-- 검색창 폼 / 검색은 API 활용
-        <form th:action="@{/boardQuestion/list}" method="get" id="searchForm">
-            <input type="hidden" id="kw" name="kw" th:value="${kw}">
-            <input type="hidden" id="page" name="page" th:value="${paging.number}">
-        </form>
-        -->
     </div>
-    <!--커뮤니티 목록 html 끝-->
+    <!--첨부파일-->
+    <div class="card my-3 file">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">
+            	<div class="filedownload">
+            	<!--
+            		<div>파일명</div>
+            		<div><button>다운</button></div>
+            		-->
+            	</div>
+            </div>
+        </div>
+    </div>
+    <!-- 답변의 갯수 표시 -->
+    <!--반복 돌리면 오류 터지는 이유? -> comment에 s 안붙임, 띄어쓰기 특수문자는 ''안에, + 빼먹음 -->
+    <h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(community.communityComments)}|+개의+' '+답변이+' '+ 있습니다+'.'"></h5>
+    <!--답변 반복 시작 -->
+    <div class="card my-3 answer" th:each="communityComment : ${community.communityComments}">
+        <div class="card-body">
+        	<div>
+        		<!--더보기 드롭다운-->
+    			<div class="option">
+        			<!--자기글만 수정 가능하도록 처리  추가(민지킴 js 참고)-->
+        			<a class="modify" th:href="@{|/modify/${id}/modifyComment/${commetId}|}" sec:authorize="isAuthenticated()">수정</a>
+        			<a class="delete"  sec:authorize="isAuthenticated()">삭제</button>
+        			<!--
+					<button class="Cmodify" type="button" onclick="" sec:authorize="isAuthenticated()">수정</button>
+        			<button class="Cdelete" type="button" onclick="" sec:authorize="isAuthenticated()">삭제</button>
+    				-->
+    			</div>
+        	</div>
+        	<div class="card-content " style="white-space: pre-line;">
+        		<div th:text="${communityComment.content}"></div>
+        	</div>
+            <div class="d-flex justify-content-end">
+            	<div class="d-flex">
+            		<div class="recommend">
+            			<img id= "Arecommend" class="material-symbols-outlined " th:src="@{/files/recommend_off.png}">
+            		</div>
+            		<div class="recommend">
+            			<img  id="Acomplaint" class="material-symbols-outlined" th:src="@{/files/complaint_no.png}">
+            		</div>
+            	</div>
+                <div class="badge bg-light text-dark p-2 text-start">
+                	 <div class="mb-2">
+                    	<span th:if="${community.user != null}" th:text="${communityComment.user.name}"></span>
+                	</div>
+                	<div th:text="${#temporals.format(communityComment.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 답변 반복 끝  -->
+    <!-- 답변 작성 -->
+    <form  sec:authorize="isAuthenticated()" th:action="@{|/community/detail/${community.cmId}|}" th:object="${communityCommentForm}" method="post" class="my-3">
+        <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
+        <input type="submit" value="답변등록" class="btn btn-primary my-2" >
+    </form>
+    
+    <!--신고하기 모달창-->
+    <div id="complaintModal">
+    	<div id="banner">
+        	<div>신고하기</div>
+            <div class = "modalCloseBtn">X</div>
+    	</div>
+    	<div id="content">
+            <div>
+                <div>작성자</div>
+                <div>내용</div>
+            </div>
+            <div>
+                <div>이름</div>
+                <div>~~</div>
+            </div>
+         </div>
+         <div>
+            <div class="reason">사유선택</div>
+            <div id="radioBox">
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">스팸</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">음란물</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">불법</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">청불</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">욕</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">개인정보</div>
+                <div class="radioBoxCheck"><input type="radio" name="check" id="">불쾌</div>
+            </div>
+         </div>
+         <div id="complaintBtn">신고하기</div>
+    </div>
+  
+</div>
 <footer th:fragment ="footerFragment">
 	<div class="footer">
         <div class="footerTop">
@@ -241,6 +291,9 @@
 </footer>
 
 <script th:src="@{/layout/fragment.js}"></script>
+<script th:src="@{/community/communityDetail.js}"></script>
 
 </body>
+</html>
+
 </html>

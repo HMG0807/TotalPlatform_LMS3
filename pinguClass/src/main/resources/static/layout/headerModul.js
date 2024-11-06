@@ -1,36 +1,34 @@
-//header event 관련 스크립트 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-const bannerCloseBtn = document.querySelector(".closeBtn");
-const headerBanner = document.querySelector(".headerBanner");
-const header = document.querySelector("header");
-
-const headerBannerHeight = headerBanner.offsetHeight;
-
-bannerCloseBtn.addEventListener('click', function() {
-    headerBanner.classList.add("off");
-});
-
-
-window.addEventListener('scroll',function(){
-    let windowScrollY = window.scrollY;
-    
-    if(windowScrollY>0){
-        header.classList.add("scrollHeader");
-    }else{
-        header.classList.remove("scrollHeader");
-    }
-    
-});
-
-// 마우스 이벤트
+const categiryBtn = document.querySelector(".categoryBtn");
+const backgroundShadow = document.querySelector(".backgroundShadow");
 const categoryContainer = document.querySelector(".categoryContainer");
-const categoryName = categoryContainer.querySelector("p");
+const webBody = document.querySelector("body");
+const headerHeight = document.querySelector("header").offsetHeight;
+const mainContainer = document.querySelector("main");
 
-categoryContainer.addEventListener('mouseenter', (event) => {
-    categoryName.style.color = "#f7418f";
-    categoryName.querySelector("i").style.color = "#f7418f";
-});
+let navBoolean = true;
 
-categoryContainer.addEventListener('mouseleave', (event) => {
-    categoryName.style.color = "";
-    categoryName.querySelector("i").style.color = "";
-});
+
+
+mainContainer.style.marginTop = (headerHeight+5)+"px";
+
+
+
+categiryBtn.addEventListener('click',function(e){
+    e.preventDefault;
+    if(navBoolean==true){
+        categoryContainer.style.top = headerHeight + "px";
+        backgroundShadow.classList.add('navOn');
+        categoryContainer.classList.add('navOn');
+        webBody.classList.add("scrollOff");
+
+        navBoolean = false;
+    }else{
+        categoryContainer.style.top = "";
+        backgroundShadow.classList.remove('navOn');
+        categoryContainer.classList.remove('navOn');
+        webBody.classList.remove('scrollOff');
+        
+        navBoolean = true;
+    }
+
+})

@@ -1,0 +1,165 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.csContentContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+}
+
+.csSideNav {
+    width: 20%;
+}
+
+
+.csSideNav>ul {
+    padding-right: 3rem;
+}
+
+.csSideNav>ul>li>a {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: 900;
+    border-top: 1px solid var(--boxShadow);
+}
+
+.csSideNav>ul>li:last-child>a {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.csCon {
+    width: 80%;
+}
+.csCon>ul {
+    position: relative;
+    height: 70vh;
+}
+
+.csCon>ul>li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+}
+
+.csCon>ul>li.on{
+    display: block;
+}
+
+.csConTitle {
+    padding-bottom: 1rem;
+    font-size: 30px;
+    font-weight: 900;
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.faqNav {
+    display: flex;
+    padding: 3rem 0;
+    gap: 2rem;
+}
+
+.faqNav>li {
+    flex: 1;
+}
+
+.faqNav>li>a {
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+
+
+.csCon>ul>li>.faqCon {
+    position: relative;
+}
+
+.faqCon>li {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.faqCon>li.on{
+    display: block;
+}
+
+.faqCon>li>table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.faqCon>li>table tr {
+    border-top: 1px solid var(--boxShadow);
+}
+
+.faqCon>li>table tr:last-child {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.faqCon>li>table tr td {
+    padding: 1rem 0;
+}
+
+.faqCon>li>table tr td:first-child {
+    width: 5%;
+}
+
+.faqCon>li>table tr td:nth-child(2) {
+    width: 80%;
+}
+
+.faqCon>li>table tr td:nth-child(3) {
+    width: 20%;
+}
+
+/* 공지사항 */
+
+.mention>table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.mention>table tr {
+    border-top: 1px solid var(--boxShadow);
+}
+
+.mention>table tr:last-child {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.mention>table tr td {
+    padding: 1rem;
+}
+
+.mention>table tr td:first-child {
+    width: 10%;
+}
+.mention>table tr td:nth-child(2) {
+    width: 55%;
+}
+
+.mention>table tr td:nth-child(3) {
+    width: 15%;
+}
+.mention>table tr td:nth-child(4){
+	width: 20%
+}
+
+
+/*---------추가-----------*/
+/*테이블 맨 윗칸 패딩*/
+.mention>table tr th {
+    padding: 1rem
+}
+
+
