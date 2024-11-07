@@ -18,7 +18,11 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 	
 	public User getUser(String id) throws Exception {
+
 		Optional<User> user = this.userRepository.findById(id);
+
+
+
 		if(user.isPresent()) {
 			return user.get();
 		}
@@ -28,7 +32,7 @@ public class UserService {
 	}
 	
 
-
+	// 회원가입 정보 받기
 	public User returncreate(String id, String email1, String email2, String pw, String name, String tel, String gender,
 			String birth) {
 		
@@ -48,6 +52,36 @@ public class UserService {
 		
 		return setUser;
 	}
+	
+	public User loginId() {
+		User user = new User();
+		user.getId();
+		
+		return user;
+		
+	}
+	
+	public User loginPw() {
+		User user = new User();
+		user.getPw();
+		
+		return user;
+		
+	}
+	
+//  ID값으로 해당되는 유저를 찾는 메서드
+//	public User getUserId(String id) throws UserException {
+//		Optional<User> userId = this.userRepository.findById(id);
+//		if(userId.isPresent()) {
+//			return userId.get();
+//		}
+//		else {
+//			throw new UserException("해당 유저가 존재하지 않습니다");
+//		}
+//	}
+	
+
+	
 
 
 }

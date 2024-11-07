@@ -148,15 +148,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="community, loop : ${community}">
-                <!--
+                <tr th:each="paging, loop : ${community}">
                     <td th:text="${community.getTotalElements - (community.number * community.size) - loop.index}"></td>
-                    -->
                     <td>
                         <a th:href="@{|/community/detail/${community.cmId}|}" th:text="${community.title}"></a>
                     </td>
                     <td><span th:if="${community.author != null}" th:text="${community.author.Name}"></span></td>
-                    <td th:text="${#temporals.format(community.createDate,'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#temporals.format(community.lastUpdate,'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
             </tbody>
         </table>

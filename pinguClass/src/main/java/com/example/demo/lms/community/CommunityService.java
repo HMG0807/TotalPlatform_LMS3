@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.user.UserRepository;
@@ -23,10 +24,21 @@ public class CommunityService {
 	private final CommunityRepository communityRepository;
 	private final UserRepository userRepository;
 
-	public List<Community> getList() {
-		// TODO Auto-generated method stub
-		return communityRepository.findAll();
-	}
+	
+	// 미삭제 커뮤 목록 조회
+//	public List<Community> findByList() {
+//		
+//		return communityRepository.findAll();
+//	}
+//	
+//	// 이순 : 임시 로그인 확인
+//	
+//	public Optional<User> loginCheck(String id){
+//		
+//		return userRepository.loginId(id);
+//		
+//	}
+	
 
 	public Community getdetail(Integer id) throws UserException {
 		Optional<Community> community = this.communityRepository.findById(id);
@@ -40,12 +52,46 @@ public class CommunityService {
 	//로그인시 커뮤니티 글 조회
 		public Page<Community> getList(int page, String id)  throws UserException {
 			List<Sort.Order> sorts = new ArrayList<>();
-			sorts.add(Sort.Order.desc("questionDate"));
+			sorts.add(Sort.Order.desc("cmId"));
 
 			Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 			
 			return this.communityRepository.findByUser(getByUser(id), pageable);
 		}
+	
+
+		
+		
+	// 커뮤니티 글 작성하기
+		public void communityCreate(String title ,String content, User user) {
+			Community community = new Community();
+			community.setTitle(title);
+			community.setContent(content);
+			community.setLastUpdate(LocalDateTime.now());
+			community.setUser(user);
+			community.setDeleteYn("n");
+			this.communityRepository.save(community);
+		}
+		
+		// 커뮤니티 글 수정하기
+		public void modify(Community community, String title, String content) {
+			community.setTitle(title);
+			community.setContent(content);
+			community.setLastUpdate(LocalDateTime.now());
+					
+			this.communityRepository.save(community);
+					
+		}
+
+		// 커뮤니티 글 삭제
+		public void delete(Community communityDelete) {
+					
+			// delete y/n 변경
+			communityDelete.setDeleteYn("y");
+			this.communityRepository.save(communityDelete);
+							
+		}
+		
 		
 		//유저 정보 가져오기
 		public User getByUser(String id) throws UserException {
@@ -58,11 +104,7 @@ public class CommunityService {
 			}
 		}
 		
-		
-		
-		
-		
-		
+
 	
 	/* 마이페이지에서 특정 사용자의 삭제되지 않은 커뮤니티 글 목록을 페이징처리 - 남동현 */
 	public Page<Community> getMyPageCommunityList(int page, String username)
@@ -104,12 +146,21 @@ public class CommunityService {
 		
 	}
 
-
+	// 페이징을 위한 모든 게시글 갯수 구하기
+	public int getCommunityCount() {
+		return this.communityRepository.countCommunityAll(); 
+	}
+	
+	public List<Community> getCommunityByLimit(String keyword, int startNo, int pageSize){
+		return this.communityRepository.findCommunityByLimit(keyword, startNo, pageSize);
 		
+	}
+	
+
+
 
 	
+			
+	
 		
-		
-		
-		
-		}
+}

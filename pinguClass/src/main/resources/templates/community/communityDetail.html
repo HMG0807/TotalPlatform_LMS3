@@ -1,0 +1,134 @@
+<html layout:decorate="~{layout/layout}">
+    <main layout:fragment="main">
+        <!--커뮤니티 목록-->
+        <link rel="stylesheet" th:href="@{/community/communityDetailStyle.css}">
+
+
+        <div class="container my-3">
+            <!-- 질문 -->
+            <h2 class="border-bottom py-2" th:text="${community.title}"></h2>
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="option">
+                        <!--더보기 드롭다운-->
+                        <div class="optionDropdown">
+                            <!--자기글만 수정 가능하도록 처리  추가 / 시큐리티 이슈로 id는 짱박음-->
+                            <a class="modify" th:href="@{|/community/modify/${community.cmId}|}">수정</a>
+						</div>
+						<div class="optionDropdown">
+                            <a class="delete" th:data-uri="@{|/community/delete/${community.cmId}|}"th:href="@{|/community/delete/${community.cmId}|}">삭제</a>
+                        </div>
+                    </div>
+                    <div class="card-content " style="white-space: pre-line;">
+                        <div th:text="${community.content}"></div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="d-flex"> <!--추천/신고 일단 img 짱박음-->
+                            <div class="recommend">
+                                <img id="Qrecommend" class="material-symbols-outlined "
+                                    th:src="@{/img/recommend_off.png}">
+                            </div>
+                            <div class="recommend">
+                                <img id="Qcomplaint" class="material-symbols-outlined"
+                                    th:src="@{/img/complaint_no.png}">
+                            </div>
+                        </div>
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div class="mb-2">
+                                <span th:if="${community.user != null}" th:text="${community.user.name}"></span>
+                            </div>
+                            <div th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 답변의 갯수 표시 -->
+            <!--반복 돌리면 오류 터지는 이유? -> comment에 s 안붙임, 띄어쓰기 특수문자는 ''안에, + 빼먹음 -->
+            <h5 class="border-bottom my-3 py-2"
+                th:text="|${#lists.size(community.communityComments)}|+개의+' '+답변이+' '+ 있습니다+'.'"></h5>
+            <!--답변 반복 시작 -->
+            <div class="card my-3 answer" th:each="communityComment : ${community.communityComments}">
+                <div class="card-body">
+                    <div>
+                        <!--더보기 드롭다운-->
+                        <div class="option">
+                            <!--자기글만 수정 가능하도록 처리  추가(민지킴 js 참고)-->
+                            
+                            <a class="modify" th:href="@{|/modify/${id}/modifyComment/${commetId}|}"
+                                sec:authorize="isAuthenticated()">수정</a>
+                            <a class="delete" sec:authorize="isAuthenticated()">삭제</button>
+                            
+                                <!--
+                        <button class="Cmodify" type="button" onclick="" sec:authorize="isAuthenticated()">수정</button>
+                        <button class="Cdelete" type="button" onclick="" sec:authorize="isAuthenticated()">삭제</button>
+                        -->
+                        </div>
+                    </div>
+                    <div class="card-content " style="white-space: pre-line;">
+                        <div th:text="${communityComment.content}"></div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="d-flex">
+                            <div class="recommend">
+                                <img id="Arecommend" class="material-symbols-outlined "
+                                    th:src="@{/img/recommend_off.png}">
+                            </div>
+                            <div class="recommend">
+                                <img id="Acomplaint" class="material-symbols-outlined"
+                                    th:src="@{/img/complaint_no.png}">
+                            </div>
+                        </div>
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div class="mb-2">
+                                <span th:if="${community.user != null}" th:text="${communityComment.user.name}"></span>
+                            </div>
+                            <div th:text="${#temporals.format(communityComment.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 답변 반복 끝  -->
+            <!-- 답변 작성 -->
+            <form sec:authorize="isAuthenticated()" th:action="@{|/community/detail/${community.cmId}|}"
+                th:object="${communityCommentForm}" method="post" class="my-3">
+                <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
+                <input type="submit" value="답변등록" class="btn btn-primary my-2">
+            </form>
+
+            <!--신고하기 모달창-->
+            <div id="complaintModal">
+                <div id="banner">
+                    <div>신고하기</div>
+                    <div class="modalCloseBtn">X</div>
+                </div>
+                <div id="content">
+                    <div>
+                        <div>작성자</div>
+                        <div>내용</div>
+                    </div>
+                    <div>
+                        <div>이름</div>
+                        <div>~~</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="reason">사유선택</div>
+                    <div id="radioBox">
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">스팸</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">음란물</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">불법</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">청불</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">욕</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">개인정보</div>
+                        <div class="radioBoxCheck"><input type="radio" name="check" id="">불쾌</div>
+                    </div>
+                </div>
+                <div id="complaintBtn">신고하기</div>
+            </div>
+
+        </div>
+
+        <script th:src="@{/community/communityDetail.js}"></script>
+	<main>
+
+</html>

@@ -1,7 +1,7 @@
 main {
     display: flex;
     justify-content: center;
-    padding: 3rem 0;
+    padding: 8rem 0;
 }
 
 .csContentContainer {
@@ -89,22 +89,6 @@ main {
 }
 
 
-
-
-.selectOption{
-    display: flex;
-    justify-content: end;
-}
-.selectOption>p{
-    padding-bottom: 1rem ;
-    padding-left: 1rem;
-    font-size: 14px;
-}
-
-
-
-
-
 .faqNav {
     display: flex;
     padding: 3rem 0;
@@ -153,16 +137,53 @@ table tr:last-child {
     border-bottom: 1px solid var(--boxShadow);
 }
 
+/*테이블 간격 조정*/
+table tr th {
+    padding: 1rem;
+}
 table tr td {
-    padding: 1rem 0;
+    padding: 1rem;
 }
 
 table tr td:first-child {
-    width: 5%;
+    width: 10%;
 }
 table tr td:nth-child(2) {
-    width: 80%;
+    width: 55%;
 }
 table tr td:nth-child(3) {
+    width: 15%;
+}
+table tr td:nth-child(4) {
     width: 20%;
 }
+
+/*질문 작성 버튼*/
+.createbtn{
+	width: 7rem;
+    height: 2.5rem;
+    background-color: #393939;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 0.6rem;
+    justify-self: end;
+    margin: 3rem 1rem;
+}
+
+/* 페이징 버튼 _ 이순*/
+.pageBtn>ul{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #393939;
+	color: #fff;
+	margin-top: 2rem;
+	border-radius: 5px;
+}
+.pageBtn>ul>div{
+	margin: 0.5rem 0.5rem;
+}
+
+
+
