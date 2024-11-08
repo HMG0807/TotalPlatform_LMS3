@@ -11,9 +11,35 @@ import com.example.demo.lms.entity.CsQuestion;
 
 public interface AdminCsQuestionRepository extends JpaRepository<CsQuestion, Integer>{
 
-	@Query(value = "SELECT * FROM cs_question limit :start, :idx", nativeQuery = true)	
-	List<CsQuestion> findCsQuestionLimitStartIdx(@Param("start") int start, @Param("idx") int pageSize);
+//	@Query(value = "SELECT * FROM cs_question limit :start, :idx", nativeQuery = true)	
+//	List<CsQuestion> findCsQuestionLimitStartIdx(@Param("start") int start, @Param("idx") int pageSize);
+//	
+//	@Query(value = "SELECT count(*) FROM cs_question" , nativeQuery = true)
+//	int countCsQuestionByKeyword();
 	
-	@Query(value = "SELECT count(*) FROM cs_question" , nativeQuery = true)
-	int countCsQuestionByKeyword();
+	
+	
+	/* 커뮤니티 관리 검색 기능 */
+	/********************************** 글제목 또는 작성자로 1대1 문의글 조회 **********************************/
+	@Query(value = "SELECT c.* FROM cs_question c inner join user u on c.user_id = u.user_id where c.title like %:kw% or u.id like %:kw% limit :start, :idx", nativeQuery = true) 	
+	List<CsQuestion> findAllByKeyword(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
+	
+	@Query(value = "SELECT count(c.question_id) FROM cs_question c inner join user u on c.user_id = u.user_id where c.title like %:kw% or u.name like %:kw%", nativeQuery = true)
+	int countQuestionByKeyword(@Param("kw") String kw);
+	
+	
+	/********************************** 글제목으로 1대1 문의글 조회 **********************************/
+	@Query(value = "SELECT c.* FROM cs_question c where c.title like %:kw% limit :start, :idx", nativeQuery = true)
+	List<CsQuestion> findAllByQuestionTitle(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
+
+	@Query(value = "SELECT count(*) FROM cs_question c where c.title like %:kw%" , nativeQuery = true)
+	int countQuestionByTitle(@Param("kw") String kw);
+	
+	/********************************** 이름으로 1대1 문의글 조회 **********************************/
+	@Query(value = "SELECT c.* FROM cs_question c inner join user u on c.user_id = u.user_id where u.id like %:kw% limit :start, :idx", nativeQuery = true)
+	List<CsQuestion> findAllByUserName(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
+
+	
+	@Query(value = "SELECT count(question_id) FROM cs_question c inner join user u on c.user_id = u.user_id where u.id like %:kw%", nativeQuery = true)
+    int countQuestionByName(@Param("kw") String kw);	
 }

@@ -1,118 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/payment/subscriptionPageStyle.css}">
+    <link rel="stylesheet" th:href="@{static/reset.css}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="대기시간; url=http://이동할 주소">
-    <title>Document</title>
-    <link rel="stylesheet" href="/payment/subscriptionPageStyle.css">
-    <link rel="stylesheet" href="static/reset.css">
-</head>
+   <main>
 
-<body>
-    <!-- 메인 컨텐츠 -->
-    <main>
-        <!-- 프리미엄 구독, 설명문구, 혜택 -->
-        <section>
-            <div class="premeumText">
-                <h1>프리미엄 구독</h1>
-                <p>설명 문구</p>
-                <p>혜택 1 + 혜택 2</p>
-            </div>
-            <!-- 구독권 별 진열란 -->
-            <div class="premeumProductContainer">
-                <div>
-                    <a th:href="@{/subPaymentOrder/1}">
-                        <div class="subscriptionPeriod">
-                            <p>1 개월</p>
-                        </div>
-                        <div class="ProductPrice">
-                            <div class="regularPrice">
-                                <br>  <!-- 4개의 구독권의 통일성을 위해, 공백으로 처리 -->
-                            </div>
-                            <div class="discountPercent">
-                                <br>
-                            </div>
-                            <div class="discount">
-                                <p>10,000 원</p>
-                            </div>
-                        </div>
-                        <div class="paymentBnt">
-                            <p>구매하기</p>
-                        </div>
-                    </a>
+        <div class="contentWrap">
+
+            <div class="content">
+                
+                <div class="text">
+                    <h1>프리미엄 구독</h1><br>
+                    <h2>"최고"의 요식업 강의 무제한 시청!</h2><br>
+                    <h3> 1개월 구독 : 1,000원 쿠폰 X 3</h3>
+                    <h3> 3개월 구독 : 2,000원 쿠폰 X 5</h3>
+                    <h3> 6개월 구독 : 3,000원 쿠폰 X 7</h3>
+                    <h3> 1년권 구독 : 5,000원 쿠폰 X 9</h3>
                 </div>
 
-                <div>
-                    <a th:href="@{/subPaymentOrder/2}">
-                        <div class="subscriptionPeriod">
-                            <p>6 개월</p>
-                        </div>
-                        <div class="ProductPrice">
-                            <div class="regularPrice">
-                                <p>60,000 원</p>
+                <div class="subscriptGroup">
+                    <a href="/subPaymentOrder/1">
+                        <div class="subDetail">
+
+                            <div id="period">1 개월 </div>
+                            <div>&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+                            <div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp10,000 원  </div>
+                            <div class="btn">
+                                구매하기
                             </div>
-                            <div class="discountPercent">
-                                <p>할인가 20%</p>
-                            </div>
-                            <div class="discount">
-                                <p>48,000 원</p>
-                            </div>
-                        </div>
-                        <div class="paymentBnt">
-                            <p>구매하기</p>
+                            
                         </div>
                     </a>
-                </div>
 
-                <div>
-                    <a th:href="@{/subPaymentOrder/3}">
-                        <div class="subscriptionPeriod">
-                            <p>6 개월</p>
-                        </div>
-                        <div class="ProductPrice">
-                            <div class="regularPrice">
-                                <p>60,000 원</p>
+                    <a href="/subPaymentOrder/2">
+                        <div class="subDetail">
+
+                            <div id="period">3 개월</div>
+                            <div class="sale">원가  30,000 원</div>
+                            <div>▶ 27,000 원</div>
+                            <div class="btn">
+                                구매하기
                             </div>
-                            <div class="discountPercent">
-                                <p>할인가 20%</p>
-                            </div>
-                            <div class="discount">
-                                <p>48,000 원</p>
-                            </div>
-                        </div>
-                        <div class="paymentBnt">
-                            <p>구매하기</p>
+                            
                         </div>
                     </a>
-                </div>
 
-                <div>
-                    <a th:href="@{/subPaymentOrder/4}">
-                        <div class="subscriptionPeriod">
-                            <p>6 개월</p>
+                    <a href="/subPaymentOrder/3">
+                        <div class="subDetail">
+
+                            <div id="period"> 6 개월</div>
+                            <div class="sale">원가 60,000 원</div>
+                            <div>▶ 48,000 원</div>
+                            <div class="btn">
+                                구매하기
+                            </div>
+                            
                         </div>
-                        <div class="ProductPrice">
-                            <div class="regularPrice">
-                                <p>60,000 원</p>
+                    </a>
+
+                    <a href="/subPaymentOrder/4">
+                        <div class="subDetail">
+
+                            <div id="period">1 년권</div>
+                            <div class="sale"> 원가 120,000원</div>
+                            <div>▶ 84,000원</div>
+                            <div class="btn">
+                                구매하기
                             </div>
-                            <div class="discountPercent">
-                                <p>할인가 20%</p>
-                            </div>
-                            <div class="discount">
-                                <p>48,000 원</p>
-                            </div>
-                        </div>
-                        <div class="paymentBnt">
-                            <p>구매하기</p>
+                            
                         </div>
                     </a>
                 </div>
 
             </div>
-        </section>
-    </main>
-</body>
 
+        </div>
+
+   </main>
+
+
+
+</main>
 </html>
