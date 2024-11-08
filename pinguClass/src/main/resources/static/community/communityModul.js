@@ -38,8 +38,6 @@ faqNavLi.forEach((item,index )=>{
 });
 */
 
-
-/** 페이징 버튼 클릭시 해당 페이지로 이동 **********************************************/
 const page_elements = document.getElementsByClassName("page-link");
 		Array.from(page_elements).forEach(function(element) {
     		element.addEventListener('click', function() {

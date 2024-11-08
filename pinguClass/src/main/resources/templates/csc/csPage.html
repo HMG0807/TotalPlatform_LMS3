@@ -4,10 +4,10 @@
 		<div class="csContentContainer">
             <div class="csSideNav">
                 <ul>
-                    <li>
-                    	<a th:href="@{/csc/list}">1:1문의</a>
+                    <li th:classappend="${activePageType == 'inquiry'} ? 'on'">
+                    	<a th:href="@{/csc}">1:1문의</a>
                     </li>
-                     <li>
+                     <li th:classappend="${activePageType == 'notice'} ? 'on'">
                      	<a th:href="@{/notice}">공지사항</a>
                      </li>
                 </ul>
@@ -18,65 +18,64 @@
                         <div class="csConTitle">
                             <p>FAQ</p>
                         </div>
-                        <!--문의하기-->
-                        <div class="createbtn">
-                        	<a th:href="@{/community/create}">문의하기</a>
-                        </div>
-                        
-                        <!--목록-->
                         <table>
+                        
                         <ul class="faqCon">
-                            <li class="on"> 
+                            <li class="on">
+                                
                             <tr>
                             	<th>번호</th>
                             	<th>제목</th>
                             	<th>작성자</th>
-                            	<th>답변상태</th>
+                            	<th>작성일</th>
                         	</tr>
-                            <tr th:each="csList : ${csList}">
-                                <td th:text="${csList.questionId}"></td>
-                                <td><a th:href="@{|/csc/detail/${csList.questionId}|}" th:text="${csList.title}"></a></td>
-                                <td th:text="${csList.user.name}">관리자</td>
-                                <td th:if="${csList.csAnswer != null}" th:text="답변완료"></td>
-                                <td th:unless="${csList.csAnswer != null}" th:text="답변대기"></td>
-                                
+                            <tr th:each="csQuestion : ${csQuestion}">
+                            <!--
+                                <td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
+                                -->
+                                <td th:text="${csQuestion.questionId}"></td>
+                                <td><a th:href="@{|/csc/detail/${id}|}" th:text="${csQuestion.title}"></a></td>
+                                <td th:text="${csQuestion.user.name}">관리자</td>
+                                <td th:text="${#temporals.format(csQuestion.lastUpdate, 'yyyy-MM-dd')}"></td>
                             </tr>
                         </table>
-                         <!--페이징 버튼 _ 이순 *************************************************-->
-                        <div class="pageBtn" th:if="${paging.totalPage} > 1">
-                        	<ul>
-                            	<div>
-                                	<a  th:if="${paging.pageNo != 1}" class="page-link" href="javascript:void(0)" th:data-page="1"> 처음 </a>
-                            	</div>
-                            	<div>
-                                	<a a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo>1}"
-                                	 th:data-page="${paging.pageNo-1}"> 이전 </a>
-                            	</div>
-                            	<div th:each="num : ${#numbers.sequence(paging.startPage,paging.endPage)}"
-                                	th:classappend="${paging.pageNo == num} ? 'active'">
-                                	<a class="page-link" href="javascript:void(0)"} th:text="${num}" th:data-page="${num}"></a>
-                            	</div>
-                            	<div>
-                                	<a a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo < paging.totalPage}" 
-                                	th:data-page="${paging.pageNo+1}"> 다음 </a>
-                            	</div>
-                            	<div>
-                                	<a class="page-link" th:if="${paging.pageNo != paging.totalPage}" href="javascript:void(0)" th:data-page="${paging.totalPage}"
-                                	> 마지막으로 </a>
-                            	</div>
-                        	</ul>
-                       </div>
-                        
-                    </li>      
+                    </li>
+                           
                 </ul>
+               
+                    
+                    <li class="maintap mention">
+                        <div class="csConTitle">
+                            <p>공지사항</p>
+                        </div>
+                        <table>
+                        	<tr>
+                                <td>Q</td>
+                                <td>공지사항을 안내드립니다</td>
+                                <td>2024.10.01</td>
+                            </tr>
+                            <tr>
+                                <td>Q</td>
+                                <td>공지사항을 안내드립니다</td>
+                                <td>2024.10.01</td>
+                            </tr>
+                            <tr>
+                                <td>Q</td>
+                                <td>공지사항을 안내드립니다</td>
+                                <td>2024.10.01</td>
+                            </tr>
+                            <tr>
+                                <td>Q</td>
+                                <td>공지사항을 안내드립니다</td>
+                                <td>2024.10.01</td>
+                            </tr>
+                        </table>
+                    </li>
+                    
+                </ul>
+
             </div>
         </div>
-        
-        
-        <!--페이징 form-->
-        <form th:action="@{/csc/list}" method="get" id="pagingForm">
-            <input type="hidden" id="page" name="page">
-        </form>
 
     	
     	<script th:src="@{/csc/csPageModul.js}"></script>

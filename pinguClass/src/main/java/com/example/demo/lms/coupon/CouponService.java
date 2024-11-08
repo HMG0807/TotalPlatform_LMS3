@@ -21,7 +21,7 @@ public class CouponService {
 	
 	public void createCoupon(String id) throws Exception {
 		Coupon c = new Coupon();
-		User u = this.userService.getUser(3);
+		User u = this.userService.getUser("user3");
 		String code = RandomStringUtils.randomAlphabetic(16);
 		
 		while(true) {

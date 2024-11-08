@@ -110,7 +110,7 @@ dropdown.addEventListener('click', function(){
 
 
 // 삭제시 alert창
-let del = document.querySelector(".delete")
+let del = document.querySelectorAll(".delete")
 for(let el of del){
 	el.addEventListener('click', function(){
 		if(confirm("정말로 삭제?")){

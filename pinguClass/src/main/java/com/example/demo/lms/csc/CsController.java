@@ -7,23 +7,17 @@ import java.util.Optional;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.lms.admin.AdminNoticeService;
 import com.example.demo.lms.admin.AdminService;
-import com.example.demo.lms.community.CommunityForm;
 import com.example.demo.lms.entity.CsQuestion;
 import com.example.demo.lms.entity.Notice;
-import com.example.demo.lms.entity.User;
 import com.example.demo.lms.paging.EzenPaging;
-import com.example.demo.lms.user.UserService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/csc")
@@ -31,27 +25,32 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class CsController {
 	
-	private final CsQuestionService csQuestionService;
-	private final AdminService adminService;
-	private final UserService userService;
+	private final CsQuestionService qr;
+	private final AdminService ar;
+	private final AdminNoticeService ans;
 	
 	
-	// 1:1문의 목록 + 페이징 _ 이순
+	// 1:1문의 목록
 	//@PreAuthorize("isAuthenticated()")
-	@GetMapping("/list")
+	@GetMapping("")
 	public String csCenter(Model model,
-			@RequestParam(value="page", defaultValue="0") int page, 
-			Principal principal) {
-			//@RequestParam(value="chk", defaultValue="on") String chk) {
+			@RequestParam(value="page1", defaultValue="0") int page1, 
+			@RequestParam(value="page2", defaultValue="0") int page2,
+			@RequestParam(value="pageType", defaultValue="inquiry") String pageType,
+			Principal principal,
+			@RequestParam(value="chk", defaultValue="on") String chk) {
 		
-		// [페이징] 현재 페이지에 보일 개수, 언더바 사이즈
-	    EzenPaging ezenPaging = new EzenPaging(page, 10, this.adminService.getCsQuestionCount(), 5);
+		// 1:1 문의 페이징
+	    EzenPaging ezenPaging = new EzenPaging(page1, 10, this.ar.getQuestionCountByAll(1), 5); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+	    List<CsQuestion> csQuestion = this.ar.getUserByKeyword(1, ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+		
 	    
-	    // [페이징] 페이지 이동시 문의글 변경
-	    List<CsQuestion> csList = this.adminService.getCsQuestionByLimit(ezenPaging.getStartNo(), ezenPaging.getPageSize()); 
+	 // 공지사항 페이징
+	    EzenPaging ezenPaging2 = new EzenPaging(page2, 10, this.ans.getNoticeCountAll(), 5);
+	    List<Notice> noticeList = ans.getNoticePaging(ezenPaging2.getStartNo(), ezenPaging2.getPageSize());
 	    
-	    model.addAttribute("csList", csList);
-	    model.addAttribute("paging", ezenPaging);
+	 // 현재 활성화된 페이지 타입 정보 추가
+	    model.addAttribute("activePageType", pageType);
 	    
 		return "csc/csPage";
 	}
@@ -59,71 +58,16 @@ public class CsController {
 	// 문의글 상세
 	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/detail/{id}")
-	public String csDetail(Model model, @PathVariable("id") Integer id, 
-			Principal principa)throws UserException {
-			CsQuestion csDetail = this.csQuestionService.getDetail(id);
-			model.addAttribute("csDetail", csDetail);
+	public String csDetail(Model model, @PathVariable("id") Integer id, Principal principa) throws UserException {
+		CsQuestion csDetail = this.qr.getQuestion(id);
+		model.addAttribute("csQuestion", csDetail);
 		
 		return "csc/csDetail";
 		
-	}
-	
-	
-	// 문의글 수정
-	//@PreAuthorize("isAuthenticated()")
-	@GetMapping("/modify/{id}")
-	public String CsQuestionModify(CsQuestionForm csQuestionForm, @PathVariable("id") Integer id,
-			Principal principal, Model model) {
 		
-		try {
-			CsQuestion csQuestionModify = this.csQuestionService.getDetail(id);
-			model.addAttribute("csQuestionModify", csQuestionModify);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-				return "csc/csQuestionModify";
-	}
-	
-	//@PreAuthorize("isAuthenticated()")
-	@PostMapping("/modify/{id}")
-	public String CsQuestionModify(Model model, @PathVariable("id") Integer id,
-			@RequestParam(value="content") String content,
-			@RequestParam(value="title") String title,
-			@Valid CsQuestionForm csQuestionForm, BindingResult bindingResult,
-			Principal principal) throws UserException{
-				
-		CsQuestion csQuestion = this.csQuestionService.getDetail(id);
-		
-		if(bindingResult.hasErrors()) {
-			return "csc/csQuestionModify";
-		}
-		
-		try {
-			User user = this.userService.getUser(id);
-			this.csQuestionService.modify(csQuestion, csQuestionForm.getTitle(), csQuestionForm.getContents());
-			
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return String.format("redirect:/css/detail/%s", id);
 		
 	}
-	
-	
-	// 문의글 삭제
-	@GetMapping("/delete/{id}")
-	public String csQuestionDelete(@PathVariable("id") Integer id) throws UserException {
-		CsQuestion csQuestionDelete = this.csQuestionService.getDetail(id);
-		this.csQuestionService.delete(csQuestionDelete);
-		
-		return "redirect:/csc/list";
-		
-	}
-
 	
 	
 	

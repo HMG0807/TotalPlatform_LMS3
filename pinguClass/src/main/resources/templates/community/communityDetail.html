@@ -42,7 +42,6 @@
                     </div>
                 </div>
             </div>
-            
             <!-- 답변의 갯수 표시 -->
             <!--반복 돌리면 오류 터지는 이유? -> comment에 s 안붙임, 띄어쓰기 특수문자는 ''안에, + 빼먹음 -->
             <h5 class="border-bottom my-3 py-2"
@@ -50,16 +49,19 @@
             <!--답변 반복 시작 -->
             <div class="card my-3 answer" th:each="communityComment : ${community.communityComments}">
                 <div class="card-body">
-                    <div class="option">
-                        <!--수정삭제btn-->
-                        <div class="optionDropdown">
-                            <!-- 로그인 되면 sec:authorize="isAuthenticated() 추가
-                            자기글만 수정 가능하도록 처리  추가(민지킴 js 참고)-->
-                            <a class="modify" th:href="@{|/modify/${id}/modifyComment/${commetId}|}">수정</a>
-                        </div>
-                        <div class="optionDropdown">
-                        	<!--로그인 되면 sec:authorize="isAuthenticated() 추가-->
-                        	<a class="delete">삭제</button>
+                    <div>
+                        <!--더보기 드롭다운-->
+                        <div class="option">
+                            <!--자기글만 수정 가능하도록 처리  추가(민지킴 js 참고)-->
+                            
+                            <a class="modify" th:href="@{|/modify/${id}/modifyComment/${commetId}|}"
+                                sec:authorize="isAuthenticated()">수정</a>
+                            <a class="delete" sec:authorize="isAuthenticated()">삭제</button>
+                            
+                                <!--
+                        <button class="Cmodify" type="button" onclick="" sec:authorize="isAuthenticated()">수정</button>
+                        <button class="Cdelete" type="button" onclick="" sec:authorize="isAuthenticated()">삭제</button>
+                        -->
                         </div>
                     </div>
                     <div class="card-content " style="white-space: pre-line;">

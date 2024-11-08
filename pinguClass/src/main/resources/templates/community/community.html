@@ -28,7 +28,7 @@
                         		<th>번호</th>
                         		<th>제목</th>
                         		<th>작성자</th>
-                        		<th>작성일</th>
+                        		<th>날짜</th>
                         	</tr>
                             <tr th:each="communityList : ${communityList}">
                                 <td th:text="${communityList.cmId}"></td >
@@ -73,7 +73,7 @@
         </div>
         
         <!--페이징 form-->
-        <form th:action="@{/community/list}" method="get" id="pagingForm">
+        <form th:action="@{/community/list}" method="get" id="pagingForm"> <!--전체 검색창-->
             <input type="hidden" id="page" name="page">
         </form>
 

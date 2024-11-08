@@ -70,7 +70,7 @@ public class CommunityController {
 		if(bindingResult.hasErrors()) {
 			return "community/communityForm"; //오류가 있다면 리파지토리저장 없이 기존의 데이터를 boardQuestion_form.html에 표시
 		}
-		User user = this.userService.getUser(1); //글쓴이 정보를 보여주기 위한 코드
+		User user = this.userService.getUser("asdf"); //글쓴이 정보를 보여주기 위한 코드
 		this.communityService.communityCreate(communityForm.getTitle(),communityForm.getContent(), user);
 		return "redirect:/community/list";
 		//오류가 없다면 boardQuestionService의 boardQuestionCreate로 리파지토리에 값을 저장하고 FQA/문의 게시판 화면으로 넘어간다
@@ -117,7 +117,7 @@ public class CommunityController {
 			}
 			
 			try {
-				User user = this.userService.getUser(1);
+				User user = this.userService.getUser("asdf");
 				this.communityService.modify(community, communityForm.getTitle(),
 						communityForm.getContent());
 					

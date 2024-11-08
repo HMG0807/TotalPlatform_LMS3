@@ -354,16 +354,18 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 		this.adminCsAnswerRepository.save(answer);
 	}
 
+	public int getQuestionCountByAll(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-	/* 페이징을 위한 모든 문의 개수 구하기 ----------------------------*/
-	public int getCsQuestionCount() {
-		return this.adminCsQuestionRepository.countCsQuestionAll();
+	public List<CsQuestion> getUserByKeyword(int i, int startNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
 	
-	/*-페이징--------------------------------------------------*/
-	public List<CsQuestion> getCsQuestionByLimit(int startNo, int pageSize){
-		return this.adminCsQuestionRepository.findCsQuestionByLimit(startNo, pageSize);
-	}
 
 
 	

@@ -23,32 +23,67 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class CsQuestionService {
 	
-	private final CsQuestionRepository csQuestionRepository;
+	private final CsQuestionRepository qr;
 	private final CsQuestionUserRepository userRepository;
 	
-	// a팀 코드 참고함 _ 이순
-	
-	//유저 정보 가져오기
-	public User getUser(Integer id) throws UserException {
-		Optional<User> user = this.userRepository.findById(id);
-				
-		if(user.isPresent()) { 
-			return user.get();
-		} else {
-			throw new UserException("유저 정보가 없습니다.");
-		}
-	}
-
-			
-		// 문의글 상세 _ 이순 
-		public CsQuestion getDetail(Integer id) throws UserException {
-			Optional<CsQuestion> csQuestion = this.csQuestionRepository.findById(id);
-			if(csQuestion.isPresent()) {
-				return csQuestion.get();
-			}else {
-				throw new UserException("데이터를 찾을수 없습니다");
+	// a팀 코드 참고
+	// 1:1 문의 내용 가져오기
+			public CsQuestion getQuestion(Integer csQuestionId) throws UserException {
+				Optional<CsQuestion> q1 = this.qr.findById(csQuestionId);
+				if(q1.isPresent()) {
+					return q1.get();
+				}else {
+					throw new UserException("데이터를 찾을수 없습니다");
+				}
 			}
-		}
+			
+			
+			//유저 정보 가져오기
+			public User getUser(Integer id) throws UserException {
+				Optional<User> user = this.userRepository.findById(id);
+				
+				if(user.isPresent()) { 
+					return user.get();
+				} else {
+					throw new UserException("유저 정보가 없습니다.");
+				}
+			}
+
+	
+	
+	
+	
+	
+//	// 문의글 조회
+//	public List<CsQuestion> getList(){
+//		
+//		return this.qr.findAll();
+//		
+//	}
+//	
+//	
+//	
+//	//로그인한 유저의 모든 고객센터 문의글을 조회하는 메소드
+//		public Page<CsQuestion> getList(int page, String id)  throws UserException {
+//			List<Sort.Order> sorts = new ArrayList<>();
+//			sorts.add(Sort.Order.desc("lastUpdate"));
+//
+//			Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+//			
+//			return this.qr.findByUser(getUser(id), pageable);
+//		}
+//		
+//		
+//		
+//		// 문의글 상세
+//		public CsQuestion getQuestion(Integer id) throws UserException {
+//			Optional<CsQuestion> q1 = this.qr.findById(id);
+//			if(q1.isPresent()) {
+//				return q1.get();
+//			}else {
+//				throw new UserException("데이터를 찾을수 없습니다");
+//			}
+//		}
 //
 //		public void create(String title, String contents, String id) throws UserException {
 //			CsQuestion q = new CsQuestion();
@@ -69,26 +104,16 @@ public class CsQuestionService {
 //			this.qr.delete(q);
 //		}
 //		
-//		
-
-		// 문의글 수정 _ 이순
-		public void modify(CsQuestion csQuestion, String title, String contents) {
-			csQuestion.setTitle(title);
-			csQuestion.setContent(contents);
-			csQuestion.setLastUpdate(LocalDateTime.now());
+//		//유저 정보 가져오기
+		public User getUser(String id) throws UserException {
+			Optional<User> user = this.userRepository.findById(id);
 			
-			this.csQuestionRepository.save(csQuestion);
-			
+			if(user.isPresent()) { 
+				return user.get();
+			} else {
+				throw new UserException("유저 정보가 없습니다.");
+			}
 		}
-
-		// 문의글 삭제 _ 이순
-		public void delete(CsQuestion csQuestionDelete) {
-			csQuestionDelete.setDeleteYn("y");
-			
-			this.csQuestionRepository.save(csQuestionDelete);
-			
-		}
-
 	
 	
 	

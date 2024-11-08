@@ -146,7 +146,7 @@ public class CommunityService {
 		
 	}
 
-	// 페이징을 위한 모든 게시글 개수 구하기
+	// 페이징을 위한 모든 게시글 갯수 구하기
 	public int getCommunityCount() {
 		return this.communityRepository.countCommunityAll(); 
 	}

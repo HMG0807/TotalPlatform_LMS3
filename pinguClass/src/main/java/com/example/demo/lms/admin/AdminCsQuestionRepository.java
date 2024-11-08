@@ -16,12 +16,4 @@ public interface AdminCsQuestionRepository extends JpaRepository<CsQuestion, Int
 	
 	@Query(value = "SELECT count(*) FROM cs_question" , nativeQuery = true)
 	int countCsQuestionByKeyword();
-
-	/* [페이징] 문의글 개수 조회 _ 이순 ----------------------------- */
-	@Query(value = "SELECT count(*) FROM cs_question WHERE delete_yn = 'n'", nativeQuery = true)
-	int countCsQuestionAll();
-
-	/* [페이징] 현재 페이지에서 보이는 글 범위 지정 _ 이순 --------------------- */
-	@Query(value = "SELECT * FROM cs_question where delete_yn = 'n' limit :start, :idx", nativeQuery = true)
-	List<CsQuestion> findCsQuestionByLimit(@Param("start") int startNo, @Param("idx") int pageSize);
 }

@@ -22,20 +22,3 @@ csSideNav.forEach(item => {
         }
     });
 });
-
-
-// -----------------------------수정 삭제 버튼 활성화 기능 ----------------------------
-
-const csContainer = document.querySelector(".csContainer"); // 질문 박스
-const optionBtn = document.querySelector(".d-flex"); // 수정 삭제 버튼
-
-
-
-// 수정 삭제 버튼 활성화 여부
-if (csContainer.querySelector(".csAnswer")) { // 관리자 답변이 있으면
-    optionBtn.style.display = "none"; // 수정 버튼 숨김
-
-} else {
-    optionBtn.style.display = "flex"; //관리자 답변이 없으면 수정 버튼 활성화
-}
-
