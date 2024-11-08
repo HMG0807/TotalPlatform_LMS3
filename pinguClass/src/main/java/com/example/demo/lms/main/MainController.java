@@ -1,12 +1,10 @@
 package com.example.demo.lms.main;
 
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.example.demo.lms.Authuser.Authuser;
 import com.example.demo.lms.Authuser.AuthuserService;
 import com.example.demo.lms.LoginCheck.LoginCheck;
@@ -16,19 +14,20 @@ import com.example.demo.lms.user.UserRepository;
 import com.example.demo.totalPlatform.TotalUser;
 import com.example.demo.totalPlatform.TotalUserRepository;
 import com.example.demo.totalPlatform.TotalUserService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
 public class MainController {
+
 	private final AuthuserService authuserService;
 	private final UserRepository userRepository;
 	private final TotalUserRepository totalUserRepository;
 	private final TotalUserService totalUserService;
 	
 	
+//---------------------MAIN PAGE--------------------------
 	@GetMapping("/main")
 	public String mainpage(@Authuser User user) {
 		if(user.getId().equals("null")) {
@@ -40,8 +39,11 @@ public class MainController {
 		}
 		
 		return "main/main";
+		}
 		
-	}
+
+		
+	
 	
 	@GetMapping("/")
 	public String in1dex(@Authuser User user)  {

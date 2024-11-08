@@ -207,7 +207,7 @@ public class AdminController {
 		
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
 		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCommunityCountByKeyword(kwType, kw), 5);
-		List<Community> communityList = this.adService.getCommunityByKeyword(kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+		List<Community> communityList = this.adService.getCommunityByKeyword(kwType,kw, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("page", ezenPaging);
@@ -259,7 +259,7 @@ public class AdminController {
 
 		
 		return "/admin/adminNoticeList";
-	}
+	}	
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 공지사항 작성글 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/admin/adminNoticeListDetail/{id}")
@@ -308,6 +308,7 @@ public class AdminController {
 			return "/admin/adminRegistNotice";
 		}
 		
+ 
 		String adminCode = "qwer1234"; //principal.getName()
 		
 		
@@ -352,8 +353,8 @@ public class AdminController {
 			@RequestParam(value = "kwType", defaultValue = "") String kwType) {
 									
 		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCsQuestionCountByKeyword(), 5);
-		List<CsQuestion> questionList = this.adService.getCsQuetionByKeyword(ezenPaging.getStartNo(), ezenPaging.getPageSize());
+		EzenPaging ezenPaging = new EzenPaging(page, 10, adService.getCsQuestionCountByKeyword(kwType, kw), 5);
+		List<CsQuestion> questionList = this.adService.getCsQuetionByKeyword(kwType,kw,ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("questionList", questionList);
 		model.addAttribute("page", ezenPaging);
@@ -457,6 +458,9 @@ public class AdminController {
 	}	
 	
 
+	
+	
+	
 	
 } //class END
 

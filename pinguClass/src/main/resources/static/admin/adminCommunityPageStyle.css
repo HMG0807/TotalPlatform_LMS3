@@ -63,10 +63,11 @@ main #searchBtn:hover {
 #columnBox>span:nth-child(1) { width: 50px;}
 #columnBox>span:nth-child(2) { width: 250px;}
 #columnBox>span:nth-child(3) { width: 120px;}
-#columnBox>span:nth-child(4) { width: 150px;}
-#columnBox>span:nth-child(5) { width: 70px;}
-#columnBox>span:nth-child(6) { width: 150px;}
+#columnBox>span:nth-child(4) { width: 120px;}
+#columnBox>span:nth-child(5) { width: 150px;}
+#columnBox>span:nth-child(6) { width: 70px;}
 #columnBox>span:nth-child(7) { width: 150px;}
+#columnBox>span:nth-child(8) { width: 110px;}
 
 
 
@@ -90,8 +91,9 @@ main #searchBtn:hover {
 .contentRows>span:nth-child(1) { width: 50px;}
 .contentRows>span:nth-child(2) { width: 250px;}
 .contentRows>span:nth-child(3) { width: 120px;}
-.contentRows>span:nth-child(4) { width: 150px;}
-.contentRows>span:nth-child(5) { width: 70px;}
+.contentRows>span:nth-child(4) { width: 120px;}
+.contentRows>span:nth-child(5) { width: 150px;}
+.contentRows>span:nth-child(6) { width: 70px;}
 
 .contentRows>button {
 	width: 100px;
