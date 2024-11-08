@@ -205,6 +205,11 @@ public class MypageController {
 	}
 
 	
+	@GetMapping("/mypage")
+	public String mypageTest() {
+		
+		return "mypage/myPage";
+	}
 	
 	
 	// QnA 수정 처리 

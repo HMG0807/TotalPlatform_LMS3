@@ -1,50 +1,43 @@
-<main>
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/mypage/myCourseQnaAnswerFormPageStyle.css}">
 	
-    <link rel="stylesheet" th:href="@{/mypage/myCourseQnaAnswerFormPageStyle.css}">
-    
-    <div class="mpContainer">
-		<div class="mpSideNav">
-			<div class="mpSideNavTitle">
-				<p>마이페이지</p>
-			</div>
-			<ul>
-				<li class="on">
-					<a href="#">
-						<p>공지사항</p>
-						<i class="fa-solid fa-angle-right"></i>
-					</a>
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+	
+    <div class="myPageContainer">
+    	<!-- 서브 네비바 영역 -->
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <div class="myPageContentContainer">
+            <!-- 컨텐트 영역 -->
+            <ul>
+				<li class="courseMngContent">
+					<div class="courseMngTitle">
+						내 강좌 관리 > QnA 내역 > 답글 등록
+					</div>
+					<!-- 내용 부문 -->
+					<div class="courseContainer">
+			            <form name="courseform" action="post">
+			                <!-- 답글 입력 -->
+			                <div class="courseTitle formText">
+			                    <label for="title">제목</label>
+			                    <input type="text" class="formStyle" id="title" placeholder="제목을 입력해주세요.">
+			                </div>
+			                <div class="answerContent formText">
+			                    <label for="content">내용</label>
+			                    <textarea type="text" class="formStyle" id="content" placeholder="내용을 입력해주세요."></textarea>
+			                </div>
+			
+			                <!-- button -->
+			                <div class="submitButton">
+			                    <input type="submit" value="등록하기">
+			                </div>
+			            </form>
+		        	</div>
 				</li>
 			</ul>
-		</div>
-
-		<ul>
-			<li class="courseMngContent">
-				<div class="courseMngTitle">
-					내 강좌 관리 > QnA 내역 > 답글 등록
-				</div>
-				<!-- 내용 부문 -->
-				<div class="courseContainer">
-		            <form name="courseform" action="post">
-		                <!-- 답글 입력 -->
-		                <div class="courseTitle formText">
-		                    <label for="title">제목</label>
-		                    <input type="text" class="formStyle" id="title" placeholder="제목을 입력해주세요.">
-		                </div>
-		                <div class="answerContent formText">
-		                    <label for="content">내용</label>
-		                    <textarea type="text" class="formStyle" id="content" placeholder="내용을 입력해주세요."></textarea>
-		                </div>
-		
-		                <!-- button -->
-		                <div class="submitButton">
-		                    <input type="submit" value="등록하기">
-		                </div>
-		            </form>
-	        	</div>
-			</li>
-		</ul>
-
-	</div>
-    
+        </div>
+    </div>
 	<script th:src="@{/mypage/myCourseQnaAnswerFormPageModul.js}"></script>
 </main>
+</html>

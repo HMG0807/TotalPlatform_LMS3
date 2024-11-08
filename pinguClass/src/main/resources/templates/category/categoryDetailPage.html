@@ -1,114 +1,43 @@
 <html layout:decorate="~{layout/layout}">
 	<main layout:fragment="main">
-    	<link rel="stylesheet" th:href="@{/course/categoryDetailStyle.css}">
+    	<link rel="stylesheet" th:href="@{/category/categoryDetailStyle.css}">
     	
         <div class="categoryDetailContainer">
             <div class="categoryDetailLeft">
                 <div class="lecturerCard">
                     <div class="lecturerName">
                         <img src="" alt="">
-                        <p>Lecturer Name</p>
+                        <p th:text="${course.instructor.user.name}"></p>
                     </div>
                     <div class="lecturerText">
-                        <p>초급</p>
-                        <p>챕터 8개 , 총 4시간 21분</p>
-                        <p> 오디오 한국어</p>
-                    </div>
+                        <p th:text="'카테고리 : '+${course.category.category}"></p>
+                        <p th:text="'강좌 목표 : '+${course.objective}"></p>
+                        <p th:text="'강의 개수 : '+${#lists.size(course.lectures)} + '개'"></p>
+                    </div>    
                 </div>
                 <ul class="lectureNav">
-                    <li><a href="#">클래스 소개</a></li>
-                    <li><a href="#">크리에이터</a></li>
-                    <li><a href="#">추천</a></li>
+                    <li><a href="#">강의 리스트</a></li>
+                    <li><a th:href="@{|/courseQna/${course.courseId}|}">강좌 Q&A</a></li>
+                    <li><a href="#">강좌 리뷰</a></li>
                 </ul>
 
                 <ul class="lecturerContentContainer" >
                     <li class="classIntroduce">
                         <div class="lectureTitle">
-                            <p>이런걸 배워요!</p>
-                            <!-- <div class="lectureSlideBtn">
-                                <button class="lectureSlideLeft"><i class="fa-solid fa-chevron-left"></i></button>
-                                <button class="lectureSlideRight"><i class="fa-solid fa-chevron-right"></i></button>
-                            </div> -->
-                        </div>
-                        <div class="lectureSlideContainer">
-                            <ul class="slides">
-                                <li class="slide">
-                                    <a href="#">
-                                        <div class="lectureConImg">
-                                            <img src="" alt="">
-                                        </div>
-                                        <div class="lectureConText">
-                                            <p>subTitle</p>
-                                            <p>content Text</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a href="#">
-                                        <div class="lectureConImg">
-                                            <img src="" alt="">
-                                        </div>
-                                        <div class="lectureConText">
-                                            <p>subTitle</p>
-                                            <p>content Text</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a href="#">
-                                        <div class="lectureConImg">
-                                            <img src="" alt="">
-                                        </div>
-                                        <div class="lectureConText">
-                                            <p>subTitle</p>
-                                            <p>content Text</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="slide">
-                                    <a href="#">
-                                        <div class="lectureConImg">
-                                            <img src="" alt="">
-                                        </div>
-                                        <div class="lectureConText">
-                                            <p>subTitle</p>
-                                            <p>content Text</p>
-                                        </div>
-                                    </a>
-                                </li>
+                            <p>강의 리스트</p>    
+                        </div><br>
+                        
+                        <div>
+                            <ul class="lectureList">
+                                <div th:each="course : ${courseId} ">
+                                    <a href="">
+                                        <li th:text="${course.lectureOrder} + ${course.lectures.title}"></li>
+                                    </a>    
+                            </div>
+
                             </ul>
                         </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainText">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium corrupti porro alias nisi quis facere, illo iste reiciendis. Expedita itaque adipisci soluta illum. Error quae repellat tenetur veritatis nam dolorum!</p>
-                        </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainText">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium corrupti porro alias nisi quis facere, illo iste reiciendis. Expedita itaque adipisci soluta illum. Error quae repellat tenetur veritatis nam dolorum!</p>
-                        </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainText">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium corrupti porro alias nisi quis facere, illo iste reiciendis. Expedita itaque adipisci soluta illum. Error quae repellat tenetur veritatis nam dolorum!</p>
-                        </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainImg">
-                            <img src="" alt="">
-                        </div>
-                        <div class="lectureMainText">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium corrupti porro alias nisi quis facere, illo iste reiciendis. Expedita itaque adipisci soluta illum. Error quae repellat tenetur veritatis nam dolorum!</p>
-                        </div>
-                    </li>
+
                     <li class="creater">
                         <div class="lectureTitle">
                             <p>크리에이터</p>
@@ -299,22 +228,18 @@
 
             <div class="categoryDetailRight">
                 <div class="categoryCart">
-                    <div class="categoryCartTitle">
-                        CategoryTitle
+                    <div class="categoryCartTitle" th:text="${course.title}">
+                        
                     </div>
                     <div class="categoryPrice">
-                        <p class="originPrice">가격 <span>월 59,880원</span></p>
-                        <p class="discount">최대 해택가 <span><span>20% </span>월 48,000원</span></p>
+                        <p class="discount">최대 해택가 <span th:text="${course.price}+' 원'"></span></p>
                     </div>
-                    <div class="paymentContainer">
-                        <p><input type="radio" name="productDiscount" id="productDiscount"> 상품할인</p>
-                        <p><input type="radio" name="productDiscount" id="productDiscount"> 5개월 무이자 할부</p>
-                    </div>
+
                     <button class="buyBtn">구매하기</button>
                 </div>
             </div>
         </div>
 
-		<script th:src="@{/course/categoryDetailModul.js}"></script>
+		<script th:src="@{/category/categoryDetailModul.js}"></script>
 	</main>
 </html>

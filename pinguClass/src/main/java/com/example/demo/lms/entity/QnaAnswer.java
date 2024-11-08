@@ -34,6 +34,7 @@ public class QnaAnswer {
 	@Column(name = "delete_yn")
 	private String deleteYn; //삭제여부
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="qna_id")
 	private Qna qna;

@@ -1,0 +1,10 @@
+/* 오류 메시지 */
+#errors {
+	font-weight: bold;
+	padding: 10px 0px;
+	border-bottom: 2px solid red;
+}
+
+#errors>span, #errors>i  {
+	color: red;
+}

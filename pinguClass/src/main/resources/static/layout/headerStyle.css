@@ -73,16 +73,17 @@ header{
 }
 
 .loginBtn>.loginNav{
-    display: none;
+    /*display: none;*/
     border: 1px solid;
     position:absolute;
-    top: 100%;
+    top: 100%;	
     right: 0;
     text-align: center;
     border-radius: 0.5rem;
     overflow: hidden;
     width: 70%;
     margin-top: 0.2rem;
+    z-index: 2;
 }
 
 .loginNav>li>a{

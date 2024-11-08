@@ -18,6 +18,7 @@
     <div id="columnBox">
         <span>번호</span>
         <span>글제목</span>
+        <span>아이디명</span>
         <span>작성자명</span>
         <span>최근 수정일</span>
         <span>삭제여부</span>
@@ -28,6 +29,7 @@
         <span th:text="${loop.count}"></span>
         <span th:if="${#strings.length(community.title) > 27}" th:text="${#strings.substring(community.title, 0, 27) + '...'}"></span>
 		<span th:if="${#strings.length(community.title) <= 27}" th:text="${community.title}"></span>
+        <span th:text="${community.user.id}"></span>
         <span th:text="${community.user.name}"></span>
         <span th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd')}"></span>
         <span  th:text="${community.deleteYn} == n ? 'N' : 'Y'" th:classappend="${community.deleteYn} == y ? 'blueText'"></span>
