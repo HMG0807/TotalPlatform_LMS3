@@ -1,6 +1,9 @@
 package com.example.demo.lms.entity;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,14 +34,17 @@ public class Qna {
 	@Column(name = "delete_yn")
 	private String deleteYn; //삭제여부
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	private Course course;
 	
+	@JsonManagedReference
 	@OneToOne(mappedBy = "qna")
 	private QnaAnswer qnaAnswer;
 }

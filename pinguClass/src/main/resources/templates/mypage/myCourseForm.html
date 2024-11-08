@@ -1,4 +1,3 @@
-
 <html layout:decorate="~{layout/layout}">
 <main layout:fragment="main">
 	<link rel="stylesheet" th:href="@{/mypage/myCourseFormPageStyle.css}">
@@ -14,22 +13,25 @@
             <ul>
 				<li class="courseMngContent">
 					<div class="courseMngTitle">
-						내 강좌 관리 > 강좌 등록
+						<th:block th:text="${courseDTO == null ? '내 강좌 관리 > 강좌 등록' : '내 강좌 관리 > 강좌 수정'}"></th:block>
 					</div>
 					<!-- 내용 부문 -->
 					<div class="courseContainer">
-			            <form name="courseform" th:action="@{/mypage/instructor/courseCreate}" th:object="${courseForm}" enctype="multipart/form-data" method="post">
-			                <!-- 과정 입력 -->
+			            <form name="courseform" th:object="${courseForm}" enctype="multipart/form-data" method="post">
+			            	<!-- 오류 메시지 -->
+			            	<div th:replace="~{user/form_errors :: formErrorsFragment}"></div>
+			            	
+			                <!-- 과정 입력 --> 
 			                <div class="courseImg formText">
-			                    <label for="bannerImg">배너 이미지</label>
-			                    <input type="file" name="bannerImg">
+			                    <label for="mainImg">메인 이미지</label>
+			                    <input type="file" name="mainImg" th:if="${courseDTO == null}">
+			                    <img th:if="${courseDTO != null}" th:src="@{|/files/${courseDTO.file.fileName}|}" style="height: 200px;">
 			                </div>
 			                <div class="courseCategory formText">
 			                    <label for="category">카테고리</label>
 			                    <select class="formStyle" th:field="*{category}">
 			                        <option value="">선택하기</option>
-			                        <option value="한식">한식</option>
-			                        <option value="양식">양식</option>
+			                        <option th:each="category : ${categoryList}" th:text="${category.category}" th:value="${category.category}"></option>
 			                    </select>
 			                </div>
 			                <div class="courseTitle formText">
