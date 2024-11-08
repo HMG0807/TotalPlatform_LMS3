@@ -30,11 +30,11 @@
 							<td th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></td>
 							<td>
 								<div class="btnsDiv">
-									<button>강좌 수정</button>
-									<button>강좌 삭제</button>
-									<button>QnA 내역</button>
+									<button th:onclick="courseModify([[${course.courseId}]])">강좌 수정</button>
+									<button th:onclick="courseDelete([[${course.courseId}]])">강좌 삭제</button>
+									<button th:onclick="courseQnaSelect([[${course.courseId}]], [[${course.qnas}]])">QnA 내역</button>
 									<button>리뷰 보기</button>
-									<button>강의 추가/관리</button>
+									<button th:onclick="lectureMng([[${course.courseId}]])">강의 추가/관리</button>
 								</div>
 							</td>
 						</tr>

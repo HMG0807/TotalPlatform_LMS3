@@ -35,7 +35,7 @@ public class Course {
 	private String objective; //목표
 	private Integer price; //가격
 	@Column(name = "file_id")
-	private Integer fileId; //메인 배너 이미지
+	private Integer fileId; //강좌 메인 이미지
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate; //수정날짜
 	@Column(name = "delete_yn")
@@ -61,6 +61,7 @@ public class Course {
 	@OneToMany(mappedBy = "course")
     private List<Review> reviews; //리뷰 리스트
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "course")
     private List<Qna> qnas; //강좌 QnA 리스트
 	

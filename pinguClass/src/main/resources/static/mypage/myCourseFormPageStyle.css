@@ -1,24 +1,22 @@
-
-main>.mpContainer {
-    padding-left: 10vw;
-    padding-right: 10vw;
-    min-width: 1024px;
+main{
     display: flex;
-    gap: 2rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    flex-direction: column;
+    align-items: center;
 }
 
 
-main>.mpContainer{
+/* mypage mainContent ------------------------------------------------*/
+.myPageContainer{
+    width: var(--pageMinWidth);
+    display: flex;
+    margin-bottom: 5rem ;
+}
+
+.myPageContentContainer{
     width: 80%;
 }
 
-main>.mpContainer>ul {
-    width: 100%;
-    position: relative;
-}
-main>.mpContainer>ul>.courseMngContent{
+main>.myPageContainer>ul>.courseMngContent{
     width: 100%;
     position: absolute;
     top: 0;
@@ -69,9 +67,9 @@ main>.mpContainer>ul>.courseMngContent{
     font-size: 16px;
     color: black;
 }
-.courseContent>label, .courseObjective>label {
+.courseContent>label, .courseObjective>label, .courseImg>label {
 	align-self: flex-start;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 .formStyle {
@@ -96,3 +94,7 @@ main>.mpContainer>ul>.courseMngContent{
     font-size: 16px;
     cursor: pointer;
 }
+
+
+
+
