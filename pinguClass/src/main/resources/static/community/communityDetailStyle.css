@@ -223,7 +223,7 @@ textarea {
 }
 
 #complaintBtn{
-    background-color: #d9bbb8;
+    background-color: #393939;
     color: #fff;
     text-align: center;
     padding: 20px;
@@ -233,11 +233,11 @@ textarea {
 }
 
 
-/*더보기 드롭다운*/
+/*수정 삭제 btn*/
 .option{
 	display: flex;
-	position: absolute;
-	right: 3%;
+    justify-content: flex-end;
+
 }
 .optionDropdown{
 	margin: 0.5rem;
@@ -246,19 +246,10 @@ textarea {
     background-color:#ededed;
     width: 80px;
     z-index: 10;
-    position: relative;
-    left: 0%;
     text-align: center;
      
 }
 
-.option>.optionDropdown:nth-child(1):hover{
-     background-color: darkgrey;
-}
-
-.option>.optionDropdown:nth-child(2):hover{
-      background-color: darkgrey;
-}
 
 
 /*댓글 수정, 삭제 버튼*/

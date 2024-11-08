@@ -17,7 +17,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	public User getUser(String id) throws Exception {
+	public User getUser(Integer id) throws Exception {
 
 		Optional<User> user = this.userRepository.findById(id);
 
@@ -68,17 +68,8 @@ public class UserService {
 		return user;
 		
 	}
-	
-//  ID값으로 해당되는 유저를 찾는 메서드
-//	public User getUserId(String id) throws UserException {
-//		Optional<User> userId = this.userRepository.findById(id);
-//		if(userId.isPresent()) {
-//			return userId.get();
-//		}
-//		else {
-//			throw new UserException("해당 유저가 존재하지 않습니다");
-//		}
-//	}
+
+
 	
 
 	

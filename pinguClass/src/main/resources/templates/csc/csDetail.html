@@ -1,79 +1,69 @@
 <html layout:decorate="~{layout/layout}">
 	<main layout:fragment="main">
-    	<link rel="stylesheet" th:href="@{/csc/csPageStyle.css}">
+    	<link rel="stylesheet" th:href="@{/csc/csDetailStyle.css}">
     	<div class="csContentContainer">
             <div class="csSideNav">
                 <ul>
                     <li>
-                    	<a th:href="@{/csc}">1:1문의</a>
+                    	<a th:href="@{/csc/list}">1:1문의</a>
                     </li>
                     <li>
                     	<a th:href="@{/notice}">공지사항</a>
                     </li>
                 </ul>
             </div>
-            
-            <table> <!--boxShadow 안 먹음-->
-            	<tr th:each="csDetail : ${csQuestion}">
-                	<th th:text="${csQuestion.title}"></th>
-                </tr>
-                <tr>
-                    <td th:text="${csQuestion.content}"></td >
-                </tr>
-             </table>
-             <div class="pageBtn" th:if="${page2.totalPage} > 1">
-                   <ul>
-                        <li th:classappend="${page2.pageNo == 1} ? 'disabled'">
-                            <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
-                        </li>
-                        <li>
-                            <a class="page-link" href="javascript:void(0)" th:if="${page2.pageNo > 1}"
-                                th:data-page="${page2.pageNo - 1}">이전</a>
-                        </li>
-                        <li th:each="num : ${#numbers.sequence(page2.startPage, page2.endPage)}"
-                            th:classappend="${page2.pageNo == num} ? 'active'">
-                            <a class="page-link" href="javascript:void(0)" th:text="${num}"
-                                th:data-page="${num}"></a>
-                        </li>
-                        <li>
-                            <a class="page-link" href="javascript:void(0)" th:if="${page2.pageNo < page2.totalPage}"
-                                    th:data-page="${page2.pageNo + 1}">다음</a>
-                        </li>
-                        <li th:classappend="${page2.pageNo == page2.totalPage} ? 'disabled'">
-                            <a class="page-link" href="javascript:void(0)"
-                                th:data-page="${page2.totalPage}">마지막으로</a>
-                        </li>
-                    </ul>
-               </div>
-			<!-- 전체 display: flex라서 테이블로 만듦
-    		<h2 class="border-bottom py-2" th:text="${notice.title}"></h2>
-    		<div class="card my-3">
-        		<div class="card-body">
-            		<div class="card-text" style="white-space: pre-line;" th:text="${notice.content}"></div>
-            		<div class="d-flex justify-content-end">
-            		-->
-                		<!--
-                		<div class="badge bg-light text-dark p-2 text-start">
-                    		<div class="mb-2">
-                    			<span th:if="${notice.user != null}" th:text="${notice.user.name}"></span>
-                			</div>
-                    		<div th:text="${#temporals.format(notice.lastUpdate, 'yyyy-MM-dd')}"></div>
+             
+             
+			<div class="csContainer">
+				<h2 class="border-bottom py-2" th:text="${csDetail.title}"></h2>
+    			<div class="card my-3">
+        			<div class="card-body">
+        				<div class="card-text">
+        					<div class="content" th:text="${csDetail.content}"></div >
+    						<div class="d-flex justify-content-end">
+       							 <div class="d-flex">
+            						<div class="optionBtn">
+                						<a th:href="@{|/csc/modify/${csDetail.questionId}|}">수정</a>
+            						</div>
+            						<div class="optionBtn">
+                						<a th:data-uri="@{|/css/delete/${csDetail.questionId}|}"th:href="@{|/csc/delete/${csDetail.questionId}|}">삭제</a>
+            						</div>
+        						</div>
+        						<div class="badge bg-light text-dark p-2 text-start">
+            						<div class="mb-2">
+                						<span th:if="${csDetail.user != null}" th:text="${csDetail.user.name}"></span>
+            						</div>
+            						<div th:text="${#temporals.format(csDetail.lastUpdate, 'yyyy-MM-dd')}"></div>
+        						</div>
+        					</div>
+						</div>
+        			</div>
+    			</div>
+    			<!-- 관리자 답변 있을경우만 표시 ******************************-->
+    			<div class="csAnswer" th:if="${csDetail.csAnswer != null}">
+    				<div class="csAnswerTitle" th:text="${csDetail.csAnswer.title}"></div>
+            		<div class="card my-3 answer">
+                		<div class="card-body">
+                    		<div class="card-content " style="white-space: pre-line;">
+                        		<div th:text="${csDetail.csAnswer.content}"></div>
+                    		</div>
+                    		<div class="d-flex justify-content-end">
+                        		<div class="badge bg-light text-dark p-2 text-start">
+                            		<div th:text="${#temporals.format(csDetail.csAnswer.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div>
+                        		</div>
+                    		</div>
                 		</div>
-                		
             		</div>
-        		</div>
-    		</div>
-    		-->
-
-			<form th:action="@{/csc}" method="get" id="searchForm">
-            	<input type="hidden" id="page1" name="page1" th:value="${page.pageNo}" />
-            	<input type="hidden" id="page2" name="page2" th:value="${page2.pageNo}" />
-            	<input type="hidden" id="pageType" name="pageType" th:value="${activePageType}" />
-        	</form>
+    			</div>
+    			<!-- 관리자 답변 -->
+            	
+			</div>
+    		
+    		
 
         </div>
 
-    <script th:src="@{/csc/csDetail.js}"></script>
+    <script th:src="@{/csc/cscDetail.js}"></script>
  	
     </main>
 </html>

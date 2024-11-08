@@ -40,7 +40,7 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value = "SELECT count(*) FROM community WHERE delete_yn = 'n'", nativeQuery = true)
 	int countCommunityAll();
 
-	// [페이징] 해당 페이지에서 보이는 글 범위 지정 _ 이순
+	// [페이징] 현재 페이지에서 보이는 글 범위 지정 _ 이순
 	@Query(value = "SELECT * FROM community where title like %:kw% && delete_yn = 'n' limit :start, :idx", nativeQuery = true)
 	List<Community> findCommunityByLimit(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
 

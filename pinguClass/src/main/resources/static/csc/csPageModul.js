@@ -22,17 +22,16 @@ csSideNavLi.forEach((item,index)=>{
 
 
 const faqNav = document.querySelector(".faqNav");
-const faqNavLi = faqNav.querySelectorAll("li");
 
-const faqCon = document.querySelector(".faqCon");
-const faqConLi = faqCon.querySelectorAll("li");
+/** 페이징 버튼 클릭시 해당 페이지로 이동 **********************************************/
+const page_elements = document.getElementsByClassName("page-link");
+		Array.from(page_elements).forEach(function(element) {
+    		element.addEventListener('click', function() {
+        		document.getElementById('page').value = this.dataset.page;
+        		document.getElementById('pagingForm').submit();
+    			});
+			});
 
-faqNavLi.forEach((item,index )=>{
-    item.addEventListener('click',function(){
-        faqConLi.forEach(con =>{
-            con.classList.remove('on');
-        });
-        faqConLi[index].classList.add('on');
-    });
-});
+
+
 
