@@ -28,8 +28,19 @@ let ApiUrl = "http://192.168.17.254:8080/login"
        alert("로그인에 성공하였습니다.")
        let jwtToken = response.headers.get("Authorization"); 
 	   document.cookie = `jwtToken=${jwtToken};path=/;`
+	   		axios({
+		      url: "http://localhost:8081/JwtCookie/request",
+		      method: "post",
+		      withCredentials: true,
+		      headers : {		  
+			      "Authorization": jwtToken
+			   }
+		      })	
+	   	
+	   	
+	   	
        location.href="/main";
-  
+  		
        console.log(response.data);
       })
       .catch(error => {

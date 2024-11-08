@@ -26,7 +26,7 @@
     <span th:text="${#temporals.format(notice.lastUpdate, 'yyyy-MM-dd')}"></span>
     <span  th:text="${notice.deleteYn} == n ? 'N' : 'Y'" th:classappend="${notice.deleteYn} == y ? 'blueText'"></span>
     <button th:onclick="noticeSelect([[${notice.noticeId}]], [[${#lists.size(notice.content)}]])">조회</button>
-    <button th:onclick="deleteNotice([[${notice.title}]], [[${notice.noticeId}]], [[${notice.deleteYn}]])" th:text="${notice.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${notice.deleteYn} == y ? 'blueText'"></button>
+    <button th:onclick="deleteAnswer([[${notice.title}]], [[${notice.noticeId}]], [[${notice.deleteYn}]])" th:text="${notice.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${notice.deleteYn} == y ? 'blueText'"></button>
     <button th:onclick="noticeModify([[${notice.noticeId}]], [[${#lists.size(notice.content)}]])">수정</button>
 </div>
 

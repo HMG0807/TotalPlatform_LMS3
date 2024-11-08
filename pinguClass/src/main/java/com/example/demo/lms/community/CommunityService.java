@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.lms.entity.Community;
+import com.example.demo.lms.entity.CommunityComment;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.user.UserRepository;
 
@@ -23,6 +24,7 @@ public class CommunityService {
 	
 	private final CommunityRepository communityRepository;
 	private final UserRepository userRepository;
+	private final CommunityCommentRepository communityCommentRepository;
 
 	
 	// 미삭제 커뮤 목록 조회
@@ -119,6 +121,10 @@ public class CommunityService {
         return communityRepository.findByUserAndDeleteYn(user, "N", pageable);
     }
 	
+	
+	
+	
+	
 	/* 유저ID로 커뮤니티 글의 총 갯수 조회 */
 	public int getCommunityCountById(String userId) {
 		
@@ -126,6 +132,9 @@ public class CommunityService {
 		
 		return this.communityRepository.countUserById(user.getUserId());
 	}
+	
+	
+	
 
 	public List<Community> getUserByKeyword(String userId, int startNo, int pageSize) {
 		
@@ -134,6 +143,10 @@ public class CommunityService {
 		return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
 	}
 
+	
+	
+	
+	
 	public void updateCommunity(Integer cmId, String title, String content)
 	throws UserException {
 		
@@ -159,6 +172,20 @@ public class CommunityService {
 
 
 
+
+
+    
+    // 커뮤니티 댓글 조회 메서드 
+    
+    public List<CommunityComment> getCommentsByUser(String userId, int startNo, int pageSize) {
+        User user = this.userRepository.findUserById(userId);
+        return communityCommentRepository.findAllByUserId(user.getUserId(), startNo, pageSize);
+    }
+
+    public List<Community> getCommunityListByUser(String userId, int startNo, int pageSize) {
+        User user = this.userRepository.findUserById(userId);
+        return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
+    }
 	
 			
 	

@@ -14,8 +14,21 @@
             <input type="hidden">
             <!-- subject -->
             <div class="qs-info-subject">
-                <h3>제목</h1>
+                <h3>제목</h1>                   
                 <input type="text" th:field="*{title}" >
+                
+                <div>
+                    <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
+                </div> 
+                 <div class="file_drag">
+                         <div class="file_list_header" style="display: none;">
+                         <div class="file_list_header_task"><button type="button" class="button_svg_delete"><span class="blind">전체 삭제</span></button></div>
+                         <div class="file_list_header_title"><span class="text">파일명</span></div>
+                        <div class="file_list_header_volume"><span class="text">용량</span><span id="fileSize">0</span></div>
+                     </div>
+                    <ul id="fileList"></ul>
+                </div>
+
             </div>
             <!-- subject end -->
 
@@ -31,5 +44,6 @@
     
     </div> 
 
+    <script th:src="@{/admin/adminRegistNotice.js}"></script>   
 </body>
 </html>
