@@ -1,0 +1,38 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">QnA 등록하기</h2>
+            
+           <form th:action="@{/mypage/qna/save}" th:object="${qna}" method="post">
+    <div>
+        <label for="title">제목:</label>
+        <input type="text" id="title" th:field="*{title}" required>
+    </div>
+    <div>
+        <label for="content">내용:</label>
+        <textarea id="content" th:field="*{content}" rows="5" required></textarea>
+    </div>
+    <div>
+        <label for="course">강좌 선택:</label>
+        <select id="course" name="courseId" required>
+            <option value="">강좌를 선택하세요</option>
+            <option th:each="course : ${courses}" th:value="${course.courseId}" th:text="${course.title}"></option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">등록</button>
+        <a href="/mypage/qna">
+            <button type="button">목록으로 돌아가기</button>
+        </a>
+    </div>
+</form>
+              
+        </div>
+    </div>
+</main>
+</html>

@@ -1,0 +1,31 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/courseQna/userCouserQnaEdit.css}">
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">QnA 수정</h2>
+
+            <form th:action="@{/mypage/qna/edit/{qnaId}(qnaId=${qna.qnaId})}" method="post">
+                <div>
+                    <label for="title">제목:</label>
+                    <input type="text" id="title" name="title" th:value="${qna.title}" required>
+                </div>
+                <div>
+                    <label for="content">내용:</label>
+                    <textarea id="content" name="content" rows="5" required th:text="${qna.content}"></textarea>
+                </div>
+                <div>
+                    <button type="submit">수정 완료</button>
+                    <a th:href="@{/mypage/qna/{qnaId}(qnaId=${qna.qnaId})}">
+                        <button type="button">취소</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</html>

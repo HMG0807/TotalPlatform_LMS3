@@ -1,75 +1,136 @@
-
 <html layout:decorate="~{layout/layout}">
 <main layout:fragment="main">
-	<link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
-	
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+    
     <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
-	
+    
     <div class="myPageContainer">
-    	<!-- 서브 네비바 영역 -->
+        <!-- 서브 네비바 영역 -->
         <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
         
         <div class="myPageContentContainer">
             <!-- 컨텐트 영역 -->
             <ul>
-				<li class="courseMngContent">
-					<div class="courseMngTitle">
-						내 강좌 관리
-						<button class="courseCreateBtn" onclick="location.href='/mypage/instructor/courseCreate'">강좌 등록</button>
-					</div>
-					<table class="courseMngInfo">
-						<tr>
-							<th>번호</th>
-							<th>강좌명</th>
-							<th>개설일</th>
-							<th>기타</th>
-						</tr>
-						<tr th:each="course, loop : ${courseList}">
-							<td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">1</td>
-							<td th:text="${course.title}"></td>
-							<td th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></td>
-							<td>
-								<div class="btnsDiv">
-									<button>강좌 수정</button>
-									<button>강좌 삭제</button>
-									<button>QnA 내역</button>
-									<button>리뷰 보기</button>
-									<button>강의 추가/관리</button>
-								</div>
-							</td>
-						</tr>
-					</table>
-					
-					<!-- page 데이터 넘기기 -->
-				    <form th:action="@{/mypage/instructor/myCourseList}" method="get" id="searchForm">
-				        <input type="hidden" id="page" name="page">
-				    </form>
-					
-					<!-- 페이징 버튼 -->
-					<div id="pageBtn" th:if="${page.totalPage} > 1">
-						<ul>
-							<li th:classappend="${page.pageNo == 1} ? 'disabled'">
-								<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
-							</li>
-							<li>
-								<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
-							</li>
-							<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
-								<a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
-							</li>
-							<li>
-								<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
-							</li>
-							<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
-								<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
-							</li>
-						</ul>
-					</div>
-					
-				</li>
-			</ul>
+                <!-- 작성 글 섹션 -->
+                <li class="courseMngContent">
+                    <div class="courseMngTitle">
+                        작성 글 목록
+                    </div>
+                    <table class="courseMngInfo">
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>내용 미리보기</th>
+                            <th>작성일</th>
+                        </tr>
+                        <!-- 작성 글 목록 반복 출력 -->
+                        <tr th:each="community, loop : ${communityList}">
+                            <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">1</td>
+                            <td th:text="${community.title}"></td>
+                            <td th:text="${community.content}"></td>
+                            <td th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd')}"></td>
+                        </tr>
+                    </table>
+
+                    <!-- page 데이터 넘기기 -->
+                    <form th:action="@{/mypage/community}" method="get" id="searchForm">
+                        <input type="hidden" id="page" name="page">
+                    </form>
+
+                    <!-- 페이징 버튼 -->
+                    <div id="pageBtn" th:if="${page.totalPage} > 1">
+                        <ul>
+                            <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+                            </li>
+                            <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+                                <a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo<page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+                            </li>
+                            <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+
+                <!-- 작성 댓글 섹션 -->
+                <li class="courseMngContent">
+                    <div class="courseMngTitle">
+                        작성 댓글 목록
+                    </div>
+                    <table class="courseMngInfo">
+                        <tr>
+                            <th>번호</th>
+                            <th>게시글 제목</th>
+                            <th>댓글 내용</th>
+                            <th>작성일</th>
+                        </tr>
+
+                        <!-- 작성 댓글 목록 반복 출력 -->
+                        <tr th:each="comment, loop : ${commentList}">
+                            <!-- 댓글 번호 -->
+                            <td th:text="${loop.count + ((commentPage.pageNo-1) * commentPage.pageSize)}">1</td>
+
+                            <!-- 댓글이 달린 게시글 제목 (cm_id로 게시글 정보 조회 가능) -->
+                            <!-- 게시글 제목을 클릭하면 해당 게시글로 이동 -->
+                            <td><a th:href="@{/mypage/community/{cmId}(cmId=${comment.cmId})}" 
+                                   th:text="'게시글 ID ' + ${comment.cmId}"></a></td>
+
+                            <!-- 댓글 내용 -->
+                            <td th:text="${comment.content}"></td>
+
+                            <!-- 댓글 작성일 -->
+                            <td th:text="${#temporals.format(comment.lastUpdate, 'yyyy-MM-dd HH:mm')}"></td>
+
+                        </tr>
+
+                    </table>
+
+                    <!-- page 데이터 넘기기 -->
+                    <form th:action="@{/mypage/community}" method="get" id="searchFormComment">
+                        <input type="hidden" id="commentPage" name="commentPage">
+                    </form>
+
+                    <!-- 페이징 버튼 (댓글용) -->
+                    <div id="commentPageBtn" th:if="${commentPage.totalPage} > 1">
+                        <ul>
+                            <li th:classappend="${commentPage.pageNo == 1} ? 'disabled'">
+                                <a class="page-link" href="?commentPage=1">처음으로</a>
+                            </li>
+                            <li><a class="page-link" href="?commentPage=${commentPage.pageNo-1}" 
+                                   th:if="${commentPage.pageNo > 1}">이전</a></li>
+
+                            <!-- 페이지 번호 출력 -->
+                            <li th:each="num : ${#numbers.sequence(commentPage.startPage, commentPage.endPage)}"
+                                th:classappend="${commentPage.pageNo == num} ? 'active'">
+                                <a class="page-link" href="?commentPage=${num}" 
+                                   th:text="${num}"></a></li>
+
+                            <!-- 다음 페이지 이동 버튼 -->
+                            <li><a class="page-link" href="?commentPage=${commentPage.pageNo+1}"
+                                   th:if="${commentPage.pageNo<commentPage.totalPage}">다음</a></li>
+
+                            <!-- 마지막 페이지 이동 버튼 -->
+                            <li><a class="page-link" href="?commentPage=${commentPage.totalPage}"
+                                   th:data-page="${commentPage.totalPage}" 
+                                   th:classappend="${commentPage.pageNo == commentPage.totalPage} ? 'disabled'">마지막으로</a></li>
+
+                        </ul>
+                    </div>
+
+                </li>
+
+            </ul>
+
         </div>
-    </div>
-	<script th:src="@{/mypage/myCourseMngPageModul.js}"></script>
-</main>
-</html>
+
+    </div> 
+</main> 
+</html> 
