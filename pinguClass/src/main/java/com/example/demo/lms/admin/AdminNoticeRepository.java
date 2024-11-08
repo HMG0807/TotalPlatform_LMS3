@@ -15,6 +15,14 @@ public interface AdminNoticeRepository extends JpaRepository<Notice, Integer> {
 	
 	@Query(value = "SELECT count(*) FROM notice" , nativeQuery = true)
 	int countNoticeByKeyword();
+
+	/* 관리자 기본키로 공지사항 조회 */
+	@Query(value = "SELECT count(*) FROM notice" , nativeQuery = true)
+	int countNoticeAll();
+
+	// 페이징
+	@Query(value = "SELECT * FROM notice limit :start, :idx", nativeQuery = true)
+	List<Notice> findNoticeByAdminId(@Param("start") int startNo, @Param("idx") int pageSize);
 	
 	
 	

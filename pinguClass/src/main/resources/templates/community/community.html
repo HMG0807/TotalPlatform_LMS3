@@ -7,197 +7,75 @@
                 <p>커뮤니티</p>
                 <ul>
                     <li><a href="#">자유게시판</a></li>
-                    <li><a href="#">질문 / 답변</a></li>
-                    <li><a href="#">고민 나누기</a></li>
                 </ul>
             </div>
             <div class="csCon">
                 <ul>
                     <li class="maintap faq on">
                         <div class="csConTitle">
-                            <p>자유게시판</p>
+                            <p>자유게시판</p> <!--form 추가-->
                             <div class="cummunitysearchContainer">
                                 <input type="text" placeholder="내용을 입력해주세요">
                                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </div>
-                        <div class="selectOption">
-                            <p>추천순</p>
-                            <p>인기순</p>
+                        <div class="createbtn">
+                        	<a th:href="@{/community/create}">질문 작성</a>
                         </div>
+                        <!--목록-->
                         <table>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
+                        	<tr>
+                        		<th>번호</th>
+                        		<th>제목</th>
+                        		<th>작성자</th>
+                        		<th>날짜</th>
+                        	</tr>
+                            <tr th:each="communityList : ${communityList}">
+                                <td th:text="${communityList.cmId}"></td >
+                                <td>
+                                	<a th:href="@{|/community/detail/${communityList.cmId}|}" th:text="${communityList.title}"></a>
+								</td>
+                                <td>
+                                	<span th:if="${communityList.user != null}" th:text="${communityList.user.name}"></span>
+                                </td>
+                                <td th:text="${#temporals.format(communityList.lastUpdate,'yyyy-MM-dd')}"></td>
                             </tr>
                         </table>
-                    </li>
-                    <li class="maintap mention">
-                        <div class="csConTitle">
-                            <p>질문 / 답변</p>
-                            
-                            <div class="cummunitysearchContainer">
-                                <input type="text" placeholder="내용을 입력해주세요">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
-                        <div class="selectOption">
-                            <p>추천순</p>
-                            <p>인기순</p>
-                        </div>
-                        <table>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                        </table>
-                    </li>
-                    <li class="maintap mention">
-                        <div class="csConTitle">
-                            <p>고민 나누기</p>
-                            <div class="cummunitysearchContainer">
-                                <input type="text" placeholder="내용을 입력해주세요">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
-                        <div class="selectOption">
-                            <p>추천순</p>
-                            <p>인기순</p>
-                        </div>
-                        <table>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                            <tr>
-                                <td>Q</td>
-                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores dicta possimus saepe ipsa nulla, consectetur quasi impedit, vel sunt aperiam non tempora ipsam minima! Quia enim excepturi a accusamus ratione!</td>
-                                <td>2024.10.01</td>
-                            </tr>
-                        </table>
+                        <!--페이징 버튼-->
+                        <div class="pageBtn" th:if="${paging.totalPage} > 1">
+                        	<ul>
+                            	<div>
+                                	<a  th:if="${paging.pageNo != 1}" class="page-link" href="javascript:void(0)" th:data-page="1"> 처음 </a>
+                            	</div>
+                            	<div>
+                                	<a a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo>1}"
+                                	 th:data-page="${paging.pageNo-1}"> 이전 </a>
+                            	</div>
+                            	<div th:each="num : ${#numbers.sequence(paging.startPage,paging.endPage)}"
+                                	th:classappend="${paging.pageNo == num} ? 'active'">
+                                	<a class="page-link" href="javascript:void(0)"} th:text="${num}" th:data-page="${num}"></a>
+                            	</div>
+                            	<div>
+                                	<a a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo < paging.totalPage}" 
+                                	th:data-page="${paging.pageNo+1}"> 다음 </a>
+                            	</div>
+                            	<div>
+                                	<a class="page-link" th:if="${paging.pageNo != paging.totalPage}" href="javascript:void(0)" th:data-page="${paging.totalPage}"
+                                	> 마지막으로 </a>
+                            	</div>
+                        	</ul>
+                       </div>
+
                     </li>
                 </ul>
 
             </div>
         </div>
+        
+        <!--페이징 form-->
+        <form th:action="@{/community/list}" method="get" id="pagingForm"> <!--전체 검색창-->
+            <input type="hidden" id="page" name="page">
+        </form>
 
 
 		<script th:src="@{/community/communityModul.js}"></script>

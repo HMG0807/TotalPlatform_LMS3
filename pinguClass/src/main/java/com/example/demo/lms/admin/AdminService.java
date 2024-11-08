@@ -373,7 +373,19 @@ public class AdminService {
 		answer.setDeleteYn(singnoutVal);
 		
 		this.adminCsAnswerRepository.save(answer);
-	}	
+	}
+
+	public int getQuestionCountByAll(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public List<CsQuestion> getUserByKeyword(int i, int startNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 

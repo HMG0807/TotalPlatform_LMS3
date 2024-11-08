@@ -1,0 +1,58 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.csContentContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+}
+
+.csSideNav {
+    width: 20%;
+}
+
+
+.csSideNav>ul {
+    padding-right: 3rem;
+}
+
+.csSideNav>ul>li>a {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: 900;
+    border-top: 1px solid var(--boxShadow);
+}
+
+.csSideNav>ul>li:last-child>a {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+/*공지사항 제목 내용*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table tr th{
+	 text-align: left;
+	 font-size: 30px;
+	 font-weight: 900;
+}
+
+table tr {
+    border-top: 1px solid var(--boxShadow);
+}
+
+table tr:last-child {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+table tr td {
+    padding: 3rem 1rem;
+}
+
+
+
+

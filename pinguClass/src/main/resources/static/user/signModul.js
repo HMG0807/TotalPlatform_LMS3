@@ -54,7 +54,7 @@ nBtns.addEventListener("click", function(e){
 	
 	const test = AlertCheckbox();
 	if(test != false){ //약관동의 했을 때만 submit
-		document.signform.submit();
+		document.userForm.submit();
 	}
 })
 
