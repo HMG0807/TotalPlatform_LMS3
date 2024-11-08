@@ -75,6 +75,11 @@ public class MypageController {
 	}
 
 	
+	@GetMapping("/mypage")
+	public String mypageTest() {
+		
+		return "mypage/myPage";
+	}
 	
 	
 	
