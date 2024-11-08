@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.example.demo.lms.entity.Community;
+import com.example.demo.lms.entity.CommunityComment;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.user.UserRepository;
 
@@ -22,6 +23,7 @@ public class CommunityService {
 	
 	private final CommunityRepository communityRepository;
 	private final UserRepository userRepository;
+	private final CommunityCommentRepository communityCommentRepository;
 
 	public List<Community> getList() {
 		// TODO Auto-generated method stub
@@ -77,6 +79,10 @@ public class CommunityService {
         return communityRepository.findByUserAndDeleteYn(user, "N", pageable);
     }
 	
+	
+	
+	
+	
 	/* 유저ID로 커뮤니티 글의 총 갯수 조회 */
 	public int getCommunityCountById(String userId) {
 		
@@ -84,6 +90,9 @@ public class CommunityService {
 		
 		return this.communityRepository.countUserById(user.getUserId());
 	}
+	
+	
+	
 
 	public List<Community> getUserByKeyword(String userId, int startNo, int pageSize) {
 		
@@ -92,6 +101,10 @@ public class CommunityService {
 		return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
 	}
 
+	
+	
+	
+	
 	public void updateCommunity(Integer cmId, String title, String content)
 	throws UserException {
 		
@@ -105,8 +118,29 @@ public class CommunityService {
 	}
 
 
-		
+	// 커뮤니티 글 삭제 메서드
+    public void deleteCommunity(Integer cmId) throws UserException {
+        // 해당 커뮤니티 글을 찾고, 없으면 예외 발생
+        Community community = communityRepository.findById(cmId)
+                .orElseThrow(() -> new UserException("Community post not found"));
 
+        // 삭제
+        communityRepository.delete(community);
+    }
+
+
+    
+    // 커뮤니티 댓글 조회 메서드 
+    
+    public List<CommunityComment> getCommentsByUser(String userId, int startNo, int pageSize) {
+        User user = this.userRepository.findUserById(userId);
+        return communityCommentRepository.findAllByUserId(user.getUserId(), startNo, pageSize);
+    }
+
+    public List<Community> getCommunityListByUser(String userId, int startNo, int pageSize) {
+        User user = this.userRepository.findUserById(userId);
+        return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
+    }
 	
 		
 		

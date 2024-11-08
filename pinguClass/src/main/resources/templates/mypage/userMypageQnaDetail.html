@@ -1,0 +1,82 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">QnA 상세</h2>
+
+            <!-- QnA 정보 표시 -->
+            <div>
+                <!-- 제목 및 내용 표시 -->
+                <p><strong>제목:</strong> 
+                   <span id="titleDisplay" th:text="${qna.title}"></span>
+                   <input type="text" id="titleInput" name="title" th:value="${qna.title}" style="display:none;">
+                </p>
+                <p><strong>내용:</strong> 
+                   <span id="contentDisplay" th:text="${qna.content}"></span>
+                   <textarea id="contentInput" name="content" rows="5" style="display:none;">[[${qna.content}]]</textarea>
+                </p>
+                <p><strong>작성일:</strong> 
+                   <span th:text="${#temporals.format(qna.lastUpdate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+            </div>
+
+            <!-- 수정 및 삭제 버튼 -->
+            <div>
+                <!-- 수정 버튼 클릭 시 입력 필드가 나타남 -->
+                <a th:href="@{/mypage/qna/edit/{qnaId}(qnaId=${qna.qnaId})}">
+                    <button id="editBtn">수정</button>
+                </a>
+
+                <!-- 삭제 버튼 -->
+                <form th:action="@{|/mypage/qna/delete/${qna.qnaId}|}" method="post" style="display:inline;">
+                    <button type="submit">삭제</button>
+                </form>
+            </div>
+
+            <!-- 목록으로 돌아가기 -->
+            <a href="/mypage/qna"><button>목록으로 돌아가기</button></a>
+
+            <!-- 답변 목록 표시 -->
+           <div>
+    <h3>답변 목록</h3>
+    
+    <!-- 답변이 있는 경우 -->
+    <div th:if="${qnaAnswers != null && qnaAnswers.size() > 0}">
+        <ul>
+            <li th:each="answer : ${qnaAnswers}">
+                <!-- 답변 제목 및 내용 -->
+                <p><strong>답변 제목:</strong> 
+                   <span th:text="${answer.title}"></span></p>
+                <p><strong>답변 내용:</strong> 
+                   <span th:text="${answer.content}"></span></p>
+                <!-- 답변 작성일 -->
+                <p><strong>작성일:</strong> 
+                   <span th:text="${#temporals.format(answer.lastUpdate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <!-- 강사 정보 -->
+                <p><strong>강사 이름:</strong> 
+                   <span th:text="${answer.instructor.user.name}"></span></p>
+
+            
+
+               
+            </li>
+        </ul>
+    </div>
+
+    <!-- 답변이 없는 경우 -->
+    <div th:if="${qnaAnswers == null || qnaAnswers.isEmpty()}">
+        <p>아직 답변이 없습니다.</p>
+    </div>
+</div>
+           
+        </div>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script th:src="@{/mypage/userMypageqnaDetailScript.js}"></script>
+
+</main>
+</html>
