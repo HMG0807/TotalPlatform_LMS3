@@ -69,12 +69,7 @@ public class MyCourseMngController {
 		return "redirect:/mypage/instructor/myCourseList";
 	}
 	
-	@GetMapping("/mypage")
-	public String mypageTest() {
-		
-		return "mypage/myPage";
-	}
-	
+
 }
 
 
