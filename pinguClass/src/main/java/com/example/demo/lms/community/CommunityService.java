@@ -171,6 +171,14 @@ public class CommunityService {
 	
 
 
+	// 커뮤니티 글 삭제 메서드
+    public void deleteCommunity(Integer cmId) throws UserException {
+        // 해당 커뮤니티 글을 찾고, 없으면 예외 발생
+        Community community = communityRepository.findById(cmId)
+                .orElseThrow(() -> new UserException("Community post not found"));
+        // 삭제
+        communityRepository.delete(community);
+    }
 
 
 
