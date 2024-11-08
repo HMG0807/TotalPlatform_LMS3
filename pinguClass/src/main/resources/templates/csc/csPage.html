@@ -1,130 +1,55 @@
 <html layout:decorate="~{layout/layout}">
 	<main layout:fragment="main">
     	<link rel="stylesheet" th:href="@{/csc/csPageStyle.css}">
-    	
-        <div class="csContentContainer">
+		<div class="csContentContainer">
             <div class="csSideNav">
                 <ul>
-                    <li><a href="#">1:1 문의</a></li>
-                    <li><a href="#">공지사항</a></li>
+                    <li th:classappend="${activePageType == 'inquiry'} ? 'on'">
+                    	<a th:href="@{/csc}">1:1문의</a>
+                    </li>
+                     <li th:classappend="${activePageType == 'notice'} ? 'on'">
+                     	<a th:href="@{/notice}">공지사항</a>
+                     </li>
                 </ul>
             </div>
             <div class="csCon">
                 <ul>
                     <li class="maintap faq on">
                         <div class="csConTitle">
-                            <p>1:1 문의</p>
+                            <p>FAQ</p>
                         </div>
-                        <ul class="faqNav">
-                            <li><a href="#">이용안내</a></li>
-                            <li><a href="#">결제</a></li>
-                            <li><a href="#">회원정보</a></li>
-                        </ul>
+                        <table>
                         
                         <ul class="faqCon">
                             <li class="on">
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    
-
-                                </table>
-                            </li>
-                            <li>
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                </table>
-                            </li>
-                            <li>
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                </table>
-                            </li>
-                        </ul>
-
+                                
+                            <tr>
+                            	<th>번호</th>
+                            	<th>제목</th>
+                            	<th>작성자</th>
+                            	<th>작성일</th>
+                        	</tr>
+                            <tr th:each="csQuestion : ${csQuestion}">
+                            <!--
+                                <td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
+                                -->
+                                <td th:text="${csQuestion.questionId}"></td>
+                                <td><a th:href="@{|/csc/detail/${id}|}" th:text="${csQuestion.title}"></a></td>
+                                <td th:text="${csQuestion.user.name}">관리자</td>
+                                <td th:text="${#temporals.format(csQuestion.lastUpdate, 'yyyy-MM-dd')}"></td>
+                            </tr>
+                        </table>
                     </li>
+                           
+                </ul>
+               
+                    
                     <li class="maintap mention">
                         <div class="csConTitle">
                             <p>공지사항</p>
                         </div>
                         <table>
-                            <tr>
+                        	<tr>
                                 <td>Q</td>
                                 <td>공지사항을 안내드립니다</td>
                                 <td>2024.10.01</td>
@@ -146,10 +71,16 @@
                             </tr>
                         </table>
                     </li>
+                    
                 </ul>
+
             </div>
         </div>
-        
-		<script th:src="@{/csc/csPageModul.js}"></script>
+
+    	
+    	<script th:src="@{/csc/csPageModul.js}"></script>
     </main>
+
+   
+	
 </html>

@@ -26,8 +26,8 @@
                             <i class="fa-regular fa-user"></i>
                         </a>
                         <ul class="loginNav">
-                            <li><a href="#">로그인</a></li>
-                            <li><a href="#">회원가입</a></li>
+                            <li><a th:href="@{user/login}">로그인</a></li>
+                            <li><a href="http://192.168.17.254:8080/signup">회원가입</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -38,7 +38,7 @@
                 <a><i class="fa-solid fa-bars"></i><span>Category</span></a>
             </div>
             <ul class="headerNav">
-                <li><a href="#">커뮤니티</a></li>
+                <li><a th:href="@{/community/list}">커뮤니티</a></li>
             </ul>
         </div>
     </header>

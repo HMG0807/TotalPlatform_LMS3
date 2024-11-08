@@ -1,8 +1,11 @@
 package com.example.demo.lms.user;
 
+import java.util.Collections;
+
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -14,6 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +36,8 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests(
 				(authorizeHttpRequests) -> authorizeHttpRequests
-			  .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+			  .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+			  .requestMatchers(HttpMethod.OPTIONS, "/**/*").permitAll())
         .headers((headers) -> headers
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
                     XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
@@ -39,8 +47,22 @@ public class SecurityConfig {
         .logout((logout) -> logout
         		.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
         		.logoutSuccessUrl("/main")
-        		.invalidateHttpSession(true))
-		;
+        		.invalidateHttpSession(true));
+		
+		http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                CorsConfiguration config = new CorsConfiguration();
+                config.setAllowedOrigins(Collections.singletonList("http://192.168.17.254:8080"));
+                config.setAllowedMethods(Collections.singletonList("*"));
+                config.setAllowCredentials(true);
+                config.setAllowedHeaders(Collections.singletonList("*"));
+                config.setExposedHeaders(Collections.singletonList("Authorization, Authorization-refresh"));
+                config.setMaxAge(3600L);
+                return config;
+            }
+        }));
+		
 		return http.build();
 	}
 	

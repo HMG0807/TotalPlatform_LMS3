@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class EzenPaging {
+	
 	private int pageNo; //현재 페이지 번호
 	private int pageSize; // 한페이지당 보여지는 글의 갯수
 	private int totalCount; // 총 데이터 갯수

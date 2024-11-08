@@ -1,0 +1,47 @@
+
+
+.contentTitle {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.inputGroup {
+    margin-bottom: 15px;
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.inputGroup input[type="text"], .inputGroup textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.buttonGroup {
+    margin-top: 20px;
+}
+
+.buttonGroup button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttonGroup button:hover {
+    background-color: #45a049;
+}
+
+.buttonGroup a {
+    text-decoration: none;
+}

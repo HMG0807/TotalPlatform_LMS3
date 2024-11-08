@@ -21,7 +21,7 @@ public class AuthuserService {
     	
     	
     	Mono<ResponseEntity<String>> response = webClient
-                .get()
+                .post()
                 .uri(uriBuilder -> uriBuilder.path("/test")
                         .build())
                 .header("Authorization", "Bearer "+jwtToken)

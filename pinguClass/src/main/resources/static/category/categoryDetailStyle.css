@@ -1,0 +1,270 @@
+main {
+    min-width: var(--pageMinWidth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* CATEGORY DETAIL */
+.categoryDetailContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+    align-items: start;
+    padding-top: 2rem;
+}
+
+/* categoryLeft */
+.categoryDetailContainer>.categoryDetailLeft {
+    width: 75%;
+    padding-right: 2rem;
+}
+
+.lecturerCard>.lecturerName {
+    display: flex;
+    align-items: center;
+}
+
+.lecturerCard>.lecturerName>img {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: rgb(211, 211, 211);
+}
+
+.lecturerCard>.lecturerName>p {
+    margin-left: 1rem;
+}
+
+.lecturerText{
+    padding: 1rem 0;
+}
+
+.lecturerText>p{
+    padding-bottom: 0.5rem;
+    font-size: 14px;
+    color: var(--color);
+}
+/* lectureNav */
+.lectureNav{
+    display: flex;
+    position: sticky;
+    top: 123px;
+    background-color: var(--background);
+    z-index: 15;
+}
+.lectureNav>li{
+    padding-right: 4rem;
+}
+.lectureNav>li>a{
+    display: block;
+    padding: 1rem 0 ;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+}
+.lectureNav>li.on>a::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
+    border-bottom: 3px solid ;
+}
+
+
+
+
+/* classIntroduce */
+.classIntroduce{
+    padding-bottom: 1rem;
+}
+.lectureTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.lectureList{
+    outline: 1px solid red;
+
+}
+
+.lectureList > div a> li {
+    outline: 1px solid red;
+    margin: 10px 10px;
+}
+
+/* creater */
+.creater{
+    margin-bottom: 2rem;
+}
+.createrText{
+    padding: 2rem 0;
+}
+
+
+/* section------------------------------------------------------------- */
+.section{
+    width: 100%;
+    padding: 3rem 0;
+}
+
+
+.sectionTitle{
+    display: flex;
+    justify-content: space-between;
+}
+.sectionTitle>p{
+    padding: 1rem 0;
+}
+
+.sectionSlideBtn{
+    display: flex;
+    gap: 0.5rem;
+}
+.sectionSlideBtn> button{
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    border: none;
+    background: var(--background);
+    cursor: pointer;
+}
+
+.sectionSlideBtn> button:disabled>i{
+    color: var(--boxShadow);
+}
+
+
+
+
+.sectionSlideContainer{
+    position: relative;
+    height: 20rem;
+    overflow: hidden;
+}
+
+.sectionSlideContainer>.slides{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.sectionSlideContainer>.slides>.slide{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+
+.sectionSlideContainer>.slides>.slide>li{
+    width: 25%;
+}
+
+
+.sectionSlideContainer>.slides>.slide>li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sectionSlideContainer>.slides>.slide>li>a>.sectionConImg{
+    width: 100%;
+    height: 70%;
+    border-radius: 1rem;
+    background-color: rgb(205, 205, 205);
+    overflow: hidden;
+}
+
+.sectionSlideContainer>.slides>.slide>li>a>.sectionConText{
+    height: 30%;
+    padding: 0.5rem 0;
+}
+
+.sectionSlideContainer>.slides>.slide>li>a>.sectionConText>p{
+    font-weight: 600;
+}
+
+.sectionSlideContainer>.slides>.slide>li>a>.sectionConText>p>span{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--boxShadow);
+}
+
+
+
+
+/* categoryRight */
+.categoryDetailContainer>.categoryDetailRight {
+    width: 25%;
+    position: sticky;
+    top: 200px;
+}
+
+.categoryCart {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.categoryCart>.categoryCartTitle {
+    padding: 1rem 0;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.categoryPrice {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.categoryCart>.categoryPrice>p {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    padding: 0.5rem 0;
+    font-size: 14px;
+}
+
+.originPrice {
+    color: var(--boxShadow);
+}
+
+.originPrice>span {
+    color: var(--boxShadow);
+}
+
+.discount {
+    color: var(--color);
+}
+
+.discount>span>span {
+    color: var(--spanColor);
+}
+
+.paymentContainer {
+    margin-top: 0.5rem;
+    border: 1px solid var(--boxShadow);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.paymentContainer>p {
+    padding: 0.5rem;
+}
+
+.paymentContainer>p:first-child {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+.categoryCart>.buyBtn {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    padding: 1rem 0;
+    border: none;
+    background-color: var(--spanColor);
+    color: var(--background);
+}

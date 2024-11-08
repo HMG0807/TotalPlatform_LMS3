@@ -1,6 +1,7 @@
 package com.example.demo.lms.community;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +14,14 @@ import com.example.demo.lms.entity.User;
 
 public interface CommunityRepository extends JpaRepository<Community, Integer> {
 
+	/* 이순 : 미삭제 커뮤니티 글 조회*/
+	@Query(value = "SELECT * FROM community WHERE delete_yn = n",  nativeQuery = true)
 	List<Community> findAll();
-	Page<Community> findByUser(User user, Pageable pageable);
-
 	
+	// 이순 : 임시로그인 근데 환상적으로 실패
+	//Optional<Community> loginCheck(User user);
+	
+	Page<Community> findByUser(User user, Pageable pageable);
 	
 	
 	/*마이페이지 - 글 삭제하지 않는 글 조회 하는 메서드 - 남동현 */
@@ -27,9 +32,18 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value = "SELECT * FROM community WHERE user_id = :id limit :start, :idx", nativeQuery = true)
 	List<Community> findAllById(@Param("id") Integer userId, @Param("start") int startNo, @Param("idx") int pageSize);
 		
+	
 	@Query(value = "SELECT count(*) FROM community WHERE user_id = :id" , nativeQuery = true)
 	int countUserById(@Param("id") Integer userId);
-	
+
+	/* [페이징] 커뮤니티 글 개수 조회 이순 */
+	@Query(value = "SELECT count(*) FROM community WHERE delete_yn = 'n'", nativeQuery = true)
+	int countCommunityAll();
+
+	// [페이징] 해당 페이지에서 보이는 글 범위 지정 _ 이순
+	@Query(value = "SELECT * FROM community where title like %:kw% && delete_yn = 'n' limit :start, :idx", nativeQuery = true)
+	List<Community> findCommunityByLimit(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
+
 	
 	
 	

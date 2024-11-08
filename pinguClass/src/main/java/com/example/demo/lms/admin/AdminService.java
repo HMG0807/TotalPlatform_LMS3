@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.lms.entity.Admin;
 import com.example.demo.lms.entity.Community;
@@ -14,6 +15,7 @@ import com.example.demo.lms.entity.CsQuestion;
 import com.example.demo.lms.entity.Instructor;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.entity.Notice;
+import com.example.demo.lms.entity.NoticeFile;
 import com.example.demo.lms.entity.Report;
 import com.example.demo.lms.entity.User;
 
@@ -173,23 +175,34 @@ public class AdminService {
 		this.adminLectureRepository.save(lecture);
 	}
 
+	
+	
+	
     /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 글 조회 > 검색어의 총 갯수 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public int getCommunityCountByKeyword(String kwType, String kw) {
-		/*
+		
 		switch(kwType) {
-			case "total": return this.adminCommunuityRepository.countUserByKeyword(kw);
-			case "title": return this.adminCommunuityRepository.countUserById(kw);
-			case "name": return this.adminCommunuityRepository.countUserByName(kw);
+			case "total": return this.adminCommunityRepository.countCommunityByKeyword(kw);
+			case "title": return this.adminCommunityRepository.countCommunityByTitle(kw);
+			case "name": return this.adminCommunityRepository.countCommunityByName(kw);
 		}
-		*/
+		
 		
 		return this.adminCommunityRepository.countCommunityByKeyword(kw);
 	}
+		
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 전체글 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
-	public List<Community> getCommunityByKeyword(String kw, int startNo, int pageSize) {
-		return this.adminCommunityRepository.findCommunityLimitStartIdx(kw, startNo, pageSize);
+	public List<Community> getCommunityByKeyword(String kwType,String kw, int startNo, int pageSize) {
+		switch(kwType) {
+		case "total": return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
+		case "title": return this.adminCommunityRepository.findAllByCommunityTitle(kw, startNo, pageSize);
+		case "name": return this.adminCommunityRepository.findAllByUserName(kw, startNo, pageSize);
+	}
+		
+		
+		return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 	}
 	
 	
@@ -203,20 +216,7 @@ public class AdminService {
 	}	
 	
 
-	
-	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 커뮤니티 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
 
-	public List<Community> getCommunityContentByKeyword(String kwType, String kw, int startNo, int pageSize){
-	
-	switch(kwType) {
-	case "total": return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
-	case "title": return this.adminCommunityRepository.findAllByCommunityTitle(kw, startNo, pageSize);
-	case "name": return this.adminCommunityRepository.findAllByUserName(kw, startNo, pageSize);}
-
-return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
-
-	}
-	
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 작성글 삭제+삭제 해제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public void signoutContent(Integer cmId, String singnoutVal) {
@@ -268,6 +268,7 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 		n.setLastUpdate(LocalDateTime.now());
 		n.setAdmin(admin);
 		n.setDeleteYn("n");
+
 		
 		this.adminNoticeRepository.save(n);
 	}
@@ -281,16 +282,36 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 	}
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	public List<CsQuestion> getCsQuetionByKeyword(int startNo, int pageSize) {
-
-		return this.adminCsQuestionRepository.findCsQuestionLimitStartIdx(startNo, pageSize);}
-
-	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 페이징  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	public int getCsQuestionCountByKeyword() {
+//	public List<CsQuestion> getCsQuetionByKeyword(int startNo, int pageSize) {
+//
+//		return this.adminCsQuestionRepository.findCsQuestionLimitStartIdx(startNo, pageSize);}
+	
+	public List<CsQuestion> getCsQuetionByKeyword(String kwType,String kw, int startNo, int pageSize) {
+		switch(kwType) {
+		case "total": return this.adminCsQuestionRepository.findAllByKeyword(kw, startNo, pageSize);
+		case "title": return this.adminCsQuestionRepository.findAllByQuestionTitle(kw, startNo, pageSize);
+		case "name": return this.adminCsQuestionRepository.findAllByUserName(kw, startNo, pageSize);
+	}
 		
-		return this.adminCsQuestionRepository.countCsQuestionByKeyword();
+		
+		return this.adminCsQuestionRepository.findAllByKeyword(kw, startNo, pageSize);
+	}	
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 문의글 조회 > 검색어의 총 갯수  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+	public int getCsQuestionCountByKeyword(String kwType, String kw) {
+		
+		switch(kwType) {
+			case "total": return this.adminCsQuestionRepository.countQuestionByKeyword(kw);
+			case "title": return this.adminCsQuestionRepository.countQuestionByTitle(kw);
+			case "name": return this.adminCsQuestionRepository.countQuestionByName(kw);
+		}
+		
+		
+		return this.adminCommunityRepository.countCommunityByKeyword(kw);
 	}
 
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1 질문글 보기  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
 	public CsQuestion getQuestion(Integer questionId) {
 
@@ -352,7 +373,19 @@ return this.adminCommunityRepository.findAllByKeyword(kw, startNo, pageSize);
 		answer.setDeleteYn(singnoutVal);
 		
 		this.adminCsAnswerRepository.save(answer);
-	}	
+	}
+
+	public int getQuestionCountByAll(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public List<CsQuestion> getUserByKeyword(int i, int startNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 

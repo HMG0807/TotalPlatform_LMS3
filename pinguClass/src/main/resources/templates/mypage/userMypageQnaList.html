@@ -1,0 +1,89 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+    
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+    
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">내 QnA 관리</h2> 
+            <a href="/mypage/qna/new">
+    			<button>등록하기</button>
+			</a>
+            
+            <!-- QnA 목록 테이블 -->
+            <table class="qnaMngInfo">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                        <th>답변 여부</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- QnA 데이터가 없는 경우 -->
+                    <tr th:if="${#lists.isEmpty(qnaList)}">
+                        <td colspan="4">등록된 QnA가 없습니다.</td>
+                    </tr>
+
+                    <!-- QnA 데이터가 있는 경우 -->
+                    <tr th:each="qna, loop : ${qnaList}">
+                        <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></td>
+                        <td><a th:href="@{/mypage/qna/{qnaId}(qnaId=${qna.qnaId})}" th:text="${qna.title}"></a></td> <!-- 제목 클릭 시 상세 페이지로 이동 -->
+                        <td th:text="${#temporals.format(qna.lastUpdate, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${qna.qnaAnswer != null ? '답변완료' : '답변대기'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+	
+            <!-- 페이징 정보 표시 -->
+            <div th:if="${page.totalPage} > 1">
+                <p>총 [[${page.totalCount}]]개의 항목 중 [[${page.startNo + 1}]]-[[${page.endNo}]]</p>
+
+                <!-- 페이징 버튼 -->
+                <div id="pageBtn">
+                    <ul>
+                        <!-- 처음으로 버튼 -->
+                        <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+                            <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                        </li>
+
+                        <!-- 이전 버튼 -->
+                        <li>
+                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo > 1}" th:data-page="${page.pageNo - 1}">이전</a>
+                        </li>
+
+                        <!-- 페이지 번호 버튼 -->
+                        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+                            <a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
+                        </li>
+
+                        <!-- 다음 버튼 -->
+                        <li>
+                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo + 1}">다음</a>
+                        </li>
+
+                        <!-- 마지막으로 버튼 -->
+                        <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+                            <a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- page 데이터 넘기기 폼 -->
+            <form th:action="@{/mypage/qna}" method="get" id="pageForm">
+                <input type="hidden" id="page" name="page">
+            </form>
+
+        </div> <!-- myPageContentContainer 끝 -->
+    </div> <!-- myPageContainer 끝 -->
+
+    <!-- JavaScript 파일 연결 -->
+    <script th:src="@{/mypage/qnaListModule.js}"></script>
+
+</main>
+</html>

@@ -1,0 +1,245 @@
+<html layout:decorate="~{layout/layout}">
+	<main layout:fragment="main">
+    	<link rel="stylesheet" th:href="@{/category/categoryDetailStyle.css}">
+    	
+        <div class="categoryDetailContainer">
+            <div class="categoryDetailLeft">
+                <div class="lecturerCard">
+                    <div class="lecturerName">
+                        <img src="" alt="">
+                        <p th:text="${course.instructor.user.name}"></p>
+                    </div>
+                    <div class="lecturerText">
+                        <p th:text="'카테고리 : '+${course.category.category}"></p>
+                        <p th:text="'강좌 목표 : '+${course.objective}"></p>
+                        <p th:text="'강의 개수 : '+${#lists.size(course.lectures)} + '개'"></p>
+                    </div>    
+                </div>
+                <ul class="lectureNav">
+                    <li><a href="#">강의 리스트</a></li>
+                    <li><a th:href="@{|/courseQna/${course.courseId}|}">강좌 Q&A</a></li>
+                    <li><a href="#">강좌 리뷰</a></li>
+                </ul>
+
+                <ul class="lecturerContentContainer" >
+                    <li class="classIntroduce">
+                        <div class="lectureTitle">
+                            <p>강의 리스트</p>    
+                        </div><br>
+                        
+                        <div>
+                            <ul class="lectureList">
+                                <div th:each="course : ${courseId} ">
+                                    <a href="">
+                                        <li th:text="${course.lectureOrder} + ${course.lectures.title}"></li>
+                                    </a>    
+                            </div>
+
+                            </ul>
+                        </div>
+
+                    <li class="creater">
+                        <div class="lectureTitle">
+                            <p>크리에이터</p>
+                        </div>
+                        <div class="lecturerCard">
+                            <div class="lecturerName">
+                                <img src="" alt="">
+                                <p>Lecturer Name</p>
+                            </div>
+                            <div class="createrText">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ab autem dolor facilis, ullam necessitatibus. Unde in maxime exercitationem <br><br> earum aliquid harum id mollitia nam! Officia adipisci totam expedita necessitatibus!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita sint necessitatibus impedit, commodi molestias error eaque sit, laudantium veritatis repellendus eos assumenda, aliquam dicta suscipit facilis vero at ab!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="recommand">
+                        <div class="section">
+                            <div class="sectionTitle">
+                                <p>이 클래스와 비슷한 클래스 추천</p>
+                                <div class="sectionSlideBtn">
+                                    <button class="setionSlideLeft"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="setionSlideRight"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="sectionSlideContainer">
+                                <div class="slides">
+                                    <ul class="slide">
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                
+                                    </ul>
+                                    <ul class="slide">
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                
+                                    </ul>
+                                    <ul class="slide">
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="sectionConImg">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="sectionConText">
+                                                    <p>
+                                                        loremloremlorem <br> <span>loremlorem</span>
+                                                    </p>
+                
+                                                </div>
+                                            </a>
+                                        </li>
+                
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div class="categoryDetailRight">
+                <div class="categoryCart">
+                    <div class="categoryCartTitle" th:text="${course.title}">
+                        
+                    </div>
+                    <div class="categoryPrice">
+                        <p class="discount">최대 해택가 <span th:text="${course.price}+' 원'"></span></p>
+                    </div>
+
+                    <button class="buyBtn">구매하기</button>
+                </div>
+            </div>
+        </div>
+
+		<script th:src="@{/category/categoryDetailModul.js}"></script>
+	</main>
+</html>

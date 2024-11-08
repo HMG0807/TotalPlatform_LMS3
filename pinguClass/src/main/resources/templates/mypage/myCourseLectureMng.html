@@ -1,72 +1,64 @@
-
-<main>
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
 	<link rel="stylesheet" th:href="@{/mypage/myCourseLectureMngPageStyle.css}">
 	
-	<div class="mpContainer">
-		<div class="mpSideNav">
-			<div class="mpSideNavTitle">
-				<p>마이페이지</p>
-			</div>
-			<ul>
-				<li class="on">
-					<a href="#">
-						<p>공지사항</p>
-						<i class="fa-solid fa-angle-right"></i>
-					</a>
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+	
+    <div class="myPageContainer">
+    	<!-- 서브 네비바 영역 -->
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <div class="myPageContentContainer">
+            <!-- 컨텐트 영역 -->
+            <ul>
+				<li class="courseMngContent">
+					<div class="courseMngTitle">
+						내 강좌 관리 > 강의 추가/관리
+						<!--<button class="orderByChangeBtn">강의 순서 변경</button>-->
+						<button th:onclick="lectureCreate([[${courseId}]])">강의 추가</button>
+					</div>
+					<table class="courseMngInfo">
+						<tr>
+							<th>번호</th>
+							<th>강의명</th>
+							<th>수정 날짜</th>
+						</tr>
+						<tr th:each="lecture, loop : ${lectureList}">
+							<td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">1</td>
+							<td th:text="${lecture.title}"></td>
+							<td th:text="${#temporals.format(lecture.lastUpdate, 'yyyy-MM-dd')}"></td>
+						</tr>
+					</table>
+					
+					<!-- page 데이터 넘기기 -->
+				    <form th:action="@{|/mypage/instructor/lectureMng/${courseId}|}" method="get" id="searchForm">
+				        <input type="hidden" id="page" name="page">
+				    </form>
+					
+					<!-- 페이징 버튼 -->
+					<div id="pageBtn" th:if="${page.totalPage} > 1">
+						<ul>
+							<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+								<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+							</li>
+							<li>
+								<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+							</li>
+							<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+								<a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
+							</li>
+							<li>
+								<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+							</li>
+							<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+								<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+							</li>
+						</ul>
+					</div>
 				</li>
 			</ul>
-		</div>
-
-		<ul>
-			<li class="courseMngContent">
-				<div class="courseMngTitle">
-					내 강좌 관리 > 강의 추가/관리
-					<button class="orderByChangeBtn">강의 순서 변경</button>
-					<button onclick="location.href='/mypage/instructor/courseCreate'">강의 추가</button>
-				</div>
-				<table class="courseMngInfo">
-					<tr>
-						<th>번호</th>
-						<th>강의명</th>
-						<th>수정 날짜</th>
-					</tr>
-					<tr th:each="course, loop : ${courseList}">
-						<td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}">1</td>
-						<td th:text="${course.title}"></td>
-						<td th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></td>
-					</tr>
-				</table>
-				
-				<!-- page 데이터 넘기기 -->
-			    <form th:action="@{/mypage/instructor/myCourseList}" method="get" id="searchForm">
-			        <input type="hidden" id="page" name="page">
-			    </form>
-				
-				<!-- 페이징 버튼 -->
-				<div id="pageBtn" th:if="${page.totalPage} > 1">
-					<ul>
-						<li th:classappend="${page.pageNo == 1} ? 'disabled'">
-							<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
-						</li>
-						<li>
-							<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
-						</li>
-						<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
-							<a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
-						</li>
-						<li>
-							<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
-						</li>
-						<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
-							<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-		</ul>
-
-	</div>
+        </div>
+    </div>
 	<script th:src="@{/mypage/myCourseLectureMngPageModul.js}"></script>
-
 </main>
-
+</html>

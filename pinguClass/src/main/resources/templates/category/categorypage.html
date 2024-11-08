@@ -1,0 +1,59 @@
+<html layout:decorate="~{layout/layout}">
+	<main layout:fragment="main">
+    	<link rel="stylesheet" th:href="@{/category/categoryStyle.css}">
+    	
+        <div class="categoryContentContainer">
+            <div class="categoryDetailNav">
+                <p class="categoryDetailNavTitle">
+                    나라별 요리
+                </p>
+                <ul>
+                    <li><a th:href="@{/category}">전체</a></li>
+                    <li><a th:href="@{/category/1}">한식</a></li>
+                    <li><a th:href="@{/category/2}">양식</a></li>
+                    <li><a th:href="@{/category/3}">중식</a></li>
+                    <li><a th:href="@{/category/4}">일식</a></li>
+                    <li><a th:href="@{/category/5}">기타</a></li>
+                </ul>
+            </div>
+
+            <div class="categoryContent">
+                <div class="categoryContentTop">
+                    <form action="">
+                        <select name="categorySelect" id="">
+                            <option value="">인기순</option>
+                            <option value="">최신순</option>
+                        </select>
+                    </form>
+                    <form action="">
+                        <select name="categorySelect" id="">
+                            <option value="">구매옵션</option>
+                            <option value="">평생소장</option>
+                            <option value="">대여</option>
+                            <option value="">구독</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="categoryContentDown">
+                    <ul class="categoryCons">
+                        <li class="categoryCon" th:each="course : ${courseList}">
+                            <a th:href="@{|/courseDetail/${course.courseId}|}">
+                                <div class="categoryConImg">
+                                    <img th:src="@{|/files/${course.file.fileName}|}" alt="">                                </div>
+                                <div class="categoryConText">
+                                    <p th:text="'[강좌명] '+${course.title}">
+                                        <br> <span th:text="${course.objective}"></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                   </ul>
+                </div>
+                
+            </div>
+        </div>
+        <script th:src="@{/category/categoryModul.js}"></script>
+	</main>
+</html>
+    
