@@ -1,5 +1,6 @@
 package com.example.demo.lms.mypage;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.lms.Authuser.Authuser;
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.community.CommunityService;
 import com.example.demo.lms.community.UserException;
 
@@ -26,6 +29,7 @@ import com.example.demo.lms.entity.QnaAnswer;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.paging.EzenPaging;
 import com.example.demo.lms.user.UserRepository;
+import com.example.demo.lms.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +41,7 @@ public class MypageController {
 	private final CommunityService communityService;
 	private final UserRepository userRepository;
 	private final QnaService qnaService;
+	private final UserService userService;
 	@GetMapping("/mypage/community")
     public String getMyPageCommunityList(
         @RequestParam(name = "page", defaultValue = "0") int page,  // 페이지 번호, 기본값은 0
@@ -190,12 +195,7 @@ public class MypageController {
 //	
 //	
 	
-	
-	
-	
-	
-		
-	
+
 	// QnA 수정 메서드 
 	@GetMapping("/mypage/qna/edit/{qnaId}")
 	public String editQnaForm(@PathVariable("qnaId") Integer qnaId, Model model) {
@@ -232,15 +232,41 @@ public class MypageController {
 	    return "redirect:/mypage/qna";
 	}
 	
-	
-	
-	
-	
 	// QnA 강사가 댓글을 달면 조회가 가능 . 
 	
 	
 	
+	/////////////////////////////////회원정보, 구독, 쿠폰 관련//////////////////
 	
+	///////회원 정보 수정//////
+	
+	@GetMapping("/mypage/edit")
+	public String editUserInfo() {
+		return "mypage/myPageUserEdit";
+	}
+	
+	@GetMapping("/mypage/edit/password")
+	public String editUserPassword() {
+		return "mypage/myPageEditPassword";
+	}
+	
+	//////////////////구독상황///////////////////
+	
+	@GetMapping("/mypage/subscription")
+	public String mySubscription() {
+		return "mypage/myPageSubscription";
+	}
+	
+	
+	
+	//////////////쿠폰현황///////////////////////////
+	
+	@LoginCheck
+	@GetMapping("/mypage/coupon")
+	public String myCoupon(@Authuser User user, Model model) {
+		model.addAttribute("user", user);
+		return "mypage/myPageCoupon";
+	}
 }
 	
 	
