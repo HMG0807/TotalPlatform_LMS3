@@ -40,7 +40,8 @@
                         <li class="categoryCon" th:each="course : ${courseList}">
                             <a th:href="@{|/courseDetail/${course.courseId}|}">
                                 <div class="categoryConImg">
-                                    <img th:src="@{|/files/${course.file.fileName}|}" alt="">                                </div>
+                                    <img th:src="@{|/files/${course.file.fileName}|}" alt="">                                
+                                </div>
                                 <div class="categoryConText">
                                     <p th:text="'[강좌명] '+${course.title}">
                                         <br> <span th:text="${course.objective}"></span>

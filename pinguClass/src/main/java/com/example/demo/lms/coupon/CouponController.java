@@ -15,9 +15,5 @@ public class CouponController {
 		return "main/coupontest";
 	}
 	
-	@PostMapping("/coupon")
-	public String create() throws Exception {
-		couponService.createCoupon("user3");
-		return "redirect:/coupon";
-	}
+	
 }

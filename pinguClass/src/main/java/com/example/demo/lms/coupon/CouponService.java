@@ -19,9 +19,8 @@ public class CouponService {
 	private final CouponRepository couponRepository;
 	private final UserService userService;
 	
-	public void createCoupon(String id) throws Exception {
+	public void createCoupon(User u, Integer discount) throws Exception {
 		Coupon c = new Coupon();
-		User u = this.userService.getUser("user3");
 		String code = RandomStringUtils.randomAlphabetic(16);
 		
 		while(true) {
@@ -35,7 +34,7 @@ public class CouponService {
 		c.setCode(code);
 		c.setUser(u);
 		c.setCreateDate(LocalDateTime.now());
-		c.setDiscount(3000);
+		c.setDiscount(discount);
 		c.setUseYn("n");
 		
 		couponRepository.save(c);

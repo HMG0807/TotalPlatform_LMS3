@@ -23,15 +23,18 @@
                 <div class="productDetail">
                     <div>
                         <h3>구매상품</h3>
-                        <span>1 개월 구독권</span>
+                        <span th:text="${subscribe.type}"></span>
                     </div>
                     <div>
                         <h3>가격</h3>
-                        <span>5000 원</span> 
+                        <span th:text="${subscribe.price}"></span> 
                     </div>
                     <div>
                         <h3>혜택</h3>
-                        <span>1000 원 * 3 장</span> 
+                        <span  th:if="${subscribe.type == '1개월 구독'}">1,000 원 쿠폰 * 1</span>
+                        <span  th:if="${subscribe.type == '3개월 구독'}">2,000 원 쿠폰 * 2</span>
+                        <span  th:if="${subscribe.type == '6개월 구독'}">3,000 원 쿠폰 * 3</span>
+                        <span  th:if="${subscribe.type == '12개월 구독'}">5,000 원 쿠폰 * 5</span>
                     </div> 
                 </div>
                 

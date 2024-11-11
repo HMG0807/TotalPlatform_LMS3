@@ -1,0 +1,47 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/mySubscriptionStatusStyle.css}">
+
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="contentWrap">
+
+            <div class="subContent">
+
+                <div class="subText">
+                    <h1>사용 중인 이용권</h1>
+                    <div>
+                        * 사용 중인 이용권이 표시됩니다. <br>
+                        * 구독은 아래 버튼을 통해 이용할 수 있습니다
+                    </div>
+                </div>
+
+                <div class="subStatus">
+
+                    <div class="subStatusText" th:if="${subscription==null}">
+                        <h3>사용 중인 이용권이 없습니다.</h3>
+                        핑구클래스 프리미엄 멤버십으로 요식업과 창업 경쟁력을 높이세요! <br>
+                        당신의 성공적인 요식업과 창업을 위한 모든 과정을 전문가가 함께합니다.
+                    </div>
+
+                    <div class="subStatusText" th:if="${subscription!=null}">
+                        <h3 th:text="${subscription.startDate}+'~'+${subscription.endDate}"></h3>
+                        <div>
+                        </div>
+                    </div>
+
+                    <div class="buttonLayout">
+                        <button>멤버십 구독하기</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+</main>
+</html>

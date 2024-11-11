@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* mypage mainContent ------------------------------------------------*/
+.myPageContainer{
+    width: var(--pageMinWidth);
+    display: flex;
+    margin-bottom: 5rem ;
+}
+
+.myPageContentContainer{
+    width: 80%;
+}
+
+main>.myPageContainer>ul>.courseMngContent{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.subContent{
+    border: 1px solid gray;
+    border-radius: 10px;
+    position: relative;
+
+    margin: 0 auto;
+    padding:50px;
+    background-color: white;
+
+}
+
+.subText > *{
+    margin-left: 50px;
+}
+
+.subStatus{
+    margin-top: 50px; 
+}
+
+.subStatusText{
+    border-top: 1px solid gray;
+    margin: 50px;
+    margin-left: 50px;
+}
+
+.subStatusText > * {
+    margin: auto;
+}
+
+.subStatusText > h3{
+    padding-top: 50px;
+}
+
+.buttonLayout{
+    margin-left: 200px;
+}
+
+.buttonLayout >button{
+    background-color:var(--spanColor);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 0px;
+
+}

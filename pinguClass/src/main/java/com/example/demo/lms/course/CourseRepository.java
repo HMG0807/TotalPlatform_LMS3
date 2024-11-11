@@ -15,7 +15,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	List<Course> findByCategoryId(@Param("id") Integer categoryId);
 
 	@Query(value = "SELECT count(*) FROM qna where course_id = :id" , nativeQuery = true)
-	int countCourseByKeyword(@Param("id") Integer courseId);
+	int countQnaByKeyword(@Param("id") Integer courseId);
 
 
 	
