@@ -22,6 +22,7 @@ import com.example.demo.lms.Authuser.Authuser;
 import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.community.CommunityService;
 import com.example.demo.lms.community.UserException;
+import com.example.demo.lms.coupon.CouponService;
 import com.example.demo.lms.course.CourseService;
 import com.example.demo.lms.courseQna.QnaService;
 import com.example.demo.lms.courseReview.courseReviewService;
@@ -40,6 +41,7 @@ import com.example.demo.lms.payment.SubscriptionService;
 import com.example.demo.lms.user.UserRepository;
 import com.example.demo.lms.user.UserService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -55,6 +57,7 @@ public class MypageController {
 	private final RegistrationService registrationService;
 	private final courseReviewService coursereviewService;
 	private final SubscriptionService subscriptionService;
+	private final CouponService couponService;
 
 	@GetMapping("/mypage/community")
     public String getMyPageCommunityList(
@@ -394,12 +397,22 @@ public class MypageController {
     
 	
 
-	@LoginCheck
-	@GetMapping("/mypage/coupon")
-	public String myCoupon(@Authuser User user, Model model) {
-		model.addAttribute("user", user);
-		return "mypage/myPageCoupon";
-	}
+//	@LoginCheck
+//	@GetMapping("/mypage/coupon")
+//	public String myCoupon(@Authuser User user, Model model,
+//			@RequestParam(value="page", defaultValue="0") int page){
+//		
+//		EzenPaging ezenPaging = new EzenPaging(page, 10, couponService.getCouponCountByKeyword(), 5);
+//		List<User> userList = this.couponService.getUserByKeyword(ezenPaging.getStartNo(), ezenPaging.getPageSize());
+//
+//		
+//		model.addAttribute("user", user);
+//		model.addAttribute("page", ezenPaging);
+//		model.addAttribute("kw", kw);
+//		model.addAttribute("kwType", kwType);
+//		
+//		return "mypage/myPageCoupon";
+//	}
 
 }
 	

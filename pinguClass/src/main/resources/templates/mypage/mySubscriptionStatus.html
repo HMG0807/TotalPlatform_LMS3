@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout/layout}">
 <main layout:fragment="main">
     <link rel="stylesheet" th:href="@{/mypage/mySubscriptionStatusStyle.css}">
+    <link rel="stylesheet" th:href="@{/layout/settingStyle.css}">
 
     <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
 
@@ -28,12 +29,12 @@
                     </div>
 
                     <div class="subStatusText" th:if="${subscription!=null}">
-                        <h3 th:text="${subscription.startDate}+'~'+${subscription.endDate}"></h3>
+                        <h3 th:text="${#temporals.format(subscription.startDate, 'yyyy-MM-dd')}+' ~ '+${#temporals.format(subscription.endDate, 'yyyy-MM-dd')}"></h3>
                         <div>
                         </div>
                     </div>
 
-                    <div class="buttonLayout">
+                    <div class="buttonLayout" th:onclick="|location.href='@{/subPaymentPage}'|">
                         <button>멤버십 구독하기</button>
                     </div>
 
