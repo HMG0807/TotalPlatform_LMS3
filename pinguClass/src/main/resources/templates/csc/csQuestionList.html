@@ -1,0 +1,84 @@
+<html layout:decorate="~{layout/layout}">
+	<main layout:fragment="main">
+    	<link rel="stylesheet" th:href="@{/csc/csPageStyle.css}">
+		<div class="csContentContainer">
+            <div class="csSideNav">
+                <ul>
+                    <li>
+                    	<a th:href="@{/csc/list}">1:1문의</a>
+                    </li>
+                     <li>
+                     	<a th:href="@{/notice/list}">공지사항</a>
+                     </li>
+                </ul>
+            </div>
+            <div class="csCon">
+                <ul>
+                    <li class="maintap faq on">
+                        <div class="csConTitle">
+                            <p>1:1 문의</p>
+                        </div>
+                        <!-- 1:1 문의 버튼 -->
+                        <div class="createbtn">
+            				<a th:href="@{/csc/create}">문의하기</a>
+            			</div>
+            			<!--문의 목록-->
+                        <table>
+                        
+                        <ul class="faqCon">
+                            <li class="on">
+                               <table>
+                               		<tr>
+                            			<th>번호</th>
+                            			<th>제목</th>
+                            			<th>작성자</th>
+                            			<th>답변여부</th>
+                        			</tr>
+                            		<tr th:each="csQuestion : ${csQuestion}">
+                            	<!--
+                                		<td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
+                                	-->
+                                		<td th:text="${csQuestion.questionId}"></td>
+                                		<td><a th:href="@{|/csc/detail/${csQuestion.questionId}|}" th:text="${csQuestion.title}"></a></td>
+                                		<td th:if="${csQuestion.user != null}" th:text="${csQuestion.user.id}"></td>
+                                		<td th:if="${csQuestion.csAnswer != null}" text="답변완료"></td>
+                                		<td th:unless="${csQuestion.csAnswer != null}" text="답변대기"></td>
+                                		
+                            		</tr>
+                               </table> 
+                            	<!--페이징 버튼-->
+                        		<div class="pageBtn" th:if="${paging.totalPage} > 1">
+                            		<div>
+                                		<a class="page-link" th:if="${paging.pageNo != 1}" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                            		</div>
+                            		<div>
+                                		<a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo>1}" th:data-page="${paging.pageNo-1}">이전</a>
+                            		</div>
+                            		<div th:each="num : ${#numbers.sequence(paging.startPage,paging.endPage)}">
+                                		<a class="page-link" href="javascript:void(0)"} th:text="${num}" th:data-page="${num}"><a>
+                            		</div>
+                            		<div>
+                                		<a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo < paging.totalPage}" th:data-page="${paging.pageNo+1}">다음</a>
+                            		</div>
+                            		<div>
+                                		<a class="page-link" th:if="${paging.pageNo != paging.totalPage}" href="javascript:void(0)" th:data-page="${paging.totalPage}">마지막으로</a>
+                            		</div>
+                       			</div>
+                    		</li>
+                		</ul>
+            		</div>
+	
+        		</div>
+        
+        <!--  페이징 폼 -->
+        <form th:action="@{/csc/list}" method="get" id="pagingForm">
+    		<input type="hidden" id="page" name="page">
+		</form>
+
+    	
+    	<script th:src="@{/csc/csPageModul.js}"></script>
+    </main>
+
+   
+	
+</html>

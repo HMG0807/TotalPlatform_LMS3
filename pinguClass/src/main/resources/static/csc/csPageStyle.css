@@ -1,7 +1,8 @@
 main {
     display: flex;
     justify-content: center;
-    padding: 8rem 0;
+    padding-top: 3rem;
+    padding-bottom: 12rem;
 }
 
 .csContentContainer {
@@ -31,7 +32,7 @@ main {
 }
 
 .csCon {
-    width: 80%;
+    width: 100%;
 }
 .csCon>ul {
     position: relative;
@@ -51,7 +52,6 @@ main {
 }
 
 .csConTitle {
-    padding-bottom: 1rem;
     font-size: 30px;
     font-weight: 900;
     border-bottom: 1px solid var(--boxShadow);
@@ -91,36 +91,6 @@ main {
     display: block;
 }
 
-.faqCon>li>table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-
-.faqCon>li>table tr {
-    border-top: 1px solid var(--boxShadow);
-}
-
-.faqCon>li>table tr:last-child {
-    border-bottom: 1px solid var(--boxShadow);
-}
-
-.faqCon>li>table tr td {
-    padding: 1rem 0;
-}
-
-.faqCon>li>table tr td:first-child {
-    width: 5%;
-}
-
-.faqCon>li>table tr td:nth-child(2) {
-    width: 80%;
-}
-
-.faqCon>li>table tr td:nth-child(3) {
-    width: 20%;
-}
-
 /* 공지사항 */
 
 .mention>table {
@@ -131,6 +101,10 @@ main {
 
 .mention>table tr {
     border-top: 1px solid var(--boxShadow);
+    
+}
+.mention>table tr th{
+	text-align: center;
 }
 
 .mention>table tr:last-child {
@@ -139,15 +113,83 @@ main {
 
 .mention>table tr td {
     padding: 1rem 0;
+    text-align: center;
 }
 
 .mention>table tr td:first-child {
     width: 5%;
 }
 .mention>table tr td:nth-child(2) {
-    width: 80%;
+    padding-left: 1rem;
+    text-align: left;
 }
 
 .mention>table tr td:nth-child(3) {
-    width: 20%;
+    width: 8%;
 }
+.mention>table tr td:nth-child(4) {
+    width: 10%;
+}
+
+
+/*페이징 버튼*/
+.pageBtn{
+	display: flex;
+	background-color: #393939;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.2rem;
+	margin-top: 1rem;
+}
+.pageBtn>div{
+	padding: 0.3rem 0.5rem;
+	color: #fff;
+}
+
+/*문의하기 버튼*/
+.createbtn{
+	width: 7rem;
+    height: 2.5rem;
+    background-color: #393939;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 0.6rem;
+    justify-self: end;
+    margin: 0 1rem;
+    margin-bottom: 3rem;
+}
+
+/*테이블 간격 조정  --> 공지랑 문의가 충돌 통합 수정 필요*/
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+table tr th {
+    padding: 1rem;
+    text-align: center;
+}
+table tr td {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+table tr td:first-child {
+    width: 10%;
+}
+table tr td:nth-child(2) {
+    padding: 1rem;
+    text-align: left;
+}
+table tr td:nth-child(3) {
+    width: 10%;
+}
+table tr td:nth-child(4) {
+    width: 15%;
+}
+
+table tr th:nth-child(2){
+	padding: 1rem;
+    text-align: left;
+}
+

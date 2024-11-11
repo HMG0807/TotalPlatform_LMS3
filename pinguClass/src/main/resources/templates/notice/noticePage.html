@@ -5,124 +5,17 @@
         <div class="csContentContainer">
             <div class="csSideNav">
                 <ul>
-                    <li><a href="/csc">1:1 문의</a></li>
-                    <li><a href="/notice">공지사항</a></li>
+                    <li><a href="/csc/list">1:1 문의</a></li>
+                    <li><a href="/notice/list">공지사항</a></li>
                 </ul>
             </div>
             <div class="csCon">
                 <ul>
-                    <li class="maintap faq">
-                        <div class="csConTitle">
-                            <p>1:1 문의</p>
-                        </div>
-                        <ul class="faqNav">
-                            <li><a href="#">이용안내</a></li>
-                            <li><a href="#">결제</a></li>
-                            <li><a href="#">회원정보</a></li>
-                        </ul>
-                        
-                        <ul class="faqCon">
-                            <li class="on">
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>이용안내를 알고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    
-
-                                </table>
-                            </li>
-                            <li>
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>환불하고싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                </table>
-                            </li>
-                            <li>
-                                <table>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Q</td>
-                                        <td>회원정보를 변경하고 싶어요</td>
-                                        <td>2024.10.01</td>
-                                    </tr>
-                                </table>
-                            </li>
-                        </ul>
-
-                    </li>
                     <li class="maintap mention on">
                         <div class="csConTitle">
                             <p>공지사항</p>
                         </div>
+            			<!--공지 목록-->
                         <table>
                             <tr>
                             	<th>번호</th>
@@ -130,20 +23,42 @@
                             	<th>작성자</th>
                             	<th>작성일</th>
                         	</tr>
-                            <tr th:each="notice : ${notice}">
-                            <!--
-                                <td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
-                                -->
-                                <td>N</td>
-                                <td><a th:href="@{|/notice/detail/${id}|}" th:text="${notice.content}"></a></td>
+                            <tr th:each="noticeList : ${noticeList}">
+                                <td th:text="${noticeList.noticeId}"></td>
+                                <td><a th:href="@{|/notice/detail/${noticeList.noticeId}|}" th:text="${noticeList.title}"></a></td>
                                 <td>관리자</td>
-                                <td th:text="${#temporals.format(notice.lastUpdate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#temporals.format(noticeList.lastUpdate, 'yyyy-MM-dd')}"></td>
                             </tr>
                         </table>
+                        <!--페이징 버튼-->
+                        <div class="pageBtn" th:if="${paging.totalPage} > 1">
+                            <div>
+                                <a class="page-link" th:if="${paging.pageNo != 1}" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                            </div>
+                            <div>
+                                <a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo>1}" th:data-page="${paging.pageNo-1}">이전</a>
+                            </div>
+                            <div th:each="num : ${#numbers.sequence(paging.startPage,paging.endPage)}">
+                                <a class="page-link" href="javascript:void(0)"} th:text="${num}" th:data-page="${num}"><a>
+                            </div>
+                            <div>
+                                <a class="page-link" href="javascript:void(0)" th:if="${paging.pageNo < paging.totalPage}" th:data-page="${paging.pageNo+1}">다음</a>
+                            </div>
+                            <div>
+                                <a class="page-link" th:if="${paging.pageNo != paging.totalPage}" href="javascript:void(0)" th:data-page="${paging.totalPage}">마지막으로</a>
+                            </div>
+                       </div>
                     </li>
                 </ul>
             </div>
+	
         </div>
+        
+        <!--  페이징 폼 -->
+        <form th:action="@{/notice/list}" method="get" id="pagingForm">
+    		<input type="hidden" id="page" name="page">
+		</form>
+        
         
 		<script th:src="@{/csc/csPageModul.js}"></script>
     </main>
