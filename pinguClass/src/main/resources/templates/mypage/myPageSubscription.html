@@ -1,0 +1,49 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/mypage/myPageStyle.css}">
+	
+	<!-- 마이 카드 영역 -->
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+    
+    <div class="myPageContainer">
+        <!-- 서브 네비바 영역 -->
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <!-- Content 영역 -->
+        <div class="myPageContentContainer">
+            <ul>
+                <li class="subscription on">
+                    <div class="subscriptionTitle">
+                        <p>다양한 클래스 <br>구독으로 만나보세요</p>
+                        <p class="subTitle">나에게 맞는 클래스를 추천받을수 있어요</p>
+                    </div>
+                    <button>구독 시작하기</button>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                결제 내역<i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                결제 수단<i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                구독이용권 등록하기<i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                수강권 등록하기<i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+<script th:src="@{/mypage/myPageModul.js}"></script>
+</html>

@@ -9,8 +9,8 @@
             </div>
 
             <div class="searchContainer">
-                <form action="post">
-                    <input type="text" class="searchBar" placeholder="검색어를 입력해주세요">
+                <form th:action="@{category}" id="keywordForm">
+                    <input name="keyword" type="text" class="searchBar" placeholder="검색어를 입력해주세요">
                     <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
                 </form>
             </div>
@@ -39,6 +39,7 @@
             </div>
             <ul class="headerNav">
                 <li><a th:href="@{/community/list}">커뮤니티</a></li>
+                <li><a th:href="@{/csc/list}">고객센터</a></li>
             </ul>
         </div>
     </header>

@@ -66,7 +66,6 @@
 }
 
 .card-body>.card-text {
-    padding-top: 3rem;
     padding-bottom: 3rem;
 }
 
@@ -233,49 +232,98 @@ textarea {
 }
 
 
-/*더보기 드롭다운*/
-.option{
+/*------- 게시글 수정 삭제 버튼  -------------------------------*/
+.Qoption{
 	display: flex;
-	position: absolute;
-	right: 3%;
+	justify-content: flex-end;
 }
-.optionDropdown{
+
+/* 수정 삭제 btn*/
+.QoptionModify{
 	margin: 0.5rem;
 	border-radius: 5px;
     display: block;
     background-color:#ededed;
     width: 80px;
     z-index: 10;
-    position: relative;
-    left: 0%;
+    text-align: center;
+     
+}
+.QoptionDelete{
+	margin: 0.5rem;
+	border-radius: 5px;
+    display: block;
+    background-color:#ededed;
+    width: 80px;
+    z-index: 10;
+    text-align: center;
+}
+
+/* btn 선택시 이벤트*/
+.Qoption>.QoptionModify:hover{
+     background-color: darkgrey;
+     cursor: pointer;
+}
+
+.Qoption>.QoptionDelete:hover{
+      background-color: darkgrey;
+      cursor: pointer;
+}
+
+
+/*답변*/
+.Aoption{
+	display: flex;
+	justify-content: flex-end;
+}
+.AoptionDropdown{
+	margin: 0.5rem;
+	border-radius: 5px;
+    display: block;
+    background-color:#ededed;
+    width: 80px;
+    z-index: 10;
     text-align: center;
      
 }
 
-.option>.optionDropdown:nth-child(1):hover{
+.Aoption>.AoptionDropdown:nth-child(1):hover{
      background-color: darkgrey;
 }
 
-.option>.optionDropdown:nth-child(2):hover{
+.Aoption>.AoptionDropdown:nth-child(2):hover{
       background-color: darkgrey;
 }
 
 
-/*댓글 수정, 삭제 버튼*/
-/*.modify{
-	width: 3rem;
-    height: 1.5rem;
-    margin-top: 0.5rem;
+/*사이드바 영역 비워두기*/
+.csSideNav {
+    width: 20%;
+    display: flex;
 }
-.delete{
-	width: 3rem;
-    height: 1.5rem;
-    margin-top: 0.5rem;
+
+/*제목 내용 컨테이너 가로 사이즈 맞추기*/
+.contentContainer{
+	display: flex;
+    justify-content: center;
+	width: 100%;
 }
-*/
+
+.my-31{
+	width: 70%;
+	
+}
 
 
 
 
+
+/*댓글 수정*/
+#modifyAnswer{
+	border: 2px solid darkgrey;
+	height: 5rem;
+	margin: 2rem 0;
+	
+}
 
 

@@ -1,0 +1,32 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/mypage/myPageStyle.css}">
+	
+	<!-- 마이 카드 영역 -->
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+    
+    <div class="myPageContainer">
+        <!-- 서브 네비바 영역 -->
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <!-- Content 영역 -->
+        <div class="myPageContentContainer">
+            <ul>
+                <li class="myInfo on">
+                    <p class="myInfoTitle">내 정보 관리</p>
+                    <div class="profileImg">
+                        <img src="" alt="">
+                    </div>
+                    <form action="">
+                        <input type="text" placeholder="전화번호">
+                        <input type="text" placeholder="이메일" disabled>
+                        <button onclick="location.href='http://localhost:8080/mypage/edit/password'" class="passwordBtn">비밀번호 변경</button>
+                        <button class="saveBtn">저장하기</button>
+                        <button class="removeIdBtn">회원탈퇴</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</html>

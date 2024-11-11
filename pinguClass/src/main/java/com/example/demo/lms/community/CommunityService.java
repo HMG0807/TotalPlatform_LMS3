@@ -42,6 +42,7 @@ public class CommunityService {
 //	}
 	
 
+	// 1109 커뮤니티 상세 조회 - 이순
 	public Community getdetail(Integer id) throws UserException {
 		Optional<Community> community = this.communityRepository.findById(id);
 		if(community.isPresent()) {
@@ -159,13 +160,14 @@ public class CommunityService {
 		
 	}
 
-	// 페이징을 위한 모든 게시글 갯수 구하기
+	////// 페이징 //////////////////////////////////
+	// 모든 게시글 카운트
 	public int getCommunityCount() {
 		return this.communityRepository.countCommunityAll(); 
 	}
-	
-	public List<Community> getCommunityByLimit(String keyword, int startNo, int pageSize){
-		return this.communityRepository.findCommunityByLimit(keyword, startNo, pageSize);
+	// 현재 페이지 게시글 정보, 언더바 몇페이지인지 구하기
+	public List<Community> getCommunityByLimit(String kw, int startNo, int pageSize){
+		return this.communityRepository.findCommunityByLimit(kw, startNo, pageSize);
 		
 	}
 	

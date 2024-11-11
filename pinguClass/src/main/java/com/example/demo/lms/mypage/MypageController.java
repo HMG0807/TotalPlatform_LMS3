@@ -1,5 +1,6 @@
 package com.example.demo.lms.mypage;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.lms.Authuser.Authuser;
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.community.CommunityService;
 import com.example.demo.lms.community.UserException;
 import com.example.demo.lms.course.CourseService;
@@ -32,6 +35,8 @@ import com.example.demo.lms.entity.Review;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.paging.EzenPaging;
 import com.example.demo.lms.registration.RegistrationService;
+import com.example.demo.lms.entity.Subscription;
+import com.example.demo.lms.payment.SubscriptionService;
 import com.example.demo.lms.user.UserRepository;
 import com.example.demo.lms.user.UserService;
 
@@ -49,7 +54,8 @@ public class MypageController {
 	private final UserService userService;
 	private final RegistrationService registrationService;
 	private final courseReviewService coursereviewService;
-	
+	private final SubscriptionService subscriptionService;
+
 	@GetMapping("/mypage/community")
     public String getMyPageCommunityList(
         @RequestParam(name = "page", defaultValue = "0") int page,  // 페이지 번호, 기본값은 0
@@ -225,12 +231,7 @@ public class MypageController {
         return "redirect:/mypage/qna";
     }
 	
-	
-	
-	
-	
-		
-	
+
 	// QnA 수정 메서드 
 	@GetMapping("/mypage/qna/edit/{qnaId}")
 	public String editQnaForm(@PathVariable("qnaId") Integer qnaId, Model model) {
@@ -243,7 +244,7 @@ public class MypageController {
 	@GetMapping("/mypage")
 	public String mypageTest() {
 		
-		return "mypage/myPage";
+		return "redirect:/mypage/edit";
 	}
 	
 	
@@ -267,6 +268,8 @@ public class MypageController {
 	    return "redirect:/mypage/qna";
 	}
 	
+	// QnA 강사가 댓글을 달면 조회가 가능 . 
+	
 	
 	@GetMapping("/mypage/courses")
 	public String getEnrolledCourses(
@@ -284,13 +287,42 @@ public class MypageController {
 	    return "mypage/myenrolledCourses";
 	}
 	
+	/////////////////////////////////회원정보, 구독, 쿠폰 관련//////////////////
 	
+	///////회원 정보 수정//////
+	@LoginCheck
+	@GetMapping("/mypage/edit")
+	public String editUserInfo() {
+		return "mypage/myPageUserEdit";
+	}
+	@LoginCheck
+	@GetMapping("/mypage/edit/password")
+	public String editUserPassword() {
+		return "mypage/myPageEditPassword";
+	}
 	
 
+	//////////////////구독상황///////////////////
+	@LoginCheck
+	@GetMapping("/mypage/subscription")
+	public String mySubscription() {
+		return "mypage/myPageSubscription";
+	}
 	
 	
+//=====================마이페이지 구독조회===============================//
+	@LoginCheck
+	@GetMapping("/mypage/subscription") 
+	public String subscriptionStatus(Model model, @Authuser User user){
+		
+		Subscription subscription = subscriptionService.getUser(user.getUserId());
+		
+		model.addAttribute("subscription",subscription);
+		
+		return "/mypage/mySubscriptionStatus";
+	} 
 	
-	
+	//////////////쿠폰현황///////////////////////////
 	
 	
 
@@ -367,6 +399,14 @@ public class MypageController {
     
     
 	
+
+	@LoginCheck
+	@GetMapping("/mypage/coupon")
+	public String myCoupon(@Authuser User user, Model model) {
+		model.addAttribute("user", user);
+		return "mypage/myPageCoupon";
+	}
+
 }
 	
 	

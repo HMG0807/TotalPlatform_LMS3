@@ -7,7 +7,7 @@
                 <div class="lecturerCard">
                     <div class="lecturerName">
                         <img src="" alt="">
-                        <p th:text="${course.instructor.user.name}"></p>
+                        <p th:text="${course.title}"></p>
                     </div>
                     <div class="lecturerText">
                         <p th:text="'카테고리 : '+${course.category.category}"></p>
@@ -22,7 +22,32 @@
                 </ul>
 
                 <ul class="lecturerContentContainer" >
+                	<li class="classIntroduce">
+                    <ul class="lecturerContentContainer" >
                     <li class="classIntroduce">
+                        <div class="lectureTitle">
+                            <p>이런걸 배워요!</p>
+                            <!-- <div class="lectureSlideBtn">
+                                <button class="lectureSlideLeft"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="lectureSlideRight"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div> -->
+                        </div>
+                        <div class="lectureSlideContainer">
+                            <ul class="slides">
+                                <li class="slide" th:each="lecture : ${lectureList}">
+                                    <a href="#">
+                                        <div class="lectureConImg">
+                                            <img src="" alt="">
+                                        </div>
+                                        <div class="lectureConText">
+                                            <p th:text="${lecture.title}"></p>
+                                            <p th:text="${lecture.objective}"></p>
+                                        </div>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                        </div>
                         <div class="lectureTitle">
                             <p>강의 리스트</p>    
                         </div><br>
@@ -39,19 +64,21 @@
                         </div>
 
                     <li class="creater">
-                        <div class="lectureTitle">
-                            <p>크리에이터</p>
-                        </div>
+						<div class="lectureTitle">
+							<p>크리에이터</p>
+						</div>
+						<br>
                         <div class="lecturerCard">
                             <div class="lecturerName">
-                                <img src="" alt="">
-                                <p>Lecturer Name</p>
+                                <img th:src="@{/files/${course.instructor}}" alt="">
+                                <p th:text="${course.instructor.user.name}"></p>
                             </div>
                             <div class="createrText">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ab autem dolor facilis, ullam necessitatibus. Unde in maxime exercitationem <br><br> earum aliquid harum id mollitia nam! Officia adipisci totam expedita necessitatibus!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita sint necessitatibus impedit, commodi molestias error eaque sit, laudantium veritatis repellendus eos assumenda, aliquam dicta suscipit facilis vero at ab!</p>
+                                <p></p>
                             </div>
                         </div>
                     </li>
+                    
                     <li class="recommand">
                         <div class="section">
                             <div class="sectionTitle">

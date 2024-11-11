@@ -1,24 +1,42 @@
+////////    문의글 삭제   //////////////////////////////////////////////
+// 삭제시 alert창
+alert("울면암바");
+console.log(window.location.href);
+let del = document.querySelectorAll(".delete")
+for(let el of del){
+	el.addEventListener('click', function(){
+		if(confirm("정말로 삭제?")){
+			location.href = this.dataset.uri;
+		}
+	});
+};
 
 
-// Tap Menu Event *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-const csSideNav = document.querySelectorAll(".csSideNav>ul>li");
-const AllcsContent = document.querySelectorAll(".csContainer>ul>li");
+////// a팀 코드 슬쩍 //////////////
+///////   답변 달리면 수정삭제 불가   //////////////////////////////////////////
 
-console.log(csSideNav);
 
-csSideNav.forEach(item => {
-    item.addEventListener('click', function () {
-        csSideNav.forEach(i => i.classList.remove("on"));
-        item.classList.add("on");
+const csQuestion = document.querySelector(".csQuestion"); // 질문 박스
+const retouchBtn = document.querySelector(".recommend"); // 수정 삭제 버튼
 
-        // 모든 콘텐츠에서 'on' 클래스를 제거
-        AllcsContent.forEach(i => i.classList.remove("on"));
 
-        // 현재 클릭한 아이템에 대응하는 콘텐츠를 찾아 'on' 클래스를 추가
-        const index = Array.from(csSideNav).indexOf(item);
-        if (index !== -1) {
-            AllcsContent[index].classList.add("on");
-        }
-    });
-});
+// 수정 삭제 버튼 활성화 여부
+if (csQuestion.querySelector("border-bottommy-3py-2")) { // 관리자 답변이 있으면
+    retouchBtn.style.display = "none"; // 수정 버튼 숨김
+
+} else {
+    retouchBtn.style.display = "block"; //관리자 답변이 없으면 수정 버튼 활성화
+}
+
+
+
+
+
+
+
+
+
+
+
+

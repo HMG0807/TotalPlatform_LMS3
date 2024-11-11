@@ -35,14 +35,14 @@ function lectureSelect(courseId, lectureCount){
 }
 
 //삭제 버튼 클릭시
-function deleteCourse(course){
-	if(course.deleteYn == "n"){
-		if(confirm(`정말로 \"${course.title}\" 강좌를 삭제하시겠습니까?`)){
-			location.href = "/admin/deletecourse/" + course.courseId;
+function deleteCourse(deleteYn, title, courseId){
+	if(deleteYn == "n"){
+		if(confirm(`정말로 \"${title}\" 강좌를 삭제하시겠습니까?`)){
+			location.href = "/admin/deletecourse/" + courseId;
 		}
 	} else {
-		if(confirm(`정말로 \"${course.title}\" 강좌를 삭제해제 하시겠습니까?`)){
-			location.href = "/admin/deletecourse/cancel/" + course.courseId;
+		if(confirm(`정말로 \"${title}\" 강좌를 삭제해제 하시겠습니까?`)){
+			location.href = "/admin/deletecourse/cancel/" + courseId;
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.example.demo.lms.csc;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,14 +43,14 @@ public interface CsQuestionRepository extends JpaRepository<CsQuestion, Integer>
 	
 	
 	
-	// a팀 코드 참고
-	/* 유저 기본키로 1:1 문의글 조회 */
+	//// 페이징 (a팀 코드 참고) ////////////////////////////////////
+	/* 1:1 문의에서 자기글만 조회 */
 	@Query(value = "SELECT count(*) FROM cs_question WHERE user_id = :id" , nativeQuery = true)
-	int countQuestionByAll(@Param("id") Integer userId);
+	int countQuestionByAll(@Param("id") User userId);
 	
-	@Query(value = "SELECT * FROM cs_question WHERE user_id = :id limit :start, :idx", nativeQuery = true)
-	List<CsQuestion> findQestionByUserId(@Param("id") Integer userId, @Param("start") int startNo, @Param("idx") int pageSize);
-	
-	
+	// 현재 페이지 목록 조회
+	@Query(value = "SELECT * FROM cs_question WHERE delete_yn = 'n' && user_id = :id limit :start, :idx", nativeQuery = true)
+	List<CsQuestion> findQestionByUserId(@Param("id") User userId, @Param("start") int startNo, @Param("idx") int pageSize);
+
 
 }

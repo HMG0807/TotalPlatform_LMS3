@@ -66,17 +66,21 @@ th , td{
     padding: 1.5rem 0 1.5rem 0;
     text-align: center;
     color: rgb(68, 68, 68);
+    width: 10%;
 }
 td{
     font-weight: 400;
 }
-th , td{
-    width: 10%;
-}
 
+th:nth-child(1){
+    width: 12%;
+}
 th:nth-child(2){
     width: 55%;
     text-align: center;
+}
+td:nth-child(1){
+    width: 12%;
 }
 td:nth-child(2){
     text-align: left;
@@ -85,51 +89,3 @@ th:nth-child(3){
     width: 15%;
 }
 
-
-/* 페이징 버튼 */
-#pageBtn > ul {
-	display: flex;
-	list-style-type: none;
-	margin-top: 30px;
-	justify-content: center;
-}
-#pageBtn li:not(.active):not(.disabled):hover {
-	background-color: #eee;
-}
-#pageBtn li:not(.active):not(.disabled):hover > a {
-	color: var(--spanColor);
-}
-#pageBtn li {
-	display: inline-block;
-	background-color: white;
-	border: 1px solid #ddd;
-	margin-left: -1px;
-}
-#pageBtn li:first-child {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-#pageBtn li:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-}
-#pageBtn a {
-	text-decoration: none;
-	display: inline-block;
-	padding: 6px 12px;
-	/*color: rgb(206, 154, 0);*/
-}
-#pageBtn .active {
-	background-color: var(--spanColor);
-}
-#pageBtn .active > a {
-	color: white;
-	pointer-events: none; /* 포인터 이벤트 동작 X */
-}
-#pageBtn .disabled {
-	background-color: #ddd;
-}
-#pageBtn .disabled > a {
-	pointer-events: none; /* 포인터 이벤트 동작 X */
-	color: rgb(68, 68, 68);
-}
