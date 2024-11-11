@@ -9,6 +9,7 @@
     color: var(--color);
 }
 
+
 body.scrollOff{
     width: 100vw;
     height: 100vh;

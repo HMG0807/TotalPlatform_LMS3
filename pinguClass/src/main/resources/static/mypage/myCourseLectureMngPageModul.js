@@ -13,3 +13,8 @@ Array.from(page_elements).forEach(function(element) {
 function lectureCreate(courseId){
 	location.href = "/mypage/instructor/lectureCreate/" + courseId;
 }
+
+//강의 순서 변경 버튼 클릭시
+function lectureOrderChange(courseId){
+	location.href = "/mypage/instructor/lectureMng/orderChange/" + courseId;
+}

@@ -36,10 +36,19 @@ public class AdminController {
 	private final AdminService adService;
 	private final FileService fileService;
 
+	/*************************************** 관리자 로그인 ***************************************/
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 GET ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/admin")
-	public String adminLogin() {
+	public String adminLogin(AdminForm adminform) {
 		
 		return "admin/adminLogin";
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@PostMapping("/admin/login")
+	public String adminSelect(@Valid AdminForm adminform, BindingResult bindingResult) {
+		
+		return "admin/userList";
 	}
 	
 	/*************************************** 회원 관리 ***************************************/

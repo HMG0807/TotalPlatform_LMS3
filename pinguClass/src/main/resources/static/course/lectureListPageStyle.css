@@ -1,0 +1,69 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.courseContainer {
+    width: var(--pageMinWidth);
+    margin-bottom: 5rem ;
+}
+
+.courseTitle {
+    width: 100%;
+    padding: 3rem 0 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+.courseCon{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    font-size: 17px;
+    font-weight: 450;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.courseCon>p{
+    margin: 10px 0px;
+}
+
+/* 강의 내용 */
+.lectureContent{
+	padding: 20px;
+	margin: 40px 50px 0px 50px;
+	border-radius: 20px;
+}
+.lectureContent:hover{
+	transform: scale(1.01, 1.01);
+	cursor: pointer;
+}
+
+.order-lecture{
+    padding-bottom: 0.5rem;
+    font-size: var(--subtitleFont);
+    font-weight: 550;
+    border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+.lectureCon{
+    padding: 20px;
+}
+.lectureTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 10px;
+}
+.lectureTitle>p:first-child{
+	margin-bottom: 10px;
+	color: #888;
+}
+.lectureDate{
+    margin-top: 1rem;
+}

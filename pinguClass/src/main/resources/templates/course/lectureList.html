@@ -1,0 +1,39 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/course/lectureListPageStyle.css}">
+	<!-- <link rel="stylesheet" href="../../static/course/lectureListPageStyle.css"> -->
+	
+	<div class="courseContainer">
+		<div class="courseTitle">
+			<div>
+				<p th:text="${course.title}">[인기 강좌] 한식 전문가가 알려주는 쉽고 재밌는 요리 만들기</p>
+					<div class="courseCon">
+						<p th:text="'강사명 : ' + ${course.instructor.user.name}"></p>
+						<p th:text="'개설일자 : ' + ${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></p>
+					</div>
+			</div>
+		</div>
+		
+		<div class="lectureContent" th:each="lecture : ${course.lectures}" th:data-page="${lecture.lectureId}">
+			<div class="order-lecture">
+				<p th:text="${lecture.title}"></p>
+			</div>
+			<div class="lectureCon">
+				<div class="lectureTitle">
+					<p th:if="${#strings.length(lecture.lectureOrder)} == '1'" th:text="${#strings.append(0,lecture.lectureOrder)} + '.'"></p>
+					<p th:if="${#strings.length(lecture.lectureOrder)} == '2'" th:text="${lecture.lectureOrder} + '.'"></p>
+					<p th:text="${lecture.objective}"></p>
+					<p class="lectureDate" th:text="${#temporals.format(lecture.lastUpdate, 'yyyy-MM-dd')}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- page 데이터 넘기기 -->
+    <form th:action="@{/course/lectureDetail}" method="get" id="lectureForm">
+        <input type="hidden" id="lectureId" name="lectureId">
+    </form>
+    
+	<script th:src="@{/course/lectureListPageModul.js}"></script>
+</main>
+</html>
