@@ -24,6 +24,10 @@ main>.myPageContainer>ul>.courseMngContent{
     left: 0;
 }
 
+.contentWrap{
+	width:800px;
+	
+}
 .subContent{
     border: 1px solid gray;
     border-radius: 10px;
@@ -49,16 +53,14 @@ main>.myPageContainer>ul>.courseMngContent{
     margin-left: 50px;
 }
 
-.subStatusText > * {
-    margin: auto;
-}
+
 
 .subStatusText > h3{
     padding-top: 50px;
 }
 
 .buttonLayout{
-    margin-left: 200px;
+    margin-left: 290px;
 }
 
 .buttonLayout >button{

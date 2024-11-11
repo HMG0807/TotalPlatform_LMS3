@@ -20,7 +20,7 @@
     width: 1100px;
     margin: 0 auto;
     padding:50px;
-    background-color: white;
+    background-color: var(--background);
 
 }
 
@@ -67,7 +67,7 @@ a > .subDetail{
 }
 
 .subDetail > .btn{
-    background-color: orange;
+    background-color: var(--spanColor);
     color: white;
     border-radius: 10px;
     padding: 10px;
