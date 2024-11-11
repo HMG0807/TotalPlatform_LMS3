@@ -1,0 +1,133 @@
+/* 제목 스타일 */
+h2.contentTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+ 
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 15px;
+    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #FF7700;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* 모달 창 스타일 */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 30px;
+    width: 500px; 
+  
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-dialog {
+    background-color: white;
+    margin: 15% auto; /* 화면 중앙에 위치 */
+    padding: 20px;
+    border-radius: 10px; /* 모서리 둥글게 */
+}
+
+.modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝에 배치 */
+}
+
+.modal-footer button {
+    margin-left: 10px; /* 버튼 간격 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 페이징 버튼 */
+#pageBtn > ul {
+	display: flex;
+	list-style-type: none;
+	margin-top: 30px;
+	justify-content: center;
+}
+#pageBtn li:not(.active):not(.disabled):hover {
+	background-color: #eee;
+}
+#pageBtn li:not(.active):not(.disabled):hover > a {
+	color: rgb(40, 40, 255);
+}
+#pageBtn li {
+	display: inline-block;
+	background-color: white;
+	border: 1px solid #ddd;
+	margin-left: -1px;
+}
+#pageBtn li:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#pageBtn li:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#pageBtn a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 6px 12px;
+	/*color: rgb(206, 154, 0);*/
+}
+#pageBtn .active {
+	background-color: #0D6EFD;
+}
+#pageBtn .active > a {
+	color: white;
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+}
+#pageBtn .disabled {
+	background-color: #ddd;
+}
+#pageBtn .disabled > a {
+	pointer-events: none; /* 포인터 이벤트 동작 X */
+	color: rgb(68, 68, 68);
+}

@@ -1,0 +1,199 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/mypage/myenrolledCoursesStyle.css}">
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">수강 강좌 리뷰 관리</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>강좌명</th>
+                        <th>리뷰 제목</th>
+                        <th>평점</th>
+                        <th>작성일</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="review, loop : ${reviews}">
+                        <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></td>
+                        <td th:text="${review.course.title}"></td>
+                        <td th:text="${review.title}"></td>
+                        <td th:text="${review.rating}"></td>
+                        <td th:text="${#temporals.format(review.lastUpdate, 'yyyy-MM-dd')}"></td>
+                        <td>
+                             <button th:onclick="'showEditModal(' + ${review.reviewId} + ')'" class="btn btn-primary btn-sm">수정</button>
+                            <button onclick="showDeleteModal(this.getAttribute('data-review-id'))" th:attr="data-review-id=${review.reviewId}" class="btn btn-danger btn-sm">삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 페이징 버튼 -->
+            <div id="pageBtn" th:if="${page.totalPage} > 1">
+                <ul>
+                    <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+                        <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                    </li>
+                    <li>
+                        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+                    </li>
+                    <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+                        <a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
+                    </li>
+                    <li>
+                        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+                    </li>
+                    <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+                        <a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 페이지 이동을 위한 폼 -->
+            <form th:action="@{/mypage/CourseReview/list}" method="get" id="pageForm">
+                <input type="hidden" id="page" name="page">
+            </form>
+
+          <!-- 삭제 확인 모달 -->
+<div id="deleteModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">리뷰 삭제 확인</h5>
+                <button type="button" class="close" onclick="closeDeleteModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>정말로 이 리뷰를 삭제하시겠습니까?</p>
+            </div>
+            <div class="modal-footer">
+                <!-- 리뷰 삭제 폼 -->
+                <form id="deleteForm" th:action="@{/mypage/CourseReview/delete}" method="post">
+                    <input type="hidden" id="reviewIdToDelete" name="reviewId">
+                    <!-- 실제 삭제를 위한 버튼 -->
+                    <button type="submit" class="btn btn-danger">네, 삭제합니다</button>
+                </form>
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">아니오</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+<!-- 수정 모달 -->
+<div id="editReviewModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>리뷰 수정</h3>
+                <button type="button" class="close" onclick="closeEditModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- 리뷰 수정 폼 -->
+            <form id="editForm" th:action="@{/mypage/CourseReview/edit}" method="post">
+                <!-- 리뷰 ID 필드 -->
+                <input type="hidden" id="editReviewId" name="reviewId"> <!-- 이 필드가 누락되면 reviewId가 서버로 전송되지 않습니다 -->
+
+                <!-- 제목 입력 -->
+                <div class="form-group">
+                    <label for="editTitle">제목</label>
+                    <input type="text" class="form-control" id="editTitle" name="title" required>
+                </div>
+
+                <!-- 내용 입력 -->
+                <div class="form-group">
+                    <label for="editContent">내용</label>
+                    <textarea class="form-control" id="editContent" name="content" rows="3" required></textarea>
+                </div>
+
+                <!-- 평점 선택 -->
+                <div class="form-group">
+                    <label for="editStarRating">별점</label>
+                    <select id='editStarRating' name='rating' required>
+                        <option value='5'>⭐️⭐️⭐️⭐️⭐️</option>
+                        <option value='4'>⭐️⭐️⭐️⭐️☆</option>
+                        <option value='3'>⭐️⭐️⭐️☆☆</option>
+                        <option value='2'>⭐️⭐☆☆☆</option>
+                        <option value='1'>⭐☆☆☆☆</option>
+                    </select>
+                </div>
+
+                <!-- 수정 완료 버튼 -->
+                <button type="submit" class="btn btn-primary">수정 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+            </div>
+    <script th:inline="javascript">
+   // 페이징 버튼 클릭 이벤트
+            const page_elements = document.getElementsByClassName("page-link");
+            Array.from(page_elements).forEach(function(element) {
+                element.addEventListener('click', function() {
+                    document.getElementById('page').value = this.dataset.page;
+                    document.getElementById('pageForm').submit();
+                });
+            });
+
+            let reviewIdToDelete;
+
+            function showDeleteModal(reviewId) {
+                reviewIdToDelete = reviewId;
+                document.getElementById('reviewIdToDelete').value = reviewId;
+                document.getElementById('deleteModal').style.display = 'block';
+            }
+
+            function closeDeleteModal() {
+                document.getElementById('deleteModal').style.display = 'none';
+            }
+
+            // 삭제 폼 제출 이벤트
+            document.getElementById('deleteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var reviewId = reviewIdToDelete;
+                if (reviewId) {
+                    document.getElementById('reviewIdToDelete').value = reviewId;
+                    this.submit();
+                } else {
+                    console.error('Review ID is not set');
+                }
+            });
+
+            // 모달 외부 클릭 시 닫기
+            window.onclick = function(event) {
+                if (event.target == document.getElementById('deleteModal')) {
+                    closeDeleteModal();
+                }
+                if (event.target == document.getElementById('editModal')) {
+                    closeEditModal();
+                }
+            }
+
+          async function showEditModal(reviewId) {
+    // 새롭게 입력할 수 있도록 빈 값으로 설정
+    document.getElementById('editReviewId').value = reviewId || ''; // 리뷰 ID
+    document.getElementById('editTitle').value = ''; // 제목
+    document.getElementById('editContent').value = ''; // 내용
+    document.getElementById('editStarRating').value = '5'; // 기본 별점 설정
+    
+    document.getElementById('editReviewModal').style.display = 'block'; // 모달 열기
+}
+
+function closeEditModal() {
+    document.getElementById('editReviewModal').style.display = 'none'; // 모달 닫기
+}
+
+
+    </script>
+</main>
+</html>

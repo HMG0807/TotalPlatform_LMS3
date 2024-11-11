@@ -106,7 +106,7 @@
 <!-- 취소 및 결제 버튼 시작 -->
                 <div class="buttonLayout">
                     <button type="button" value="결제가 취소되었습니다." onclick="alert('취소되었습니다.'); history.back();" id=cancel>취소</button>
-                    <button id="paymentBtn">결제</button>
+                    <button id="paymentBtn" th:onclick="success([[${Subscribe.subscId}]])">결제</button>
                 </div>
 
 

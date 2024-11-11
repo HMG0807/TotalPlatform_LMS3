@@ -9,11 +9,12 @@ import org.springframework.data.repository.query.Param;
 import com.example.demo.lms.entity.Lecture;
 
 public interface InstUseLectureRepository extends JpaRepository<Lecture, Integer> {
-
-	/********************************** 강좌 ID로 QnA 문의글 조회 **********************************/
-	@Query(value = "SELECT * FROM lecture where course_id = :id and delete_yn = 'n' limit :start, :idx", nativeQuery = true)
-	List<Lecture> findLectureByCourseId(@Param("id") Integer courseId, @Param("start") int startNo, @Param("idx") int pageSize);
 	
+	/********************************** 강좌 ID로 해당 강좌의 총 강의 갯수 반환 **********************************/
+	@Query(value = "SELECT * FROM lecture where course_id = :id and delete_yn = 'n' order by lecture_order", nativeQuery = true)
+	List<Lecture> findLectureByCourseId(@Param("id") Integer courseId);
+	
+	/********************************** 강좌 ID로 해당 강좌의 총 강의 갯수 반환 **********************************/
 	@Query(value = "SELECT count(*) FROM lecture where course_id = :id and delete_yn = 'n'" , nativeQuery = true)
 	int countLectureByCourseId(@Param("id") Integer courseId);
 }

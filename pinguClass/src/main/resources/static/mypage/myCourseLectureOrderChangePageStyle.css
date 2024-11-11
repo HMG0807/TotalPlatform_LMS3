@@ -1,0 +1,132 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* mypage mainContent ------------------------------------------------*/
+.myPageContainer{
+    width: var(--pageMinWidth);
+    display: flex;
+    margin-bottom: 5rem ;
+}
+
+.myPageContentContainer{
+    width: 80%;
+}
+
+main>.myPageContainer>ul>.courseMngContent{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 컨텐츠 영역 > 제목 */
+.courseMngContent>.courseMngTitle {
+    font-size: 24px;
+    font-weight: 500;
+    padding-bottom: 2rem;
+    padding-top: 0.6rem;
+    position: relative;
+}
+
+.courseMngContent>.courseMngTitle>button { /* 강의 순서 변경, 강의 추가 버튼 */
+    border: 0px;
+    background-color: var(--spanColor);
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
+.courseMngContent>.courseMngTitle>.orderByChangeBtn{ /* 강의 순서 변경 버튼 */
+    right: 120px;
+}
+
+/* 컨텐츠 영역 > 내용 */
+.courseMngContent>.courseMngInfo{
+    border-collapse: collapse;
+    font-weight:lighter;
+    width: 100%;
+}
+.courseMngContent tr{
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+.courseMngContent tr:first-child{
+    border-top: 2px solid rgb(49, 49, 49);
+    border-bottom: 1px solid rgb(49, 49, 49);
+}
+
+th , td{ 
+    padding: 1.5rem 0 1.5rem 0;
+    text-align: center;
+    color: rgb(68, 68, 68);
+}
+td{
+    font-weight: 400;
+}
+
+th:nth-child(1){
+    width: 200px;
+}
+th:nth-child(2){
+    width: 50%;
+    text-align: center;
+}
+th:nth-child(3){
+    width: 30%;
+    text-align: center;
+}
+
+td:nth-child(1){
+    width: 200px;
+}
+td:nth-child(2){
+	width: 50%;
+    text-align: left;
+}
+th:nth-child(3){
+    width: 30%;
+}
+
+/* 강의 순서 내용 */
+.lectureTr>td:first-child{
+	display: flex;
+	justify-content: center;
+}
+
+.lectureTr>td:first-child>i{
+	cursor: pointer;
+}
+
+.orderVal {
+	border: 0px;
+	outline: 0px;
+	width: 50px;
+	text-align: center;
+	font-size: 18px;
+}
+
+/* 전송 버튼 */
+.submitDiv {
+	text-align: center;
+	padding: 2rem 2rem;
+}
+
+.submitDiv>button {
+	width: 200px;
+	height: 40px;
+	background-color: var(--spanColor);
+	border: 0px;
+	color: white;
+	font-weight: 900;
+	border-radius: 0.5rem;
+	font-size: 18px;
+	cursor: pointer;
+}
+

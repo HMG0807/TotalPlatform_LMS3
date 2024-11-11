@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.lms.Authuser.Authuser;
 import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Category;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.entity.Qna;
+import com.example.demo.lms.entity.User;
 import com.example.demo.lms.file.FileService;
 import com.example.demo.lms.paging.EzenPaging;
 
@@ -31,10 +33,12 @@ public class MyCourseMngController {
 	private final FileService fileService;
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 등록한 강좌 리스트 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/myCourseList")
-	public String myCourseList(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+	public String myCourseList(Model model, @RequestParam(value="page", defaultValue="0") int page,
+								@Authuser User user) {
 		
-		String userId = "user3"; //principal.getName() 대체
+		String userId = user.getId(); //principal.getName() 대체 > "hmg234"
 		
 		EzenPaging ezenPaging = new EzenPaging(page, 5, this.mcmService.getCourseCountById(userId), 5);
 		List<Course> courseList = this.mcmService.getCourseList(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
@@ -46,6 +50,7 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/courseCreate")
 	public String myCourseCreateGet(CourseForm courseForm, Model model) {
 		
@@ -57,9 +62,10 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 등록 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@PostMapping("/mypage/instructor/courseCreate")
 	public String myCourseCreatePost(@Valid CourseForm courseForm, BindingResult bindingResult, 
-									HttpServletRequest request, Model model) throws Exception {
+									HttpServletRequest request, Model model, @Authuser User user) throws Exception {
 		
 		if(bindingResult.hasErrors()) {
 			//@Valid 유효성 검사 실패시 myCourseForm.html로 이동
@@ -73,13 +79,14 @@ public class MyCourseMngController {
 		//파일 복사 + file 테이블 insert, file_id 반환
 		Integer fileId = this.fileService.save(request, courseForm.getMainImg()); //메인 이미지
 		
-		String userId = "user3"; //principal.getName() 대체
+		String userId = user.getId(); //principal.getName() 대체
 		this.mcmService.CourseCreate(userId, courseForm, fileId);
 		
 		return "redirect:/mypage/instructor/myCourseList";
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 수정 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/courseModify/{id}")
 	public String myCourseModifyGet(@PathVariable("id") Integer courseId, CourseForm courseForm, Model model) {
 		
@@ -99,6 +106,7 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 수정 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@PostMapping("/mypage/instructor/courseModify/{id}")
 	public String myCourseModifyPost(@Valid CourseForm courseForm, BindingResult bindingResult, Model model,
 									@PathVariable("id") Integer courseId) throws Exception {
@@ -126,6 +134,7 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 삭제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/courseDelete/{id}")
 	public String myCourseDelete(@PathVariable("id") Integer courseId) {
 		
@@ -136,6 +145,7 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강좌 QnA 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/courseQnaSelect/{id}")
 	public String myCourseQnaSelect(@PathVariable("id") Integer courseId, Model model,
 									@RequestParam(value="page", defaultValue="0") int page) {
@@ -150,21 +160,45 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 특정 강좌의 강의 내역 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/lectureMng/{id}")
-	public String myCourselectureMng(@PathVariable("id") Integer courseId, Model model,
-									@RequestParam(value="page", defaultValue="0") int page) {
+	public String myCourselectureMng(@PathVariable("id") Integer courseId, Model model) {
 		
-		EzenPaging ezenPaging = new EzenPaging(page, 5, this.mcmService.getLectureCountById(courseId), 5);
-		List<Lecture> lectureList = this.mcmService.getLectureList(courseId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+		List<Lecture> lectureList = this.mcmService.getLectureList(courseId);
 		
 		model.addAttribute("lectureList", lectureList);
-		model.addAttribute("page", ezenPaging);
 		model.addAttribute("courseId", courseId);
 		
 		return "mypage/myCourseLectureMng";
 	}
 	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 특정 강좌의 강의 내역 순서 변경 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
+	@GetMapping("/mypage/instructor/lectureMng/orderChange/{id}")
+	public String myCourselectureOrderChange(@PathVariable("id") Integer courseId, Model model) {
+		
+		List<Lecture> lectureList = this.mcmService.getLectureList(courseId);
+		
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("courseId", courseId);
+		
+		return "mypage/myCourseLectureOrderChange";
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 특정 강좌의 강의 내역 순서 변경 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
+	@PostMapping("/mypage/instructor/lectureMng/orderChange/{id}")
+	public String myCourselectureOrderChangePost(@PathVariable("id") Integer courseId,
+												@RequestParam("orderValue") List<Integer> orderValue,
+												@RequestParam("lectureId") List<Integer> lectureIdList) {
+		
+		this.mcmService.lectureOrderChange(lectureIdList, orderValue);
+		
+		return "redirect:/mypage/instructor/lectureMng/" + courseId;
+	}
+	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강의 등록 Get ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@GetMapping("/mypage/instructor/lectureCreate/{id}")
 	public String myCourseLectureCreateGet(LectureForm lectureForm) {
 		
@@ -172,6 +206,7 @@ public class MyCourseMngController {
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강사 > 강의 등록 Post ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	@LoginCheck
 	@PostMapping("/mypage/instructor/lectureCreate/{id}")
 	public String myCourseLectureCreatePost(@PathVariable("id") Integer courseId,
 											@Valid LectureForm lectureForm, BindingResult bindingResult, 

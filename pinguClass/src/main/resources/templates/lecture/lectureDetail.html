@@ -1,0 +1,40 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/lecture/lectureDetailStyle.css}">
+	
+    <div class="lectureDetailContainer">
+        <div class="lectureDetailLeft">
+            <ul class="lecturerContentContainer" >
+                <li class="classIntroduce">
+                    <div class="lectureTitle">
+                        <p th:text="${lecture.title}"></p>
+                    </div>
+                    <div class="lectureMainVideo">
+                        <video controls autoplay preload="metadata" id="lectureVideo">
+	                    	<source th:src="@{|/files/${lecture.file.fileName}|}" type="video/mp4">
+	                    </video>
+                    </div>
+                    <div class="lectureMainText">
+                        <p th:text="${lecture.objective}"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="lectureIndexRight">
+            <div class="indexContainer">
+                <div class="indexTitle">목차</div>
+                <div class="indexContent" th:each="lectureIndex, loop : ${lecture.lectureIndexs}">
+                    <th:block th:text="${loop.count}"></th:block>.
+                    <span class="indexConText" th:text="${lectureIndex.title}"></span>
+                    (
+					<button th:onclick="timeMove([[${lectureIndex.time}]])" th:text="${#numbers.formatInteger(lectureIndex.time/60/60,2)} + ':' + ${#numbers.formatInteger(lectureIndex.time/60,2)} + ':' + ${#numbers.formatInteger(lectureIndex.time%60,2)}"></button>
+					)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script th:src="@{/lecture/lectureDetailModul.js}"></script>
+</main>
+</html>
