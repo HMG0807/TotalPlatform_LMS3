@@ -46,20 +46,11 @@ function deleteCookie(name) {
 const loginNav = document.querySelector(".loginNav");
     
 if(getCookie( 'jwtToken') !==null){
-	console.log("확인");
 	loginNav.innerHTML ="<li><a href="+"#"+">마이페이지</a></li><li><a id = "+"logout "+"href="+"/user/logout"+">로그아웃</a></li>";
 }else{
-	console.log("확인");
 	loginNav.innerHTML ="<li><a href="+"/user/login"+">로그인</a></li><li><a href="+"http://192.168.17.254:8080/signup" +">회원가입</a></li>";
 }
 
-let logoutBtn = document.querySelector("#logout");
-    
-logoutBtn.addEventListener("click", function(){
-	deleteCookie('jwtToken');
-	location.href = "/"
-})
-  
 const searchBtn = document.querySelector(".searchBtn");
 const keywordForm = document.querySelector("#keywordForm");
 
@@ -67,4 +58,17 @@ searchBtn.addEventListener("click", function(){
 	keywordForm.submit();
 })
   
+
+let logoutBtn = document.querySelector("#logout");
+    
+if(getCookie( 'jwtToken') !==null){
+	logoutBtn.addEventListener("click", function(){
+	deleteCookie('jwtToken');
+	location.href = "/"
+
+})
+  
+}    
+
+
   

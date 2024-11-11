@@ -23,6 +23,14 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	@Query(value = "select * from course order by last_update desc limit :start, :idx",  nativeQuery = true)
 	List<Course> findAll(@Param("start") Integer startIdx, @Param("idx") Integer Idx);
 
+	// 강좌 최신등록순 조회 인덱스X (민준호)
+	@Query(value = "select * from course order by last_update desc",  nativeQuery = true)
+	List<Course> findByTime();
+	
+	// 강좌 인기순 조회 (민준호)
+	@Query(value = "select r.course_id ,count(*) ct from course c join registration r on c.course_id = r.course_id group by r.course_id order by ct desc", nativeQuery = true)
+	List<Course> findBypopularity();
+	
 	// 강좌 키워드로 조회 (민준호)
 	@Query(value = "select * from course where title like %:kw%",  nativeQuery = true)
 	List<Course> findByKeyword(@Param("kw") String kw);
