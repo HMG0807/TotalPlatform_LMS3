@@ -68,19 +68,14 @@ public class UserService {
 		return user;
 		
 	}
-	
-//  ID값으로 해당되는 유저를 찾는 메서드
-//	public User getUserId(String id) throws UserException {
-//		Optional<User> userId = this.userRepository.findById(id);
-//		if(userId.isPresent()) {
-//			return userId.get();
-//		}
-//		else {
-//			throw new UserException("해당 유저가 존재하지 않습니다");
-//		}
-//	}
-	
 
+	
+	
+	/*강좌 QnA 관리에서 질문 등록 하기 위해 추가 ID로 사용자 객체를 조회하기  위해 - 남동현  */
+	 public User findById(Integer userId) {
+	        return userRepository.findById(userId).orElse(null);  // ID로 사용자 조회
+	    }
+	
 	
 
 

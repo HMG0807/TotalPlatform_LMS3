@@ -24,6 +24,17 @@ public class CourseService {
 	}
 
 
+	public Course findById(Integer courseId) {
+		 Optional<Course> course = courseRepository.findById(courseId);
+	        return course.orElse(null);  // 값이 없으면 null .
+	    }
+
+	}
+
+
+
+
+
 
 
 
@@ -32,4 +43,4 @@ public class CourseService {
 //		return this.courseRepository.countQnaByKeyword(corseId);
 //	}
 //
-}
+

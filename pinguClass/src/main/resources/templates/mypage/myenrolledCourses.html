@@ -1,0 +1,113 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+    <link rel="stylesheet" th:href="@{/mypage/myCourseMngPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/mypage/myenrolledCoursesStyle.css}">
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+
+    <div class="myPageContainer">
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+
+        <div class="myPageContentContainer">
+            <h2 class="contentTitle">수강 강좌 내역</h2>
+            <!-- 강좌 목록 테이블 -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>강좌명</th>
+                        <th>수강시작날짜</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="registration, loop : ${registrations}">
+                        <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></td>
+                        <td th:text="${registration.course.title}"></td>
+                        <td th:text="${#temporals.format(registration.createDate, 'yyyy-MM-dd')}"></td>
+                        <td>
+                             
+                          <!-- 수강 취소 버튼 -->
+							<button type="button" class="btn btn-danger" th:onclick="'showCancelModal(' + ${registration.rgId} + ')'" >수강 취소</button>
+
+
+                            <!-- QnA 및 리뷰 등록 링크 -->
+                            <a th:href="@{/mypage/qna/new(courseId=${registration.course.courseId})}" >QnA 등록</a>
+                            <a th:href="@{/mypage/review/new(courseId=${registration.course.courseId})}">리뷰 등록</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 모달 창 구현 -->
+            <div id="cancelModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">수강 취소 확인</h5>
+                            <button type="button" class="close" onclick="closeModal()" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            정말로 이 강의를 취소하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                            <!-- 수강 취소 폼 -->
+                            <form id="cancelForm" method="post">
+                                <!-- 실제 삭제를 위한 버튼 -->
+                                <button type="submit" class="btn btn-danger">수강 취소</button>
+                            </form>
+                            <!-- 모달 닫기 버튼 -->
+                            <button type="button" class="btn btn-secondary" onclick="closeModal()">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+          
+          
+           
+<!-- 페이징 버튼 -->
+<div id="pageBtn" th:if="${page.totalPage} > 1">
+	<ul>
+		<li th:classappend="${page.pageNo == 1} ? 'disabled'">
+			<a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+		</li>
+		<li>
+			<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+		</li>
+		<li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+			<a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+		</li>
+		<li>
+			<a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+		</li>
+		<li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+			<a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+		</li>
+	</ul>
+</div>
+       	<form th:action="@{/mypage/userList}" method="get" id="searchForm">
+	
+	<input type="hidden" id="page" name="page">
+</form>
+
+
+
+
+<!-- 페이지 이동을 위한 폼 수정 -->
+            <form th:action="@{/mypage/courses}" method="get" id="pageForm">
+                <input type="hidden" id="page" name="page">
+            </form>
+            
+            
+            
+            
+            
+    <script th:src="@{/mypage/MypageEnrolledCourses.js}"></script>
+
+   
+   
+
+</main>
+</html>
