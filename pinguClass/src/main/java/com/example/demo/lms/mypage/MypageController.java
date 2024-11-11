@@ -208,7 +208,7 @@ public class MypageController {
 	@GetMapping("/mypage")
 	public String mypageTest() {
 		
-		return "mypage/myPage";
+		return "redirect:/mypage/edit";
 	}
 	
 	
@@ -239,19 +239,19 @@ public class MypageController {
 	/////////////////////////////////회원정보, 구독, 쿠폰 관련//////////////////
 	
 	///////회원 정보 수정//////
-	
+	@LoginCheck
 	@GetMapping("/mypage/edit")
 	public String editUserInfo() {
 		return "mypage/myPageUserEdit";
 	}
-	
+	@LoginCheck
 	@GetMapping("/mypage/edit/password")
 	public String editUserPassword() {
 		return "mypage/myPageEditPassword";
 	}
 	
 	//////////////////구독상황///////////////////
-	
+	@LoginCheck
 	@GetMapping("/mypage/subscription")
 	public String mySubscription() {
 		return "mypage/myPageSubscription";
