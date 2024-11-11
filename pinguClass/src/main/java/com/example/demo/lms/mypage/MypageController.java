@@ -1,5 +1,6 @@
 package com.example.demo.lms.mypage;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ import com.example.demo.lms.entity.User;
 import com.example.demo.lms.paging.EzenPaging;
 import com.example.demo.lms.payment.SubscriptionService;
 import com.example.demo.lms.user.UserRepository;
+import com.example.demo.lms.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,8 +43,9 @@ public class MypageController {
 	private final CommunityService communityService;
 	private final UserRepository userRepository;
 	private final QnaService qnaService;
+	private final UserService userService;
 	private final SubscriptionService subscriptionService;
-	
+
 	@GetMapping("/mypage/community")
     public String getMyPageCommunityList(
         @RequestParam(name = "page", defaultValue = "0") int page,  // 페이지 번호, 기본값은 0
@@ -196,12 +199,7 @@ public class MypageController {
 //	
 //	
 	
-	
-	
-	
-	
-		
-	
+
 	// QnA 수정 메서드 
 	@GetMapping("/mypage/qna/edit/{qnaId}")
 	public String editQnaForm(@PathVariable("qnaId") Integer qnaId, Model model) {
@@ -214,7 +212,7 @@ public class MypageController {
 	@GetMapping("/mypage")
 	public String mypageTest() {
 		
-		return "mypage/myPage";
+		return "redirect:/mypage/edit";
 	}
 	
 	
@@ -238,11 +236,30 @@ public class MypageController {
 	    return "redirect:/mypage/qna";
 	}
 	
-	
-	
-	
-	
 	// QnA 강사가 댓글을 달면 조회가 가능 . 
+	
+	
+	
+	/////////////////////////////////회원정보, 구독, 쿠폰 관련//////////////////
+	
+	///////회원 정보 수정//////
+	@LoginCheck
+	@GetMapping("/mypage/edit")
+	public String editUserInfo() {
+		return "mypage/myPageUserEdit";
+	}
+	@LoginCheck
+	@GetMapping("/mypage/edit/password")
+	public String editUserPassword() {
+		return "mypage/myPageEditPassword";
+	}
+	
+	//////////////////구독상황///////////////////
+	@LoginCheck
+	@GetMapping("/mypage/subscription")
+	public String mySubscription() {
+		return "mypage/myPageSubscription";
+	}
 	
 	
 //=====================마이페이지 구독조회===============================//
@@ -257,7 +274,14 @@ public class MypageController {
 		return "/mypage/mySubscriptionStatus";
 	} 
 	
+	//////////////쿠폰현황///////////////////////////
 	
+	@LoginCheck
+	@GetMapping("/mypage/coupon")
+	public String myCoupon(@Authuser User user, Model model) {
+		model.addAttribute("user", user);
+		return "mypage/myPageCoupon";
+	}
 }
 	
 	

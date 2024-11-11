@@ -154,6 +154,17 @@ main{
     font-weight: 900;
 }
 
+.myInfo>form>.passwordBtn{
+	padding: 1rem 0;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--spanColor);
+    border-radius: 0.3rem;
+    color: white;
+    font-weight: 900;
+}
+
 .myInfo>form>.removeIdBtn{
     padding: 1rem 0;
     border: none;
@@ -202,6 +213,41 @@ main{
     padding: 0 1em;
 }
 
+
+/* coupon */
+
+.couponTitle{
+    margin-bottom: 1rem;
+}
+.couponTitle>p{
+    font-size: 20px ;
+    font-weight: 900;
+    padding-bottom: 1rem;
+}
+
+.coupon>button{
+    border: none;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 0.5rem ;
+    background-color: var(--spanColor);
+    color: white;
+    font-weight: 900;
+}
+.subscription>ul{
+    margin-top: 5rem ;
+    border-top: 1px solid var(--boxShadow);
+    padding: 1rem 0;
+}
+.subscription>ul>li>a{
+    display: flex;
+    padding: 1rem 0;
+    justify-content: space-between;
+    font-weight: 900;
+}
+.subscription>ul>li>a>i{
+    padding: 0 1em;
+}
 
 
 /* delivery */
