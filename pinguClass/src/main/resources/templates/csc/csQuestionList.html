@@ -35,9 +35,6 @@
                             			<th>답변여부</th>
                         			</tr>
                             		<tr th:each="csQuestion : ${csQuestion}">
-                            	<!--
-                                		<td th:text="${notice.totalElements - (notice.number * notice.size) - loop.index}"></td>
-                                	-->
                                 		<td th:text="${csQuestion.questionId}"></td>
                                 		<td><a th:href="@{|/csc/detail/${csQuestion.questionId}|}" th:text="${csQuestion.title}"></a></td>
                                 		<td th:if="${csQuestion.user != null}" th:text="${csQuestion.user.id}"></td>
@@ -69,6 +66,12 @@
             		</div>
 	
         		</div>
+        
+        
+        
+        
+        
+        
         
         <!--  페이징 폼 -->
         <form th:action="@{/csc/list}" method="get" id="pagingForm">

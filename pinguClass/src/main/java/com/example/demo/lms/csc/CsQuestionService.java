@@ -43,16 +43,19 @@ public class CsQuestionService {
 			}
 
 
+			
+			
+			
 
 		/// 페이징 ///////////////////////////////////////////
 		// 모든 문의글 개수 구하기
-		public int getQuestionCountByAll(User userId) {
+		public int getQuestionCountByAll(Integer userId) {
 			
 			return this.csQuestionRepository.countQuestionByAll(userId);
 		}
 
 		// 현재 페이지에서 보이는 글 목록, 언더바 몇페이지인지 구하기
-		public List<CsQuestion> getQuestionByLimit(User userId, int startNo, int pageSize) {
+		public List<CsQuestion> getQuestionByLimit(Integer userId, int startNo, int pageSize) {
 			
 			return this.csQuestionRepository.findQestionByUserId(userId, startNo, pageSize);
 			

@@ -60,12 +60,20 @@ public class CommunityCommentService {
 	
 	
 	// 댓글 삭제
-	public void commentDelete(CommunityComment communityCommentDelete) {
+	public void delete(CommunityComment communityCommentDelete) {
 		
 		communityCommentDelete.setDeleteYn("y");
 		this.communityCommentRepository.save(communityCommentDelete);
 		
 	}
+	
+	
+	
+	
+	
+	
+
+
 
 
 

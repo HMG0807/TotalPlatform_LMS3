@@ -106,9 +106,21 @@ AcomplaintBtn.addEventListener('click',function(){
 // 감사합니다~~~:)
 
 
+
+
+
+
+
+
+
+
+
+
+
+////////   커뮤니티 원글 //////////////////////////////////////
+
 // 글 삭제시 alert창
 let dele = document.querySelector(".QoptionDelete");
-console.log("성공1");
 dele.addEventListener('click', function(){
 	if(confirm("정말로 삭제?")){
 		alert("삭제되었습니다.")
@@ -124,13 +136,11 @@ dele.addEventListener('click', function(){
 ////////   커뮤니티 댓글 //////////////////////////////////////
 
 // 댓글 삭제
-let del = document.querySelectorAll(".deleteAnswer")
+let del = document.querySelectorAll(".AoptionDelete")
 for(let el of del){
 	el.addEventListener('click', function(){
 		if(confirm("정말로 삭제?")){
 			location.href = this.dataset.uri;
-		}else{
-			return false;
 		}
 	});
 };

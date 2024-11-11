@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.lms.Authuser.Authuser;
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.CommunityComment;
 import com.example.demo.lms.entity.User;
@@ -35,11 +37,12 @@ public class CommunityController {
 	private final CommunityCommentService communityCommentService;
 	
 	//커뮤니티 목록 + 페이징 + 검색
-	//@PreAuthorize(value = "isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/list") 
 	public String list(Model model,
 			@RequestParam(value="kw", defaultValue="") String kw, 
-			@RequestParam(value="page", defaultValue="0") int page, Principal principal) throws UserException {
+			@RequestParam(value="page", defaultValue="0") int page,
+			@Authuser User user) throws UserException {
 	
 		EzenPaging paging = new EzenPaging(page, 10, communityService.getCommunityCount(), 5);
 
@@ -50,36 +53,47 @@ public class CommunityController {
 		return "community/communityList"; 
 	}
 	
+	
+	
+	
 	//특정 질문 클릭시 보여주는 상세페이지 주소
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping(value = "/detail/{id}") 
-	public String detail(Model model , @PathVariable("id") Integer id, CommunityCommentForm communityCommentForm) throws UserException{
+	public String detail(Model model , @PathVariable("id") Integer id,
+			CommunityCommentForm communityCommentForm, @Authuser User user) throws UserException{
 		// 질문
 		Community community = this.communityService.getdetail(id);
 		model.addAttribute("community",community);
 		
 		// 댓글
-		//CommunityComment commentModify = this.communityCommentService.getdetail(id);
-		//model.addAttribute("communityComment", commentModify);
+		CommunityComment commentModify = this.communityCommentService.getdetail(id);
+		model.addAttribute("commentModify", commentModify);
 		
 		return "community/communityDetail";
 	}
 	
+	
+	
+	
+	
 	// 커뮤니티 글 작성 주소
-	//@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/create") 
-	public String communityCreate(CommunityForm communityForm) {
+	public String communityCreate(CommunityForm communityForm, @Authuser User user) {
 		
 		return "community/communityForm";
 	}
 	
 	@PostMapping("/create") 
-	public String communityCreate(@Valid CommunityForm communityForm, BindingResult bindingResult, Principal principal) throws Exception{
+	public String communityCreate(@Valid CommunityForm communityForm,
+			BindingResult bindingResult, @Authuser User user) throws Exception{
+		
+
 		if(bindingResult.hasErrors()) {
 			return "community/communityForm"; //오류가 있다면 리파지토리저장 없이 기존의 데이터를 boardQuestion_form.html에 표시
 		}
-		User user = this.userService.getUser("asdf"); //글쓴이 정보를 보여주기 위한 코드
-		this.communityService.communityCreate(communityForm.getTitle(),communityForm.getContent(), user);
+		User userId = this.userService.getUser(user.getUserId()); //글쓴이 정보를 보여주기 위한 코드
+		this.communityService.communityCreate(communityForm.getTitle(),communityForm.getContent(), userId);
 		return "redirect:/community/list";
 		//오류가 없다면 boardQuestionService의 boardQuestionCreate로 리파지토리에 값을 저장하고 FQA/문의 게시판 화면으로 넘어간다
 	}
@@ -89,10 +103,10 @@ public class CommunityController {
 		
 		
 		// 커뮤니티 글 수정하기
-		//@PreAuthorize("isAuthenticated()")
-		@GetMapping("/modify/{id}")
+		@LoginCheck
+		@GetMapping(value="/modify/{id}")
 		public String CommunityModify(CommunityForm communityForm, @PathVariable("id") Integer id,
-				Principal principal, Model model) {
+				@Authuser User user, Model model) {
 			
 			try {
 				Community communityModify = this.communityService.getdetail(id);
@@ -108,13 +122,13 @@ public class CommunityController {
 		
 		
 		
-		//@PreAuthorize("isAuthenticated()")
-		@PostMapping("/modify/{id}")
+		@LoginCheck
+		@PostMapping(value="/modify/{id}")
 		public String CommunityModify(Model model, @PathVariable("id") Integer id,
 				@RequestParam(value="content") String content,
 				@RequestParam(value="title") String title,
 				@Valid CommunityForm communityForm, BindingResult bindingResult,
-				Principal principal) throws Exception {
+				@Authuser User user) throws Exception {
 			
 			Community community = this.communityService.getdetail(id);
 			
@@ -125,7 +139,7 @@ public class CommunityController {
 			}
 			
 			try {
-				User user = this.userService.getUser("asdf");
+				User userId = this.userService.getUser(user.getUserId());
 				this.communityService.modify(community, communityForm.getTitle(),
 						communityForm.getContent());
 					
@@ -143,9 +157,9 @@ public class CommunityController {
 		
 		
 		// 커뮤니티 글 삭제
-		//@PreAuthorize("isAuthenticated()")
-		@GetMapping("/delete/{id}")
-		public String communityDelete(@PathVariable("id") Integer id) throws Exception {
+		@LoginCheck
+		@GetMapping(value="/delete/{id}")
+		public String communityDelete(@PathVariable("id") Integer id, @Authuser User user) throws Exception {
 			Community communityDelete = this.communityService.getdetail(id);
 			this.communityService.delete(communityDelete);
 			
@@ -168,16 +182,16 @@ public class CommunityController {
 ////////  댓글 //////////////////////////////////////////////////// 	
 		
 		// 커뮤니티 댓글 작성
-		//@PreAuthorize("isAuthenticated()")
-		@PostMapping("/detail/{id}") 
+		@LoginCheck
+		@PostMapping(value="/detail/{id}") 
 		public String createCommunityComment(Model model,@PathVariable("id") Integer id ,
 				@RequestParam(value="content") String content,
 				@Valid CommunityCommentForm CommunityCommentForm, BindingResult bindingResult,
-				Principal principal) throws Exception {
+				@Authuser User user) throws Exception {
 					
 			Community community = this.communityService.getdetail(id);
 					
-			User user = this.userService.getUser("qwer"); // qwer -> principal.getName() 바꾸기
+			User userId = this.userService.getUser(user.getUserId()); // qwer -> principal.getName() 바꾸기
 					
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("community",community);
@@ -195,8 +209,9 @@ public class CommunityController {
 		
 		
 		// 커뮤니티 댓글 수정하기
+//		@LoginCheck
 //		@GetMapping(value="/commnetModify/{id}")
-//		public String commentModify(@PathVariable("id") Integer id,  Principal principal, Model model) {
+//		public String commentModify(@PathVariable("id") Integer id, @Authuser User user, Model model) {
 //			try {
 //				Community community = this.communityService.getdetail(id);
 //				model.addAttribute("community", community);
@@ -240,15 +255,24 @@ public class CommunityController {
 //				}
 		
 		
+		
+
+		
+		
+		
 		// 커뮤니티 댓글 삭제하기
-		@GetMapping("/commentDelete/{id}")
-		public String CommentDelete(@PathVariable("id") Integer id) throws Exception {
-			Community commentDelete = this.communityService.getdetail(id);
-			this.communityService.delete(commentDelete);
+		@LoginCheck
+		@GetMapping(value="/commentDelete/{id}")
+		public String CommentDelete(@PathVariable("id") Integer id, @Authuser User user) throws UserException {
+			CommunityComment commentDelete = this.communityCommentService.getdetail(id);
+			this.communityCommentService.delete(commentDelete);
 			
 			return "redirect:/community/list";
 			
 	}
+		
+		
+		
 
 		
 		

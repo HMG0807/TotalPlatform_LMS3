@@ -35,19 +35,21 @@ public class CsController {
 	@LoginCheck
 	@GetMapping("/list")
 	public String CsCenter(Model model, @Authuser User user,
-			@RequestParam(value="page", defaultValue="0") int page,
-			@RequestParam(value="id", defaultValue="0") User userId) {
+			@RequestParam(value="page", defaultValue="0") int page) {
 		
 		
 		// 1:1 문의 페이징
-	    EzenPaging paging = new EzenPaging(page, 10, this.csQuestionService.getQuestionCountByAll(userId), 5); 
-	    List<CsQuestion> csQuestion = this.csQuestionService.getQuestionByLimit(userId, paging.getStartNo(), paging.getPageSize()); // 나중에 14->id로 바꾸기
+	    EzenPaging paging = new EzenPaging(page, 10, this.csQuestionService.getQuestionCountByAll(user.getUserId()), 5); 
+	    List<CsQuestion> csQuestion = this.csQuestionService.getQuestionByLimit(user.getUserId(), paging.getStartNo(), paging.getPageSize()); // 나중에 14->id로 바꾸기
 		
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("csQuestion", csQuestion);
 	    
 		return "csc/csQuestionList";
 	}
+	
+	
+	
 	
 	// 문의글 상세
 	@LoginCheck
@@ -75,17 +77,20 @@ public class CsController {
 	public String CsQuestionCreate(@Valid CsForm csForm, BindingResult bindingResult, 
 			@Authuser User user) throws UserException {
 		
+		
+		System.out.println("책임을 물것이야!!!!!!!");
 		// 제목 내용 안쓰면 폼에서 못 나간다!
 		if(bindingResult.hasErrors()) {
 			return "csc/csQuestionForm";
 		}
-		
+		System.out.println("ang");
 		
 		// 제대로 썼을 때 저장
 		try {
 			// 유저 이름 불러오기
+			System.out.println("책임을 물것이야!!!!!!!22222222");
 			User userId;
-			userId = userService.getUser(user.getId());
+			userId = userService.getUser(user.getUserId());
 			// 유저 정보에 입력한 제목, 내용, 유저명 저장
 			this.csQuestionService.create(csForm.getTitle(), csForm.getContent(), userId);
 		} 
