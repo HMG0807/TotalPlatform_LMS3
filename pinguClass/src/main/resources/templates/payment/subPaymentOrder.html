@@ -19,6 +19,8 @@
                         </h1>
 
                         <div>
+                        	<input type="hidden" id="subscribeType" th:value="${Subscribe.type}">
+                        	<input type="hidden" id="totalPrice" th:value="${Subscribe.price}">
                             <span>
                                 상품가격                    
                             </span>
@@ -40,10 +42,10 @@
                             <span>
                                 총 결제금액
                             </span>
-                            <span  th:if="${Subscribe.type == '1개월 구독'}" class="productInfo">10,000원</span>
-                            <span  th:if="${Subscribe.type == '3개월 구독'}" class="productInfo">27,000원</span>
-                            <span  th:if="${Subscribe.type == '6개월 구독'}" class="productInfo">48,000원</span>
-                            <span  th:if="${Subscribe.type == '12개월 구독'}" class="productInfo">84,000원</span>
+                            <span  th:if="${Subscribe.type == '1개월 구독'}"  class="productInfo" value="10000">10,000원</span>
+                            <span  th:if="${Subscribe.type == '3개월 구독'}"  class="productInfo" value="27000">27,000원</span>
+                            <span  th:if="${Subscribe.type == '6개월 구독'}"  class="productInfo" value="48000">48,000원</span>
+                            <span  th:if="${Subscribe.type == '12개월 구독'}"  class="productInfo" value="84000">84,000원</span>
                         </div>
                     </form>
  <!-- 상품 정로란 종료  -->
@@ -106,7 +108,7 @@
 <!-- 취소 및 결제 버튼 시작 -->
                 <div class="buttonLayout">
                     <button type="button" value="결제가 취소되었습니다." onclick="alert('취소되었습니다.'); history.back();" id=cancel>취소</button>
-                    <button id="paymentBtn" th:onclick="success([[${Subscribe.subscId}]])">결제</button>
+                    <button id="paymentBtn">결제</button>
                 </div>
 
 
@@ -117,7 +119,7 @@
     </main>   
 <button>d</button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="https://js.tosspayments.com/v1/payment"></script>
     <script src="/payment/subPaymentOrder.js"></script>    
 </body>
 </html>
