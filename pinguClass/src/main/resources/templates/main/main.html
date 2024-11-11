@@ -38,7 +38,7 @@
         </div>
         <div class="section">
             <div class="sectionTitle">
-                <p>실시간 인기 클래스</p>
+                <p>실시간 새로운 클래스</p>
                 <div class="sectionSlideBtn">
                     <button class="setionSlideLeft"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="setionSlideRight"><i class="fa-solid fa-chevron-right"></i></button>
@@ -47,158 +47,46 @@
             <div class="sectionSlideContainer">
                 <div class="slides">
                     <ul class="slide">
-                        <li>
+                    	<li th:each="courseList : ${courseList1}">
                             <a href="#">
                                 <div class="sectionConImg">
                                     <img src="" alt="">
                                 </div>
                                 <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
+                                    <p th:text="${courseList.title}">
+                                         <br> <span th:text="${courseList.content}"></span>
                                     </p>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-
                     </ul>
                     <ul class="slide">
-                        <li>
+                        <li th:each="courseList : ${courseList2}">
                             <a href="#">
                                 <div class="sectionConImg">
                                     <img src="" alt="">
                                 </div>
                                 <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
+                                    <p th:text="${courseList.title}">
+                                         <br> <span th:text="${courseList.content}"></span>
                                     </p>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-
                     </ul>
                     <ul class="slide">
-                        <li>
+                        <li th:each="courseList : ${courseList3}">
                             <a href="#">
                                 <div class="sectionConImg">
                                     <img src="" alt="">
                                 </div>
                                 <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
+                                    <p th:text="${courseList.title}">
+                                         <br> <span th:text="${courseList.content}"></span>
                                     </p>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="sectionConImg">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="sectionConText">
-                                    <p>
-                                        loremloremlorem <br> <span>loremlorem</span>
-                                    </p>
-
-                                </div>
-                            </a>
-                        </li>
-
                     </ul>
                 </div>
             </div>

@@ -32,3 +32,11 @@ categiryBtn.addEventListener('click',function(e){
     }
 
 })
+
+
+const searchBtn = document.querySelector(".searchBtn");
+const keywordForm = document.querySelector("#keywordForm");
+
+searchBtn.addEventListener("click", function(){
+	keywordForm.submit();
+})

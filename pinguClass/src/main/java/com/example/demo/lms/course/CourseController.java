@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.lms.entity.Course;
+import com.example.demo.lms.entity.Lecture;
+import com.example.demo.lms.lecture.LectureService;
 import com.example.demo.lms.paging.EzenPaging;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class CourseController {
 
 	private final CourseService courseService;	
+	private final LectureService lectureService;
+	
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강의 상세 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
@@ -25,10 +29,15 @@ public class CourseController {
 	public String course(@PathVariable("id") Integer courseId,Model model) {
 		
 		Course course = this.courseService.getCourse(courseId);
+		List<Lecture> lecture = this.lectureService.getLecture(courseId);
 		
 		model.addAttribute("course",course);
+		model.addAttribute("lectureList", lecture);
 		return "/category/categoryDetailPage";
 	}
+	
+	
+	
 	
 //	@GetMapping("/courseQna/{id}")
 //	public String Qna(@PathVariable("id") Integer courseId, Model model,

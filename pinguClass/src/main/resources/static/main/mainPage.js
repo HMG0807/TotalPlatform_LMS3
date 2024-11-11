@@ -7,6 +7,8 @@
     
     const loginNav = document.querySelector(".loginNav");
     
+    
+    
     if(getCookie( 'jwtToken') !==null){
 		console.log("확인");
 		loginNav.innerHTML ="<a id = "+"logout "+"href="+"/user/logout"+">로그아웃</a>";

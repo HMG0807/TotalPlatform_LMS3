@@ -1,11 +1,10 @@
 package com.example.demo.lms.course;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.example.demo.lms.entity.Course;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -24,8 +23,17 @@ public class CourseService {
 	}
 
 
+    // 시간순으로 강의 조회
+	public List<Course> getAllCourseBytime(Integer startIdx, Integer Idx) {
+		
+		return this.courseRepository.findAll(startIdx, Idx);
 
+	}
+	
 
+	public int getCourseCount() {
+		return this.courseRepository.countCourseAll(); 
+	}
 
 //	public int getQuestionCountByKeyword(Integer corseId) {
 //
