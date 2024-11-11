@@ -34,9 +34,14 @@ public class CourseService {
 	}
 
 
-	public Lecture getLecture(Integer lectureId) {
-		return null;
+	public Course findById(Integer courseId) {
+		 Optional<Course> course = courseRepository.findById(courseId);
+	        return course.orElse(null);  // 값이 없으면 null .
+	    }
+
 	}
+
+
 
 
 

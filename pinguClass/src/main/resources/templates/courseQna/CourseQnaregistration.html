@@ -8,31 +8,43 @@
         <div class="myPageContentContainer">
             <h2 class="contentTitle">QnA 등록하기</h2>
             
-           <form th:action="@{/mypage/qna/save}" th:object="${qna}" method="post">
-    <div>
-        <label for="title">제목:</label>
-        <input type="text" id="title" th:field="*{title}" required>
-    </div>
-    <div>
-        <label for="content">내용:</label>
-        <textarea id="content" th:field="*{content}" rows="5" required></textarea>
-    </div>
-    <div>
-        <label for="course">강좌 선택:</label>
-        <select id="course" name="courseId" required>
-            <option value="">강좌를 선택하세요</option>
-            <option th:each="course : ${courses}" th:value="${course.courseId}" th:text="${course.title}"></option>
-        </select>
-    </div>
-    <div>
-        <button type="submit">등록</button>
-        <a href="/mypage/qna">
-            <button type="button">목록으로 돌아가기</button>
-        </a>
-    </div>
-</form>
-              
-        </div>
-    </div>
+            <!-- QnA 등록 폼 -->
+            <form th:action="@{/mypage/qna/save}" th:object="${qna}" method="post">
+                <!-- 제목 입력 -->
+                <div>
+                    <label for="title">제목:</label>
+                    <input type="text" id="title" th:field="*{title}" required>
+                </div>
+                
+                <!-- 내용 입력 -->
+                <div>
+                    <label for="content">내용:</label>
+                    <textarea id="content" th:field="*{content}" rows="5" required></textarea>
+                </div>
+                
+                <!-- 강좌 선택 드롭다운 -->
+                <div>
+                    <label for="course">강좌 선택:</label>
+                    <select id="course" name="courseId" required>
+                        <option value="">강좌를 선택하세요</option>
+                        <!-- 사용자가 수강 중인 강좌 목록을 표시 -->
+                        <option th:each="course : ${courses}" 
+                        		th:value="${course.courseId}" 
+                        		th:text="${course.title}">
+                        		</option>
+                    </select>
+                </div>
+
+                <!-- 버튼들 -->
+                <div>
+                    <button type="submit">등록</button>
+                    <!-- 목록으로 돌아가기 버튼 -->
+                    <a href="/mypage/qna">
+                        <button type="button">목록으로 돌아가기</button>
+                    </a>
+                </div>
+            </form>              
+        </div> <!-- myPageContentContainer 끝 -->
+    </div> <!-- myPageContainer 끝 -->
 </main>
 </html>
