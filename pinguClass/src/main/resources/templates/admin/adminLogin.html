@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>adminLoginPage</title>
-    <link rel="stylesheet" href="../reset.css">
-    <link rel="stylesheet" href="../adminLoginPageStyle.css">
+    <link rel="stylesheet" th:href="@{admin/reset.css}">
+    <link rel="stylesheet" th:href="@{admin/adminLoginPageStyle.css}">
 </head>
 
 <body>
@@ -16,8 +16,12 @@
         <div class="loginContainer">
             <p>&lt; PinguClass &gt;</p>
             <p>관리자 로그인</p>
-            <form action="">
-                <input type="text" name="adcode" placeholder="관리자 코드를 입력해주세요.">
+            <form th:action="@{/admin/login}" th:object="${adminform}">
+            	<!-- 오류 메시지 -->
+				<div th:replace="~{user/form_errors :: formErrorsFragment}"></div>
+				
+				<!-- 관리자 코드 입력 -->
+                <input type="text" th:field="*{adminCode}" placeholder="관리자 코드를 입력해주세요.">
                 <div class="login">
                     <button>로그인</button>
                 </div>

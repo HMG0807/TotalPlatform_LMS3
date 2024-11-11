@@ -1,0 +1,49 @@
+<html layout:decorate="~{layout/layout}">
+<main layout:fragment="main">
+	<link rel="stylesheet" th:href="@{/mypage/myCourseLectureOrderChangePageStyle.css}">
+	
+    <div th:replace="~{mypage/common/myPageMyCard :: myCardFragment}"></div>
+	
+    <div class="myPageContainer">
+    	<!-- 서브 네비바 영역 -->
+        <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
+        
+        <div class="myPageContentContainer">
+            <!-- 컨텐트 영역 -->
+            <ul>
+				<li class="courseMngContent">
+					<div class="courseMngTitle">
+						내 강좌 관리 > 강의 추가/관리 > 순서 변경
+						<!--<button class="orderByChangeBtn">강의 순서 변경</button>-->
+						<!--<button th:onclick="lectureCreate([[${courseId}]])">강의 추가</button>-->
+					</div>
+					<form id="orderform" th:action="@{|/mypage/instructor/lectureMng/orderChange/${courseId}|}" method="post">
+						<table class="courseMngInfo">
+							<tr>
+								<th>강의 순서</th>
+								<th>강의명</th>
+								<th>등록 날짜</th>
+							</tr>
+							<tr th:each="lecture : ${lectureList}" class="lectureTr">
+								<td>
+									<i class="fa-solid fa-minus minus"></i>
+										<input type="text" name="orderValue" class="orderVal" th:value="${lecture.lectureOrder}" readonly>
+										<input type="hidden" name="lectureId" th:value="${lecture.lectureId}">
+									<i class="fa-solid fa-plus plus"></i>
+								</td>
+								<td th:text="${lecture.title}"></td>
+								<td th:text="${#temporals.format(lecture.lastUpdate, 'yyyy-MM-dd')}"></td>
+							</tr>
+						</table>
+					</form>
+					
+					<div class="submitDiv">
+						<button onclick="changeSubmit()">변경 완료</button>
+					</div>
+				</li>
+			</ul>
+        </div>
+    </div>
+	<script th:src="@{/mypage/myCourseLectureOrderChangePageModul.js}"></script>
+</main>
+</html>
