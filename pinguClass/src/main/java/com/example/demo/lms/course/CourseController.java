@@ -1,6 +1,8 @@
 package com.example.demo.lms.course;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Lecture;
 import com.example.demo.lms.file.FileRepository;
+import com.example.demo.lms.lecture.LectureService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +22,8 @@ public class CourseController {
 
 	private final CourseService courseService;	
 	private final FileRepository fileRepository; //한민기 추가
+	private final LectureService lectureService;
+	
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강의 상세 보기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
@@ -26,8 +31,10 @@ public class CourseController {
 	public String course(@PathVariable("id") Integer courseId,Model model) {
 		
 		Course course = this.courseService.getCourse(courseId);
+		List<Lecture> lecture = this.lectureService.getLecture(courseId);
 		
 		model.addAttribute("course",course);
+		model.addAttribute("lectureList", lecture);
 		return "/category/categoryDetailPage";
 	}
 	

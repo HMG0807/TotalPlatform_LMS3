@@ -39,8 +39,18 @@ public class CourseService {
 	        return course.orElse(null);  // 값이 없으면 null .
 	    }
 
-	}
+	
+	// 시간순으로 강의 조회
+		public List<Course> getAllCourseBytime(Integer startIdx, Integer Idx) {
+			
+			return this.courseRepository.findAll(startIdx, Idx);
 
+		}
+		
+
+		public int getCourseCount() {
+			return this.courseRepository.countCourseAll(); 
+		}
 
 
 

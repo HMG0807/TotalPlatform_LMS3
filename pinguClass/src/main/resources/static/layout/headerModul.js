@@ -60,6 +60,11 @@ logoutBtn.addEventListener("click", function(){
 	location.href = "/"
 })
   
-  
+const searchBtn = document.querySelector(".searchBtn");
+const keywordForm = document.querySelector("#keywordForm");
+
+searchBtn.addEventListener("click", function(){
+	keywordForm.submit();
+})
   
   

@@ -302,12 +302,6 @@ public class MypageController {
 	}
 	
 
-	//////////////////구독상황///////////////////
-	@LoginCheck
-	@GetMapping("/mypage/subscription")
-	public String mySubscription() {
-		return "mypage/myPageSubscription";
-	}
 	
 	
 //=====================마이페이지 구독조회===============================//
