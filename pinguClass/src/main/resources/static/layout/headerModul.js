@@ -46,7 +46,7 @@ function deleteCookie(name) {
 const loginNav = document.querySelector(".loginNav");
     
 if(getCookie( 'jwtToken') !==null){
-	loginNav.innerHTML ="<li><a href="+"#"+">마이페이지</a></li><li><a id = "+"logout "+"href="+"/user/logout"+">로그아웃</a></li>";
+	loginNav.innerHTML ="<li><a href="+"/mypage/subscription"+">마이페이지</a></li><li><a id = "+"logout "+"href="+"/user/logout"+">로그아웃</a></li>";
 }else{
 	loginNav.innerHTML ="<li><a href="+"/user/login"+">로그인</a></li><li><a href="+"http://192.168.17.254:8080/signup" +">회원가입</a></li>";
 }

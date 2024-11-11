@@ -40,11 +40,17 @@ public class MyCourseMngController {
 		
 		String userId = user.getId(); //principal.getName() 대체 > "hmg234"
 		
+//		if(user.getInstructor() == null) {
+//			return "redirect:/mypage";
+//		}
+		
 		EzenPaging ezenPaging = new EzenPaging(page, 5, this.mcmService.getCourseCountById(userId), 5);
 		List<Course> courseList = this.mcmService.getCourseList(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 		
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("page", ezenPaging);
+		
+		//model.addAttribute("instructor", user.g); //강사인지 아닌지 확인
 		
 		return "mypage/myCourseMng";
 	}
