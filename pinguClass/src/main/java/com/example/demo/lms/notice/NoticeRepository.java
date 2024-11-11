@@ -13,24 +13,15 @@ import com.example.demo.lms.entity.User;
 
 public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 	
-	@Query(value = "SELECT * FROM notice n WHERE n.delete_yn = 'n'",   nativeQuery = true)
-	List<Notice> findAll();
-	//Page<Notice> findByTitleContaining(String keyword, Pageable pageable);
 	
-//	@Query("select distinct n " 
-//            + "from notice n " 
-//            + "inner join n.admin a " 
-//            + "where n.title like %:kw% " 
-//            + "or a.id like %:kw%")
-//	Page<Notice> findAllByTitleOrId(@Param("kw") String kw, Pageable pageable);
 	
-	//@Query("select distinct n " 
-    //        + "from notice n " 
-     //       + "inner join n.admin a " 
-     //       + "where a.id like %:kw%")
-	//Page<Notice>findAllById(@Param("kw") String kw, Pageable pageable);
-	
-	//Page<Notice> findByUser(User user, Pageable pageable);
+	// 1108 공지 개수 카운트
+	@Query(value = "SELECT count(*) FROM notice  WHERE delete_yn like 'n'",   nativeQuery = true)
+	int countNoticeAll();
+
+	// 1108 공지 보이는 개수 제한
+	@Query(value = "SELECT * FROM notice WHERE delete_yn like 'n' limit :start, :idx", nativeQuery = true)
+	List<Notice> countNoticeByLimit(@Param("start") int startNo, @Param("idx") int pageSize);
 	
 
 }

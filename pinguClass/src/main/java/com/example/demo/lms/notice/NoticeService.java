@@ -22,28 +22,34 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class NoticeService {
 	
-	private final NoticeRepository nr;
-	private final AdminUserRepository ar;
-	private final UserRepository ur;
+	private final NoticeRepository noticeRepository;
 
-	// 미삭제 공지 조회
-	public List<Notice> getList(){
-		
-		return this.nr.findAll();
-	}
 	
-	// 유저 정보 가져오기
-	public User getUser(String id) throws UserException {
-		Optional<User> user = this.ur.findById(id);
-		if(user.isPresent()) { 
-			return user.get();
-		} else {
-			throw new UserException("유저 정보가 없습니다.");
-		}
+	
+	
+	///////// 페이징 ///////////////////////////
+	// 1108 공지 개수 카운트 - 이순
+	public int getNoticeCount() {
+		
+		return this.noticeRepository.countNoticeAll();
 	}
 
+	// 1108 공지 개수 카운트 - 이순
+	public List<Notice> getNoticeByLimit(int startNo, int pageSize) {
+
+		return this.noticeRepository.countNoticeByLimit(startNo, pageSize);
+	}
+
+	
+	
+	
+	
+	
+	
+	//////// 1109 공지 상세 조회 - 이순 //////////////////////////////
 	public Notice getdetail(Integer id) throws UserException {
-		Optional<Notice> notice = this.nr.findById(id);
+		
+		Optional<Notice> notice = this.noticeRepository.findById(id);
 		if(notice.isPresent()) {
 			return notice.get();
 		}else {

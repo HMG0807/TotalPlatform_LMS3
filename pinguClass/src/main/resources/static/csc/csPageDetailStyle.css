@@ -1,0 +1,196 @@
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+
+/* 사이드바 시작 */
+.csContentContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+}
+
+.csSideNav {
+    width: 20%;
+}
+
+
+.csSideNav>ul {
+    padding-right: 3rem;
+}
+
+.csSideNav>ul>li>a {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: 900;
+    border-top: 1px solid var(--boxShadow);
+}
+
+.csSideNav>ul>li:last-child>a {
+    border-bottom: 1px solid var(--boxShadow);
+}
+
+/*  사이드바 끝  */
+
+
+
+
+
+
+
+
+/*제목 내용 컨텐츠*/
+.csContent{
+	width: 100%;
+}
+
+
+/* 커뮤 디테일 쎄비지*/
+
+/* 타이틀 꾸미기 */
+.container>.py-2 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border: 1px solid rgb(204, 204, 204);
+    color: rgb(102, 102, 102);
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+    padding-left: 1.5rem;
+
+}
+.container>.py-2:nth-child(1){
+	        background-color: #393939;
+	        color:#fff;
+}
+
+/* content decoration */
+.container>.card:nth-child(2) {
+    border: 1px solid rgb(204, 204, 204);
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+}
+
+
+
+/* 컨텐츠 패딩 */
+.card-body>.card-text {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+
+
+
+/* 컨텐츠 작성 날짜 */
+.d-flex {
+    display: flex;
+    justify-content: end;
+}
+
+
+/*----- 수정 삭제 버튼 -----------------*/
+.modify{
+	padding-right: 0.5rem;
+}
+
+.modify>a{
+	margin: 0.5rem;
+    border-radius: 5px;
+    display: block;
+    background-color: #ededed;
+    width: 80px;
+    z-index: 10;
+    position: relative;
+    left: 0%;
+    text-align: center;
+   
+}
+
+.delete{
+	padding-right: 0.5rem;
+}
+
+.delete>a{
+    margin: 0.5rem;
+    border-radius: 5px;
+    display: block;
+    background-color: #ededed;
+    width: 80px;
+    z-index: 10;
+    position: relative;
+    left: 0%;
+    text-align: center;
+}
+
+/* btn 선택시 이벤트*/
+.d-flex>.modify>a:hover{
+     background-color: darkgrey;
+     cursor: pointer;
+}
+
+.d-flex>.delete>a:hover{
+     background-color: darkgrey;
+     cursor: pointer;
+}
+
+
+
+
+.mb-2{
+	margin-left: 1.5rem;
+}
+
+/* 수정삭제버튼 호버시 색 변경*/
+.recommend>a:hover{
+     background-color: darkgrey;
+}
+
+
+
+
+
+
+
+/******  답변  ********************************/
+
+/*제목*/
+.border-bottommy-3py-2{
+	padding-top: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    color: rgb(102, 102, 102);
+    margin-bottom: 1rem;
+    border-radius: 0.rem;
+   
+    padding-left: 1.5rem;
+
+}
+
+
+
+/*내용*/
+.card-content{
+	white-space: pre-line;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    border: 1px solid rgb(204, 204, 204);
+
+}
+
+/*내용의 날짜*/
+.justify-content-end-answer{
+	padding-right: 2rem;
+}
+
+
