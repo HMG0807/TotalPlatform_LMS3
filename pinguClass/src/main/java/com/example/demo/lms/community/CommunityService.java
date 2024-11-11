@@ -65,7 +65,7 @@ public class CommunityService {
 
 		
 		
-	// 커뮤니티 글 작성하기
+		// 커뮤니티 글 작성하기
 		public void communityCreate(String title ,String content, User user) {
 			Community community = new Community();
 			community.setTitle(title);

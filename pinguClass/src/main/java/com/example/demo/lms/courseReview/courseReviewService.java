@@ -27,11 +27,11 @@ public class courseReviewService {
 	
 	
 		/*마이페이지 수강중인 강좌 리뷰 조회 - 남동현*/
-	 public List<Review> getUserReviews(Integer userId, int startNo, int pageSize) {
+	 public List<Review> getUserReviews(String userId, int startNo, int pageSize) {
 	        return courseReviewRepository.findByUserWithPaging(userId, startNo, pageSize);
 	    }
 
-	    public int getUserReviewCount(Integer userId) {
+	    public int getUserReviewCount(String userId) {
 	        return courseReviewRepository.countByUserId(userId);
 	    }
 

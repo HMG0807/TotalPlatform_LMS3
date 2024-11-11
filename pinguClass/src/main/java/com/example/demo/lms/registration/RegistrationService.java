@@ -17,11 +17,11 @@ public class RegistrationService {
 	/*수강 중인 강좌 내역 조회 및 취소 기능을 위한 작성 코드 - 남동현 */
     private final RegistrationRepository registrationRepository;
     
-    public List<Registration> getRegistrationsByUser(Integer userId, int startNo, int pageSize) {
+    public List<Registration> getRegistrationsByUser(String userId, int startNo, int pageSize) {
         return registrationRepository.findLimitStartIdx(userId, startNo, pageSize);
     }
 
-    public int countRegistrationByUser(Integer userId) {
+    public int countRegistrationByUser(String userId) {
         return registrationRepository.countRegistrationByUser(userId);
     }
 

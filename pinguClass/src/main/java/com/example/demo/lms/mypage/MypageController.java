@@ -56,64 +56,56 @@ public class MypageController {
 	private final courseReviewService coursereviewService;
 	private final SubscriptionService subscriptionService;
 
-	@GetMapping("/mypage/community")
-    public String getMyPageCommunityList(
-        @RequestParam(name = "page", defaultValue = "0") int page,  // 페이지 번호, 기본값은 0
-        Model model  // 뷰로 데이터를 전달하는 모델 객체
-    ) throws UserException {
-		
-		String userId = "dongmony";       // 로그인 기능 완료시 실제 유저 아이디 가져와야함.
-		
-		
-		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-	    EzenPaging ezenPaging = new EzenPaging(page, 10, communityService.getCommunityCountById(userId), 5);
-	    List<Community> communityList = this.communityService.getCommunityListByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
-	    List<CommunityComment> commentList = this.communityService.getCommentsByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
-	    
-	    model.addAttribute("communityList", communityList);
-	    model.addAttribute("commentList", commentList);
-	    model.addAttribute("page", ezenPaging);
-	    
-	    return "mypage/communityManage";
-	}
-
+	 @LoginCheck
+	 @GetMapping("/mypage/community")
+	    public String getMyPageCommunityList(
+	            @RequestParam(name = "page", defaultValue = "0") int page,
+	            Model model,
+	            @Authuser User user
+	    ) throws UserException {
+	        String userId = user.getId();
+	        EzenPaging ezenPaging = new EzenPaging(page, 10, communityService.getCommunityCountById(userId), 5);
+	        List<Community> communityList = this.communityService.getCommunityListByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+	        List<CommunityComment> commentList = this.communityService.getCommentsByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+	        
+	        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+	        System.out.println(user.getUserId());
+	        System.out.println(user.getId());
+	        System.out.println(communityList.size());
+	        
+	        model.addAttribute("communityList", communityList);
+	        model.addAttribute("commentList", commentList);
+	        model.addAttribute("page", ezenPaging);
+	        
+	        return "mypage/communityManage";
+	    }
+	
 	
 	
 	// 마이페이지에서 글 제목 클릭시 상세 페이지로 이동-> 해당 글 정보 가져와서 화면에 출력 
-	@GetMapping("/mypage/community/{cmId}")
-	public String viewCommunityDetail(@PathVariable("cmId")Integer cmId, Model model) throws UserException {
-	    // cmId에 해당하는 커뮤니티 글 정보를 가져옴
-	    Community community = communityService.getdetail(cmId);
-	    
-	    // 모델에 커뮤니티 정보 추가
-	    model.addAttribute("community", community);
-	    
-	    // 상세보기 화면 반환
-	    return "mypage/communityDetail";
-	}
-	
-	@GetMapping("/mypage/community/edit/{cmId}")
-	public String editCommunityForm(@PathVariable("cmId") Integer cmId, Model model) throws UserException {
-	    // cmId에 해당하는 커뮤니티 글 정보를 가져옴
-	    Community community = communityService.getdetail(cmId);
-	    
-	    
-	    // 모델에 커뮤니티 정보 추가
-	    model.addAttribute("community", community);
-	    
-	    // 수정 폼 화면 반환
-	    return "mypage/communityEdit";
-	    
-	    
-	    
-	}
+	 @LoginCheck
+	 @GetMapping("/mypage/community/{cmId}")
+	    public String viewCommunityDetail(@PathVariable("cmId") Integer cmId, Model model, @Authuser User user) throws UserException {
+		 Community community = communityService.getdetail(cmId);
+		 model.addAttribute("community", community);
+		 return "mypage/communityDetail";
+	    }
+
+	@LoginCheck
+    @GetMapping("/mypage/community/edit/{cmId}")
+    public String editCommunityForm(@PathVariable("cmId") Integer cmId, Model model) throws UserException {
+        Community community = communityService.getdetail(cmId);
+        model.addAttribute("community", community);
+        return "mypage/communityEdit";
+    }
 	
 	
-	
+	@LoginCheck
 	@PostMapping("/mypage/community/edit/{cmId}")
 	public String editCommunity(@PathVariable("cmId") Integer cmId,    // 각각 pathVariable, 
 								@RequestParam("title") String title,   // RequestParam 안 파라미터는 로그인 기능 완료시 지워줘도 됨 
-								@RequestParam("content") String content) throws UserException {
+								@RequestParam("content") String content,
+								@Authuser User user) throws UserException {
 	    
 	    // 커뮤니티 글 업데이트
 	    communityService.updateCommunity(cmId, title, content);
@@ -130,6 +122,7 @@ public class MypageController {
 	
 	
 	// 마이페이지에서 커뮤니티 작성한 글 삭제 기능 담당 해당 글의 cmId(글번호)를 받아서 삭제 기능 
+	@LoginCheck
 	@PostMapping("/mypage/community/delete/{cmId}")
 	public String deleteCommunity(@PathVariable("cmId") Integer cmId) throws UserException {
 	    // 커뮤니티 글 삭제
@@ -144,26 +137,28 @@ public class MypageController {
 
 	
 	// 마이페이지 강좌 QnA 목록 조회 
-	@GetMapping("/mypage/qna")
-	public String getMyPageQnaList(
-	    @RequestParam(name = "page", defaultValue = "0") int page,
-	    Model model
-	) {
-		Integer userId = 17;  // 로그인 기능 완료시 실제 유저 아이디 가져와야함
+	 @LoginCheck
+	 @GetMapping("/mypage/qna")
+	    public String getMyPageQnaList(
+	            @RequestParam(name = "page", defaultValue = "0") int page,
+	            Model model,
+	            @Authuser User user
+	    ) {
+		 	EzenPaging ezenPaging = new EzenPaging(page, 10, qnaService.getQnaCountByUser(user), 5);
+	        List<Qna> qnaList = qnaService.getQnaListByUser(user, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 
-	    EzenPaging ezenPaging = new EzenPaging(page, 10, qnaService.getQnaCountByUser(userId), 5);
-	    List<Qna> qnaList = qnaService.getQnaListByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+	        model.addAttribute("qnaList", qnaList);
+	        model.addAttribute("page", ezenPaging);
 
-	    model.addAttribute("qnaList", qnaList);
-	    model.addAttribute("page", ezenPaging);
+	        return "mypage/userMypageQnaList";
+	    }
 
-	    return "mypage/userMypageQnaList";
-	}
 	
 	
 	
 	
 	// QnA 상세 페이지 조회 , 강사 답변 조회 
+	@LoginCheck
 	@GetMapping("/mypage/qna/{qnaId}")
 	public String viewQnaDetail(@PathVariable("qnaId") Integer qnaId, Model model) {
 	    
@@ -194,10 +189,13 @@ public class MypageController {
 	
 
 	// QnA 등록 페이지로 이동
+	@LoginCheck
     @GetMapping("/mypage/qna/new")
     public String showQnaForm(Model model) {
         model.addAttribute("qna", new Qna());
         model.addAttribute("courses", qnaService.getAllCourses()); // 강좌 목록 추가
+        
+        
         
         // 모든 강좌 목록을 가져오는 부분 제거
         return "CourseQna/CourseQnaregistration";
@@ -206,33 +204,24 @@ public class MypageController {
     
     
     // QnA 저장 
+	@LoginCheck
     @PostMapping("/mypage/qna/save")
-    public String saveQna(@ModelAttribute Qna qna, @RequestParam(name = "courseId") Integer courseId) {
-       
-        Integer userId = 17; 
-        User user = userService.findById(userId);
-        qna.setUser(user);  // Qna 객체에 userId 설정
-        
-        
+    public String saveQna(@ModelAttribute Qna qna, @RequestParam(name = "courseId") Integer courseId, @Authuser User user) {
+        qna.setUser(user);
         
         Course course = courseService.findById(courseId);
-        qna.setCourse(course);
         if (course != null) {
             qna.setCourse(course);
         } else {
-            // Course가 없을 경우 처리 (에러 메시지 출력 또는 리다이렉트)
             return "redirect:/mypage/qna?error=courseNotFound";
         }
         
-        
-        
-        // Qna 저장
         qnaService.saveQnaWithCourse(qna, courseId);
         return "redirect:/mypage/qna";
     }
-	
 
 	// QnA 수정 메서드 
+	@LoginCheck
 	@GetMapping("/mypage/qna/edit/{qnaId}")
 	public String editQnaForm(@PathVariable("qnaId") Integer qnaId, Model model) {
 	    Qna qna = qnaService.getQnaDetail(qnaId);
@@ -240,7 +229,7 @@ public class MypageController {
 	    return "courseQna/CourseQnaEdit";
 	}
 
-	
+	@LoginCheck
 	@GetMapping("/mypage")
 	public String mypageTest() {
 		
@@ -249,6 +238,7 @@ public class MypageController {
 	
 	
 	// QnA 수정 처리 
+	@LoginCheck
 	@PostMapping("/mypage/qna/edit/{qnaId}")
 	public String editQna(
 	    @PathVariable("qnaId") Integer qnaId,
@@ -262,30 +252,32 @@ public class MypageController {
 	
 	
 	// QnA 삭제 
+	@LoginCheck
 	@PostMapping("/mypage/qna/delete/{qnaId}")
 	public String deleteQna(@PathVariable("qnaId") Integer qnaId) {
 	    qnaService.deleteQna(qnaId);
 	    return "redirect:/mypage/qna";
 	}
 	
-	// QnA 강사가 댓글을 달면 조회가 가능 . 
+		// QnA 강사가 댓글을 달면 조회가 가능 . 
 	
-	
-	@GetMapping("/mypage/courses")
-	public String getEnrolledCourses(
-	    @RequestParam(value = "page", defaultValue = "0") int page,
-	    Model model
-	) {
-	    Integer userId = 17;  // 임시로 사용자 ID를 하드코딩
+	@LoginCheck
+	  @GetMapping("/mypage/courses")
+	    public String getEnrolledCourses(
+	            @RequestParam(value = "page", defaultValue = "0") int page,
+	            Model model,
+	            @Authuser User user
+	    ) {
+	        String userId = user.getId();
+	        EzenPaging ezenPaging = new EzenPaging(page, 10, registrationService.countRegistrationByUser(userId), 5);
+	        List<Registration> registrations = registrationService.getRegistrationsByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
 
-	    EzenPaging ezenPaging = new EzenPaging(page, 10, registrationService.countRegistrationByUser(userId), 5);
-	    List<Registration> registrations = registrationService.getRegistrationsByUser(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
+	        model.addAttribute("registrations", registrations);
+	        model.addAttribute("page", ezenPaging);
 
-	    model.addAttribute("registrations", registrations);
-	    model.addAttribute("page", ezenPaging);
+	        return "mypage/myenrolledCourses";
+	    }
 
-	    return "mypage/myenrolledCourses";
-	}
 	
 	/////////////////////////////////회원정보, 구독, 쿠폰 관련//////////////////
 	
@@ -333,8 +325,8 @@ public class MypageController {
    
 
     @GetMapping("/mypage/CourseReview/list")
-    public String listReviews(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Integer userId = 17; // 임시 사용자 ID
+    public String listReviews(Model model, @RequestParam(value="page", defaultValue="0") int page, @Authuser User user) {
+        String userId = user.getId();
         EzenPaging ezenPaging = new EzenPaging(page, 10, coursereviewService.getUserReviewCount(userId), 5);
         List<Review> reviews = coursereviewService.getUserReviews(userId, ezenPaging.getStartNo(), ezenPaging.getPageSize());
         
