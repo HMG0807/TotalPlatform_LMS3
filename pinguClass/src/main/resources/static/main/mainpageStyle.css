@@ -210,3 +210,10 @@ main {
     font-weight: 400;
     color: var(--boxShadow);
 }
+
+
+.sectionConImg > img{
+	width: 100%;
+	height: 100%;
+	
+}

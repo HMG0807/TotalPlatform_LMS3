@@ -180,9 +180,14 @@ public class CommunityService {
                 .orElseThrow(() -> new UserException("Community post not found"));
         // 삭제
         communityRepository.delete(community);
+        
+        
+        
     }
-
-
+    
+    
+    
+    
 
     
     // 커뮤니티 댓글 조회 메서드 
@@ -196,6 +201,13 @@ public class CommunityService {
         User user = this.userRepository.findUserById(userId);
         return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
     }
+    
+    
+    
+    
+    
+    
+    
 	
 			
 	

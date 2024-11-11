@@ -12,6 +12,7 @@ import com.example.demo.lms.Authuser.Authuser;
 import com.example.demo.lms.Authuser.AuthuserService;
 import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.LoginCheck.undefinedUserException;
+import com.example.demo.lms.course.CourseDTO;
 import com.example.demo.lms.course.CourseService;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
@@ -38,9 +39,9 @@ public class MainController {
 	@GetMapping("/main")
 	public String mainpage(@Authuser User user, Model model) {
 		
-		List<Course> courseFirstList = this.courseService.getAllCourseBytime(0,4);
-		List<Course> courseSecondList = this.courseService.getAllCourseBytime(5,4);
-		List<Course> courseThirdList = this.courseService.getAllCourseBytime(9,4);
+		List<CourseDTO> courseFirstList = this.courseService.getAllCourseBytime(0,4);
+		List<CourseDTO> courseSecondList = this.courseService.getAllCourseBytime(5,4);
+		List<CourseDTO> courseThirdList = this.courseService.getAllCourseBytime(9,4);
 		
 		model.addAttribute("courseList1", courseFirstList);
 		model.addAttribute("courseList2", courseSecondList);

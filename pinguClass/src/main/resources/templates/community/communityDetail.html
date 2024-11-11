@@ -46,7 +46,7 @@
                         <!--11/11 작성자 날짜-->
                         <div class="badge bg-light text-dark p-2 text-start">
                             <div class="mb-2">
-                                <span th:if="${community.user != null}" th:text="${community.user.name}"></span>
+                                <span th:if="${community.user != null}" th:text="${community.user.id}"></span>
                             </div>
                             <div th:text="${#temporals.format(community.lastUpdate, 'yyyy-MM-dd HH:mm')}"></div>
                         </div>
@@ -55,6 +55,8 @@
                     </div>
                 </div>
             </div>
+            
+            
             
             
             
@@ -73,11 +75,11 @@
                 
                    <!-- 11/11 수정 삭제 버튼 -->
                     <div class="Aoption">
-                        <div class="AoptionModify">
-                            <!--자기글만 수정 가능하도록 처리  추가 / 시큐리티 이슈로 id는 짱박음-->
+                        <div class="AoptionModify" th:href="@{|/community/modify/${communityComment.commentId}|}">
+                            <!--자기글만 수정 가능하도록 처리  추가 -->
                             <a>수정</a>
                         </div>
-                        <div class="AoptionDelete">
+                        <div class="AoptionDelete" th:data-uri="@{|/community/commentDelete/${communityComment.commentId}|}">
                             <a>삭제</a>
                         </div>
                     </div>

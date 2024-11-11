@@ -50,7 +50,7 @@
                     	<li th:each="courseList : ${courseList1}">
                             <a href="#">
                                 <div class="sectionConImg">
-                                    <img src="" alt="">
+                                    <img th:src="@{|/files/${courseList.file.fileName}|}" alt="">
                                 </div>
                                 <div class="sectionConText">
                                     <p th:text="${courseList.title}">
@@ -64,7 +64,7 @@
                         <li th:each="courseList : ${courseList2}">
                             <a href="#">
                                 <div class="sectionConImg">
-                                    <img src="" alt="">
+                                    <img th:src="@{|/files/${courseList.file.fileName}|}" alt="">
                                 </div>
                                 <div class="sectionConText">
                                     <p th:text="${courseList.title}">
@@ -78,7 +78,7 @@
                         <li th:each="courseList : ${courseList3}">
                             <a href="#">
                                 <div class="sectionConImg">
-                                    <img src="" alt="">
+                                    <img th:src="@{|/files/${courseList.file.fileName}|}" alt="">
                                 </div>
                                 <div class="sectionConText">
                                     <p th:text="${courseList.title}">
