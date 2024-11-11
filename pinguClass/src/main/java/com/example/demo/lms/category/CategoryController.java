@@ -20,26 +20,38 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class CategoryController {
 
-	private final CategoryService categoryService;
- 
+	private final CategoryService categoryService; 
 	/*************************************** 카테고리 ***************************************/
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 카테고리 창으로 보내기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/category")
 	public String category(@RequestParam(name="keyword",required = false) String kw,
 						   @RequestParam(name="category",required = false) Integer Id,
+						  // @RequestParam(name="categorySelect", required = false) String select,
 						   Model model) {
 		
 		List<CourseDTO> courseList = null;
 		
 		courseList  = this.categoryService.getAllCourseDTOList();
-		
+			
 		if(Id!=null) {
 			courseList = this.categoryService.getCourseByCategoryId(Id);
 		}
 		
 		if(kw!=null) {
 			courseList = this.categoryService.getCourseByKeyWord(kw);
-		}		
+		}
+		
+//		if(select != null) {
+//			if(select.equals("시간")) {
+//				courseList = this.categoryService.getAllbyTime();
+//			}
+//			
+//			if(select.equals("인기")) {
+//				courseList = this.categoryService.getByPopularity();
+//			}
+//		}
+		
+		
 		
 		model.addAttribute("courseList", courseList);
 		

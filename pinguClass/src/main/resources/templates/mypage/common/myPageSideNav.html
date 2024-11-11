@@ -11,15 +11,15 @@
             <li><a href="#"><i class="fa-solid fa-calendar-days"></i>강좌 QnA 관리</a></li>
             <li><a href="#"><i class="fa-solid fa-calendar-days"></i>강좌 리뷰 관리</a></li>
             <li><a href="#"><i class="fa-solid fa-calendar-check"></i>수강 강좌 내역</a></li>
-            <li><a href="#"><i class="fa-solid fa-calendar-check"></i>구매 강좌 내역</a></li>
             <li><a th:href="@{/mypage/instructor/myCourseList}"><i class="fa-solid fa-calendar-days"></i>내 강좌 관리</a></li>
         </ul>
         <ul>
         	<li><a href="#"><i class="fa-regular fa-comment-dots"></i>커뮤니티 관리</a></li>
-            <li id="csCenter"><a href="csPage.html"><i class="fa-regular fa-comment"></i>고객센터</a></li>
+            <li id="csCenter"><a th:href="@{/csc/list}"><i class="fa-regular fa-comment"></i>고객센터</a></li>
         </ul>
-        <ul>
-            <li><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>로그아웃</a></li>
-        </ul>
+        <!--<ul>
+            <li><a id="logout" href="/user/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>로그아웃</a></li>
+        </ul>-->
     </div>
+    <!--<script th:src="@{/mypage/common/myPageSideNavModul.js}"></script>-->
 </th:block>

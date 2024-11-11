@@ -11,10 +11,10 @@ import com.example.demo.lms.entity.Review;
 public interface CourseReviewRepository extends JpaRepository<Review, Integer>{
 
 	 	@Query(value = "SELECT * FROM review r WHERE r.user_id = :userId ORDER BY r.last_update DESC LIMIT :start, :size", nativeQuery = true)
-	    List<Review> findByUserWithPaging(@Param("userId") Integer userId, @Param("start") int startNo, @Param("size") int pageSize);
+	    List<Review> findByUserWithPaging(@Param("userId") String userId, @Param("start") int startNo, @Param("size") int pageSize);
 
 	    @Query(value = "SELECT COUNT(*) FROM review r WHERE r.user_id = :userId", nativeQuery = true)
-	    int countByUserId(@Param("userId") Integer userId);
+	    int countByUserId(@Param("userId") String userId);
 	    
 	    
 	    

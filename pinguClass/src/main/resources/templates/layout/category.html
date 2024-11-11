@@ -5,11 +5,11 @@
 		<div class="category">
 			<ul>
 				<li><a th:href="@{/category}">전체</a></li>
-				<li><a th:href="@{/category/1}">한식</a></li>
-				<li><a th:href="@{/category/2}">양식</a></li>
-				<li><a th:href="@{/category/3}">중식</a></li>
-				<li><a th:href="@{/category/4}">일식</a></li>
-				<li><a th:href="@{/category/5}">기타</a></li>
+				<li class="categoryItem" data-value="1"><a th:href="@{/category/1}">한식</a></li>
+				<li class="categoryItem" data-value="2"><a th:href="@{/category/2}">양식</a></li>
+				<li class="categoryItem" data-value="3"><a th:href="@{/category/3}">중식</a></li>
+				<li class="categoryItem" data-value="4"><a th:href="@{/category/4}">일식</a></li>
+				<li class="categoryItem" data-value="5"><a th:href="@{/category/5}">기타</a></li>
 			</ul>
 			<ul>
 				<li><a href="#">요리</a></li>
@@ -36,4 +36,8 @@
 			</ul>
 		</div>
 	</div>
+	<form th:action="@{category}" id="CategoryForm">
+         <input name="category" id="categoryInput" hidden />
+     </form>
+	<script th:src="@{category/category.js}"></script>`
 </th:block>

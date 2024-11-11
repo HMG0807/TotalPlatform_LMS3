@@ -42,7 +42,7 @@ public class PaymentController {
 		model.addAttribute("Subscribe", subscribe);
 		return "/payment/subPaymentOrder";
 	}
-	
+
 // 구독권 결제 완료 시, 결제 완료 창으로 이동 및 결제 데이터 전송
 	@GetMapping("/subscriptionSuccess/{id}")
 	public String  subscriptionSuccess(Model model,

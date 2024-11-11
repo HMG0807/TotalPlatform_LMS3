@@ -71,4 +71,10 @@ public class CouponService {
 		c.setUseYn("y");
 		couponRepository.save(c);
 	}
+
+//=======================쿠폰 갯수 (페이징)==================================	
+//	public int getCouponCountByKeyword(String kwType, String kw) {
+//
+//		return this.couponRepository.countCouponByKeyword(kw);
+//	}
 }
