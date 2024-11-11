@@ -13,7 +13,7 @@
                 <ul>
                     <li class="maintap faq on">
                         <div class="csConTitle">
-                            <p>자유게시판</p> <!--form 추가-->
+                            <p>자유게시판</p> <!--검색 form 추가-->
                             <div class="cummunitysearchContainer">
                                 <input type="text" placeholder="내용을 입력해주세요">
                                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -41,6 +41,9 @@
                                 <td th:text="${#temporals.format(communityList.lastUpdate,'yyyy-MM-dd')}"></td>
                             </tr>
                         </table>
+                        
+                        
+                        
                         <!--페이징 버튼-->
                         <div class="pageBtn" th:if="${paging.totalPage} > 1">
                         	<ul>

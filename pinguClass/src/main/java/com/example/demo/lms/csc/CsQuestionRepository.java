@@ -43,14 +43,19 @@ public interface CsQuestionRepository extends JpaRepository<CsQuestion, Integer>
 	
 	
 	
+	
+	
+	
+	
+	
 	//// 페이징 (a팀 코드 참고) ////////////////////////////////////
 	/* 1:1 문의에서 자기글만 조회 */
 	@Query(value = "SELECT count(*) FROM cs_question WHERE user_id = :id" , nativeQuery = true)
-	int countQuestionByAll(@Param("id") User userId);
+	int countQuestionByAll(@Param("id") Integer user);
 	
 	// 현재 페이지 목록 조회
 	@Query(value = "SELECT * FROM cs_question WHERE delete_yn = 'n' && user_id = :id limit :start, :idx", nativeQuery = true)
-	List<CsQuestion> findQestionByUserId(@Param("id") User userId, @Param("start") int startNo, @Param("idx") int pageSize);
+	List<CsQuestion> findQestionByUserId(@Param("id") Integer userId, @Param("start") int startNo, @Param("idx") int pageSize);
 
 
 }

@@ -15,7 +15,7 @@ import com.example.demo.lms.entity.User;
 public interface CommunityRepository extends JpaRepository<Community, Integer> {
 
 	/* 이순 : 미삭제 커뮤니티 글 조회*/
-	@Query(value = "SELECT * FROM community WHERE delete_yn = n",  nativeQuery = true)
+	@Query(value = "SELECT * FROM community WHERE delete_yn = 'n'",  nativeQuery = true)
 	List<Community> findAll();
 
 	
@@ -42,6 +42,10 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value = "SELECT * FROM community where title like %:kw% && delete_yn = 'n' limit :start, :idx", nativeQuery = true)
 	List<Community> findCommunityByLimit(@Param("kw") String keyword, @Param("start") int startNo, @Param("idx") int pageSize);
 
+	
+	
+	
+	
 	
 	
 	

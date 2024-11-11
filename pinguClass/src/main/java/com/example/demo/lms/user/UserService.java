@@ -17,9 +17,11 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	public User getUser(String id) throws Exception {
+	
+	// 11/11 이순 통합로그인으로 수정!!!! 바꾸면 안돼요!!
+	public User getUser(Integer userId) throws Exception {
 
-		Optional<User> user = this.userRepository.findById(id);
+		Optional<User> user = this.userRepository.findById(userId);
 
 
 
