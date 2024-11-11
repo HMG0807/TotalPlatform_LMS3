@@ -26,8 +26,10 @@ import com.example.demo.lms.entity.CommunityComment;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.Qna;
 import com.example.demo.lms.entity.QnaAnswer;
+import com.example.demo.lms.entity.Subscription;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.paging.EzenPaging;
+import com.example.demo.lms.payment.SubscriptionService;
 import com.example.demo.lms.user.UserRepository;
 import com.example.demo.lms.user.UserService;
 
@@ -42,6 +44,8 @@ public class MypageController {
 	private final UserRepository userRepository;
 	private final QnaService qnaService;
 	private final UserService userService;
+	private final SubscriptionService subscriptionService;
+
 	@GetMapping("/mypage/community")
     public String getMyPageCommunityList(
         @RequestParam(name = "page", defaultValue = "0") int page,  // 페이지 번호, 기본값은 0
@@ -258,6 +262,17 @@ public class MypageController {
 	}
 	
 	
+//=====================마이페이지 구독조회===============================//
+	@LoginCheck
+	@GetMapping("/mypage/subscription") 
+	public String subscriptionStatus(Model model, @Authuser User user){
+		
+		Subscription subscription = subscriptionService.getUser(user.getUserId());
+		
+		model.addAttribute("subscription",subscription);
+		
+		return "/mypage/mySubscriptionStatus";
+	} 
 	
 	//////////////쿠폰현황///////////////////////////
 	

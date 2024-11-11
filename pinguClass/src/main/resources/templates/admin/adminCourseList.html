@@ -35,7 +35,7 @@
 		<span th:text="${#temporals.format(course.lastUpdate, 'yyyy-MM-dd')}"></span>
 		<span  th:text="${course.deleteYn} == n ? 'N' : 'Y'" th:classappend="${course.deleteYn} == y ? 'blueText'"></span>
 		<button th:onclick="lectureSelect([[${course.courseId}]], [[${#lists.size(course.lectures)}]])" th:text="${'강의 조회(' + #lists.size(course.lectures) + ')'}"></button>
-		<button th:onclick="deleteCourse([[${course}]])" th:text="${course.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${course.deleteYn} == y ? 'switchBtn'"></button>
+		<button th:onclick="deleteCourse([[${course.deleteYn}]], [[${course.title}]], [[${course.courseId}]])" th:text="${course.deleteYn} == n ? '삭제' : '삭제 해제'" th:classappend="${course.deleteYn} == y ? 'switchBtn'"></button>
 	</div>
 	
 	<!-- 페이징 버튼 -->

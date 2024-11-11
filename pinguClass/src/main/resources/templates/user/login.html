@@ -16,14 +16,6 @@
             <form id="LoginForm" method="post">
                 <input id="loginId" type="text" name="username" placeholder="아이디를 입력해주세요">
                 <input id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요">
-            <form id="loginForm" method="post" th:action="@{/user/login}">
-            <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
-          <!--  굳이 th:field  안써도 ok
-                <input type="text" th:field="*{id}" id="id" placeholder="아이디를 입력해주세요">
-                <input type="password" th:field="*{pw}" id="pw" placeholder="비밀번호를 입력해주세요">
-                --> 
-                <!--name은 시큐리티랑 맞추기(엔티티x)-->
-                
                 <div class="findContainer">
                     <div class="findBtn idFind">
                         <a href="#">아이디 찾기</a>
@@ -33,7 +25,7 @@
                     </div>
                 </div>
                 <div class="loginBtn login"><button type="submit">로그인</button></div>
-                <div class="loginBtn signIn"><a th:href="@{/user/sign}">회원가입</a></div>
+                <div class="loginBtn signIn"><a href="http://192.168.17.254:8080/signup">회원가입</a></div>
             </form>
         </div>
 

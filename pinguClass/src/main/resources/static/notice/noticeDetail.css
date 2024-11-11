@@ -1,24 +1,27 @@
+
 main {
     display: flex;
     justify-content: center;
     padding: 5rem 0;
 }
 
-.csContentContainer {
+
+/* 사이드바 시작 */
+.noticeContentContainer {
     width: var(--pageMinWidth);
     display: flex;
 }
 
-.csSideNav {
+.noticeSideNav {
     width: 20%;
 }
 
 
-.csSideNav>ul {
+.noticeSideNav>ul {
     padding-right: 3rem;
 }
 
-.csSideNav>ul>li>a {
+.noticeSideNav>ul>li>a {
     display: block;
     width: 100%;
     padding: 1rem 0;
@@ -26,11 +29,15 @@ main {
     border-top: 1px solid var(--boxShadow);
 }
 
-.csSideNav>ul>li:last-child>a {
+.noticeSideNav>ul>li:last-child>a {
     border-bottom: 1px solid var(--boxShadow);
 }
 
-/*공지사항 제목 내용*/
+/*  사이드바 끝  */
+
+
+/*공지사항 제목 내용*
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -52,7 +59,57 @@ table tr:last-child {
 table tr td {
     padding: 3rem 1rem;
 }
+/
+
+/*제목 내용 컨텐츠*/
+.noticeContent{
+	width: 100%;
+}
+
+
+/* 커뮤 디테일 쎄비지*/
+
+/* 타이틀 꾸미기 */
+.container>.py-2 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border: 1px solid rgb(204, 204, 204);
+    color: rgb(102, 102, 102);
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+    padding-left: 1.5rem;
+
+}
+.container>.py-2:nth-child(1){
+	        background-color: #393939;
+	        color:#fff;
+}
+
+/* content decoration */
+.container>.card:nth-child(2) {
+    border: 1px solid rgb(204, 204, 204);
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgb(187, 187, 187);
+}
+
+
+
+/* 컨텐츠 패딩 */
+.card-body>.card-text {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
 
 
 
 
+/* 컨텐츠 작성 날짜 */
+.d-flex {
+    display: flex;
+    justify-content: end;
+}

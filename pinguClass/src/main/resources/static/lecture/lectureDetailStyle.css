@@ -1,0 +1,92 @@
+main {
+    min-width: var(--pageMinWidth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.lectureDetailContainer {
+    width: var(--pageMinWidth);
+    display: flex;
+    align-items: start;
+    padding-top: 2rem;
+}
+
+.lectureDetailContainer>.lectureDetailLeft {
+    width: 75%;
+    padding-right: 2rem;
+}
+
+
+
+/* classIntroduce */
+.classIntroduce{
+    padding-bottom: 1rem;
+}
+.lectureTitle{
+    display: flex;
+    justify-content: space-between;
+}
+.lectureTitle>p{
+    padding: 1rem 0;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+/* 비디오 구역 */
+.lectureMainVideo{
+    width: 100%;
+    height: 30rem;
+    /*background-color: rgb(231, 231, 231);*/
+    margin-bottom: 2rem;
+}
+.lectureMainVideo>video{
+	width: 100%;
+	border-radius: 15px;
+}
+.lectureMainText{
+    padding-bottom: 2rem;
+}
+
+
+/* 오른쪽 목차 구역 */
+.lectureDetailContainer>.lectureIndexRight {
+    width: 25%;
+    position: sticky;
+    top: 200px;
+}
+
+.indexContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.indexContainer>.indexTitle {
+    padding: .5rem 0;
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 900;
+    border-bottom: 1px solid var(--color);
+}
+
+.indexContainer>.indexContent{
+	padding: 0.5rem 0;
+}
+.indexContainer>.indexContent>p {
+    font-size: 18px;
+}
+
+.indexConText {
+    color: var(--color);
+    margin-bottom: 5px;
+}
+.indexContent>button {
+    color: #0123B4;
+    cursor: pointer;
+    border: 0px;
+    background-color: white;
+    font-size: 16px;
+}
+

@@ -17,9 +17,7 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	/* 이순 : 미삭제 커뮤니티 글 조회*/
 	@Query(value = "SELECT * FROM community WHERE delete_yn = n",  nativeQuery = true)
 	List<Community> findAll();
-	
-	// 이순 : 임시로그인 근데 환상적으로 실패
-	//Optional<Community> loginCheck(User user);
+
 	
 	Page<Community> findByUser(User user, Pageable pageable);
 	

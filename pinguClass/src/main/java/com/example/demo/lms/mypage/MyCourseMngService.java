@@ -11,6 +11,7 @@ import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.File;
 import com.example.demo.lms.entity.Instructor;
 import com.example.demo.lms.entity.Lecture;
+import com.example.demo.lms.entity.LectureIndex;
 import com.example.demo.lms.entity.Qna;
 import com.example.demo.lms.entity.User;
 import com.example.demo.lms.file.FileService;
@@ -29,6 +30,7 @@ public class MyCourseMngService {
 	private final InstUseFileRepository instUseFileRepository; //File(파일) Repository
 	private final InstUseQnaRepository instUseQnaRepository; //Qna Repository
 	private final InstUseLectureRepository instUseLectureRepository; //Lecture(강의) Repository
+	private final InstUseLectureIndexRepository instUseLectureIndexRepository; //LectureIndex(강의목차) Repository
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 아이디로 강사 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	public Instructor getInstructorId(String userId) {
@@ -80,7 +82,6 @@ public class MyCourseMngService {
 		course.setObjective(courseForm.getObjective());
 		course.setPrice(courseForm.getPrice());
 		course.setCategory(this.instUseCategoryRepository.findByCategory(courseForm.getCategory())); //카테고리
-		course.setLastUpdate(LocalDateTime.now());
 		
 		this.instUseCourseRepository.save(course);
 	}
@@ -148,8 +149,8 @@ public class MyCourseMngService {
 	}
 
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 특정 강좌의 강의 리스트 조회  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	public List<Lecture> getLectureList(Integer courseId, int startNo, int pageSize) {
-		return this.instUseLectureRepository.findLectureByCourseId(courseId, startNo, pageSize);
+	public List<Lecture> getLectureList(Integer courseId) {
+		return this.instUseLectureRepository.findLectureByCourseId(courseId);
 	}
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 특정 강좌의 강의 리스트 총 갯수 조회  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -161,14 +162,59 @@ public class MyCourseMngService {
 	public void LectureCreate(Integer courseId, LectureForm lectureForm, Integer fileId) {
 		
 		Lecture lecture = new Lecture();
+		lecture.setCourse(getCourse(courseId));
 		lecture.setFileId(fileId);
 		lecture.setTitle(lectureForm.getTitle());
 		lecture.setLectureOrder(getLectureCountById(courseId) + 1);
 		lecture.setObjective(lectureForm.getObjective());
 		lecture.setLastUpdate(LocalDateTime.now());
 		lecture.setDeleteYn("n");
-
+		
 		this.instUseLectureRepository.save(lecture);
+		
+		//강의 목차 리스트 등록
+		for(int i=0; i<lectureForm.getLectureIndexTitle().size(); i++) {
+			
+			//시분초를 초 단위로 계산
+			Integer totalTime = 0;
+			totalTime = (lectureForm.getIndexHour().get(i)*60*60) //시
+						+ (lectureForm.getIndexMinute().get(i)*60) //분
+						+ lectureForm.getIndexSecond().get(i); //초
+			
+			LectureIndexCreate(lecture, lectureForm.getLectureIndexTitle().get(i), totalTime);
+		}
+		
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강의 목차 등록  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void LectureIndexCreate(Lecture lecture, String title, Integer time) {
+		
+		LectureIndex index = new LectureIndex();
+		index.setLecture(lecture);
+		index.setTitle(title);
+		index.setTime(time);
+		
+		this.instUseLectureIndexRepository.save(index);
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 특정 강의 1개 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public Lecture getLecture(Integer lectureId) {
+		
+		return this.instUseLectureRepository.findById(lectureId).get();
+	}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 강의 순서 변경  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public void lectureOrderChange(List<Integer> lectureIdList, List<Integer> orderValue) {
+		
+		Lecture lecture = null;
+		
+		for(int i=0; i<lectureIdList.size(); i++) {
+			lecture = getLecture(lectureIdList.get(i));
+			lecture.setLectureOrder(orderValue.get(i));
+			
+			this.instUseLectureRepository.save(lecture);
+		}
+		
 	}
 
 }

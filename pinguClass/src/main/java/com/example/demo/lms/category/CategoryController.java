@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.course.CourseDTO;
 import com.example.demo.lms.course.CourseService;
 import com.example.demo.lms.entity.Course;
@@ -18,22 +21,37 @@ import lombok.RequiredArgsConstructor;
 public class CategoryController {
 
 	private final CategoryService categoryService;
-	private final CourseService courseService;
  
 	/*************************************** 카테고리 ***************************************/
-	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 카테고리 창으로 보내기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 카테고리 창으로 보내기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@GetMapping("/category")
-	public String category( Model model) {
-
-		//List<Course> courseList = this.categoryService.getCourseByKeyword();
+	public String category(@RequestParam(name="keyword",required = false) String kw,
+						   @RequestParam(name="category",required = false) Integer Id,
+						   Model model) {
 		
-		List<CourseDTO> courseList = this.categoryService.getAllCourseDTOList();
-				
+		List<CourseDTO> courseList = null;
+		
+		courseList  = this.categoryService.getAllCourseDTOList();
+		
+		if(Id!=null) {
+			courseList = this.categoryService.getCourseByCategoryId(Id);
+		}
+		
+		if(kw!=null) {
+			courseList = this.categoryService.getCourseByKeyWord(kw);
+		}		
+		
 		model.addAttribute("courseList", courseList);
-
-		return "/category/categorypage";
+		
+		return "category/categorypage";
+		
+		
 	}
 		
+	
+	
+	
+	
 	
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 카테고리 창으로 보내기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
 //	@GetMapping("/category/{id}")

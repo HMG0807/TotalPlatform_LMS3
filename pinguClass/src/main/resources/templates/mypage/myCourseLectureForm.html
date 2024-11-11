@@ -17,16 +17,58 @@
 					</div>
 					<!-- 내용 부문 -->
 					<div class="courseContainer">
-			            <form name="courseform" action="post" th:object="${lectureForm}" enctype="multipart/form-data">
+			            <form name="courseform" method="post" th:object="${lectureForm}" enctype="multipart/form-data">
+			                <!-- 오류 메시지 -->
+			            	<div th:replace="~{user/form_errors :: formErrorsFragment}"></div>
+			                
 			                <!-- 강의 입력 -->
 			                <div class="courseImg formText">
 			                    <label for="lectureVideo">영상 파일</label>
 			                    <input type="file" th:field="*{lectureVideo}">
 			                </div>
+			                
+			                <!--<div class="courseImg formText">
+			                    <label for="indexTitle">영상 목차 제목</label>
+			                    
+			                </div>-->
+			                
+			                <div class="courseImg formText indexBox">
+			                    <label>영상 목차</label>
+			                    <div class="indexContainer">
+				                    <div class="indexConGroup">
+				                    	<div class="indexCon">
+				                    		<input type="text" class="formStyle formIndexTitle" th:field="*{lectureIndexTitle}" placeholder="목차 제목을 입력해주세요.">
+				                    		
+						                    <select class="formStyle formSel" th:field="*{indexHour}">
+						                        <option value="">선택</option>
+						                        <option th:each="hour : ${#numbers.sequence(0,23)}" th:value="${hour}" th:text="${hour}"></option>
+						                    </select>
+						                    <label for="indexTimeHour">시</label>
+						                    
+						                    <select class="formStyle formSel" th:field="*{indexMinute}">
+						                        <option value="">선택</option>
+						                        <option th:each="minute : ${#numbers.sequence(0,59)}" th:value="${minute}" th:text="${minute}"></option>
+						                    </select>
+						                    <label for="indexTimeMinute">분</label>
+						                    
+						                    <select class="formStyle formSel" th:field="*{indexSecond}">
+						                        <option value="">선택</option>
+						                        <option th:each="second : ${#numbers.sequence(0,59)}" th:value="${second}" th:text="${second}"></option>
+						                    </select>
+						                    <label for="indexTimeSecond">초</label>
+				                    	</div>
+				                    </div>
+				                    <div class="addBtnBox">
+				                    	<button type="button" onclick="indexAdd()">목차 추가</button>
+				                    </div>
+			                    </div>
+			                </div>
+			                
 			                <div class="courseTitle formText">
 			                    <label for="title">제목</label>
 			                    <input type="text" class="formStyle" th:field="*{title}" placeholder="강의 제목을 입력해주세요.">
 			                </div>
+			                
 			                <div class="courseObjective formText">
 			                    <label for="objective">학습 목표</label>
 			                    <textarea type="text" class="formStyle" th:field="*{objective}" placeholder="강의 학습 목표를 입력해주세요."></textarea>

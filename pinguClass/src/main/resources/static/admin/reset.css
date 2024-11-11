@@ -13,7 +13,7 @@
 
 :root {
     /* color */
-    --headColor: #f7418f;
+    --headColor: rgb(255, 123, 0);
     --mainColor: #8CA3B1;
     --subColor: #EDF2F5;
     --subColor02: #aaa;

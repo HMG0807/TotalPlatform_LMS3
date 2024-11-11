@@ -75,6 +75,52 @@ main>.myPageContainer>ul>.courseMngContent{
     border-radius: 0.3rem;
 }
 
+/* 영상 목차 시간 */
+.indexBox {
+	/*outline: 1px solid violet;*/
+	display: flex;
+}
+.formText>label {
+	/*outline: 1px solid blue;*/
+	align-self: flex-start;
+}
+.indexContainer {
+	/*outline: 1px solid green;*/
+}
+.indexConGroup { /* 영상 목차 내용 박스 */
+	/*outline: 1px solid red;*/
+}
+.indexCon{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid rgb(51,51,51);
+}
+.formIndexTitle { /* 영상 목차 제목 */
+	display: flex;
+	width: 600px;
+	margin-bottom: 3px;
+}
+.formSel { /* 영상 목차 시간 > select box */
+	width: 6rem;
+	margin-right: 5px;
+}
+.formSel+label { /* 영상 목차 시간 Label */
+	display: inline-block;
+	width: 2.2rem;
+}
+.addBtnBox{
+	
+}
+.addBtnBox>button { /* 목차 추가 버튼 */
+	padding: 0.5rem 1rem;
+    background-color: var(--spanColor);
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 .submitButton{
     display: flex;
     justify-content: center;

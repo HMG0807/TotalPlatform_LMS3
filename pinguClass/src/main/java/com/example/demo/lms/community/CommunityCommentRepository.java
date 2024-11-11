@@ -1,6 +1,7 @@
 package com.example.demo.lms.community;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,8 @@ public interface CommunityCommentRepository extends JpaRepository<CommunityComme
 	 
 	    @Query(value = "SELECT * FROM community_comment WHERE user_id = :userId ORDER BY last_update DESC LIMIT :start, :idx", nativeQuery = true)
 	    List<CommunityComment> findAllByUserId(@Param("userId") Integer userId, @Param("start") int start, @Param("idx") int idx);
+
+
 	}
 
 
