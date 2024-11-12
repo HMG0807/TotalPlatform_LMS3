@@ -56,21 +56,33 @@ public class CommunityController {
 	
 	
 	
+	
+	
+	
+	
+	
 	//특정 질문 클릭시 보여주는 상세페이지 주소
 	@LoginCheck
 	@GetMapping(value = "/detail/{id}") 
 	public String detail(Model model , @PathVariable("id") Integer id,
 			CommunityCommentForm communityCommentForm, @Authuser User user) throws UserException{
-		// 질문
+		// 질문 상세
 		Community community = this.communityService.getdetail(id);
 		model.addAttribute("community",community);
 		
-		// 댓글
-		CommunityComment commentModify = this.communityCommentService.getdetail(id);
-		model.addAttribute("commentModify", commentModify);
+//		// 댓글 리스트
+//		CommunityComment commentModify = this.communityCommentService.getList(id);
+//		model.addAttribute("commentModify", commentModify);
 		
 		return "community/communityDetail";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -101,6 +113,13 @@ public class CommunityController {
 	
 	
 		
+	
+	
+	
+	
+	
+	
+	
 		
 		// 커뮤니티 글 수정하기
 		@LoginCheck
@@ -156,6 +175,13 @@ public class CommunityController {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
 		// 커뮤니티 글 삭제
 		@LoginCheck
 		@GetMapping(value="/delete/{id}")
@@ -191,7 +217,7 @@ public class CommunityController {
 					
 			Community community = this.communityService.getdetail(id);
 					
-			User userId = this.userService.getUser(user.getUserId()); // qwer -> principal.getName() 바꾸기
+			//User userId = this.userService.getUser(user.getUserId()); // qwer -> principal.getName() 바꾸기
 					
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("community",community);
@@ -205,6 +231,12 @@ public class CommunityController {
 			return String.format("redirect:/community/detail/%s", id);
 					
 		}
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -253,6 +285,11 @@ public class CommunityController {
 //					
 //					return String.format("redirect:/community/detail/%s", id);
 //				}
+		
+		
+		
+		
+		
 		
 		
 		

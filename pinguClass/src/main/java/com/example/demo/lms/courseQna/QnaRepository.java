@@ -13,11 +13,11 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
     
     @Query(value = "SELECT * FROM qna q WHERE q.user_id = :userId AND q.delete_yn = 'N' ORDER BY q.last_update DESC LIMIT :start, :size", 
            nativeQuery = true)
-    List<Qna> findByUserIdOrderByLastUpdateDesc(@Param("userId") String userId, 
+    List<Qna> findByUserIdOrderByLastUpdateDesc(@Param("userId") Integer userId, 
                                               @Param("start") int startNo, 
                                               @Param("size") int pageSize);
 
     @Query(value = "SELECT COUNT(*) FROM qna q WHERE q.user_id = :userId AND q.delete_yn = 'N'", 
            nativeQuery = true)
-    int countByUserId(@Param("userId") String userId);
+    int countByUserId(@Param("userId") Integer userId);
 }

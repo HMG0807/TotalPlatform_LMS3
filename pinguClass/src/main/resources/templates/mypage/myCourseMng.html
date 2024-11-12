@@ -9,6 +9,13 @@
         <div th:replace="~{mypage/common/myPageSideNav :: mySideNavFragment}"></div>
         
         <div class="myPageContentContainer">
+        	<th:block th:if="${instructor == null}">
+        		<script>
+        			alert("강사가 아닙니다.");
+        			history.back();
+        		</script>
+        	</th:block>
+        	<th:block th:if="${instructor != null}">
             <!-- 컨텐트 영역 -->
             <ul>
 				<li class="courseMngContent">
@@ -66,6 +73,7 @@
 					</div>
 				</li>
 			</ul>
+			</th:block>
         </div>
     </div> 
     <script th:src="@{/mypage/myCourseMngPageModul.js}"></script>

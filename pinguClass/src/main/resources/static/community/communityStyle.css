@@ -162,13 +162,15 @@ table tr td:nth-child(4) {
 .createbtn{
 	width: 7rem;
     height: 2.5rem;
-    background-color: #393939;
-    color: #fff;
+    background-color: var(--color);
     text-align: center;
     border-radius: 5px;
     padding-top: 0.6rem;
     justify-self: end;
     margin: 3rem 1rem;
+}
+.askBtn, .page-link{
+	 color: var(--background);
 }
 
 /* 페이징 버튼 _ 이순*/
@@ -176,8 +178,7 @@ table tr td:nth-child(4) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #393939;
-	color: #fff;
+	background-color: var(--color);
 	margin-top: 2rem;
 	border-radius: 5px;
 }

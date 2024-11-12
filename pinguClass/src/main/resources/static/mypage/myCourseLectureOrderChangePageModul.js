@@ -2,12 +2,14 @@ let orderInputArr = document.querySelectorAll(".orderVal"); //값 배열
 let minusBtns = document.querySelectorAll(".minus"); //'-' 버튼
 let plusBtns = document.querySelectorAll(".plus"); //'+' 버튼
 
-//마이너스 버튼 클릭시
+//'-' 버튼 개수만큼
 for(let i=0; i<minusBtns.length; i++){
+	//마이너스 버튼 클릭시
 	minusBtns[i].addEventListener('click',function(){
+		//1보다 작거나 강의 개수보다 클 떄 작동 X
 		if(orderInputArr[i].value > 1 && orderInputArr[i].value < orderInputArr.length+1){
-			orderInputArr[i].value = orderInputArr[i].value - 1;
-			orderValCheck(orderInputArr[i].value);
+			orderInputArr[i].value = orderInputArr[i].value - 1; // -1
+			orderValCheck(orderInputArr[i].value); //똑같은 값이 있을 경우 빨간색 표시
 		}
 	});
 }
@@ -49,7 +51,7 @@ function orderValCheck(changeValue){
 	  
 	  for(let j=i+1; j<orderInputArr.length; j++) {
 	    if(check == orderInputArr[j].value) { //중복값이 있을 경우
-	      changeColor(check);
+	      changeColor(check); //글자색 변경
 	      return;
 	    }
 	  }

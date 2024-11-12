@@ -16,7 +16,7 @@
         <div class="loginContainer">
             <p>&lt; PinguClass &gt;</p>
             <p>관리자 로그인</p>
-            <form th:action="@{/admin/login}" th:object="${adminform}">
+            <form th:action="@{/admin/login}" method="post" th:object="${adminForm}">
             	<!-- 오류 메시지 -->
 				<div th:replace="~{user/form_errors :: formErrorsFragment}"></div>
 				

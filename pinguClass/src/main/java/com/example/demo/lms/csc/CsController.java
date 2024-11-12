@@ -68,33 +68,25 @@ public class CsController {
 	@GetMapping("/create")
 	public String CsQuestionCreate(CsForm csForm) {
 			
-		return "csc/csQuestionForm";
-			
-	}
-		
+		return "csc/csQuestionForm";	
+	}	
 	@LoginCheck
 	@PostMapping("/create")
 	public String CsQuestionCreate(@Valid CsForm csForm, BindingResult bindingResult, 
 			@Authuser User user) throws UserException {
 		
-		
-		System.out.println("책임을 물것이야!!!!!!!");
 		// 제목 내용 안쓰면 폼에서 못 나간다!
 		if(bindingResult.hasErrors()) {
 			return "csc/csQuestionForm";
 		}
-		System.out.println("ang");
-		
 		// 제대로 썼을 때 저장
 		try {
 			// 유저 이름 불러오기
-			System.out.println("책임을 물것이야!!!!!!!22222222");
 			User userId;
 			userId = userService.getUser(user.getUserId());
 			// 유저 정보에 입력한 제목, 내용, 유저명 저장
 			this.csQuestionService.create(csForm.getTitle(), csForm.getContent(), userId);
 		} 
-		
 		// 정보 불러오기 오류
 		catch (Exception e) {
 			e.printStackTrace();
@@ -108,6 +100,10 @@ public class CsController {
 		
 		
 		
+	
+	
+	
+	
 	// 문의글 수정
 	@LoginCheck
 	@GetMapping("/modify/{id}")

@@ -30,11 +30,11 @@ public class QnaService {
 	
 
 	 public List<Qna> getQnaListByUser(User user, int startNo, int pageSize) {
-	        return qnaRepository.findByUserIdOrderByLastUpdateDesc(user.getId(), startNo, pageSize);
+	        return qnaRepository.findByUserIdOrderByLastUpdateDesc(user.getUserId(), startNo, pageSize);
 	    }
 
 	    public int getQnaCountByUser(User user) {
-	        return qnaRepository.countByUserId(user.getId());
+	        return qnaRepository.countByUserId(user.getUserId());
 	    }
 
 	    public Qna getQnaDetail(Integer qnaId) {

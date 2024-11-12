@@ -29,6 +29,11 @@ public interface CommunityCommentRepository extends JpaRepository<CommunityComme
 	    List<CommunityComment> findAllByUserId(@Param("userId") Integer userId, @Param("start") int start, @Param("idx") int idx);
 
 
+	    // 상세 보기에서 댓글 리스트 조회
+	    @Query(value = "SELECT * FROM community_comment WHERE delete_yn = 'n'", nativeQuery = true)
+		List<CommunityComment> findByCmId(Integer id);
+
+
 	    
 	    
 	}
