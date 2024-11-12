@@ -37,8 +37,10 @@
 			                    <div class="indexContainer">
 				                    <div class="indexConGroup">
 				                    	<div class="indexCon">
+				                    		<!-- 목차 제목 -->
 				                    		<input type="text" class="formStyle formIndexTitle" th:field="*{lectureIndexTitle}" placeholder="목차 제목을 입력해주세요.">
 				                    		
+				                    		<!-- 목차 시간 > 시, 분, 초 -->
 						                    <select class="formStyle formSel" th:field="*{indexHour}">
 						                        <option value="">선택</option>
 						                        <option th:each="hour : ${#numbers.sequence(0,23)}" th:value="${hour}" th:text="${hour}"></option>

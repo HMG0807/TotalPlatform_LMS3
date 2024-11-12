@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.lms.LoginCheck.LoginCheck;
+import com.example.demo.lms.entity.Category;
 import com.example.demo.lms.entity.Community;
 import com.example.demo.lms.entity.Course;
 import com.example.demo.lms.entity.CsAnswer;
@@ -47,6 +48,12 @@ public class AdminController {
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	@PostMapping("/admin/login")
 	public String adminSelect(@Valid AdminForm adminform, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			//@Valid 유효성 검사 실패시
+			
+			return "redirect:/admin";
+		}
 		
 		return "admin/userList";
 	}

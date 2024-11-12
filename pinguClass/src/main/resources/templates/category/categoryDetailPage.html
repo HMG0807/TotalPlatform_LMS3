@@ -262,7 +262,7 @@
                         <p class="discount">최대 해택가 <span th:text="${course.price}+' 원'"></span></p>
                     </div>
 
-                    <button class="buyBtn">구매하기</button>
+                    <button class="buyBtn" th:onclick="coursrList([[${course.courseId}]])">구매하기</button>
                 </div>
             </div>
         </div>
