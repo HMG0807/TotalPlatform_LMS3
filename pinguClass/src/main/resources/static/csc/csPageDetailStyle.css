@@ -6,6 +6,13 @@ main {
 }
 
 
+/*답변 padding*/
+.card-contents{
+	padding-left: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+
 /* 사이드바 시작 */
 .csContentContainer {
     width: var(--pageMinWidth);
@@ -106,6 +113,7 @@ main {
     border-radius: 5px;
     display: block;
     background-color: #ededed;
+    color :black;
     width: 80px;
     z-index: 10;
     position: relative;
@@ -123,6 +131,7 @@ main {
     border-radius: 5px;
     display: block;
     background-color: #ededed;
+    color :black;
     width: 80px;
     z-index: 10;
     position: relative;
