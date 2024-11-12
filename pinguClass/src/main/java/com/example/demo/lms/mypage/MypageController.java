@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,7 @@ import com.example.demo.lms.user.UserRepository;
 import com.example.demo.lms.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -287,12 +289,38 @@ public class MypageController {
 	///////회원 정보 수정//////
 	@LoginCheck
 	@GetMapping("/mypage/edit")
-	public String editUserInfo() {
+	public String editUserInfo(@Authuser User u, Model model) {
+		model.addAttribute("user", u);
 		return "mypage/myPageUserEdit";
 	}
+	
 	@LoginCheck
 	@GetMapping("/mypage/edit/password")
-	public String editUserPassword() {
+	public String editUserPassword(Model model,@Authuser User u, EditPwForm editPwForm) {
+		model.addAttribute("user", u);
+		return "mypage/myPageEditPassword";
+	}
+	
+	
+	@LoginCheck
+	@PostMapping("/mypage/edit/password")
+	public String editUserPassword(@Authuser User u,@Valid EditPwForm editPwForm, BindingResult bindingResult) throws Exception {
+		if(userService.prePasswordCheck(u, editPwForm.getPrePassword())) {
+    		if(!editPwForm.getPassword().equals(editPwForm.getPassword2())) {
+    			bindingResult.rejectValue("Password2","NoSame", "비밀번호가 일치하지 않습니다");
+    			return "mypage/myPageEditPassword";
+    		}else {
+    			if(userService.prePasswordCheck(u, editPwForm.getPassword())) {
+    				bindingResult.rejectValue("Password","SameError", "이미 사용중인 비밀번호 입니다.");
+    				return "mypage/myPageEditPassword";
+    			}
+    		}
+    		this.userService.changePassword(u, editPwForm.getPassword());
+    		return "redirect:/mypage";
+    	}else {
+    		bindingResult.rejectValue("prePassword","NoSame", "현재 비밀번호가 일치하지 않습니다");
+    		//System.out.println("비밀번호 틀려용");
+    	}
 		return "mypage/myPageEditPassword";
 	}
 	

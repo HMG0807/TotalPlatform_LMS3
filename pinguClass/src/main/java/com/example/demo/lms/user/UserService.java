@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.lms.entity.User;
 
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -78,7 +79,21 @@ public class UserService {
 	        return userRepository.findById(userId).orElse(null);  // ID로 사용자 조회
 	    }
 	
-	
+	/////////////////////////////////////////////////////////
+	 public boolean prePasswordCheck(User user, String password) throws Exception {
+			
+			if(passwordEncoder.matches(password, user.getPw())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	 
+	 public void changePassword(User user,String password) throws Exception {
+		 user.setPw(passwordEncoder.encode(password));
+			this.userRepository.save(user);
+		}
 
 
 }
