@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.lms.Authuser.Authuser;
+import com.example.demo.lms.LoginCheck.LoginCheck;
 import com.example.demo.lms.coupon.CouponService;
 import com.example.demo.lms.course.CourseService;
 import com.example.demo.lms.entity.Subscribe;
@@ -20,7 +21,7 @@ public class PaymentController {
 
 	private final SubPaymentService spr;
 	private final CoursePaymentService cpr;
-	private final subscribeService sr;
+	private final SubscribeService sr;
 	private final SubscriptionService subscription; 
 	private final CouponService couponService;
 	
@@ -44,6 +45,7 @@ public class PaymentController {
 	}
 
 // 구독권 결제 완료 시, 결제 완료 창으로 이동 및 결제 데이터 전송
+	@LoginCheck
 	@GetMapping("/subscriptionSuccess/{id}")
 	public String  subscriptionSuccess(Model model,
 			@PathVariable("id") Integer id, @Authuser User user) throws Exception {

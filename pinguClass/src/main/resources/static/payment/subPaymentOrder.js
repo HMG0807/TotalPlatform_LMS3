@@ -40,8 +40,14 @@ function requestTossPayment(orderId, totalPrice,orderName) {
         orderId: orderId,
         orderName:orderName ,
         successUrl: window.location.origin + '/success',
-        failUrl: window.location.origin + '/fail',
-    });
+        failUrl: window.location.origin + '/fail'
+    }).catch(function (error) {
+                if (error.code === 'USER_CANCEL') {
+                    // 결제 고객이 결제창을 닫았을 때 에러 처리
+                } else if (error.code === 'INVALID_CARD_COMPANY') {
+                    // 유효하지 않은 카드 코드에 대한 에러 처리
+                }
+            })
 }
 
 const psf = document.getElementById("paymentBtn");

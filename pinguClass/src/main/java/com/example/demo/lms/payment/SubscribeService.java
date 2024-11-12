@@ -10,14 +10,19 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class subscribeService {
+public class SubscribeService {
 
-	private final subscribeRepository sr;
+	private final SubscribeRepository sr;
 
 	public Subscribe getSubscribe(Integer id) {
 		Optional<Subscribe> s1 = this.sr.findById(id);
 		return s1.get();
 		
+	}
+	
+	public Subscribe getSubscribeByType(String type) {
+		Subscribe s = this.sr.findByType(type);
+		return s;
 	}
 	
 	

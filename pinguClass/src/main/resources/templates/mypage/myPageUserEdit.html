@@ -17,11 +17,10 @@
                     <div class="profileImg">
                         <img src="" alt="">
                     </div>
-                    <form action="">
-                        <input type="text" placeholder="전화번호">
-                        <input type="text" placeholder="이메일" disabled>
-                        <button onclick="location.href='http://localhost:8080/mypage/edit/password'" class="passwordBtn">비밀번호 변경</button>
-                        <button class="saveBtn">저장하기</button>
+                    <form>
+                        <input type="text" th:value="${user.tel}"placeholder="전화번호" disabled>
+                        <input type="text" th:value="${user.email}" placeholder="이메일" disabled>
+                        <button class="passwordBtn">비밀번호 변경</button>
                         <button class="removeIdBtn">회원탈퇴</button>
                     </form>
                 </li>
@@ -30,3 +29,10 @@
     </div>
 </main>
 </html>
+<script>
+	btn = document.querySelector(".passwordBtn");
+	btn.addEventListener("click",function(e){
+		e.preventDefault();
+		location.href = "/mypage/edit/password";
+	})
+</script>
