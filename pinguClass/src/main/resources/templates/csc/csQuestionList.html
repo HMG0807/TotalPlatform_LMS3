@@ -8,7 +8,7 @@
                     	<a th:href="@{/csc/list}">1:1문의</a>
                     </li>
                      <li>
-                     	<a th:href="@{/notice/list}">공지사항</a>
+             	        	<a th:href="@{/notice/list}">공지사항</a>
                      </li>
                 </ul>
             </div>
@@ -20,7 +20,7 @@
                         </div>
                         <!-- 1:1 문의 버튼 -->
                         <div class="createbtn">
-            				<a th:href="@{/csc/create}">문의하기</a>
+            				<a class="askBtn" th:href="@{/csc/create}">문의하기</a>
             			</div>
             			<!--문의 목록-->
                         <table>
@@ -38,8 +38,8 @@
                                 		<td th:text="${csQuestion.questionId}"></td>
                                 		<td><a th:href="@{|/csc/detail/${csQuestion.questionId}|}" th:text="${csQuestion.title}"></a></td>
                                 		<td th:if="${csQuestion.user != null}" th:text="${csQuestion.user.id}"></td>
-                                		<td th:if="${csQuestion.csAnswer != null}" text="답변완료"></td>
-                                		<td th:unless="${csQuestion.csAnswer != null}" text="답변대기"></td>
+                                		<td th:if="${csQuestion.csAnswer != null}">Y</td>
+                                		<td th:unless="${csQuestion.csAnswer != null}">N</td>
                                 		
                             		</tr>
                                </table> 
