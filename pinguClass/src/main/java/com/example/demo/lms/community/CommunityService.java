@@ -109,31 +109,24 @@ public class CommunityService {
 		
 
 	
-	/* 마이페이지에서 특정 사용자의 삭제되지 않은 커뮤니티 글 목록을 페이징처리 - 남동현 */
-	public Page<Community> getMyPageCommunityList(int page, String username)
-			throws UserException {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("lastUpdate")));
+		/* 마이페이지에서 특정 사용자의 삭제되지 않은 커뮤니티 글 목록을 페이징처리 - 남동현 */
+		public Page<Community> getMyPageCommunityList(int page, String username) throws UserException {
+			Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("lastUpdate")));
 
-        // 사용자 검증
-        User user = userRepository.findById(username)
-                .orElseThrow(() -> new UserException("User not found"));
+			// 사용자 검증
+			User user = userRepository.findById(username).orElseThrow(() -> new UserException("User not found"));
 
-        // 해당 사용자가 작성한 삭제되지 않은 커뮤니티 글 반환
-        return communityRepository.findByUserAndDeleteYn(user, "N", pageable);
-    }
-	
-	
-	
-	
-	
-	/* 유저ID로 커뮤니티 글의 총 갯수 조회 */
-	public int getCommunityCountById(String userId) {
-		
-		User user = this.userRepository.findUserById(userId);
-		
-		return this.communityRepository.countUserById(user.getUserId());
-	}
-	
+			// 해당 사용자가 작성한 삭제되지 않은 커뮤니티 글 반환
+			return communityRepository.findByUserAndDeleteYn(user, "N", pageable);
+		}
+
+		/* 유저ID로 커뮤니티 글의 총 갯수 조회 */
+		public int getCommunityCountById(String userId) {
+
+			User user = this.userRepository.findUserById(userId);
+
+			return this.communityRepository.countUserById(user.getUserId());
+		}
 	
 	
 
@@ -172,36 +165,31 @@ public class CommunityService {
 	}
 	
 
-
 	// 커뮤니티 글 삭제 메서드
-    public void deleteCommunity(Integer cmId) throws UserException {
-        // 해당 커뮤니티 글을 찾고, 없으면 예외 발생
-        Community community = communityRepository.findById(cmId)
-                .orElseThrow(() -> new UserException("Community post not found"));
-        // 삭제
-        communityRepository.delete(community);
-        
-        
-        
-    }
-    
+	public void deleteCommunity(Integer cmId) throws UserException {
+		// 해당 커뮤니티 글을 찾고, 없으면 예외 발생
+		Community community = communityRepository.findById(cmId)
+				.orElseThrow(() -> new UserException("Community post not found"));
+		// 삭제
+		communityRepository.delete(community);
+
+	}
     
     
     
 
     
-    // 커뮤니티 댓글 조회 메서드 
-    
-    public List<CommunityComment> getCommentsByUser(String userId, int startNo, int pageSize) {
-        User user = this.userRepository.findUserById(userId);
-        return communityCommentRepository.findAllByUserId(user.getUserId(), startNo, pageSize);
-    }
+	// 커뮤니티 댓글 조회 메서드
 
-    public List<Community> getCommunityListByUser(String userId, int startNo, int pageSize) {
-        User user = this.userRepository.findUserById(userId);
-        return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
-    }
-    
+	public List<CommunityComment> getCommentsByUser(String userId, int startNo, int pageSize) {
+		User user = this.userRepository.findUserById(userId);
+		return communityCommentRepository.findAllByUserId(user.getUserId(), startNo, pageSize);
+	}
+
+	public List<Community> getCommunityListByUser(String userId, int startNo, int pageSize) {
+		User user = this.userRepository.findUserById(userId);
+		return this.communityRepository.findAllById(user.getUserId(), startNo, pageSize);
+	}
     
     
     
